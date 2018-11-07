@@ -1,0 +1,31 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.lxisoft.redalert"
+    },
+    "jhipsterVersion": "5.4.2",
+    "applicationType": "microservice",
+    "baseName": "RedAlert",
+    "packageName": "com.lxisoft.redalert",
+    "packageFolder": "com/lxisoft/redalert",
+    "serverPort": "8082",
+    "authenticationType": "oauth2",
+    "cacheProvider": "no",
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NDEwMDVkYWE5NDY0NzkwMTZkODNjMjdmZWYyMDM0YTgxMzgzMjY4YWIxMWYxNDNlZDUyNmViNDhlOTA0ZDljNTM4NDBkMTI3ZTY5ZmEyNjMzZjZhZGMwYTQ3Y2NjMGY2ODg3MmEyNDVlY2JkYzMxZDAyZGY2N2JkMDU0NzE2MTY=",
+    "enableTranslation": false,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "clientPackageManager": "npm",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}

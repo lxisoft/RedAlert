@@ -1,0 +1,42 @@
+{
+    "name": "Report",
+    "fields": [
+        {
+            "fieldName": "userId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "userName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "reportType",
+            "fieldType": "ReportType",
+            "fieldValues": "FAKE,PRANK,SOLVED,SUPPORT,TIMEOUT"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "post",
+            "otherEntityName": "post",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "action",
+            "otherEntityName": "action",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20181107053419",
+    "entityTableName": "report",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "RedAlert",
+    "applications": "*",
+    "microserviceName": "RedAlert"
+}

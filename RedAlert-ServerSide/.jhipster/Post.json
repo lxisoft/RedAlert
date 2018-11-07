@@ -1,0 +1,66 @@
+{
+    "name": "Post",
+    "fields": [
+        {
+            "fieldName": "alertLevel",
+            "fieldType": "Alert",
+            "fieldValues": "RED,ORANGE,GREEN"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "active",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "latitude",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "longitude",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "userRegistration",
+            "otherEntityName": "userRegistration",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "actions",
+            "otherEntityName": "action",
+            "otherEntityRelationshipName": "post"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "posts",
+            "otherEntityName": "report",
+            "otherEntityRelationshipName": "post"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "attatchments",
+            "otherEntityName": "media",
+            "otherEntityRelationshipName": "post"
+        }
+    ],
+    "changelogDate": "20181107053415",
+    "entityTableName": "post",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "RedAlert",
+    "applications": "*",
+    "microserviceName": "RedAlert"
+}

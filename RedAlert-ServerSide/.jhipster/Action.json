@@ -1,0 +1,50 @@
+{
+    "name": "Action",
+    "fields": [
+        {
+            "fieldName": "userId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "userName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "takenOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "reaction",
+            "fieldType": "Reaction",
+            "fieldValues": "COMMENT,REQUEST_TO_CLOSE"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "post",
+            "otherEntityName": "post",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "reports",
+            "otherEntityName": "report",
+            "otherEntityRelationshipName": "action"
+        }
+    ],
+    "changelogDate": "20181107053417",
+    "entityTableName": "action",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "RedAlert",
+    "applications": "*",
+    "microserviceName": "RedAlert"
+}

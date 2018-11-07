@@ -1,0 +1,24 @@
+{
+    "name": "LeaderBoard",
+    "fields": [
+        {
+            "fieldName": "userName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "score",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20181107053418",
+    "entityTableName": "leader_board",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "RedAlert",
+    "applications": "*",
+    "microserviceName": "RedAlert"
+}

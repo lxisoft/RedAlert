@@ -1,0 +1,87 @@
+{
+    "name": "UserRegistration",
+    "fields": [
+        {
+            "fieldName": "userName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "password",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "profilePic",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "gender",
+            "fieldType": "Gender",
+            "fieldValues": "MALE,FEMALE,OTHER"
+        },
+        {
+            "fieldName": "bloodGroup",
+            "fieldType": "BloodGroup",
+            "fieldValues": "A_POSITIVE,A_NEGATIVE,B_POSITIVE,B_NEGETIVE,O_POSITIVE,O_NEGETIVE,AB_POSITIVE,AB_NEGETIVE"
+        },
+        {
+            "fieldName": "contact",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dob",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "score",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Alert",
+            "fieldValues": "RED,ORANGE,GREEN"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "users",
+            "otherEntityName": "post",
+            "otherEntityRelationshipName": "userRegistration"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "friends",
+            "otherEntityName": "userRegistration",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20181107053414",
+    "entityTableName": "user_registration",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "RedAlert",
+    "applications": "*",
+    "microserviceName": "RedAlert"
+}
