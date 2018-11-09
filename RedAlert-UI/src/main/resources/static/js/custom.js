@@ -61,10 +61,7 @@ function setModal(button) {
 		document.getElementById('alertLevel').value="ORANGE";
 	}
 }
-function commentDp() {
-	console.log("hello");
-	document.getElementById("commentDp").src=document.getElementById("userdp").src;
-}
+
 /*Dropdown Menu*/
 $('.dropdown').click(function () {
         $(this).attr('tabindex', 1).focus();
