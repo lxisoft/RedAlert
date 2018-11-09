@@ -29,6 +29,25 @@
           var marker = new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
       }
 
+      function showMap(latd,longtd) {
+          console.log("hello");
+          var lat = document.getElementById(latd).value;
+          var lon = document.getElementById(longtd).value;
+          var latlon = new google.maps.LatLng(lat, lon);
+          var mapholder = document.getElementById('mapholder');
+          
+
+          var myOptions = {
+          center:latlon,zoom:14,
+          mapTypeId:google.maps.MapTypeId.ROADMAP,
+          mapTypeControl:false,
+          navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+          }
+          
+          var map = new google.maps.Map(document.getElementById("mapholder"), myOptions);
+          var marker = new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
+      }
+
       function showError(error) {
           switch(error.code) {
               case error.PERMISSION_DENIED:
