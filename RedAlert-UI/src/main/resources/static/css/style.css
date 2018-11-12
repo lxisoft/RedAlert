@@ -186,3 +186,14 @@ span.choose {
 .dropdown .dropdown-menu li:active {
     background-color: #e2e2e2
 }
+.round-sm{
+	min-width:50px;
+	width: auto;
+    height:50px;
+    right:40px;
+    
+    border-radius:50px;
+    text-align:center;
+    box-shadow: 2px 2px 2px #fff;
+    float: right;
+}
