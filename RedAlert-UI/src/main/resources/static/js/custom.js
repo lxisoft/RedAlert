@@ -53,12 +53,12 @@ function setModal(button) {
 	if(button.id=='red')
 	{
 		document.getElementById('modal-title').innerHTML='RedAlert';
-		document.getElementById('alertLevel').value="RED";
+		document.getElementById('alertLevel-red').value="RED";
 	}
 	else
 	{		
 		document.getElementById('modal-title').innerHTML='OrangeAlert';
-		document.getElementById('alertLevel').value="ORANGE";
+		document.getElementById('alertLevel-orange').value="ORANGE";
 	}
 }
 
