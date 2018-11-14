@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>RedAlert | NewsFeeds</title>
+    <title>RedAlert | History</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -93,35 +93,13 @@
               <input type="hidden" id="latitude" value="10.83836"/>
               <input type="hidden" id="longitude" value="76.56884"/>
                 <div style="float: right;">
-                  <button type="button" class="btn btn-deep-orange px-3" data-toggle="modal" data-target="#centralModalSm">Close post</button>
-                  <form action="#">
-                    <!-- Central Modal Small -->
-                    <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                      <!-- Change class .modal-sm to change the size of the modal -->
-                      <div class="modal-dialog modal-sm" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header"><br/>
-                            <h4 class="modal-title w-100" style="text-align: center;" id="myModalLabel">Are You Sure?</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <p>The post will be closed. Do yo want to continue?</p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-primary btn-sm btn-danger" data-dismiss="modal">No</button>
-                            <button style="height: auto;" type="submit" class="btn btn-primary btn-sm btn-success" name="closeReq" value="yes">Yes</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Central Modal Small -->
-                  </form>
+                  <span>1 Close Requests,</span>
+                  <span>0 Reports</span>
+                  <button type="button" class="btn btn-deep-orange px-3" data-toggle="modal" data-target="#centralModalSm">Close post</button>                  
                 </div>
               <!-- Collapse buttons -->
               <div id="meu_div">
-                <a type="button" data-toggle="collapse" onclick="commentDp();" data-target="#collapseExample"
+                <a type="button" data-toggle="collapse" data-target="#collapseExample"
                   aria-expanded="false" aria-controls="collapseExample">
                   Comments <i id="iconDown" class="fa fa-chevron-down rotate" aria-hidden="true"></i>
                 </a>
@@ -151,6 +129,33 @@
     </div>
       
     <!--/.post-->
+
+    <!--CloseConfirm-->
+    <form action="#">
+      <!-- Central Modal Small -->
+      <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <!-- Change class .modal-sm to change the size of the modal -->
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header"><br/>
+              <h4 class="modal-title w-100" style="text-align: center;" id="myModalLabel">Are You Sure?</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>The post will be closed. Do yo want to continue?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary btn-sm btn-danger" data-dismiss="modal">No</button>
+              <button style="height: auto;" type="submit" class="btn btn-primary btn-sm btn-success" name="closeReq" value="yes">Yes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Central Modal Small -->
+    </form>
+    <!--/.CloseConfirm-->
 
 
     <!--map-->

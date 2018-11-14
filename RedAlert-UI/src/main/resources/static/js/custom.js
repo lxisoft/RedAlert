@@ -84,3 +84,15 @@ $(function(){
     $("#iconDown").toggleClass("crossRotate");
   });
 });
+
+function toggleContent(argument) {
+	// body...
+	if(argument.innerHTML=='<i class="fa fa-plus"></i>')
+	{
+		argument.innerHTML='<i class="fa fa-plus"></i>'+'  Click to allow notification access';
+	}
+	else
+	{
+		argument.innerHTML='<i class="fa fa-plus"></i>';
+	}
+}
