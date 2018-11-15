@@ -53,12 +53,12 @@ function setModal(button) {
 	if(button.id=='red')
 	{
 		document.getElementById('modal-title').innerHTML='RedAlert';
-		document.getElementById('alertLevel').value="RED";
+		document.getElementById('alertLevel-red').value="RED";
 	}
 	else
 	{		
 		document.getElementById('modal-title').innerHTML='OrangeAlert';
-		document.getElementById('alertLevel').value="ORANGE";
+		document.getElementById('alertLevel-orange').value="ORANGE";
 	}
 }
 
@@ -84,3 +84,15 @@ $(function(){
     $("#iconDown").toggleClass("crossRotate");
   });
 });
+
+function toggleContent(argument) {
+	// body...
+	if(argument.innerHTML=='<i class="fa fa-plus"></i>')
+	{
+		argument.innerHTML='<i class="fa fa-plus"></i>'+'  Click to allow notification access';
+	}
+	else
+	{
+		argument.innerHTML='<i class="fa fa-plus"></i>';
+	}
+}
