@@ -34,20 +34,25 @@ public class LeaderBoard {
 		@RequestMapping(value="/findAllUsers",method=RequestMethod.GET)
 		public String createScores(Model model)
 		{
-			/*UserRegistrationDTO user=new UserRegistrationDTO();
-			user.setId((long)1);
-			user.setUserName("abhina");
-			user.setScore((long)5);
-			*/
+		   List<UserRegistrationDTO> userdtolist=new ArrayList<UserRegistrationDTO>();
 			
-			List<UserRegistrationDTO> user=new ArrayList<UserRegistrationDTO>();
-			user.add(new UserRegistrationDTO("1","abhina",(long)5));
-			user.add(new UserRegistrationDTO("2","shilpa",(long)10));
+			UserRegistrationDTO userdto1=new UserRegistrationDTO();
+			userdto1.setId((long)1);
+			userdto1.setUserName("Abhina");
+			userdto1.setEmail("abhina38@gmail.com");
+			
+			UserRegistrationDTO userdto2=new UserRegistrationDTO();
+			userdto2.setId((long)2);
+			userdto2.setUserName("Shilpa");
+			userdto2.setEmail("shilpa.s@gmail.com");
+			
+			userdtolist.add(userdto1);
+			userdtolist.add(userdto2);
 
-		System.out.println("***********0 index"+user.get(0).getUserName());
-		System.out.println("***********1 index"+user.get(1).getUserName());
+		System.out.println("***********0 index"+userdtolist.get(0).getUserName());
+		System.out.println("***********1 index"+userdtolist.get(1).getUserName());
 			//ResponseEntity<List<UserRegistrationDTO>> dto=userRegApiReso.getAllUserRegistrationsUsingGET(null, null, null, null, 5, null, null, null, null, null, null);
-			model.addAttribute("userRegDTO",user);
+			model.addAttribute("userRegDTO",userdtolist);
 			return "allUsers";
 		}
 		
@@ -56,6 +61,11 @@ public class LeaderBoard {
 		public String doPosts(Model model,String name)
 		{
 			log.debug("name______________"+name);
+			
+	
+			UserRegistrationDTO userdto=new UserRegistrationDTO();
+			
+			
 			PostDTO dto=new PostDTO();
 			dto.setDescription("help me");
 			dto.setDescription("Iam in danger");
@@ -63,10 +73,10 @@ public class LeaderBoard {
 			AlertLevelEnum level2=AlertLevelEnum.valueOf("GREEN");
 			dto.setAlertLevel(alertlevel);
 			dto.setAlertLevel(level2);
-			UserRegistrationDTO userDto=new UserRegistrationDTO(name, null, null);
+			//UserRegistrationDTO userDto=new UserRegistrationDTO(name, null, null);
 			
 			model.addAttribute("posts",dto);
-			model.addAttribute("userdto",userDto);
+			model.addAttribute("userdtolist",userdto);
 			
 			
 			
@@ -80,19 +90,7 @@ public class LeaderBoard {
 			return "showPosts";
 			
 		}
-		/*@RequestMapping(value="actions")
-		public String doActions(Model model,String name)
-		{
-			log.debug("name_____________"+name);
-			ActionDTO dto=new ActionDTO();
-			dto.setDescription("I will help you");
-			ReactionEnum reaction=ReactionEnum.valueOf("COMMENT");
-			dto.setReaction(reaction);
-			
-			model.addAttribute("actions",dto);
-			return "showActions";
-			
-		}*/
+		
 		
 		
 	}
