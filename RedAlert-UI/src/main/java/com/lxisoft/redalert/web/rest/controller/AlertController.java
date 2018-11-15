@@ -45,9 +45,25 @@ public class AlertController {
 	{
 		model.addAttribute("view", new View());
 		return "home";
-		
 	}
-
+	@GetMapping("/newsview")
+	public String getNews()
+	{
+	return "news";
+	}
+	@GetMapping("/friendsview")
+	public String getFriends()
+	{
+	return "friends";
+	}
+	@PostMapping("/thirdpage")
+	public String getAction(@ModelAttribute View view,Model model ){
+		
+		
+		return "home";
+	}
+	
+}
 	
 	/*@GetMapping("/getAlert")
 	public String getAction(@ModelAttribute PostDTO postDTO,Model model)
@@ -137,4 +153,4 @@ public class AlertController {
 		return "home";
 	}*/
 
-}
+
