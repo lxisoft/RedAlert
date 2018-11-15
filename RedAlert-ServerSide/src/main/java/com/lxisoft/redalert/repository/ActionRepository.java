@@ -1,12 +1,13 @@
 package com.lxisoft.redalert.repository;
 
 import com.lxisoft.redalert.domain.Action;
-import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
+
+import org.springframework.data.jpa.repository.*;
 
 
 /**
- * Spring Data  repository for the Action entity.
+ * Spring Data JPA repository for the Action entity.
  */
 @SuppressWarnings("unused")
 @Repository

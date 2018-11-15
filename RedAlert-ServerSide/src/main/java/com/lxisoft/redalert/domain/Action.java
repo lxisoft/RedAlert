@@ -1,7 +1,6 @@
 package com.lxisoft.redalert.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -42,12 +41,16 @@ public class Action implements Serializable {
     @Column(name = "reaction")
     private Reaction reaction;
 
+    @Column(name = "approval")
+    private Boolean approval;
+
     @ManyToOne
-    @JsonIgnoreProperties("actions")
     private Post post;
 
     @OneToMany(mappedBy = "action")
+    @JsonIgnore
     private Set<Report> reports = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -122,6 +125,19 @@ public class Action implements Serializable {
         this.reaction = reaction;
     }
 
+    public Boolean isApproval() {
+        return approval;
+    }
+
+    public Action approval(Boolean approval) {
+        this.approval = approval;
+        return this;
+    }
+
+    public void setApproval(Boolean approval) {
+        this.approval = approval;
+    }
+
     public Post getPost() {
         return post;
     }
@@ -190,6 +206,7 @@ public class Action implements Serializable {
             ", description='" + getDescription() + "'" +
             ", takenOn='" + getTakenOn() + "'" +
             ", reaction='" + getReaction() + "'" +
+            ", approval='" + isApproval() + "'" +
             "}";
     }
 }

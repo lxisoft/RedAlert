@@ -140,7 +140,7 @@ jhipster:
     mail:
         from: RedAlert@localhost
     swagger:
-        default-include-pattern: /api/.*
+        default-include-pattern: /apis/.*
         title: RedAlert API
         description: RedAlert API documentation
         version: 0.0.1

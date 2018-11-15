@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * MediaDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-07T12:19:21.345+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-14T12:53:44.106+05:30[Asia/Calcutta]")
 
 public class MediaDTO   {
   @JsonProperty("file")

@@ -28,7 +28,6 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-
 import static com.lxisoft.redalert.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -60,12 +59,15 @@ public class ActionResourceIntTest {
     private static final Reaction DEFAULT_REACTION = Reaction.COMMENT;
     private static final Reaction UPDATED_REACTION = Reaction.REQUEST_TO_CLOSE;
 
+    private static final Boolean DEFAULT_APPROVAL = false;
+    private static final Boolean UPDATED_APPROVAL = true;
+
     @Autowired
     private ActionRepository actionRepository;
 
     @Autowired
     private ActionMapper actionMapper;
-    
+
     @Autowired
     private ActionService actionService;
 
@@ -108,7 +110,8 @@ public class ActionResourceIntTest {
             .userName(DEFAULT_USER_NAME)
             .description(DEFAULT_DESCRIPTION)
             .takenOn(DEFAULT_TAKEN_ON)
-            .reaction(DEFAULT_REACTION);
+            .reaction(DEFAULT_REACTION)
+            .approval(DEFAULT_APPROVAL);
         return action;
     }
 
@@ -138,6 +141,7 @@ public class ActionResourceIntTest {
         assertThat(testAction.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testAction.getTakenOn()).isEqualTo(DEFAULT_TAKEN_ON);
         assertThat(testAction.getReaction()).isEqualTo(DEFAULT_REACTION);
+        assertThat(testAction.isApproval()).isEqualTo(DEFAULT_APPROVAL);
     }
 
     @Test
@@ -175,9 +179,10 @@ public class ActionResourceIntTest {
             .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].takenOn").value(hasItem(DEFAULT_TAKEN_ON.toString())))
-            .andExpect(jsonPath("$.[*].reaction").value(hasItem(DEFAULT_REACTION.toString())));
+            .andExpect(jsonPath("$.[*].reaction").value(hasItem(DEFAULT_REACTION.toString())))
+            .andExpect(jsonPath("$.[*].approval").value(hasItem(DEFAULT_APPROVAL.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getAction() throws Exception {
@@ -193,7 +198,8 @@ public class ActionResourceIntTest {
             .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.takenOn").value(DEFAULT_TAKEN_ON.toString()))
-            .andExpect(jsonPath("$.reaction").value(DEFAULT_REACTION.toString()));
+            .andExpect(jsonPath("$.reaction").value(DEFAULT_REACTION.toString()))
+            .andExpect(jsonPath("$.approval").value(DEFAULT_APPROVAL.booleanValue()));
     }
 
     @Test
@@ -209,7 +215,6 @@ public class ActionResourceIntTest {
     public void updateAction() throws Exception {
         // Initialize the database
         actionRepository.saveAndFlush(action);
-
         int databaseSizeBeforeUpdate = actionRepository.findAll().size();
 
         // Update the action
@@ -221,7 +226,8 @@ public class ActionResourceIntTest {
             .userName(UPDATED_USER_NAME)
             .description(UPDATED_DESCRIPTION)
             .takenOn(UPDATED_TAKEN_ON)
-            .reaction(UPDATED_REACTION);
+            .reaction(UPDATED_REACTION)
+            .approval(UPDATED_APPROVAL);
         ActionDTO actionDTO = actionMapper.toDto(updatedAction);
 
         restActionMockMvc.perform(put("/api/actions")
@@ -238,6 +244,7 @@ public class ActionResourceIntTest {
         assertThat(testAction.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testAction.getTakenOn()).isEqualTo(UPDATED_TAKEN_ON);
         assertThat(testAction.getReaction()).isEqualTo(UPDATED_REACTION);
+        assertThat(testAction.isApproval()).isEqualTo(UPDATED_APPROVAL);
     }
 
     @Test
@@ -248,15 +255,15 @@ public class ActionResourceIntTest {
         // Create the Action
         ActionDTO actionDTO = actionMapper.toDto(action);
 
-        // If the entity doesn't have an ID, it will throw BadRequestAlertException
+        // If the entity doesn't have an ID, it will be created instead of just being updated
         restActionMockMvc.perform(put("/api/actions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(actionDTO)))
-            .andExpect(status().isBadRequest());
+            .andExpect(status().isCreated());
 
         // Validate the Action in the database
         List<Action> actionList = actionRepository.findAll();
-        assertThat(actionList).hasSize(databaseSizeBeforeUpdate);
+        assertThat(actionList).hasSize(databaseSizeBeforeUpdate + 1);
     }
 
     @Test
@@ -264,7 +271,6 @@ public class ActionResourceIntTest {
     public void deleteAction() throws Exception {
         // Initialize the database
         actionRepository.saveAndFlush(action);
-
         int databaseSizeBeforeDelete = actionRepository.findAll().size();
 
         // Get the action

@@ -26,7 +26,7 @@ import java.util.Optional;
  * REST controller for managing Post.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/apis")
 public class PostResource {
 
     private final Logger log = LoggerFactory.getLogger(PostResource.class);

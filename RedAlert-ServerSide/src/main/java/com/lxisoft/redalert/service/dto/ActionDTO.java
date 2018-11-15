@@ -1,7 +1,10 @@
 package com.lxisoft.redalert.service.dto;
 
+
 import java.time.Instant;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 import com.lxisoft.redalert.domain.enumeration.Reaction;
 
@@ -21,6 +24,8 @@ public class ActionDTO implements Serializable {
     private Instant takenOn;
 
     private Reaction reaction;
+
+    private Boolean approval;
 
     private Long postId;
 
@@ -72,6 +77,14 @@ public class ActionDTO implements Serializable {
         this.reaction = reaction;
     }
 
+    public Boolean isApproval() {
+        return approval;
+    }
+
+    public void setApproval(Boolean approval) {
+        this.approval = approval;
+    }
+
     public Long getPostId() {
         return postId;
     }
@@ -90,7 +103,7 @@ public class ActionDTO implements Serializable {
         }
 
         ActionDTO actionDTO = (ActionDTO) o;
-        if (actionDTO.getId() == null || getId() == null) {
+        if(actionDTO.getId() == null || getId() == null) {
             return false;
         }
         return Objects.equals(getId(), actionDTO.getId());
@@ -110,7 +123,7 @@ public class ActionDTO implements Serializable {
             ", description='" + getDescription() + "'" +
             ", takenOn='" + getTakenOn() + "'" +
             ", reaction='" + getReaction() + "'" +
-            ", post=" + getPostId() +
+            ", approval='" + isApproval() + "'" +
             "}";
     }
 }

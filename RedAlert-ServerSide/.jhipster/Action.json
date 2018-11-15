@@ -1,5 +1,19 @@
 {
-    "name": "Action",
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "post",
+            "otherEntityName": "post",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "reports",
+            "otherEntityName": "report",
+            "otherEntityRelationshipName": "action"
+        }
+    ],
     "fields": [
         {
             "fieldName": "userId",
@@ -21,20 +35,10 @@
             "fieldName": "reaction",
             "fieldType": "Reaction",
             "fieldValues": "COMMENT,REQUEST_TO_CLOSE"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipName": "post",
-            "otherEntityName": "post",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
         },
         {
-            "relationshipType": "one-to-many",
-            "relationshipName": "reports",
-            "otherEntityName": "report",
-            "otherEntityRelationshipName": "action"
+            "fieldName": "approval",
+            "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20181107053417",
@@ -43,8 +47,5 @@
     "pagination": "pagination",
     "service": "serviceImpl",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "RedAlert",
-    "applications": "*",
     "microserviceName": "RedAlert"
 }
