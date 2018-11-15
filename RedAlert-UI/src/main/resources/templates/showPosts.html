@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Get Scores</title>
+</head>
+<body>
+<h1> Posts</h1>
+ <!-- <table border="2">-->
+ 
+<table border="2">
+ <tr th:each="dto: ${posts}">
+         <td th:text="  'COMMENTS:  '+${dto.getDescription()+'!'}">...</td></br><br>
+          <td th:text=" 'ALERT:     '+${dto.getAlertLevel()+'!'}">...</td></br>
+         </tr></table>
+         
+        <h1>Actions</h1>
+       <table border="2"> 
+        <tr th:each="actiondto: ${actions}">
+         <td th:text="  'COMMENTS:  '+${actiondto.getDescription()+'!'}">...</td></br>
+         <td th:text=" 'REACTION:   '+${actiondto.getReaction()+'!'}">...</td></br>
+         </tr>
+      </table>  
