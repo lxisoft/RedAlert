@@ -37,7 +37,7 @@ public class AlertController {
 	public String getIndex(Model model)
 	{
 		
-	
+				
 		return "index";
 	}
 	@GetMapping("/secondpage")

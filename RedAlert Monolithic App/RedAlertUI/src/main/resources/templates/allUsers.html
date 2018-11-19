@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>All Users</title>
+</head>
+<body>
+
+
+  
+<table>
+      
+    <tr th:each="user: ${userRegDTO}">
+         <td th:text="${user.id}">...</td></br>
+         <td th:text="${user.userName}">...</td></br>
+      
+          <td> <form th:action="@{/showposts}" th:object="${user}" method="get">
+          
+          <input type="hidden"  name="name" th:value="*{userName}"> 
+          <input type="submit"  value="GETSCORES">
+</form></td>
+
+<td> <form th:action="@{/posts}" th:object="${user}" method="get">
+          
+          <input type="hidden"  name="name" th:value="*{userName}"> 
+          <input type="submit"  value="POSTS">
+</form></td>
+
+</tr>
+</table>
+
+
+
+
+</body>
+</html>
