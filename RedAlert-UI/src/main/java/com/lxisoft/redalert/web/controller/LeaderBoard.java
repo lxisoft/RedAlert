@@ -65,28 +65,57 @@ public class LeaderBoard {
 	
 			UserRegistrationDTO userdto=new UserRegistrationDTO();
 			
+			List<PostDTO>postDTO=new ArrayList<PostDTO>();
 			
-			PostDTO dto=new PostDTO();
-			dto.setDescription("help me");
-			dto.setDescription("Iam in danger");
-			AlertLevelEnum alertlevel=AlertLevelEnum.valueOf("RED");
+			PostDTO dto1=new PostDTO();
+		    dto1.setDescription("iam in danger");
+		    String[] array={"help me","anybody here","here is heavy flood"};
+		    PostDTO dto2=new PostDTO();
+		    dto2.setDescription("help me,possibility of cyclone");
+		    PostDTO dto3=new PostDTO();
+		    dto3.setDescription("save me");
+		    
+			postDTO.add(dto1);
+			postDTO.add(dto2);
+			postDTO.add(dto3);
+			
+			
+			AlertLevelEnum level=AlertLevelEnum.valueOf("RED");
 			AlertLevelEnum level2=AlertLevelEnum.valueOf("GREEN");
-			dto.setAlertLevel(alertlevel);
-			dto.setAlertLevel(level2);
-			//UserRegistrationDTO userDto=new UserRegistrationDTO(name, null, null);
+			AlertLevelEnum level3=AlertLevelEnum.valueOf("ORANGE");
+			dto1.setAlertLevel(level);
+			dto2.setAlertLevel(level2);
+			dto3.setAlertLevel(level3);
 			
-			model.addAttribute("posts",dto);
+			
+			model.addAttribute("postslist",postDTO);
 			model.addAttribute("userdtolist",userdto);
+			model.addAttribute("comments",array);
 			
 			
 			
+			List<ActionDTO>actiondto=new ArrayList<ActionDTO>();
 			
-			ActionDTO actiondto=new ActionDTO();
-			actiondto.setDescription("I will help you");
-			ReactionEnum reaction=ReactionEnum.valueOf("COMMENT");
-			actiondto.setReaction(reaction);
+			ActionDTO actiondto1=new ActionDTO();
+			actiondto1.setDescription("I will help you");
+			ActionDTO actiondto2=new ActionDTO();
+			actiondto2.setDescription("I will be there in minutes");
+			ActionDTO actiondto3=new ActionDTO();
+			actiondto3.setDescription("ok friend,i will save u");
 			
-			model.addAttribute("actions",actiondto);
+			actiondto.add(actiondto1);
+			actiondto.add(actiondto2);
+			actiondto.add(actiondto3);
+			
+			ReactionEnum reaction1=ReactionEnum.valueOf("COMMENT");
+			ReactionEnum reaction2=ReactionEnum.valueOf("REQUEST_TO_CLOSE");
+			ReactionEnum reaction3=ReactionEnum.valueOf("COMMENT");
+			
+			actiondto1.setReaction(reaction1);
+			actiondto2.setReaction(reaction2);
+			actiondto3.setReaction(reaction3);
+			
+			model.addAttribute("actionslist",actiondto);
 			return "showPosts";
 			
 		}

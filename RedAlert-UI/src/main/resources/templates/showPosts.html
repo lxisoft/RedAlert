@@ -5,19 +5,27 @@
 <title>Get Scores</title>
 </head>
 <body>
-<h1> Posts</h1>
+
  <!-- <table border="2">-->
- 
+ <!--  <th:block th:each="array : ${comments}" th:text="${array}"> -->
 <table border="2">
- <tr th:each="dto: ${posts}">
-         <td th:text="  'COMMENTS:  '+${dto.getDescription()+'!'}">...</td></br><br>
-          <td th:text=" 'ALERT:     '+${dto.getAlertLevel()+'!'}">...</td></br>
+<h1> Posts</h1>
+
+ <th:block th:each="postDTO: ${postslist}">
+ 
+ <th>Comments</th>
+         <td th:text="  ${postDTO.description}">...</td><br></br>
+       
+ <tr><th> Alerts</th>
+          <td colspan="2"  th:text=" ${postDTO.getAlertLevel()}">...</td></br>
          </tr></table>
          
-        <h1>Actions</h1>
+    <h1>Actions</h1>
        <table border="2"> 
-        <tr th:each="actiondto: ${actions}">
-         <td th:text="  'COMMENTS:  '+${actiondto.getDescription()+'!'}">...</td></br>
-         <td th:text=" 'REACTION:   '+${actiondto.getReaction()+'!'}">...</td></br>
-         </tr>
-      </table>  
+       <th:block th:each="actiondto: ${actionslist}">
+    <th>Comments</th>
+         <td th:text=" ${actiondto.description}">...</td></br>
+    <tr><th>Reaction</th>
+         <td colspan="2"  th:text=" ${actiondto.getReaction()}">...</td></br>
+    </tr> </table>
+       
