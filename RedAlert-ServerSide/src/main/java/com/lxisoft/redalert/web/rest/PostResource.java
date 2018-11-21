@@ -1,6 +1,8 @@
 package com.lxisoft.redalert.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.lxisoft.redalert.domain.enumeration.Alert;
+import com.lxisoft.redalert.repository.PostRepository;
 import com.lxisoft.redalert.service.PostService;
 import com.lxisoft.redalert.web.rest.errors.BadRequestAlertException;
 import com.lxisoft.redalert.web.rest.util.HeaderUtil;
@@ -109,7 +111,28 @@ public class PostResource {
         Optional<PostDTO> postDTO = postService.findOne(id);
         return ResponseUtil.wrapOrNotFound(postDTO);
     }
-
+    
+    
+   @GetMapping("/postclose/{id}")
+    public ResponseEntity<PostDTO> getClosePost(@PathVariable Long id){
+    	   Optional<PostDTO> postDTO=postService.closePost(id);
+    
+    	return ResponseUtil.wrapOrNotFound(postDTO);
+   }
+    
+   @GetMapping("/changeAlert/{id}/{alertLevel}") 
+   public ResponseEntity<PostDTO> changeAlertLevel(@PathVariable Long id,@PathVariable String alertLevel)
+   {
+	   
+	    Optional<PostDTO>postDTO=postService.changeAlert(id,alertLevel);
+	   
+	    return ResponseUtil.wrapOrNotFound(postDTO);
+	   
+   }
+    
+    
+    
+    
     /**
      * DELETE  /posts/:id : delete the "id" post.
      *
