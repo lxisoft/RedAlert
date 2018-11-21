@@ -2,6 +2,7 @@ package com.lxisoft.redalert.service.impl;
 
 import com.lxisoft.redalert.service.PostService;
 import com.lxisoft.redalert.domain.Post;
+import com.lxisoft.redalert.domain.enumeration.Alert;
 import com.lxisoft.redalert.repository.PostRepository;
 import com.lxisoft.redalert.service.dto.PostDTO;
 import com.lxisoft.redalert.service.mapper.PostMapper;
@@ -87,4 +88,58 @@ public class PostServiceImpl implements PostService {
         log.debug("Request to delete Post : {}", id);
         postRepository.deleteById(id);
     }
+    
+    
+    @Override
+    public Optional<PostDTO> closePost(Long id)
+    {
+    	 Optional<Post> optionalPost=postRepository.findById(id);
+    	
+    	 Post post= optionalPost.get();
+    	 post.setActive(false);
+   
+    	postRepository.save(post);
+    	//postRepository.delete(post);
+    	optionalPost=postRepository.findById(id);
+    	
+    	return optionalPost.map(postMapper::toDto);
+    
+    	
+     }
+    
+    
+    
+    
+    public Optional<PostDTO> changeAlert(Long id,String alert)
+    {
+    	Optional<Post>optionalPost=postRepository.findById(id);
+    	if(alert.equals("RED"))
+    	{
+    		 Post post= optionalPost.get();
+    		post.setAlertLevel(Alert.RED);
+    		postRepository.save(post);
+    		
+    	}
+    	else if(alert.equals("GREEN"))
+    	{
+    		 Post post= optionalPost.get();
+    		optionalPost.get().setAlertLevel(Alert.GREEN);
+    		postRepository.save(post);
+    	}
+    	else if(alert.equals("ORANGE"))
+    	{
+    		 Post post= optionalPost.get();
+    	optionalPost.get().setAlertLevel(Alert.ORANGE);
+    	postRepository.save(post);
+    	}
+    	
+    	//post.setAlertLevel(alertLevel);
+    	optionalPost=postRepository.findById(id);
+    	return optionalPost.map(postMapper::toDto);
+    	
+    	
+    	
+    }
+
+
 }
