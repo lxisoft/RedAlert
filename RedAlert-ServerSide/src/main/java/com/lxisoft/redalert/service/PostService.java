@@ -43,4 +43,11 @@ public interface PostService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    /**
+     * Get all the posts by Registration Id.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    Optional<Page<PostDTO>> findAllByUserRegistrationId(Pageable pageable,Long userRegistrationId);
 }
