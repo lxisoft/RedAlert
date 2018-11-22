@@ -102,6 +102,12 @@ public class ViewController {
 	    return "friends";
 	}
 	
+	@GetMapping("/history")
+	public String getHistory()
+	{
+	   return "history";
+	}
+	
 	
 }
 	
