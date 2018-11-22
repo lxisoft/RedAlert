@@ -5,15 +5,16 @@ import com.lxisoft.redalert.domain.Action;
 import com.lxisoft.redalert.repository.ActionRepository;
 import com.lxisoft.redalert.service.dto.ActionDTO;
 import com.lxisoft.redalert.service.mapper.ActionMapper;
+
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 /**
  * Service Implementation for managing Action.
@@ -42,7 +43,6 @@ public class ActionServiceImpl implements ActionService {
     @Override
     public ActionDTO save(ActionDTO actionDTO) {
         log.debug("Request to save Action : {}", actionDTO);
-
         Action action = actionMapper.toEntity(actionDTO);
         action = actionRepository.save(action);
         return actionMapper.toDto(action);
@@ -62,7 +62,6 @@ public class ActionServiceImpl implements ActionService {
             .map(actionMapper::toDto);
     }
 
-
     /**
      * Get one action by id.
      *
@@ -73,8 +72,8 @@ public class ActionServiceImpl implements ActionService {
     @Transactional(readOnly = true)
     public Optional<ActionDTO> findOne(Long id) {
         log.debug("Request to get Action : {}", id);
-        return actionRepository.findById(id)
-            .map(actionMapper::toDto);
+        return actionRepository.findById(id).map(actionMapper::toDto);
+        
     }
 
     /**

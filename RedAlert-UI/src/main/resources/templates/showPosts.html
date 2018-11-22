@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Get Scores</title>
+</head>
+<body>
+
+ <!-- <table border="2">-->
+ <!--  <th:block th:each="array : ${comments}" th:text="${array}"> -->
+<table border="2">
+<h1> Posts</h1>
+
+ <th:block th:each="postDTO: ${postslist}">
+ 
+ <th>Comments</th>
+         <td th:text="  ${postDTO.description}">...</td><br></br>
+       
+ <tr><th> Alerts</th>
+          <td colspan="2"  th:text=" ${postDTO.getAlertLevel()}">...</td></br>
+         </tr></table>
+         
+    <h1>Actions</h1>
+       <table border="2"> 
+       <th:block th:each="actiondto: ${actionslist}">
+    <th>Comments</th>
+         <td th:text=" ${actiondto.description}">...</td></br>
+    <tr><th>Reaction</th>
+         <td colspan="2"  th:text=" ${actiondto.getReaction()}">...</td></br>
+    </tr> </table>
+       

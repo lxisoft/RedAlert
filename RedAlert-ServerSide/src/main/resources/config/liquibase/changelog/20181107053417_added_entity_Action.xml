@@ -34,11 +34,15 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="taken_on" type="datetime">
+            <column name="taken_on" type="timestamp">
                 <constraints nullable="true" />
             </column>
 
             <column name="reaction" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="approval" type="bit">
                 <constraints nullable="true" />
             </column>
 

@@ -6,6 +6,7 @@
 package com.lxisoft.redalert.client.red_alert.api;
 
 import com.lxisoft.redalert.client.red_alert.model.ActionDTO;
+import com.lxisoft.redalert.client.red_alert.model.OptionalOfActionDTO;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,7 +26,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-07T12:19:21.345+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-14T12:53:44.106+05:30[Asia/Calcutta]")
 
 @Api(value = "ActionResource", description = "the ActionResource API")
 public interface ActionResourceApi {
@@ -37,7 +38,7 @@ public interface ActionResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/actions",
+    @RequestMapping(value = "/apis/actions",
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.POST)
@@ -50,18 +51,18 @@ public interface ActionResourceApi {
         @ApiResponse(code = 204, message = "No Content"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden") })
-    @RequestMapping(value = "/api/actions/{id}",
+    @RequestMapping(value = "/apis/actions/{id}",
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteActionUsingDELETE(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
 
-    @ApiOperation(value = "getAction", nickname = "getActionUsingGET", notes = "", response = ActionDTO.class, tags={ "action-resource", })
+    @ApiOperation(value = "getAction", nickname = "getActionUsingGET", notes = "", response = OptionalOfActionDTO.class, tags={ "action-resource", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = ActionDTO.class),
+        @ApiResponse(code = 200, message = "OK", response = OptionalOfActionDTO.class),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/actions/{id}",
+    @RequestMapping(value = "/apis/actions/{id}",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<ActionDTO> getActionUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
@@ -73,7 +74,7 @@ public interface ActionResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/actions",
+    @RequestMapping(value = "/apis/actions",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<List<ActionDTO>> getAllActionsUsingGET(@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
@@ -86,7 +87,7 @@ public interface ActionResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/actions",
+    @RequestMapping(value = "/apis/actions",
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.PUT)

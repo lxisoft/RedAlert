@@ -26,7 +26,7 @@ import java.util.Optional;
  * REST controller for managing Report.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/apis")
 public class ReportResource {
 
     private final Logger log = LoggerFactory.getLogger(ReportResource.class);

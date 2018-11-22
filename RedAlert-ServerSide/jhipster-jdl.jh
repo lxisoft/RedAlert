@@ -52,7 +52,8 @@ entity Action
 	UserName String,
 	description String,
     takenOn Instant,
-    reaction Reaction
+    reaction Reaction,
+    approval Boolean
     
 }
 entity LeaderBoard

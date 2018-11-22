@@ -15,9 +15,12 @@ import javax.validation.constraints.*;
  * ActionDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-07T12:19:21.345+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-14T12:53:44.106+05:30[Asia/Calcutta]")
 
 public class ActionDTO   {
+  @JsonProperty("approval")
+  private Boolean approval = null;
+
   @JsonProperty("description")
   private String description = null;
 
@@ -69,6 +72,26 @@ public class ActionDTO   {
 
   @JsonProperty("userName")
   private String userName = null;
+
+  public ActionDTO approval(Boolean approval) {
+    this.approval = approval;
+    return this;
+  }
+
+  /**
+   * Get approval
+   * @return approval
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public Boolean isApproval() {
+    return approval;
+  }
+
+  public void setApproval(Boolean approval) {
+    this.approval = approval;
+  }
 
   public ActionDTO description(String description) {
     this.description = description;
@@ -221,7 +244,8 @@ public class ActionDTO   {
       return false;
     }
     ActionDTO actionDTO = (ActionDTO) o;
-    return Objects.equals(this.description, actionDTO.description) &&
+    return Objects.equals(this.approval, actionDTO.approval) &&
+        Objects.equals(this.description, actionDTO.description) &&
         Objects.equals(this.id, actionDTO.id) &&
         Objects.equals(this.postId, actionDTO.postId) &&
         Objects.equals(this.reaction, actionDTO.reaction) &&
@@ -232,7 +256,7 @@ public class ActionDTO   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(description, id, postId, reaction, takenOn, userId, userName);
+    return Objects.hash(approval, description, id, postId, reaction, takenOn, userId, userName);
   }
 
   @Override
@@ -240,6 +264,7 @@ public class ActionDTO   {
     StringBuilder sb = new StringBuilder();
     sb.append("class ActionDTO {\n");
     
+    sb.append("    approval: ").append(toIndentedString(approval)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    postId: ").append(toIndentedString(postId)).append("\n");

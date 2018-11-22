@@ -2,10 +2,11 @@ package com.lxisoft.redalert.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.lxisoft.redalert.service.ActionService;
+import com.lxisoft.redalert.service.dto.ActionDTO;
 import com.lxisoft.redalert.web.rest.errors.BadRequestAlertException;
 import com.lxisoft.redalert.web.rest.util.HeaderUtil;
 import com.lxisoft.redalert.web.rest.util.PaginationUtil;
-import com.lxisoft.redalert.service.dto.ActionDTO;
+
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,12 +27,12 @@ import java.util.Optional;
  * REST controller for managing Action.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/apis")
 public class ActionResource {
 
     private final Logger log = LoggerFactory.getLogger(ActionResource.class);
 
-    private static final String ENTITY_NAME = "redAlertAction";
+    private static final String ENTITY_NAME = "action";
 
     private final ActionService actionService;
 
@@ -73,7 +74,7 @@ public class ActionResource {
     public ResponseEntity<ActionDTO> updateAction(@RequestBody ActionDTO actionDTO) throws URISyntaxException {
         log.debug("REST request to update Action : {}", actionDTO);
         if (actionDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+            return createAction(actionDTO);
         }
         ActionDTO result = actionService.save(actionDTO);
         return ResponseEntity.ok()
@@ -104,10 +105,10 @@ public class ActionResource {
      */
     @GetMapping("/actions/{id}")
     @Timed
-    public ResponseEntity<ActionDTO> getAction(@PathVariable Long id) {
+    public ResponseEntity<Optional<ActionDTO>> getAction(@PathVariable Long id) {
         log.debug("REST request to get Action : {}", id);
         Optional<ActionDTO> actionDTO = actionService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(actionDTO);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(actionDTO));
     }
 
     /**

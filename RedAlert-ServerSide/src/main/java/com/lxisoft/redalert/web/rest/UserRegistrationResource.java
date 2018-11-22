@@ -26,7 +26,7 @@ import java.util.Optional;
  * REST controller for managing UserRegistration.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/apis")
 public class UserRegistrationResource {
 
     private final Logger log = LoggerFactory.getLogger(UserRegistrationResource.class);

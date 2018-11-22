@@ -43,4 +43,12 @@ public interface PostService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+
+
+	Optional<PostDTO> closePost(Long id);
+
+	Optional<PostDTO> changeAlert(Long id, String alertLevel);
+
+
 }
