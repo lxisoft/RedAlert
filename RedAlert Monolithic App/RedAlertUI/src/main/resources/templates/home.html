@@ -102,34 +102,35 @@
           </button>
         </div>
         <div class="modal-body mx-3">
-          <form action="#" th:action="@{alertcontroller/getform}" th:object="${view}" th:method="post">
-            <input type="hidden" id="alertLevel" name="alertLevel" value="ORANGE" />
+          <form action="#" th:action="@{/redAlertUi/getAlertDetailsToPost}" th:object="${view}" th:method="post" enctype="multipart/form-data">
+            <input type="hidden" id="alertLevel" name="userAlertLevel" value="ORANGE" />
+            <input type="hidden" th:value="${view.userRegistrationDTO.id}" name="userRegistrationId"/>
             <div class="">
                 <div class="md-form mt-0">
-                  <textarea id="textarea-char-counter" class="form-control md-textarea" length="120" rows="1"></textarea>
-                  <label for="textarea-char-counter">Description</label>
+                  <textarea id="textarea-char-counter" class="form-control md-textarea" length="120" rows="1" th:field="*{postDTO.description}"></textarea>
+                  <label for="textarea-char-counter" >Description</label>
                 </div>
             </div>
             <div class="row">
               <div class="col">
                 <div class="md-form mt-0">
-                  <input type="text" placeholder=" " id="latitude" class="form-control">
-                  <label for="latitude">Latitude</label>
+                  <input type="text" placeholder=" " id="latitude" class="form-control" th:field="*{postDTO.latitude}"/>
+                  <label for="latitude" >Latitude</label>
                 </div>                
               </div>
               <div class="col">
                 <div class="md-form mt-0">
-                  <input type="text" placeholder=" " id="longitude" class="form-control">
-                  <label for="longitude">Longitude</label>
+                  <input type="text" placeholder=" " id="longitude" th:field="*{postDTO.longitude}" class="form-control"/>
+                  <label for="longitude" >Longitude</label>
                 </div>                
               </div>
             </div>
             <div class="upload-btn-wrapper row">
               <button class="btn btn-deep-orange">Upload a file</button>
-              <input type="file" name="files" id="files" multiple="multiple" />
+              <input type="file" th:name="files" id="files" multiple="multiple" />
               <i class="fa fa-paperclip" aria-hidden="true" style="right: 3%;"></i>
               <div class="md-form" style="display: inline-block;">
-                  <input type="text" id="fileslist" placeholder="Choose Files..." class="form-control">
+                  <input type="text" id="fileslist" name="filesList" placeholder="Choose Files..." class="form-control">
                 </div>
             </div>
             <div class="modal-footer d-flex justify-content-center">

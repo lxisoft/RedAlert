@@ -43,6 +43,7 @@ public interface PostService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
     /**
      * Get all the posts by Registration Id.
      *
@@ -50,4 +51,13 @@ public interface PostService {
      * @return the list of entities
      */
     Optional<Page<PostDTO>> findAllByUserRegistrationId(Pageable pageable,Long userRegistrationId);
+
+
+
+
+	Optional<PostDTO> closePost(Long id);
+
+	Optional<PostDTO> changeAlert(Long id, String alertLevel);
+
+
 }
