@@ -1,14 +1,20 @@
 package com.lxisoft.redalert.service.impl;
 
 import com.lxisoft.redalert.service.PostService;
+import com.lxisoft.redalert.service.UserRegistrationService;
 import com.lxisoft.redalert.domain.Post;
+
+import com.lxisoft.redalert.domain.UserRegistration;
+
 import com.lxisoft.redalert.domain.enumeration.Alert;
+
 import com.lxisoft.redalert.repository.PostRepository;
+import com.lxisoft.redalert.repository.UserRegistrationRepository;
 import com.lxisoft.redalert.service.dto.PostDTO;
 import com.lxisoft.redalert.service.mapper.PostMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,6 +34,9 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
     private final PostMapper postMapper;
+    
+    @Autowired
+    UserRegistrationRepository userRegistrationRepository;
 
     public PostServiceImpl(PostRepository postRepository, PostMapper postMapper) {
         this.postRepository = postRepository;
@@ -88,6 +97,33 @@ public class PostServiceImpl implements PostService {
         log.debug("Request to delete Post : {}", id);
         postRepository.deleteById(id);
     }
+
+
+    /**
+     * Get all the posts By UserRegistrationId.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+	public Optional<Page<PostDTO>> findAllByUserRegistrationId(Pageable pageable,Long userRegistrationId) {
+    	Optional<Page<PostDTO>> pageDTO;
+    	log.debug("Request to get all Posts");
+    	Optional<UserRegistration> userRegistration=userRegistrationRepository.findById(userRegistrationId);
+    	log.info("UserRegistration iiis found as**********************************"+userRegistration);
+    if(userRegistration.isPresent())
+    {
+    pageDTO=Optional.of(postRepository.findAllByUserRegistration(pageable,userRegistration.get()).get()
+                .map(postMapper::toDto));
+    return pageDTO;
+    }
+    else
+    {
+    	return Optional.empty();
+    }
+    }
+
     
     
     @Override
