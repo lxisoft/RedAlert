@@ -120,7 +120,6 @@ public class ViewController {
 	   return "history";
 	}
 	
-	
 }
 	
 	/*@GetMapping("/getAlert")
