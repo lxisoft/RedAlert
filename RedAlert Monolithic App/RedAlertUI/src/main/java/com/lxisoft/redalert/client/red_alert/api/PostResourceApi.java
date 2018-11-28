@@ -25,7 +25,9 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-22T13:02:01.232+05:30[Asia/Colombo]")
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-27T20:39:06.107+05:30[Asia/Calcutta]")
+
 
 @Api(value = "PostResource", description = "the PostResource API")
 public interface PostResourceApi {

@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-16T11:58:23.175+05:30[Asia/Colombo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-27T20:39:06.107+05:30[Asia/Calcutta]")
 
 @Api(value = "ReportResource", description = "the ReportResource API")
 public interface ReportResourceApi {
@@ -53,6 +53,18 @@ public interface ReportResourceApi {
     @RequestMapping(value = "/apis/reports/{id}",
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteReportUsingDELETE(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
+
+
+    @ApiOperation(value = "findAllByPost", nickname = "findAllByPostUsingGET", notes = "", response = ReportDTO.class, tags={ "report-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = ReportDTO.class),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/apis/postreports/{id}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<ReportDTO> findAllByPostUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
 
     @ApiOperation(value = "getAllReports", nickname = "getAllReportsUsingGET", notes = "", response = ReportDTO.class, responseContainer = "List", tags={ "report-resource", })

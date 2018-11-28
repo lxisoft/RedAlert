@@ -1,18 +1,22 @@
 package com.lxisoft.redalert.service.impl;
 
 import com.lxisoft.redalert.service.ReportService;
+import com.lxisoft.redalert.domain.Post;
 import com.lxisoft.redalert.domain.Report;
+import com.lxisoft.redalert.repository.PostRepository;
 import com.lxisoft.redalert.repository.ReportRepository;
+import com.lxisoft.redalert.service.dto.PostDTO;
 import com.lxisoft.redalert.service.dto.ReportDTO;
 import com.lxisoft.redalert.service.mapper.ReportMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,7 +31,8 @@ public class ReportServiceImpl implements ReportService {
     private final ReportRepository reportRepository;
 
     private final ReportMapper reportMapper;
-
+    @Autowired
+    PostRepository postRepo;
     public ReportServiceImpl(ReportRepository reportRepository, ReportMapper reportMapper) {
         this.reportRepository = reportRepository;
         this.reportMapper = reportMapper;
@@ -87,4 +92,27 @@ public class ReportServiceImpl implements ReportService {
         log.debug("Request to delete Report : {}", id);
         reportRepository.deleteById(id);
     }
+
+
+
+	@Override
+	public Optional<ReportDTO> findAllByPost(Long id) {
+		// TODO Auto-generated method stub
+		Optional<Post> post =postRepo.findById(id);
+		
+		log.debug("Request to get Report by post : {}", id);
+		return reportRepository.findAllByPost(post.get()).map(reportMapper::toDto);
+		
+	}
+
+/*	@Override
+	 @Transactional(readOnly = true)
+	public List<ReportDTO> findAllByPostId(Long id) {
+		// TODO Auto-generated method stub
+		List<PostDTO> post =postRepo.findByPostId(id);
+	
+		log.debug("Request to get Report by post : {}", id);
+		return reportRepository.findAllByPost(post.get()).map(reportMapper::toDto);
+				
+	}*/
 }

@@ -81,9 +81,9 @@
               alt="Generic placeholder image">
             <div class="media-body">
               <h5 class="font-weight-bold mt-0 mb-0" style="display: inline-block;">
-                <a style="color: #fd7e14;" href="">UserName</a>
+                <a style="color: #fd7e14;" th:href="" th:text="${view.userRegistrationDTO.firstName}"></a>
               </h5>
-              <p id="date" class="mb-0" style="display: inline-block; font-size: 12px; color: grey;">15m Ago <i class="fa fa-history" aria-hidden="true"></i></p>
+              <p id="date" class="mb-0" style="display: inline-block; font-size: 12px; color: grey;" th:text=${view.postDTO.createdOn}> <i class="fa fa-history" aria-hidden="true"></i></p>
               <ul class="list-unstyled list-inline mt-0 mb-0 pt-1">
                 <li class="list-inline-item" data-toggle="modal" data-target="#locationModalCenter" onclick="showMap('latitude','longitude')">
                   <a class="grey-text mr-1"><i class="fa fa-lg fa-map-marker"> </i></a>
@@ -93,9 +93,9 @@
                 </li>
               </ul>
               <h6><strong>AlertLevel</strong></h6>
-              <p style="font-weight: 400;">Issue description : Help!!!. I'm in danger. Its a fire out here. I can't get out of the house. The door got locked. Currently I'm away from the fire but i"m afraid, it may get close.</p>
-              <input type="hidden" id="latitude" value="10.83836"/>
-              <input type="hidden" id="longitude" value="76.56884"/>
+              <p style="font-weight: 400;" th:text="${view.postDTO.description}"></p>
+              <input type="hidden" id="latitude" value="${view.postDTO.latitude}"/>
+              <input type="hidden" id="longitude" value="${view.postDTO.longitude}"/>
                 <div style="float: right;">
                   <span>1 Close Requests,</span>
                   <span>0 Reports</span>
