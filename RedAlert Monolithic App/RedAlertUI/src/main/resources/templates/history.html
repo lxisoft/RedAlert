@@ -77,7 +77,7 @@
               alt="Generic placeholder image">
             <div class="media-body">
               <h5 class="font-weight-bold mt-0 mb-0" style="display: inline-block;">
-                <a style="color: #fd7e14;" th:href="" th:text="${view.userRegistrationDTO.firstName}"></a>
+                <a style="color: #fd7e14;" th:text="${view.userRegistrationDTO.firstName}"></a>
               </h5>
               <p id="date" class="mb-0" style="display: inline-block; font-size: 12px; color: grey;" th:text=${view.postDTO.createdOn}> <i class="fa fa-history" aria-hidden="true"></i></p>
               <ul class="list-unstyled list-inline mt-0 mb-0 pt-1">
@@ -244,7 +244,7 @@
     <!-- SCRIPTS -->
     <!-- JQuery -->
     <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
-    <script src="https://maps.google.com/maps/api/js?key=AIzaSyDNvROGIUEfGUi_YHSWWbBVTJpqZuZCjvY"></script>
+    <script th:src="@{https://maps.google.com/maps/api/js?key=AIzaSyDNvROGIUEfGUi_YHSWWbBVTJpqZuZCjvY}"></script>
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
     <!-- Bootstrap core JavaScript -->

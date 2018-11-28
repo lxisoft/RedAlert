@@ -110,12 +110,13 @@ public class ViewController {
 		view.setPosts((ArrayList<PostDTO>) postResourceApi.getAllPostsUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());
 		view.setMedias((ArrayList<MediaDTO>) mediaResourceApi.getAllMediaUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());
 		view.setUsers((ArrayList<UserRegistrationDTO>) userRegistrationResourceApi.getAllUserRegistrationsUsingGET(null, null, null, null, null, null, null, null, null, null, null).getBody());
-		view.setPostDTO(view.getPosts().get(0));
-		view.setMediaDTO(view.getMedias().get(0));
+		view.setPostDTO(view.getPosts().get(view.getPosts().size()-1));
+		view.setMediaDTO(view.getMedias().get(view.getPosts().size()-1));
 		System.out.println("Id "+view.getPostDTO().getDescription());
-		//System.out.println("name "+view.getUserRegistrationDTO().getFirstName());
+		System.out.println("name "+view.getPosts().size());
 		
 		view.setUserRegistrationDTO(userRegistrationResourceApi.getUserRegistrationUsingGET(view.getPostDTO().getUserRegistrationId()).getBody());
+		System.out.print("name"+view.getUserRegistrationDTO().getFirstName());
 		model.addAttribute("view",view);
 	   return "history";
 	}

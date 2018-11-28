@@ -51,4 +51,6 @@ public interface PostService {
 	Optional<PostDTO> changeAlert(Long id, String alertLevel);
 
 
+
+
 }
