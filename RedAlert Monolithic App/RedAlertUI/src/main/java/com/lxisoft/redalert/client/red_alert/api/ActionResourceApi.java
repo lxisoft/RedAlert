@@ -26,7 +26,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-16T11:58:23.175+05:30[Asia/Colombo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-27T20:39:06.107+05:30[Asia/Calcutta]")
 
 @Api(value = "ActionResource", description = "the ActionResource API")
 public interface ActionResourceApi {
@@ -65,7 +65,7 @@ public interface ActionResourceApi {
     @RequestMapping(value = "/apis/actions/{id}",
         produces = "*/*", 
         method = RequestMethod.GET)
-    ResponseEntity<ActionDTO> getActionUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
+    ResponseEntity<OptionalOfActionDTO> getActionUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
 
     @ApiOperation(value = "getAllActions", nickname = "getAllActionsUsingGET", notes = "", response = ActionDTO.class, responseContainer = "List", tags={ "action-resource", })
