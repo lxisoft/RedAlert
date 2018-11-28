@@ -2,6 +2,7 @@ package com.lxisoft.redalert.web.rest.controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -101,10 +102,21 @@ public class ViewController {
 	{
 	    return "friends";
 	}
-	
+	    
 	@GetMapping("/history")
-	public String getHistory()
+	public String getHistory(Model model)
 	{
+		View view = new View();
+		view.setPosts((ArrayList<PostDTO>) postResourceApi.getAllPostsUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());
+		view.setMedias((ArrayList<MediaDTO>) mediaResourceApi.getAllMediaUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());
+		view.setUsers((ArrayList<UserRegistrationDTO>) userRegistrationResourceApi.getAllUserRegistrationsUsingGET(null, null, null, null, null, null, null, null, null, null, null).getBody());
+		view.setPostDTO(view.getPosts().get(0));
+		view.setMediaDTO(view.getMedias().get(0));
+		System.out.println("Id "+view.getPostDTO().getDescription());
+		//System.out.println("name "+view.getUserRegistrationDTO().getFirstName());
+		
+		view.setUserRegistrationDTO(userRegistrationResourceApi.getUserRegistrationUsingGET(view.getPostDTO().getUserRegistrationId()).getBody());
+		model.addAttribute("view",view);
 	   return "history";
 	}
 	
