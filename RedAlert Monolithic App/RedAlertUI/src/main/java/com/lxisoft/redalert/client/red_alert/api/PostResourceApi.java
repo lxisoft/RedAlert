@@ -25,12 +25,22 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-27T20:39:06.107+05:30[Asia/Calcutta]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-29T13:14:44.842+05:30[Asia/Colombo]")
 
 @Api(value = "PostResource", description = "the PostResource API")
 public interface PostResourceApi {
+
+    @ApiOperation(value = "changeAlertLevel", nickname = "changeAlertLevelUsingGET", notes = "", response = PostDTO.class, tags={ "post-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = PostDTO.class),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/apis/changeAlert/{id}/{alertLevel}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<PostDTO> changeAlertLevelUsingGET(@ApiParam(value = "alertLevel",required=true) @PathVariable("alertLevel") String alertLevel,@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
+
 
     @ApiOperation(value = "createPost", nickname = "createPostUsingPOST", notes = "", response = PostDTO.class, tags={ "post-resource", })
     @ApiResponses(value = { 
@@ -79,6 +89,18 @@ public interface PostResourceApi {
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<List<PostDTO>> getAllPostsUsingGET(@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
+
+
+    @ApiOperation(value = "getClosePost", nickname = "getClosePostUsingGET", notes = "", response = PostDTO.class, tags={ "post-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = PostDTO.class),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/apis/postclose/{id}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<PostDTO> getClosePostUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
 
     @ApiOperation(value = "getPost", nickname = "getPostUsingGET", notes = "", response = PostDTO.class, tags={ "post-resource", })

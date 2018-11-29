@@ -111,33 +111,16 @@ public class PostResource {
     @Timed
     public ResponseEntity<List<PostDTO>> getAllPostsByUserRegistrationId(@PathVariable Long userRegistrationId,Pageable pageable) throws NotFoundException {
         log.debug("REST request to get a page of Posts");
-        Optional<Page<PostDTO>> page = postService.findAllByUserRegistrationId(pageable,userRegistrationId);
+        Page<PostDTO> page = postService.findAllByUserRegistrationId(pageable,userRegistrationId);
         
     
-       if(page.isPresent())
-       {
+      
        
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page.get(), "/api/posts");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/posts");
         
         
-        return new ResponseEntity<>(page.get().getContent(), headers, HttpStatus.OK);
-       }
-       else
-       {
-    	  
-    	
-    	   
-    	   
-    	   
-    	   
-    	   
-    	   
-    	   
-    	   
-    	   
-    	   return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("Posts", "UserRegistration", " UserRegistation is not found")).body(null);
-    	   
-       }
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+     
        
         
         

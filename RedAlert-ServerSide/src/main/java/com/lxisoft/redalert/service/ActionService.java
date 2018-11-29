@@ -42,4 +42,6 @@ public interface ActionService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+	Page<ActionDTO> findAllbyPostId(Pageable pageable, Long postId);
 }
