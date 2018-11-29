@@ -52,8 +52,8 @@ public class ViewController {
 		view.setMediaDTO(new MediaDTO());
 		view.setPostDTO(new PostDTO());
 		view.setUserRegistrationDTO(new UserRegistrationDTO());
-        view.setUserRegistrationId(1);
-	    view.getUserRegistrationDTO().setId(userRegistrationResourceApi.getUserRegistrationUsingGET((long) 1).getBody().getId());
+        view.setUserRegistrationId(2);
+	    view.getUserRegistrationDTO().setId(userRegistrationResourceApi.getUserRegistrationUsingGET((long) 2).getBody().getId());
 		model.addAttribute("view", view);
 		return "home";
 	}
@@ -94,6 +94,7 @@ public class ViewController {
 	@GetMapping("/news")
 	public String getNews()
 	{
+		
 	   return "news";
 	}
 	
@@ -107,7 +108,7 @@ public class ViewController {
 	public String getHistory(Model model)
 	{
 		View view = new View();
-		view.setPosts((ArrayList<PostDTO>) postResourceApi.getAllPostsUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());
+		/*view.setPosts((ArrayList<PostDTO>) postResourceApi.getAllPostsUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());
 		view.setMedias((ArrayList<MediaDTO>) mediaResourceApi.getAllMediaUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());
 		view.setUsers((ArrayList<UserRegistrationDTO>) userRegistrationResourceApi.getAllUserRegistrationsUsingGET(null, null, null, null, null, null, null, null, null, null, null).getBody());
 		view.setPostDTO(view.getPosts().get(view.getPosts().size()-1));
@@ -116,7 +117,12 @@ public class ViewController {
 		System.out.println("name "+view.getPosts().size());
 		
 		view.setUserRegistrationDTO(userRegistrationResourceApi.getUserRegistrationUsingGET(view.getPostDTO().getUserRegistrationId()).getBody());
-		System.out.print("name"+view.getUserRegistrationDTO().getFirstName());
+		System.out.print("name"+view.getUserRegistrationDTO().getFirstName());*/
+		
+		ArrayList<PostDTO> posts = (ArrayList<PostDTO>) postResourceApi.getAllPostsByUserRegistrationIdUsingGET((long)1, null, null, null, null, null, null, null, null, null, null).getBody();
+		view.setPosts(posts);
+		view.setUserRegistrationDTO(userRegistrationResourceApi.getUserRegistrationUsingGET((long)1).getBody());
+		System.out.println("name "+view.getPosts().size());
 		model.addAttribute("view",view);
 	   return "history";
 	}

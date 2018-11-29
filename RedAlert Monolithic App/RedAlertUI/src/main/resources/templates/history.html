@@ -71,6 +71,7 @@
     </nav>
     <!--/.Navbar-->
     <!--post--> 
+     <th:block th:each="post,iter:${view.posts}" >
     <br/>
     <div class="card w-100">
       <div class="card-body">
@@ -83,7 +84,8 @@
               <h5 class="font-weight-bold mt-0 mb-0" style="display: inline-block;">
                 <a style="color: #fd7e14;" th:text="${view.userRegistrationDTO.firstName}"></a>
               </h5>
-              <p id="date" class="mb-0" style="display: inline-block; font-size: 12px; color: grey;" th:text=${view.postDTO.createdOn}> <i class="fa fa-history" aria-hidden="true"></i></p>
+             
+              <p id="date" class="mb-0" style="display: inline-block; font-size: 12px; color: grey;" th:text=${post.createdOn}> <i class="fa fa-history" aria-hidden="true"></i></p>
               <ul class="list-unstyled list-inline mt-0 mb-0 pt-1">
                 <li class="list-inline-item" data-toggle="modal" data-target="#locationModalCenter" onclick="showMap('latitude','longitude')">
                   <a class="grey-text mr-1"><i class="fa fa-lg fa-map-marker"> </i></a>
@@ -93,9 +95,10 @@
                 </li>
               </ul>
               <h6><strong>AlertLevel</strong></h6>
-              <p style="font-weight: 400;" th:text="${view.postDTO.description}"></p>
-              <input type="hidden" id="latitude" value="${view.postDTO.latitude}"/>
-              <input type="hidden" id="longitude" value="${view.postDTO.longitude}"/>
+              <p th:text="${post.alertLevel}"></p>
+              <p style="font-weight: 400;" th:text="${post.description}"></p>
+              <input type="hidden" id="latitude" value="${post.latitude}"/>
+              <input type="hidden" id="longitude" value="${post.longitude}"/>
                 <div style="float: right;">
                   <span>1 Close Requests,</span>
                   <span>0 Reports</span>
@@ -103,7 +106,7 @@
                 </div>
               <!-- Collapse buttons -->
               <div id="meu_div">
-                <a type="button" data-toggle="collapse" data-target="#collapseExample"
+                <a type="button" data-toggle="collapse" th:attr="data-target='#collapseExample'+${iter.index}"
                   aria-expanded="false" aria-controls="collapseExample">
                   Comments <i id="iconDown" class="fa fa-chevron-down rotate" aria-hidden="true"></i>
                 </a>
@@ -111,7 +114,7 @@
               <!-- / Collapse buttons -->
 
               <!-- Collapsible element -->
-              <div class="collapse" id="collapseExample">
+              <div class="collapse" th:id="collapseExample+${iter.index}">
                 <div class="mt-3">
                   <div id="comments">
                     <img class="rounded-circle z-depth-1" style="height: 3%; width: 3%;" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(18)-mini.jpg"
@@ -136,6 +139,7 @@
                   </div>
                 </div>
               </div>
+             
             </div>
               <!-- / Collapsible element -->
           </div>
@@ -143,7 +147,7 @@
       </div>
       <!--Section: Author Box-->
     </div>
-      
+       </th:block>
     <!--/.post-->
 
     <!--CloseConfirm-->
