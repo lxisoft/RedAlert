@@ -50,7 +50,7 @@ public interface PostService {
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Optional<Page<PostDTO>> findAllByUserRegistrationId(Pageable pageable,Long userRegistrationId);
+    Page<PostDTO> findAllByUserRegistrationId(Pageable pageable,Long userRegistrationId);
 
 
 

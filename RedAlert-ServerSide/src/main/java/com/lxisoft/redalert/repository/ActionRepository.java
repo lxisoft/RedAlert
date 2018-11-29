@@ -1,8 +1,11 @@
 package com.lxisoft.redalert.repository;
 
 import com.lxisoft.redalert.domain.Action;
-import org.springframework.stereotype.Repository;
+import com.lxisoft.redalert.service.dto.ActionDTO;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 
 
@@ -12,5 +15,7 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface ActionRepository extends JpaRepository<Action, Long> {
+
+	Page<Action> findAllByPostId(Pageable pageable, Long postId);
 
 }

@@ -107,21 +107,14 @@ public class PostServiceImpl implements PostService {
      */
     @Override
     @Transactional(readOnly = true)
-	public Optional<Page<PostDTO>> findAllByUserRegistrationId(Pageable pageable,Long userRegistrationId) {
-    	Optional<Page<PostDTO>> pageDTO;
-    	log.debug("Request to get all Posts");
-    	Optional<UserRegistration> userRegistration=userRegistrationRepository.findById(userRegistrationId);
-    	log.info("UserRegistration iiis found as**********************************"+userRegistration);
-    if(userRegistration.isPresent())
-    {
-    pageDTO=Optional.of(postRepository.findAllByUserRegistration(pageable,userRegistration.get()).get()
-                .map(postMapper::toDto));
-    return pageDTO;
-    }
-    else
-    {
-    	return Optional.empty();
-    }
+	public Page<PostDTO> findAllByUserRegistrationId(Pageable pageable,Long userRegistrationId) {
+    	
+    	
+    	
+    
+   
+   return postRepository.findAllByUserRegistrationId(pageable,userRegistrationId)
+                .map(postMapper::toDto);
     }
 
     

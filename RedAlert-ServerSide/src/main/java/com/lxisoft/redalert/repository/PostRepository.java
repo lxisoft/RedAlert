@@ -30,7 +30,7 @@ import org.springframework.stereotype.Repository;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
 
-	Optional<Page<Post>> findAllByUserRegistration(Pageable pageable, UserRegistration userRegistration);
+	Page<Post> findAllByUserRegistrationId(Pageable pageable, Long userRegistrationId);
 
 	
 

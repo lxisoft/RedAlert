@@ -26,9 +26,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-27T20:39:06.107+05:30[Asia/Calcutta]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-29T13:14:44.842+05:30[Asia/Colombo]")
 
 @Api(value = "ActionResource", description = "the ActionResource API")
 public interface ActionResourceApi {
@@ -58,7 +56,7 @@ public interface ActionResourceApi {
     ResponseEntity<Void> deleteActionUsingDELETE(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
 
-    @ApiOperation(value = "getAction", nickname = "getActionUsingGET", notes = "", response = ActionDTO.class, tags={ "action-resource", })
+    @ApiOperation(value = "getAction", nickname = "getActionUsingGET", notes = "", response = OptionalOfActionDTO.class, tags={ "action-resource", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = ActionDTO.class),
         @ApiResponse(code = 401, message = "Unauthorized"),
@@ -67,7 +65,7 @@ public interface ActionResourceApi {
     @RequestMapping(value = "/apis/actions/{id}",
         produces = "*/*", 
         method = RequestMethod.GET)
-    ResponseEntity<OptionalOfActionDTO> getActionUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
+    ResponseEntity<ActionDTO> getActionUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
 
     @ApiOperation(value = "getAllActionsByPostId", nickname = "getAllActionsByPostIdUsingGET", notes = "", response = ActionDTO.class, responseContainer = "List", tags={ "action-resource", })
