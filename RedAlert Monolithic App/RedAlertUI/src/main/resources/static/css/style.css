@@ -197,3 +197,16 @@ span.choose {
     box-shadow: 2px 2px 2px #fff;
     float: right;
 }
+[contentEditable=true]:empty:not(:focus):before{
+
+    content:attr(data-text);
+
+    padding: 50px;
+
+    font-style: italic;
+
+    font-size: 90%;
+
+}
+
+

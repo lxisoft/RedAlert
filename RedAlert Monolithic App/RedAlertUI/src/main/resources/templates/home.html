@@ -107,21 +107,32 @@
             <input type="hidden" th:value="${view.userRegistrationDTO.id}" name="userRegistrationId"/>
             <div class="">
                 <div class="md-form mt-0">
-                  <textarea id="textarea-char-counter" class="form-control md-textarea" length="120" rows="1" th:field="*{postDTO.description}"></textarea>
+                  <textarea id="description" class="form-control md-textarea" onkeyup="showSuggestions();" length="120" rows="1" th:field="*{postDTO.description}"></textarea>
                   <label for="textarea-char-counter" >Description</label>
                 </div>
+                <label>Suggestions</label>
+                <div id="suggestions" contenteditable="true" data-text="Suggestions will appear as you type..."></div>
             </div>
+            <div class="modal-body">
+  				<div class="row">
+   					 <div class="col-md-12 modal_body_map">
+   				 		<div class="location-map" id="location-map">
+       			 			<div class="img-fluid" style="border-radius: 5px;" id="mapholder"></div>
+     					</div>
+    				</div>
+  				</div>
+			</div>
             <div class="row">
               <div class="col">
                 <div class="md-form mt-0">
-                  <input type="text" placeholder=" " id="latitude" class="form-control" th:field="*{postDTO.latitude}"/>
-                  <label for="latitude" >Latitude</label>
+                  <input type="hidden" placeholder=" " id="latitude" class="form-control" th:field="*{postDTO.latitude}"/>
+                  
                 </div>                
               </div>
               <div class="col">
                 <div class="md-form mt-0">
-                  <input type="text" placeholder=" " id="longitude" th:field="*{postDTO.longitude}" class="form-control"/>
-                  <label for="longitude" >Longitude</label>
+                  <input type="hidden" placeholder=" " id="longitude" th:field="*{postDTO.longitude}" class="form-control"/>
+                  
                 </div>                
               </div>
             </div>
@@ -203,6 +214,7 @@
   <!-- Central Modal Small -->
   <!-- SCRIPTS -->
   <!-- JQuery -->
+  <script src="https://maps.google.com/maps/api/js?key=AIzaSyDNvROGIUEfGUi_YHSWWbBVTJpqZuZCjvY"></script>
   <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
   <!-- Bootstrap tooltips -->
   <script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
@@ -212,6 +224,7 @@
   <script type="text/javascript" th:src="@{/js/mdb.min.js}"></script>
   <script type="text/javascript" th:src="@{/js/custom.js}"></script>
   <script type="text/javascript" th:src="@{/js/location.js}"></script>
+  <script type="text/javascript" th:src="@{/js/suggestions.js}"></script>
 </body>
 
 </html>
