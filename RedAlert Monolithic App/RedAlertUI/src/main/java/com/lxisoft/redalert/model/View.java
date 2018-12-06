@@ -7,6 +7,10 @@ import com.lxisoft.redalert.client.red_alert.model.PostDTO;
 import com.lxisoft.redalert.client.red_alert.model.PostDTO.AlertLevelEnum;
 import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
 
+/**
+ * @author silpa
+ *
+ */
 public class View {
 	private PostDTO postDTO;
 	private MediaDTO mediaDTO;
@@ -15,6 +19,7 @@ public class View {
 	private AlertLevelEnum userAlertLevel;
 	private ArrayList<PostDTO> posts;
 	private ArrayList<MediaDTO> medias;
+	private ArrayList<ImageView> imageviews; 
 	private ArrayList<UserRegistrationDTO> users;
 
 	public ArrayList<UserRegistrationDTO> getUsers() {
@@ -71,6 +76,12 @@ public class View {
 	}
 	public void setUserMediaId(long userMediaId) {
 		this.userMediaId = userMediaId;
+	}
+	public ArrayList<ImageView> getImageViews() {
+		return imageviews;
+	}
+	public void setImageViews(ArrayList<ImageView> imageviews) {
+		this.imageviews = imageviews;
 	}
 
 }
