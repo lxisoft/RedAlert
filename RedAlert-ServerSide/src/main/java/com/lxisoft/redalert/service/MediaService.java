@@ -43,4 +43,8 @@ public interface MediaService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+	Page<MediaDTO> findAllMediaBypostId(Pageable pageable, Long postId);
+
+	
 }

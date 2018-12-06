@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-29T13:14:44.842+05:30[Asia/Colombo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-30T15:07:32.251+05:30[Asia/Calcutta]")
 
 @Api(value = "MediaResource", description = "the MediaResource API")
 public interface MediaResourceApi {
@@ -53,6 +53,18 @@ public interface MediaResourceApi {
     @RequestMapping(value = "/apis/media/{id}",
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteMediaUsingDELETE(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
+
+
+    @ApiOperation(value = "getAllMediaByPostId", nickname = "getAllMediaByPostIdUsingGET", notes = "", response = MediaDTO.class, responseContainer = "List", tags={ "media-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = MediaDTO.class, responseContainer = "List"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/apis/medias/{postId}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<List<MediaDTO>> getAllMediaByPostIdUsingGET(@ApiParam(value = "postId",required=true) @PathVariable("postId") Long postId,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
 
 
     @ApiOperation(value = "getAllMedia", nickname = "getAllMediaUsingGET", notes = "", response = MediaDTO.class, responseContainer = "List", tags={ "media-resource", })
