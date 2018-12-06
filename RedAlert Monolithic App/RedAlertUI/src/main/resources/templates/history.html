@@ -21,6 +21,7 @@
   </head>
 
   <body style="background: #dddcdb;">
+   <th:block th:each="imageView,iter:${view.imageViews}" >
 
     <!--Navbar-->
     <nav class="navbar navbar-light lighten-4 mb-4 fixed-top" style="background: #ff7043;">
@@ -71,7 +72,10 @@
     </nav>
     <!--/.Navbar-->
     <!--post--> 
-     <th:block th:each="post,iter:${view.posts}" >
+    
+    
+    
+     
     <br/>
     <div class="card w-100">
       <div class="card-body">
@@ -85,20 +89,20 @@
                 <a style="color: #fd7e14;" th:text="${view.userRegistrationDTO.firstName}"></a>
               </h5>
              
-              <p id="date" class="mb-0" style="display: inline-block; font-size: 12px; color: grey;" th:text=${post.createdOn}> <i class="fa fa-history" aria-hidden="true"></i></p>
+              <p id="date" class="mb-0" style="display: inline-block; font-size: 12px; color: grey;" th:text=${imageView.post.createdOn}> <i class="fa fa-history" aria-hidden="true"></i></p>
               <ul class="list-unstyled list-inline mt-0 mb-0 pt-1">
                 <li class="list-inline-item" data-toggle="modal" data-target="#locationModalCenter" onclick="showMap('latitude','longitude')">
                   <a class="grey-text mr-1"><i class="fa fa-lg fa-map-marker"> </i></a>
                 </li>
-                <li class="list-inline-item" data-toggle="modal" data-target="#fileModalCenter" onclick="showMap('latitude','longitude')">
+                <li class="list-inline-item" data-toggle="modal" th:attr="data-target='#fileModalCenter'+${iter.index}" onclick="showMap('latitude','longitude')">
                   <a class="grey-text mr-1"><i class="fa fa-lg fa-paperclip"> </i></a>
                 </li>
               </ul>
               <h6><strong>AlertLevel</strong></h6>
-              <p th:text="${post.alertLevel}"></p>
-              <p style="font-weight: 400;" th:text="${post.description}"></p>
-              <input type="hidden" id="latitude" value="${post.latitude}"/>
-              <input type="hidden" id="longitude" value="${post.longitude}"/>
+              <p th:text="${imageView.post.alertLevel}"></p>
+              <p style="font-weight: 400;" th:text="${imageView.post.description}"></p>
+              <input type="hidden" id="latitude" value="${imageView.post.latitude}"/>
+              <input type="hidden" id="longitude" value="${imageView.post.longitude}"/>
                 <div style="float: right;">
                   <span>1 Close Requests,</span>
                   <span>0 Reports</span>
@@ -147,7 +151,7 @@
       </div>
       <!--Section: Author Box-->
     </div>
-       </th:block>
+       
     <!--/.post-->
 
     <!--CloseConfirm-->
@@ -211,12 +215,12 @@
     <!--./map-->
     <!--attachment-->
     <!-- Modal -->
-    <div class="modal fade" id="fileModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-
+    <div class="modal fade" th:id="fileModalCenter+${iter.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+     
         <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
         <div class="modal-dialog modal-dialog-centered" role="document">
 
-
+          
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Attatchments</h5>
@@ -226,20 +230,27 @@
                 </div>
                 <div class="modal-body">
                   
+                  
                     <div class="row">
+                     <th:block th:each="image,iteration:${imageView.images}">
                       <div class="col-6">
-                        <a class="waves-effect waves-light" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZpwuWCkP3KnXtmy9On1nA18AaP7VeU6DAlIFnTaxzA3S4MMIc">
-                         <img class="img-fluid img-thumbnail thumbnail hoverable" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZpwuWCkP3KnXtmy9On1nA18AaP7VeU6DAlIFnTaxzA3S4MMIc"
+                        <a class="waves-effect waves-light" href="#" >
+                         <img class="img-fluid img-thumbnail thumbnail hoverable"  th:src="${image}"
                           alt="Generic placeholder image"><br/>
                         </a> 
+                        
                       </div>
-                      <div class="col-6">
+                      </th:block>
+                    <!--  <div class="col-6">
                         <a class="waves-effect waves-light" href="https://i.ytimg.com/vi/Yei8WoOmtxk/maxresdefault.jpg">
                           <img class="img-fluid img-thumbnail thumbnail hoverable" src="https://i.ytimg.com/vi/Yei8WoOmtxk/maxresdefault.jpg"
                           alt="Generic placeholder image"><br/>
                         </a>
-                      </div>
+                      </div>-->
+                      
                     </div>
+                   
+                  
                   
                 </div>
                 <div class="modal-footer">
@@ -262,6 +273,7 @@
     <script type="text/javascript" th:src="@{/js/mdb.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/custom.js}"></script>
     <script type="text/javascript" th:src="@{/js/location.js}"></script>
+    </th:block>
 
   </body>
 

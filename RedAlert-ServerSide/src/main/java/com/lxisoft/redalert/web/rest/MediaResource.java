@@ -127,12 +127,12 @@ public class MediaResource {
         mediaService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
-    @GetMapping("/media/{postId}")
+    @GetMapping("/medias/{postId}")
     @Timed
-    public ResponseEntity<List<MediaDTO>> getAllMediaByPostId(Pageable pageable,Long postId) {
+    public ResponseEntity<List<MediaDTO>> getAllMediaByPostId(Pageable pageable,@PathVariable Long postId) {
         log.debug("REST request to get a page of Media");
         Page<MediaDTO> page = mediaService.findAllMediaBypostId(pageable,postId);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/media");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/apis/medias");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
