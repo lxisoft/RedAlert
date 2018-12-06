@@ -171,8 +171,13 @@
               <p>The post will be closed. Do yo want to continue?</p>
             </div>
             <div class="modal-footer">
+            
               <button type="button" class="btn btn-primary btn-sm btn-danger" data-dismiss="modal">No</button>
+               </form>
+                 <form th:action="@{/postclose/closepost}"  method="get">
+                <input type="hidden"  th:field="${closeposts.id}">
               <button style="height: auto;" type="submit" class="btn btn-primary btn-sm btn-success" name="closeReq" value="yes">Yes</button>
+              </form>
             </div>
           </div>
         </div>
@@ -263,6 +268,9 @@
     <!-- SCRIPTS -->
     <!-- JQuery -->
     <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+
+    <script src="@{https://maps.google.com/maps/api/js?key=AIzaSyDNvROGIUEfGUi_YHSWWbBVTJpqZuZCjvY}"></script>
+
     <script th:src="@{https://maps.google.com/maps/api/js?key=AIzaSyDNvROGIUEfGUi_YHSWWbBVTJpqZuZCjvY}"></script>
     <!-- Bootstrap tooltips -->
 
