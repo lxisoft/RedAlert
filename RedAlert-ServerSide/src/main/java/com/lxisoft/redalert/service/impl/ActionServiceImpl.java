@@ -86,4 +86,18 @@ public class ActionServiceImpl implements ActionService {
         log.debug("Request to delete Action : {}", id);
         actionRepository.deleteById(id);
     }
+
+    /**
+     * Get all the actions Using Post Id .
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    
+	public Page<ActionDTO> findAllbyPostId(Pageable pageable, Long postId) {
+    	log.debug("Request to get all Actions using Post Id");
+		return actionRepository.findAllByPostId(pageable,postId).map(actionMapper::toDto);
+	}
 }

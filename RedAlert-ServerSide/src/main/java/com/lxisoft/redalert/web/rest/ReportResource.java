@@ -54,7 +54,7 @@ public class ReportResource {
             throw new BadRequestAlertException("A new report cannot already have an ID", ENTITY_NAME, "idexists");
         }
         ReportDTO result = reportService.save(reportDTO);
-        return ResponseEntity.created(new URI("/api/reports/" + result.getId()))
+        return ResponseEntity.created(new URI("/apis/reports/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -92,7 +92,7 @@ public class ReportResource {
     public ResponseEntity<List<ReportDTO>> getAllReports(Pageable pageable) {
         log.debug("REST request to get a page of Reports");
         Page<ReportDTO> page = reportService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/reports");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/apis/reports");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
@@ -123,4 +123,14 @@ public class ReportResource {
         reportService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+   @GetMapping("/postreports/{id}")
+     public ResponseEntity<ReportDTO> findAllByPost(@PathVariable Long id)
+     {
+    	 log.debug("REST request to get Report by post : {}", id);
+    	 Optional<ReportDTO> reportDTO = reportService.findAllByPost(id);
+    	 return ResponseUtil.wrapOrNotFound(reportDTO);	 
+     }
+   
+     
 }

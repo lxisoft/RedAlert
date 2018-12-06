@@ -140,7 +140,7 @@ public class PostController {
 		
 		System.out.println("*************ACtion*** comfomation*******" + action);
 	
-		 action =actionResourceApi.getActionUsingGET(action.getId()).getBody();
+		// action =actionResourceApi.getActionUsingGET(action.getId()).getBody();
 //action=actionRepository.findOne(action.getId());
 System.out.println("*************ACtion** * comfomation*****Find By id**" + action);
 action.setApproval(true);
