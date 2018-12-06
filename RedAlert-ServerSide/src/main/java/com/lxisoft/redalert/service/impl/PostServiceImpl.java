@@ -142,6 +142,8 @@ public class PostServiceImpl implements PostService {
     public Optional<PostDTO> changeAlert(Long id,String alert)
     {
     	Optional<Post>optionalPost=postRepository.findById(id);
+    	
+    	
     	if(alert.equals("RED"))
     	{
     		 Post post= optionalPost.get();

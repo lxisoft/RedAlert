@@ -81,12 +81,16 @@
   </div>
   <!--/.panel-->
   <br/><br/><br/>
-  <!--alerts-->
+  <!--alerts--> 
   <div style="text-align: center;">
     <h3 style="margin: auto; font-weight: 400;">Broadcast Your Emergency</h3>
+      <form th:action="@{/postclose/alertchange}"  method="get">
+         <input type="hidden" th:value="${postDTO.id}" name="id">
+         <input type="hidden" th:value="RED" th:field="${postDTO.alertLevel}"> 
     <button id="red" type="button" class="btn btn-danger round" data-toggle="modal" data-target="#alert" onclick="getLocation();setModal(this)">RED</button>
-    <button id="orange" type="button" class="btn btn-deep-orange round" data-toggle="modal" data-target="#alert" onclick="getLocation();setModal(this)">ORANGE</button>
-    <button type="button" class="btn btn-success round" data-toggle="modal" data-target="#centralModalSm">GREEN</button>
+    </form>
+<button id="orange" type="button" class="btn btn-deep-orange round" data-toggle="modal" data-target="#alert" onclick="getLocation();setModal(this)">ORANGE</button>
+ <button type="button" class="btn btn-success round" data-toggle="modal" data-target="#centralModalSm">GREEN</button>
   </div>
   <!--/.alerts-->
   <!--modal-->
