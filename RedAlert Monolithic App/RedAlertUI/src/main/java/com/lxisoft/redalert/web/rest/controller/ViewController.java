@@ -65,8 +65,8 @@ public class ViewController {
 		view.setMediaDTO(new MediaDTO());
 		view.setPostDTO(new PostDTO());
 		view.setUserRegistrationDTO(new UserRegistrationDTO());
-        view.setUserRegistrationId(2);
-	    view.getUserRegistrationDTO().setId(userRegistrationResourceApi.getUserRegistrationUsingGET((long) 2).getBody().getId());
+        view.setUserRegistrationId(1);
+	    view.getUserRegistrationDTO().setId(userRegistrationResourceApi.getUserRegistrationUsingGET((long) 1).getBody().getId());
 		model.addAttribute("view", view);
 		return "home";
 	}
@@ -151,8 +151,13 @@ public class ViewController {
 		System.out.print("name"+view.getUserRegistrationDTO().getFirstName());*/
 		
 		ArrayList<PostDTO> posts = (ArrayList<PostDTO>) postResourceApi.getAllPostsByUserRegistrationIdUsingGET((long)1, null, null, null, null, null, null, null, null, null, null).getBody();
-		System.out.println("postsize"+posts.get(0).getDescription());
-		System.out.println("postsize"+posts.get(1).getDescription());
+		
+		
+		
+		System.out.println("posts****************************************************************************************************"+posts+"**********************************");
+		
+		/*System.out.println("postsize"+posts.get(0).getDescription());
+		System.out.println("postsize"+posts.get(1).getDescription());*/
 		
 		for(PostDTO post:posts)
 		{
@@ -168,9 +173,9 @@ public class ViewController {
 				System.out.println("+++media"+media.getFile());
 				String image="data:image/jpg;base64,"+Base64.getEncoder().encodeToString(media.getFile());
 				images.add(image);
-				System.out.println("+++media"+image);
+				System.out.println("+++media");
 				//view.setImages(("data:image/jpg;base64,"+Base64.getEncoder().encodeToString(media.getFile())));
-				System.out.println("in view*********************"+images);
+				System.out.println("in view*********************");
 				imageView.setImages(images);
 				
 			}
@@ -186,10 +191,10 @@ public class ViewController {
 		view.setImageViews(imageViews);
 		//System.out.println("images size"+view.getImages().size());
 		view.setUserRegistrationDTO(userRegistrationResourceApi.getUserRegistrationUsingGET((long)1).getBody());
-		System.out.println("name "+view.getImageViews().size());
+		/*System.out.println("name "+view.getImageViews().size());
 		System.out.println("name "+view.getImageViews().get(0).getImages().size());
 		System.out.println("name description "+view.getImageViews().get(0).getPost().getId());
-		System.out.println("name description "+view.getImageViews().get(1).getPost().getId());
+		System.out.println("name description "+view.getImageViews().get(1).getPost().getId());*/
 		model.addAttribute("view",view);
 	   return "history";
 	}
