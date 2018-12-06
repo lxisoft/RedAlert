@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
  * ReportDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-16T11:58:23.175+05:30[Asia/Colombo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-28T11:59:31.873+05:30[Asia/Calcutta]")
 
 public class ReportDTO   {
   @JsonProperty("actionId")
