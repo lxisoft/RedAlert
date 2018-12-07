@@ -163,7 +163,7 @@
           <div class="modal-content">
             <div class="modal-header"><br/>
               <h4 class="modal-title w-100" style="text-align: center;" id="myModalLabel">Are You Sure?</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -175,7 +175,9 @@
               <button type="button" class="btn btn-primary btn-sm btn-danger" data-dismiss="modal">No</button>
                </form>
                  <form th:action="@{/postclose/closepost}"  method="get">
-                <input type="hidden"  th:value="${imageView.post.id}"> 
+
+                <input type="hidden" th:name="id"  th:value="${imageView.post.id}"/>
+
               <button style="height: auto;" type="submit" class="btn btn-primary btn-sm btn-success" name="closeReq" value="yes">Yes</button>
               </form> 
             </div>

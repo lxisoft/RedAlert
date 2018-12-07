@@ -27,12 +27,7 @@ import com.lxisoft.redalert.client.red_alert.model.MediaDTO;
 import com.lxisoft.redalert.client.red_alert.model.PostDTO;
 import com.lxisoft.redalert.client.red_alert.model.PostDTO.AlertLevelEnum;
 import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
-import com.lxisoft.redalert.model.ImageView;
 import com.lxisoft.redalert.model.View;
-/**
- * @author Silpa
- *
- */
 
 @Controller
 @RequestMapping("/redAlertUi")
@@ -44,20 +39,12 @@ public class ViewController {
 	@Autowired
 	UserRegistrationResourceApi userRegistrationResourceApi;
 	
-	/**
-	 * @param model
-	 * @return String
-	 */
 	@GetMapping("/index")
 	public String getIndex(Model model)
 	{
 		return "index";
 	}
 	
-	/**
-	 * @param model
-	 * @return
-	 */
 	@GetMapping("/home")
 	public String getHome(Model model)
 	{
@@ -71,14 +58,6 @@ public class ViewController {
 		return "home";
 	}
 	
-	/**
-	 * @param view
-	 * @param files
-	 * @param users
-	 * @param medias
-	 * @param userAlertLevel
-	 * @return
-	 */
 	@PostMapping("/getAlertDetailsToPost")
 	public String getAlertDetailsToPost(@ModelAttribute View view,@RequestParam("files") MultipartFile[] files,
 			@ModelAttribute UserRegistrationDTO users,
@@ -112,20 +91,11 @@ public class ViewController {
 		return "redirect:/redAlertUi/home";
 	}
 	
-	/**
-	 * @return
-	 */
 	@GetMapping("/news")
 	public String getNews()
 	{
-		
 	   return "news";
 	}
-	
-	/**
-	 * @return
-	 */
-	
 	
 	@GetMapping("/friends")
 	public String getFriends()
@@ -137,64 +107,15 @@ public class ViewController {
 	public String getHistory(Model model)
 	{
 		View view = new View();
-		ArrayList<ImageView> imageViews=new ArrayList<ImageView>();
-		
-		/*view.setPosts((ArrayList<PostDTO>) postResourceApi.getAllPostsUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());
+		view.setPosts((ArrayList<PostDTO>) postResourceApi.getAllPostsUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());
 		view.setMedias((ArrayList<MediaDTO>) mediaResourceApi.getAllMediaUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());
 		view.setUsers((ArrayList<UserRegistrationDTO>) userRegistrationResourceApi.getAllUserRegistrationsUsingGET(null, null, null, null, null, null, null, null, null, null, null).getBody());
-		view.setPostDTO(view.getPosts().get(view.getPosts().size()-1));
-		view.setMediaDTO(view.getMedias().get(view.getPosts().size()-1));
+		view.setPostDTO(view.getPosts().get(0));
+		view.setMediaDTO(view.getMedias().get(0));
 		System.out.println("Id "+view.getPostDTO().getDescription());
-		System.out.println("name "+view.getPosts().size());
+		//System.out.println("name "+view.getUserRegistrationDTO().getFirstName());
 		
 		view.setUserRegistrationDTO(userRegistrationResourceApi.getUserRegistrationUsingGET(view.getPostDTO().getUserRegistrationId()).getBody());
-		System.out.print("name"+view.getUserRegistrationDTO().getFirstName());*/
-		
-		ArrayList<PostDTO> posts = (ArrayList<PostDTO>) postResourceApi.getAllPostsByUserRegistrationIdUsingGET((long)1, null, null, null, null, null, null, null, null, null, null).getBody();
-		
-		
-		
-		System.out.println("posts****************************************************************************************************"+posts+"**********************************");
-		
-		/*System.out.println("postsize"+posts.get(0).getDescription());
-		System.out.println("postsize"+posts.get(1).getDescription());*/
-		
-		for(PostDTO post:posts)
-		{
-			ImageView imageView=new ImageView(); 
-			
-			//System.out.println("view controller...**************"+post);
-			ArrayList<MediaDTO> medias = (ArrayList<MediaDTO>) mediaResourceApi.getAllMediaByPostIdUsingGET(post.getId(), null, null, null, null, null,null, null, null, null, null).getBody();
-			ArrayList<String> images = new ArrayList<String>();
-			for(MediaDTO media:medias)
-			{
-				System.out.print("*************post"+media.getPostId());
-				System.out.print("*************media"+media.getId());
-				System.out.println("+++media"+media.getFile());
-				String image="data:image/jpg;base64,"+Base64.getEncoder().encodeToString(media.getFile());
-				images.add(image);
-				System.out.println("+++media");
-				//view.setImages(("data:image/jpg;base64,"+Base64.getEncoder().encodeToString(media.getFile())));
-				System.out.println("in view*********************");
-				imageView.setImages(images);
-				
-			}
-			
-			 imageView.setMedia(medias);
-			 imageView.setPost(post);
-			 imageViews.add(imageView);
-		}
-		  
-		
-		
-		
-		view.setImageViews(imageViews);
-		//System.out.println("images size"+view.getImages().size());
-		view.setUserRegistrationDTO(userRegistrationResourceApi.getUserRegistrationUsingGET((long)1).getBody());
-		/*System.out.println("name "+view.getImageViews().size());
-		System.out.println("name "+view.getImageViews().get(0).getImages().size());
-		System.out.println("name description "+view.getImageViews().get(0).getPost().getId());
-		System.out.println("name description "+view.getImageViews().get(1).getPost().getId());*/
 		model.addAttribute("view",view);
 	   return "history";
 	}
