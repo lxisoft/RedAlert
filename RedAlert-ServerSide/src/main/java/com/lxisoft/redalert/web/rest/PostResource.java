@@ -9,6 +9,8 @@ import com.lxisoft.redalert.web.rest.util.HeaderUtil;
 import com.lxisoft.redalert.web.rest.util.PaginationUtil;
 import com.lxisoft.redalert.service.dto.PostDTO;
 import io.github.jhipster.web.util.ResponseUtil;
+import javassist.NotFoundException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -97,6 +99,33 @@ public class PostResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/posts");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    /**
+     * GET  /postsByRegistrationId: : get all the posts by UserRegistration Id.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of posts in body
+     * @throws NotFoundException 
+     */
+    @GetMapping("/postsByUserRegistrationId/{userRegistrationId}")
+    @Timed
+    public ResponseEntity<List<PostDTO>> getAllPostsByUserRegistrationId(@PathVariable Long userRegistrationId,Pageable pageable) throws NotFoundException {
+        log.debug("REST request to get a page of Posts");
+        Page<PostDTO> page = postService.findAllByUserRegistrationId(pageable,userRegistrationId);
+        
+    
+      
+       
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/posts");
+        
+        
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+     
+       
+        
+        
+       
+    }
 
     /**
      * GET  /posts/:id : get the "id" post.
@@ -146,4 +175,7 @@ public class PostResource {
         postService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+   
+    
+    
 }

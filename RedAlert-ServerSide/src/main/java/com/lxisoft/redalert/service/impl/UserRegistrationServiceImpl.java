@@ -96,4 +96,11 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         log.debug("Request to delete UserRegistration : {}", id);
         userRegistrationRepository.deleteById(id);
     }
+    
+    
+    
+    
+    
+    
+    
 }

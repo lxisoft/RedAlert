@@ -96,6 +96,24 @@ public class ActionResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/actions");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    /**
+     * GET  /actions : get all the actions using Post id.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of actions in body
+     */
+    @GetMapping("/actionsByPostId/{postId}")
+    @Timed
+    public ResponseEntity<List<ActionDTO>> getAllActionsByPostId(@PathVariable("postId") Long postId,Pageable pageable) {
+        log.debug("REST request to get a page of Actions Using Posts ");
+        Page<ActionDTO> page = actionService.findAllbyPostId(pageable,postId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/actions");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    
+    
 
     /**
      * GET  /actions/:id : get the "id" action.
