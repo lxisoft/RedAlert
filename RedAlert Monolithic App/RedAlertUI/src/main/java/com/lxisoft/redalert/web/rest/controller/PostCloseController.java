@@ -1,5 +1,8 @@
 package com.lxisoft.redalert.web.rest.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import com.lxisoft.redalert.client.red_alert.api.UserRegistrationResourceApi;
 import com.lxisoft.redalert.client.red_alert.model.MediaDTO;
 import com.lxisoft.redalert.client.red_alert.model.PostDTO;
 import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
+import com.lxisoft.redalert.model.ImageView;
 import com.lxisoft.redalert.model.View;
 @Controller
 @RequestMapping("/postclose")
@@ -25,12 +29,11 @@ public class PostCloseController {
 	
 	
 	
+	
 	@RequestMapping(value="/closepost",method=RequestMethod.GET)
 	public String postclosed(@ModelAttribute PostDTO postDTO)
 	{
-	      System.out.println("posts ********************************"+postDTO);
-		  //postDTO.getDescription();
-         // System.out.println("posts ********************************"+postDTO);
+	     
 	      postResource.getClosePostUsingGET(postDTO.getId());
 	    
 		  return "redirect:/postclose/history";
@@ -38,11 +41,9 @@ public class PostCloseController {
 	
 	
 	
-	@RequestMapping(value="/changealert")
+	@RequestMapping(value="/home")
 	public String changeAlerts(Model model)
 	{
-		PostDTO postDTO1=postResource.getPostUsingGET((long)1).getBody();
-		System.out.println("postdto@@@@@@@@@@@@@@@@@@@@"+postDTO1);
 		
 		View view = new View();
 		view.setMediaDTO(new MediaDTO());
@@ -51,7 +52,7 @@ public class PostCloseController {
         view.setUserRegistrationId(1);
         view.setUserRegistrationDTO(userRegistrationResourceApi.getUserRegistrationUsingGET((long) 1).getBody());
 		model.addAttribute("view", view);
-		model.addAttribute("postDTO",postDTO1);
+		
 		return "home";
 		
 	}
@@ -63,14 +64,6 @@ public class PostCloseController {
 		
 	}
 	
-	@RequestMapping(value="/history")
-	public String postclosed(Model model)
-	{
-		PostDTO postDTO = postResource.getPostUsingGET((long)5).getBody();
-		System.out.println("postsclosed ********************************"+postDTO);
-		model.addAttribute("closeposts",postDTO);
-        return "history";
-		
-     }
+	
 	
 }
