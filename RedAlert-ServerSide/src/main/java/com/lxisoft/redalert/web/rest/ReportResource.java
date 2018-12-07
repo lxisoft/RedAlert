@@ -125,11 +125,13 @@ public class ReportResource {
     }
 
    @GetMapping("/postreports/{id}")
-     public ResponseEntity<ReportDTO> findAllByPost(@PathVariable Long id)
+     public ResponseEntity<List<ReportDTO>> findAllByPost(@PathVariable Long id, Pageable pageable)
      {
     	 log.debug("REST request to get Report by post : {}", id);
-    	 Optional<ReportDTO> reportDTO = reportService.findAllByPost(id);
-    	 return ResponseUtil.wrapOrNotFound(reportDTO);	 
+  
+    	 Page<ReportDTO> reportDTOpage = reportService.findAllByPost(id,pageable);
+    	 HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(reportDTOpage, "/apis/postreports/{id}");
+         return new ResponseEntity<>(reportDTOpage.getContent(), headers, HttpStatus.OK); 
      }
    
      

@@ -92,8 +92,12 @@ public class ViewController {
 	}
 	
 	@GetMapping("/news")
-	public String getNews()
+	public String getNews(Model model)
 	{
+		View view = new View();
+		view.setPosts((ArrayList<PostDTO>) postResourceApi.getAllPostsUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());
+
+		model.addAttribute("view",view);
 	   return "news";
 	}
 	

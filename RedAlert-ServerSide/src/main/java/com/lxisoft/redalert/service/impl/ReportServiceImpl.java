@@ -94,15 +94,14 @@ public class ReportServiceImpl implements ReportService {
     }
 
 
-
 	@Override
-	public Optional<ReportDTO> findAllByPost(Long id) {
-		// TODO Auto-generated method stub
-		Optional<Post> post =postRepo.findById(id);
+	public Page<ReportDTO> findAllByPost(Long id, Pageable pageable) {
+Post post =postRepo.findById(id).get();
 		
 		log.debug("Request to get Report by post : {}", id);
-		return reportRepository.findAllByPost(post.get()).map(reportMapper::toDto);
+		return reportRepository.findAllByPost(post,pageable).map(reportMapper::toDto);
 		
+		// TODO Auto-generated method stub
 	}
 
 /*	@Override

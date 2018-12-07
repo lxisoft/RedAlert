@@ -32,6 +32,11 @@
     "promptValues": {
       "inputSpec": "http://localhost:8082/RedAlert/v2/api-docs",
       "cliName": "RedAlert"
+    },
+    "apis": {
+      "RedAlert": {
+        "spec": "http://localhost:8082/RedAlert/v2/api-docs"
+      }
     }
   }
 }
