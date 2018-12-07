@@ -62,11 +62,11 @@ var x = document.getElementById("demo");
 
       function showMap(latd,longtd) {
 
-          console.log("hello");
+          console.log("Latitude"+latd+"/n Longitude"+longtd);
 
-          var lat = document.getElementById(latd).value;
+          var lat = latd;
 
-          var lon = document.getElementById(longtd).value;
+          var lon = longtd;
 
           var latlon = new google.maps.LatLng(lat, lon);
 
@@ -94,6 +94,8 @@ var x = document.getElementById("demo");
 
           var marker = new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
 
+
+      
       }
 
  
