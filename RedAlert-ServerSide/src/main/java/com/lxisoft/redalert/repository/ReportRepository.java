@@ -22,5 +22,5 @@ import org.springframework.stereotype.Repository;
 public interface ReportRepository extends JpaRepository<Report, Long> {
 	 //List<ReportDTO> findAllByPost(PostDTO postDTO);
 
-	Optional<Report> findAllByPost(Post post);
+	Page<Report> findAllByPost(Post id,Pageable pageable);
 }

@@ -203,3 +203,16 @@ span.choose {
     font-style: italic;
     font-size: 90%;
 }
+[contentEditable=true]:empty:not(:focus):before{
+
+    content:attr(data-text);
+
+    padding: 50px;
+
+    font-style: italic;
+
+    font-size: 90%;
+
+}
+
+

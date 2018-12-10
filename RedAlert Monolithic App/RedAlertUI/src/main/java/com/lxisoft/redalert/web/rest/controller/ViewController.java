@@ -65,8 +65,8 @@ public class ViewController {
 		view.setMediaDTO(new MediaDTO());
 		view.setPostDTO(new PostDTO());
 		view.setUserRegistrationDTO(new UserRegistrationDTO());
-        view.setUserRegistrationId(2);
-	    view.getUserRegistrationDTO().setId(userRegistrationResourceApi.getUserRegistrationUsingGET((long) 2).getBody().getId());
+        view.setUserRegistrationId(1);
+	    view.getUserRegistrationDTO().setId(userRegistrationResourceApi.getUserRegistrationUsingGET((long) 1).getBody().getId());
 		model.addAttribute("view", view);
 		return "home";
 	}
@@ -116,9 +116,13 @@ public class ViewController {
 	 * @return
 	 */
 	@GetMapping("/news")
-	public String getNews()
+	public String getNews(Model model)
 	{
-		
+		View view = new View();
+		view.setPosts((ArrayList<PostDTO>) postResourceApi.getAllPostsUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());
+
+		model.addAttribute("view",view);
+
 	   return "news";
 	}
 	
@@ -139,38 +143,21 @@ public class ViewController {
 		View view = new View();
 		ArrayList<ImageView> imageViews=new ArrayList<ImageView>();
 		
-		/*view.setPosts((ArrayList<PostDTO>) postResourceApi.getAllPostsUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());
-		view.setMedias((ArrayList<MediaDTO>) mediaResourceApi.getAllMediaUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());
-		view.setUsers((ArrayList<UserRegistrationDTO>) userRegistrationResourceApi.getAllUserRegistrationsUsingGET(null, null, null, null, null, null, null, null, null, null, null).getBody());
-		view.setPostDTO(view.getPosts().get(view.getPosts().size()-1));
-		view.setMediaDTO(view.getMedias().get(view.getPosts().size()-1));
-		System.out.println("Id "+view.getPostDTO().getDescription());
-		System.out.println("name "+view.getPosts().size());
-		
-		view.setUserRegistrationDTO(userRegistrationResourceApi.getUserRegistrationUsingGET(view.getPostDTO().getUserRegistrationId()).getBody());
-		System.out.print("name"+view.getUserRegistrationDTO().getFirstName());*/
-		
 		ArrayList<PostDTO> posts = (ArrayList<PostDTO>) postResourceApi.getAllPostsByUserRegistrationIdUsingGET((long)1, null, null, null, null, null, null, null, null, null, null).getBody();
-		System.out.println("postsize"+posts.get(0).getDescription());
-		System.out.println("postsize"+posts.get(1).getDescription());
+
 		
 		for(PostDTO post:posts)
 		{
 			ImageView imageView=new ImageView(); 
 			
-			//System.out.println("view controller...**************"+post);
+		
 			ArrayList<MediaDTO> medias = (ArrayList<MediaDTO>) mediaResourceApi.getAllMediaByPostIdUsingGET(post.getId(), null, null, null, null, null,null, null, null, null, null).getBody();
 			ArrayList<String> images = new ArrayList<String>();
 			for(MediaDTO media:medias)
 			{
-				System.out.print("*************post"+media.getPostId());
-				System.out.print("*************media"+media.getId());
-				System.out.println("+++media"+media.getFile());
+				
 				String image="data:image/jpg;base64,"+Base64.getEncoder().encodeToString(media.getFile());
 				images.add(image);
-				System.out.println("+++media"+image);
-				//view.setImages(("data:image/jpg;base64,"+Base64.getEncoder().encodeToString(media.getFile())));
-				System.out.println("in view*********************"+images);
 				imageView.setImages(images);
 				
 			}
@@ -184,104 +171,13 @@ public class ViewController {
 		
 		
 		view.setImageViews(imageViews);
-		//System.out.println("images size"+view.getImages().size());
+		
 		view.setUserRegistrationDTO(userRegistrationResourceApi.getUserRegistrationUsingGET((long)1).getBody());
-		System.out.println("name "+view.getImageViews().size());
-		System.out.println("name "+view.getImageViews().get(0).getImages().size());
-		System.out.println("name description "+view.getImageViews().get(0).getPost().getId());
-		System.out.println("name description "+view.getImageViews().get(1).getPost().getId());
+	
 		model.addAttribute("view",view);
 	   return "history";
 	}
 	
 }
 	
-	/*@GetMapping("/getAlert")
-	public String getAction(@ModelAttribute PostDTO postDTO,Model model)
-	{
-		if ((postDTO.getAlertLevel().equals(PostDTO.AlertLevelEnum.ORANGE))) {
-			postDTO.setAlertLevel(PostDTO.AlertLevelEnum.ORANGE);
-			//postDTO = PostService.save(postDTO);
-			postResourceApi.updatePostUsingPUT(postDTO);
-			System.out.println("first feed " + postDTO);
-			View view = new View();
-
-			MediaDTO mediaDTO = new MediaDTO();
-			mediaDTO.setPostId(postDTO.getId());
-			view.setPostDTO(postDTO);
-			view.setMediaDTO(mediaDTO);
-			System.out.println("first file " + view.getPostDTO() + "*****" + view.getMediaDTO().getPostId());
-			model.addAttribute("view", view);
-
-			return "home";
-	}else if ((postDTO.getAlertLevel().equals(PostDTO.AlertLevelEnum.RED))) {
-		postDTO.setAlertLevel(PostDTO.AlertLevelEnum.RED);
-		//feed = feedService.save(feed);
-		postResourceApi.updatePostUsingPUT(postDTO);
-		System.out.println("first feed " + postDTO);
-		View view = new View();
-
-		MediaDTO mediaDTO = new MediaDTO();
-		mediaDTO.setPostId(postDTO.getId());
-		view.setPostDTO(postDTO);
-		view.setMediaDTO(mediaDTO);
-		System.out.println("first file " + view.getPostDTO() + "*****" + view.getMediaDTO().getPostId());
-		model.addAttribute("view", view);
-		return "home";
-	} else {
-		postDTO.setAlertLevel(PostDTO.AlertLevelEnum.GREEN);
-		//postDTO = feedService.save(feed);
-		postResourceApi.updatePostUsingPUT(postDTO);
-		System.out.println("first feed " + postDTO);
-		View view = new View();
-
-		MediaDTO mediaDTO = new MediaDTO();
-		mediaDTO.setPostId(postDTO.getId());
-		view.setPostDTO(postDTO);
-		view.setMediaDTO(mediaDTO);
-		System.out.println("first file " + view.getPostDTO() + "*****" + view.getMediaDTO().getPostId());
-		model.addAttribute("view", view);
-		return "home";
-	}
-	
-	}
-	@PostMapping("/getform")
-	@Timed
-	public String createFeed(@ModelAttribute View view, @RequestParam MultipartFile img,
-			RedirectAttributes redirectAttr, Model model) throws URISyntaxException {
-		System.out.println("second View Dto" + view);
-		System.out.println("second feed dto" + view.getPostDTO() + "id" + view.getMediaDTO());
-		
-		AlertLevelEnum alertLevel = view.getPostDTO().getAlertLevel();
-		System.out.println("testing..."+ alertLevel);
-		view.getPostDTO().setAlertLevel(alertLevel);;
-		//PostDTO postDto = postService.findOne(view.getPostDTO().getId());
-		 ResponseEntity<PostDTO> postDto = postResourceApi.getPostUsingGET(view.getPostDTO().getId());
-		 
-		postDto.getBody().setDescription(view.getPostDTO().getDescription());
-		postDto.getBody().setAlertLevel(view.getPostDTO().getAlertLevel());
-		System.out.println("feeddto nnnn" + postDto);
-
-		postResourceApi.updatePostUsingPUT(postDto.getBody());
-		ResponseEntity<MediaDTO> mediaDTO = mediaResourceApi.createMediaUsingPOST(view.getMediaDTO());
-		mediaDTO.getBody().setPostId(view.getPostDTO().getId());
-
-		try {
-			
-			String imagedata="data:image/jpg;base64,"+Base64.getEncoder().encodeToString(img.getBytes());
-			model.addAttribute("image", imagedata);
-			mediaDTO.getBody().setFile(img.getBytes());
-			
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("second file dto" + view.getMediaDTO().getFile());
-		//fileservice.save(view.getFile());
-		mediaResourceApi.updateMediaUsingPUT(view.getMediaDTO());
-		System.out.println("successsful");
-		return "home";
-	}*/
-
 
