@@ -96,3 +96,23 @@ function toggleContent(argument) {
 		argument.innerHTML='<i class="fa fa-plus"></i>';
 	}
 }
+$( document ).ready(function()
+		{
+	// GET REQUEST
+	$("#reportsId").click(function(event)
+			{
+		event.preventDefault();
+		ajaxGet();
+			});
+	// DO GET
+	function ajaxGet(){
+		$.ajax({
+	
+		type:"GET",
+		url :"http://localhost:8083/reportController/report",
+		success: function(result){
+			console.log("success: ", result);
+		}
+		});
+	}
+		});

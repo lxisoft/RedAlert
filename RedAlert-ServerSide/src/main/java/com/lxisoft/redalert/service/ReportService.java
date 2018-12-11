@@ -46,7 +46,7 @@ public interface ReportService {
      */
     void delete(Long id);
     
-   Optional<ReportDTO> findAllByPost(Long id);
+   Page<ReportDTO> findAllByPost(Long id, Pageable pageable);
 
 	//Page<ReportDTO> findAllByPostId(Pageable pageable, Long id);
 }

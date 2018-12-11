@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -9,12 +10,32 @@
 <!-- Font Awesome -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+	
+	
+	
 <!-- Bootstrap core CSS -->
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="/css/mdb.min.css" rel="stylesheet">
 <!-- Your custom styles (optional) -->
 <link href="/css/style.css" rel="stylesheet">
+
+
+
+<!-- <script  >
+    /*<![CDATA[*/
+   
+    
+    postId=$("#regId").val();
+    	    	 $("#content").load("/reportController/getGenuine?id="+postId);
+    	         $("#content").show();
+    
+  
+    /*]]>*/
+</script> -->
+
 
 </head>
 
@@ -90,7 +111,7 @@
 						<h5 class="font-weight-bold mt-0 mb-0"
 							style="display: inline-block;">
 							<a style="color: #fd7e14;" href=""
-								th:text="${newsFeedView.userRegistationDTO.userName}">UsersName</a>
+								th:text="${newsFeedView.userRegistrationDTO.userName}">UsersName</a>
 						</h5>
 						<p id="date" class="mb-0"
 							style="display: inline-block; font-size: 12px; color: grey;">
@@ -121,28 +142,36 @@
 							th:value="${newsFeedView.postDTO.latitude}" /> <input
 							type="hidden" id="longitude"
 							th:value="${newsFeedView.postDTO.longitude}" />
-						<form action="#">
-							<div style="float: right;">
-								<div class="dropdown"
-									style="display: inline-block; width: auto; height: auto;">
-									<div id="report" class="select">
-										<span>Report</span> <i style="left: 10px;"
-											class="fa fa-chevron-down"></i>
-									</div>
-									<input type="hidden" name="report" required="required">
-									<ul class="dropdown-menu">
-										<li id="fake">Fake</li>
-										<li id="prank">Prank</li>
-										<li id="solved">Solved</li>
-										<li id="support">Support</li>
-										<li id="timeout">Timeout</li>
-									</ul>
-								</div>
-								<button type="submit" class="btn btn-deep-orange px-3">
-									Report <i class="fa fa-bolt" aria-hidden="true"></i>
-								</button>
-							</div>
-						</form>
+						
+                <div style="float: right;">
+                  <div class="dropdown" style="display: inline-block; width: auto; height: auto;">  
+                   <div id="report" class="select">
+                      <span>Report</span>
+                      <i style="left: 10px;" class="fa fa-chevron-down"></i>
+                    </div> 
+                    <input type="hidden" id="reportHidden" name="report" required="required">
+                     <ul class="dropdown-menu">
+                     
+                    
+    <li th:each="report : ${T(com.lxisoft.redalert.client.red_alert.model.ReportDTO.ReportTypeEnum).values()}"
+            th:id="${report}"
+            th:value="${report}"
+            th:text="${report}">
+    </li>
+<!-- 
+                      <li id="fake">Fakes</li>
+                      <li id="prank">Prank</li>
+                      <li id="solved">Solved</li>
+                      <li id="support">Support</li>
+                      <li id="timeout">Timeout</li>.
+                    </ul>
+              -->     </div>
+              <input type="hidden" id="regId" th:name = "postId" th:value="${newsFeedView.postDTO.id}"/>
+              
+              
+                  <button id="btnrep"   class="btn btn-deep-orange px-3" th:report="${newsFeedView.postDTO.id}" th:onclick="postReport(this.getAttribute('report'));" >Report <i class="fa fa-bolt" aria-hidden="true"></i 	></button>
+                </div>
+              
 						<!-- Collapse buttons -->
 						<div>
 							<a id="meu_div" type="button" data-toggle="collapse"
@@ -227,6 +256,13 @@
 		<!--Section: Author Box-->
 	</div>
 
+
+
+
+
+      <div id="content"></div>
+      <!--Section: Author Box-->
+    </div>
 	<!--/.post-->
 
 
@@ -315,6 +351,87 @@
 	</div>
 	<!--/.attachment-->
 	<!-- SCRIPTS -->
+	<script  >
+    /*<![CDATA[*/
+   /*  $("#bt1").on("click", function () {
+    	console.log("click clickedd");
+    
+    	var regId=$('#regId').val();
+        $("#content").load("/reportController/getGenuine?id="+regId);
+        $("#content").show();
+    }); */
+    
+   /*  $("#btnrep").click(function () {
+    	
+    	
+    	console.log("clicksssssssss");
+    	var regId=$('#regId').val();
+    	var reportType=$(this).closest("form").find('input').val();
+    	alert(regId+"       Report Type is "+reportType);
+
+    }); */
+        
+   /*  ${window}.on('load',function () 
+    	console.log("windows function activated");
+    	
+    	postId=$("#regId").val();
+    	 $("#content").load("/reportController/getGenuine?id="+postId);
+         $("#content").show();
+    	
+    	
+    	
+    		}); */
+    		 $(window).on("load",function() {
+    		    console.log("ready!");
+    		    postId=$("#regId").val();
+    	    	 $("#content").load("/reportController/getGenuine?id="+postId);
+    	         $("#content").show();
+    		    
+    		}); 
+    
+    function postReport(postId)
+    {
+    	var report=$('#reportHidden').val();
+    	console.log("Report Size is"+report+"|");
+    	if(report!='')
+    		{
+    	console.log("post Id " + postId+"Report is"+report);
+    	$.ajax({
+			type: 'POST',
+			url: '/reportController/postReport?postId='+postId,
+			/* headers: {
+				'X-CSRF-TOKEN': $("input[name='_csrf']").val()
+			}, */
+			data: {
+				/* 'postId': postId, */
+				'report': report
+			},
+			success: function (response) {
+				console.log("post reply added successfully " + postId);
+				$("#content").load("/reportController/getGenuine?id="+postId);
+		         $("#content").show();
+				/* $("#replies-" + commentId).html(response); */
+				if (response.success) {
+					//document.getElementById("success-message").innerHTML="success";
+					console.log("reply added successfully in if condition");
+				}
+			},
+			error: function () {
+				console.log("reply added failed...!");
+			}
+		});
+    
+    		}
+    	 $("#content").load("/reportController/getGenuine?id="+postId);
+         $("#content").show();
+    }
+    
+    
+    
+    
+  
+    /*]]>*/
+</script>
 	<!-- JQuery -->
 	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
 	<script
@@ -328,5 +445,6 @@
 	<script type="text/javascript" src="/js/custom.js"></script>
 	<script type="text/javascript" src="/js/location.js"></script>
 </body>
+  
 
 </html>

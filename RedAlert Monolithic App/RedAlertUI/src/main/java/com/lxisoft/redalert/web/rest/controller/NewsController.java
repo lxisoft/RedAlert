@@ -39,12 +39,12 @@ public class NewsController {
 	@GetMapping("/newsOfFriend")
 	public String getNewsOfFriend(Model model) {
 		NewsFeedViewModel newsFeedView = new NewsFeedViewModel();
-		UserRegistrationDTO userRegistrationDto = userRegistrationResouceApi.getUserRegistrationUsingGET((long) 1)
+		UserRegistrationDTO userRegistrationDto = userRegistrationResouceApi.getUserRegistrationUsingGET((long)1 )
 				.getBody();
 		System.out.println("Userregistration is ******************* " + userRegistrationDto);
-		newsFeedView.setUserRegistationDTO(userRegistrationDto);
+		newsFeedView.setUserRegistrationDTO(userRegistrationDto);
 		List<PostDTO> postDtoList = postResourceApi
-				.getAllPostsByUserRegistrationIdUsingGET(newsFeedView.getUserRegistationDTO().getId(), null, null, null,
+				.getAllPostsByUserRegistrationIdUsingGET(newsFeedView.getUserRegistrationDTO().getId(), null, null, null,
 						null, null, null, null, null, null, null)
 				.getBody();
 		System.out.println("postDtoList is set ******************* " + postDtoList);

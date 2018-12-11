@@ -91,11 +91,7 @@ public class ViewController {
 		return "redirect:/redAlertUi/home";
 	}
 	
-	@GetMapping("/news")
-	public String getNews()
-	{
-	   return "news";
-	}
+
 	
 	@GetMapping("/friends")
 	public String getFriends()
