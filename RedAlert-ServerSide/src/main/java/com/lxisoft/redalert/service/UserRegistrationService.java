@@ -51,4 +51,6 @@ public interface UserRegistrationService {
     void delete(Long id);
     
     UserRegistrationDTO searchByUserName(String userName);
+    
+    Page<UserRegistrationDTO> searchByLastName(String lastName,Pageable pageable);
 }

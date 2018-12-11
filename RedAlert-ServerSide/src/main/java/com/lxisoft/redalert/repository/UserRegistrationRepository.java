@@ -28,4 +28,5 @@ public interface UserRegistrationRepository extends JpaRepository<UserRegistrati
     Optional<UserRegistration> findOneWithEagerRelationships(@Param("id") Long id);
 
     UserRegistration findByUserName(String userName);
+    Page<UserRegistration> findAllByLastName(String lastName,Pageable pageable);
 }
