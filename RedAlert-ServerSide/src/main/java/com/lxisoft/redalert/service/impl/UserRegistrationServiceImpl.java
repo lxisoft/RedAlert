@@ -96,6 +96,11 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         log.debug("Request to delete UserRegistration : {}", id);
         userRegistrationRepository.deleteById(id);
     }
+
+	@Override
+	public UserRegistrationDTO searchByUserName(String userName) {
+		return userRegistrationMapper.toDto(userRegistrationRepository.findByUserName(userName));
+	}
     
     
     

@@ -129,4 +129,12 @@ public class UserRegistrationResource {
         userRegistrationService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    @GetMapping("/user-registrations/find/{userName}")
+    @Timed
+    public ResponseEntity<UserRegistrationDTO> searchWithUserName(@PathVariable String userName)
+    {
+    	log.debug("REST request to find UserRegistration by username : {}",userName);
+    	Optional<UserRegistrationDTO> user= Optional.ofNullable(userRegistrationService.searchByUserName(userName));
+    	return ResponseUtil.wrapOrNotFound(user);
+    }
 }
