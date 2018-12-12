@@ -1,10 +1,13 @@
 package com.lxisoft.redalert.service;
 
+import com.lxisoft.redalert.domain.User;
+import com.lxisoft.redalert.domain.UserRegistration;
 import com.lxisoft.redalert.service.dto.UserRegistrationDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -49,4 +52,19 @@ public interface UserRegistrationService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    
+    
+	List<UserRegistration> findAll();
+	
+	Page<UserRegistrationDTO> getAllUsersByFirstName(String firstName, Pageable pageable);
+	
+	Page<UserRegistrationDTO> getAllUsersByLastName(String lastName, Pageable pageable);
+	
+	Page<UserRegistrationDTO> getAllUsersByEmail(String email, Pageable pageable);
+
+	Page<UserRegistrationDTO> getAllUsersByFirstNameLastNameEmail(String keyword, Pageable pageable);
+	
+	UserRegistration getUserByPassword(String password);
+
+	
 }
