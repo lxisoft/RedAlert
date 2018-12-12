@@ -51,9 +51,14 @@ public class ViewController {
 	@GetMapping("/index")
 	public String getIndex(Model model)
 	{
+		View view = new View();
+		view.setUserRegistrationDTO(new UserRegistrationDTO());
+		model.addAttribute(view);
 		return "index";
 	}
 	
+
+
 	/**
 	 * @param model
 	 * @return
