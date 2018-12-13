@@ -103,12 +103,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	}
     
     @Override
-    public Page<UserRegistrationDTO> searchByLastName(String lastName,Pageable pageable){
+    public Page<UserRegistrationDTO> findByLastName(String lastName,Pageable pageable){
     	Page<UserRegistration> users=userRegistrationRepository.findAllByLastName(lastName,pageable);
     	return users.map(userRegistrationMapper::toDto);
     }
-   
-    
-    
-    
 }

@@ -52,5 +52,5 @@ public interface UserRegistrationService {
     
     UserRegistrationDTO searchByUserName(String userName);
     
-    Page<UserRegistrationDTO> searchByLastName(String lastName,Pageable pageable);
+    Page<UserRegistrationDTO> findByLastName(String lastName,Pageable pageable);
 }
