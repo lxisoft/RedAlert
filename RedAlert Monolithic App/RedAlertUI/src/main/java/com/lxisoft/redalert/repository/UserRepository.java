@@ -1,5 +1,6 @@
 package com.lxisoft.redalert.repository;
 
+import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
 import com.lxisoft.redalert.domain.User;
 
 import org.springframework.data.domain.Page;
@@ -33,4 +34,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     Optional<User> findOneWithAuthoritiesByEmail(String email);
 
     Page<User> findAllByLoginNot(Pageable pageable, String login);
+
+	void save(UserRegistrationDTO userreg);
 }

@@ -106,6 +106,14 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	}
 	
     @Override
+
+    public Page<UserRegistrationDTO> findByLastName(String lastName,Pageable pageable){
+    	Page<UserRegistration> users=userRegistrationRepository.findAllByLastName(lastName,pageable);
+    	return users.map(userRegistrationMapper::toDto);
+    }
+    
+    
+
 	public Page<UserRegistrationDTO> getAllUsersByFirstName(String firstName, Pageable pageable){
 		return userRegistrationRepository.findAllByFirstName(firstName, pageable).map(userRegistrationMapper::toDto);
 	}
@@ -131,7 +139,14 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		return userRegistrationRepository.findByPassword(password);
 	}
 
+	@Override
+	public UserRegistrationDTO searchByUserName(String userName) {
+		UserRegistration user=userRegistrationRepository.findByUserName(userName);
+		return userRegistrationMapper.toDto(user);
+	}
+
 
  
     
+
 }

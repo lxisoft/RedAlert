@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartFile;   
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codahale.metrics.annotation.Timed;
 import com.lxisoft.redalert.client.red_alert.api.MediaResourceApi;
 import com.lxisoft.redalert.client.red_alert.api.PostResourceApi;
 import com.lxisoft.redalert.client.red_alert.api.UserRegistrationResourceApi;
-import com.lxisoft.redalert.client.red_alert.model.ActionDTO;
 import com.lxisoft.redalert.client.red_alert.model.MediaDTO;
 import com.lxisoft.redalert.client.red_alert.model.PostDTO;
 import com.lxisoft.redalert.client.red_alert.model.PostDTO.AlertLevelEnum;

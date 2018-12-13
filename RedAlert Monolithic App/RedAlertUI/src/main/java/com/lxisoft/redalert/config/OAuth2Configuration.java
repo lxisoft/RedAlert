@@ -1,4 +1,4 @@
-package com.lxisoft.redalert.config;
+/*package com.lxisoft.redalert.config;
 
 import com.lxisoft.redalert.security.OAuth2AuthenticationSuccessHandler;
 
@@ -25,11 +25,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
+*//**
  * Development only configuration that is Browsersync-aware and redirects to the origin you clicked "login" from.
  * If you split your application into client and server on separate domains, you might want to enable this for prod
  * mode too.
- */
+ *//*
 @Configuration
 @Profile("dev")
 public class OAuth2Configuration {
@@ -98,3 +98,4 @@ public class OAuth2Configuration {
         }
     }
 }
+*/
