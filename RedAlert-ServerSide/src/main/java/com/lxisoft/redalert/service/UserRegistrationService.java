@@ -6,6 +6,8 @@ import com.lxisoft.redalert.service.dto.UserRegistrationDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,6 +56,9 @@ public interface UserRegistrationService {
     void delete(Long id);
     
     
+
+    Page<UserRegistrationDTO> findByLastName(String lastName,Pageable pageable);
+
 	List<UserRegistration> findAll();
 	
 	Page<UserRegistrationDTO> getAllUsersByFirstName(String firstName, Pageable pageable);
@@ -63,6 +68,8 @@ public interface UserRegistrationService {
 	Page<UserRegistrationDTO> getAllUsersByEmail(String email, Pageable pageable);
 
 	Page<UserRegistrationDTO> getAllUsersByFirstNameLastNameEmail(String keyword, Pageable pageable);
+	
+	UserRegistrationDTO searchByUserName(String userName);
 	
 	UserRegistration getUserByPassword(String password);
 

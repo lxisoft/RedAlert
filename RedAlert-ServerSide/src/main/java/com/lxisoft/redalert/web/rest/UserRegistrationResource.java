@@ -134,16 +134,16 @@ public class UserRegistrationResource {
     public ResponseEntity<List<UserRegistrationDTO>> searchWithLastName(@PathVariable String lastName,Pageable pageable)
     {
     	log.debug("REST request to find UserRegistration by lastname : {}",lastName);
-    	Page<UserRegistrationDTO> users=userRegistrationService.searchByLastName(lastName,pageable);
-    	 HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(users, "/apis/user-registrations");
-         return new ResponseEntity<>(users.getContent(), headers, HttpStatus.OK);
+    	Page<UserRegistrationDTO> users=userRegistrationService.findByLastName(lastName,pageable);
+    	HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(users, "/apis/user-registrations");
+        return new ResponseEntity<>(users.getContent(), headers, HttpStatus.OK);
     }
     @GetMapping("/user-registrations/find/{userName}")
     @Timed
     public ResponseEntity<UserRegistrationDTO> searchWithUserName(@PathVariable String userName)
     {
     	log.debug("REST request to find UserRegistration by username : {}",userName);
-    	Optional<UserRegistrationDTO> user= Optional.ofNullable(userRegistrationService.searchByUserName(userName));
+    	Optional<UserRegistrationDTO> user = Optional.ofNullable(userRegistrationService.searchByUserName(userName));
     	return ResponseUtil.wrapOrNotFound(user);
     }
 }
