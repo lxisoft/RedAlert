@@ -5,6 +5,8 @@ import com.lxisoft.redalert.config.Constants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.validation.constraints.Email;
 
 import javax.persistence.*;
@@ -35,6 +37,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Size(min = 1, max = 50)
     @Column(length = 50, unique = true, nullable = false)
     private String login;
+    
+    @NotNull
+    @Pattern(regexp = Constants.LOGIN_REGEX)
+    @Size(min =1,max=50)
+    @Column(length = 50, unique = true, nullable = false)
+    private String password;
 
     @Size(max = 50)
     @Column(name = "first_name", length = 50)
@@ -144,7 +152,15 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
-    @Override
+    public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password=new BCryptPasswordEncoder().encode(password);
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
