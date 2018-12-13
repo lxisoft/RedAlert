@@ -48,6 +48,35 @@ document.addEventListener("DOMContentLoaded", init, false);
 		}
 		
 	}
+	
+	function checkEqual(){
+		var p = document.getElementById('pass');
+		var rp = document.getElementById('rep-pass');
+		var letter = /[a-z]/;
+		var upper  =/[A-Z]/;
+		var number = /[0-9]/;
+		if(p.value!=rp.value)
+			{
+			
+			 if(p != rp){
+			      var msg = document.getElementById('error');
+			      msg.style.display="block";
+			      msg.style.color="red";
+			      var btn = document.getElementById('submit');
+			      btn.type="button";
+			 }
+			 
+			}
+		else
+			{
+			var msg = document.getElementById('error');
+			msg.style.display="none";
+			var btn = document.getElementById('submit');
+			btn.type="submit";
+			}
+		
+	}
+	
 
 function setModal(button) {
 	if(button.id=='red')
@@ -96,3 +125,23 @@ function toggleContent(argument) {
 		argument.innerHTML='<i class="fa fa-plus"></i>';
 	}
 }
+$( document ).ready(function()
+		{
+	// GET REQUEST
+	$("#reportsId").click(function(event)
+			{
+		event.preventDefault();
+		ajaxGet();
+			});
+	// DO GET
+	function ajaxGet(){
+		$.ajax({
+	
+		type:"GET",
+		url :"http://localhost:8083/reportController/report",
+		success: function(result){
+			console.log("success: ", result);
+		}
+		});
+	}
+		});

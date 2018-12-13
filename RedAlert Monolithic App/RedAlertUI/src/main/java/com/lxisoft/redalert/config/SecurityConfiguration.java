@@ -64,13 +64,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
        /* http
             .csrf()
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+
+        http
+            .csrf().disable()
+            /*.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+
         .and()
             .addFilterBefore(corsFilter, CsrfFilter.class)
             .exceptionHandling()
             .authenticationEntryPoint(problemSupport)
-            .accessDeniedHandler(problemSupport)
-        .and()
-            .logout()
+            .accessDeniedHandler(problemSupport)*/
+        
+           /* .logout()
             .logoutUrl("/api/logout")
             .logoutSuccessHandler(ajaxLogoutSuccessHandler())
             .permitAll()
@@ -84,10 +89,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/info").permitAll()
             .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN);
-        
-        
-        
         */
+        
+        
+       
         /*http
         .csrf()
         .disable()
