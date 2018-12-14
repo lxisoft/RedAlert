@@ -10,10 +10,8 @@
 <!-- Font Awesome -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	
-    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
-	
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
 	
 <!-- Bootstrap core CSS -->
 <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -80,17 +78,19 @@
 		<!-- Collapsible content -->
 		<div class="collapse navbar-collapse" id="navbarSupportedContent20">
 
-			<!-- Links -->
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" style="color: white;"
-					href="home.html">Home</a></li>
-				<li class="nav-item active"><a class="nav-link"
-					style="color: white;" href="#">News <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item"><a class="nav-link" style="color: white;"
-					href="friends.html">Friends</a></li>
-			</ul>
-			<!-- Links -->
+			<  <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" style="color: white;" th:href="@{/redAlertUi/home}">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" style="color: white;" href="/redAlertUi/news">News <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">	
+            <a class="nav-link" style="color: white;" th:href="@{/redAlertUi/friends}">Friends</a>
+          </li>
+        </ul>
+        <!-- Links -->
 
 		</div>
 		<!-- Collapsible content -->
@@ -171,6 +171,7 @@
               
                   <button id="btnrep"   class="btn btn-deep-orange px-3" th:report="${newsFeedView.postDTO.id}" th:onclick="postReport(this.getAttribute('report'));" >Report <i class="fa fa-bolt" aria-hidden="true"></i 	></button>
                 </div>
+
               
 						<!-- Collapse buttons -->
 						<div>
@@ -253,24 +254,42 @@
 				</div>
 			</section>
 		</div>
-		<!--Section: Author Box-->
+		<!--Section: Author Box--> <div id="content">
+		
+		
+		
+		
+		
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		 <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    
 	</div>
 
 
 
 
 
-      <div id="content"></div>
+
+      
+
       <!--Section: Author Box-->
     </div>
 	<!--/.post-->
 
+<!-- 
+<div id="chartContainer" style="height: 300px; width: 100%;"></div> -->
+    <!--map-->
+    <!-- Modal -->
+    <div class="modal fade" id="locationModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
-	<!--map-->
-	<!-- Modal -->
-	<div class="modal fade" id="locationModalCenter" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalCenterTitle"
-		aria-hidden="true">
 
 		<!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
 		<div class="modal-dialog modal-dialog-centered" role="document">
@@ -312,90 +331,71 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 
 
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">Attatchments</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
 
-					<div class="row">
-						<div class="col-6">
-							<a class="waves-effect waves-light"
-								href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZpwuWCkP3KnXtmy9On1nA18AaP7VeU6DAlIFnTaxzA3S4MMIc">
-								<img class="img-fluid img-thumbnail thumbnail hoverable"
-								src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZpwuWCkP3KnXtmy9On1nA18AaP7VeU6DAlIFnTaxzA3S4MMIc"
-								alt="Generic placeholder image"><br />
-							</a>
-						</div>
-						<div class="col-6">
-							<a class="waves-effect waves-light"
-								href="https://i.ytimg.com/vi/Yei8WoOmtxk/maxresdefault.jpg">
-								<img class="img-fluid img-thumbnail thumbnail hoverable"
-								src="https://i.ytimg.com/vi/Yei8WoOmtxk/maxresdefault.jpg"
-								alt="Generic placeholder image"><br />
-							</a>
-						</div>
-					</div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Attatchments</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  
+                    <div class="row">
+                      <div class="col-6">
+                        <a class="waves-effect waves-light" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZpwuWCkP3KnXtmy9On1nA18AaP7VeU6DAlIFnTaxzA3S4MMIc">
+                         <img class="img-fluid img-thumbnail thumbnail hoverable" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZpwuWCkP3KnXtmy9On1nA18AaP7VeU6DAlIFnTaxzA3S4MMIc"
+                          alt="Generic placeholder image"><br/>
+                        </a> 
+                      </div>
+                      <div class="col-6">
+                        <a class="waves-effect waves-light" href="https://i.ytimg.com/vi/Yei8WoOmtxk/maxresdefault.jpg">
+                          <img class="img-fluid img-thumbnail thumbnail hoverable" src="https://i.ytimg.com/vi/Yei8WoOmtxk/maxresdefault.jpg"
+                          alt="Generic placeholder image"><br/>
+                        </a>
+                      </div>
+                    </div>
+                  
+                </div>
+                <div class="modal-footer">
+                
+                    <button type="button" class="btn btn-secondary btn-deep-orange" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
 
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary btn-deep-orange"
-						data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
 	<!--/.attachment-->
+	
+	<!-- <th:block th:fragment="content" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  
+    <div th:text="${reports}"></div>
+</th:block> -->
+	
+	
 	<!-- SCRIPTS -->
 	<script  >
     /*<![CDATA[*/
-   /*  $("#bt1").on("click", function () {
-    	console.log("click clickedd");
-    
-    	var regId=$('#regId').val();
-        $("#content").load("/reportController/getGenuine?id="+regId);
-        $("#content").show();
-    }); */
-    
-   /*  $("#btnrep").click(function () {
-    	
-    	
-    	console.log("clicksssssssss");
-    	var regId=$('#regId').val();
-    	var reportType=$(this).closest("form").find('input').val();
-    	alert(regId+"       Report Type is "+reportType);
-
-    }); */
-        
-   /*  ${window}.on('load',function () 
-    	console.log("windows function activated");
-    	
-    	postId=$("#regId").val();
-    	 $("#content").load("/reportController/getGenuine?id="+postId);
-         $("#content").show();
-    	
-    	
-    	
-    		}); */
+  
     		 $(window).on("load",function() {
-    		    console.log("ready!");
+    		    //console.log("ready!");
     		    postId=$("#regId").val();
     	    	 $("#content").load("/reportController/getGenuine?id="+postId);
     	         $("#content").show();
-    		    
+    	        
     		}); 
     
+    			
+    		
     function postReport(postId)
     {
     	var report=$('#reportHidden').val();
-    	console.log("Report Size is"+report+"|");
+    	//console.log("Report Size is"+report+"|");
     	if(report!='')
     		{
-    	console.log("post Id " + postId+"Report is"+report);
+    	c//onsole.log("post Id " + postId+"Report is"+report);
     	$.ajax({
 			type: 'POST',
 			url: '/reportController/postReport?postId='+postId,
@@ -407,33 +407,33 @@
 				'report': report
 			},
 			success: function (response) {
-				console.log("post reply added successfully " + postId);
+				//console.log("post reply added successfully " + postId);
 				$("#content").load("/reportController/getGenuine?id="+postId);
 		         $("#content").show();
 				/* $("#replies-" + commentId).html(response); */
 				if (response.success) {
 					//document.getElementById("success-message").innerHTML="success";
-					console.log("reply added successfully in if condition");
+					//console.log("reply added successfully in if condition");
 				}
 			},
 			error: function () {
-				console.log("reply added failed...!");
+				//console.log("reply added failed...!");
 			}
 		});
     
     		}
-    	 $("#content").load("/reportController/getGenuine?id="+postId);
-         $("#content").show();
+    	
     }
     
     
     
     
   
-    /*]]>*/
+    //]]> 
 </script>
+
 	<!-- JQuery -->
-	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+<!-- 	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script> -->
 	<script
 		src="https://maps.google.com/maps/api/js?key=AIzaSyDNvROGIUEfGUi_YHSWWbBVTJpqZuZCjvY"></script>
 	<!-- Bootstrap tooltips -->
@@ -444,7 +444,11 @@
 	<script type="text/javascript" src="/js/mdb.min.js"></script>
 	<script type="text/javascript" src="/js/custom.js"></script>
 	<script type="text/javascript" src="/js/location.js"></script>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
 </body>
   
+
 
 </html>
