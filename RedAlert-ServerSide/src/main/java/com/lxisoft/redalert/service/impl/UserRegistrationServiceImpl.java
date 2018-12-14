@@ -1,6 +1,7 @@
 package com.lxisoft.redalert.service.impl;
 
 import com.lxisoft.redalert.service.UserRegistrationService;
+import com.lxisoft.redalert.domain.User;
 import com.lxisoft.redalert.domain.UserRegistration;
 import com.lxisoft.redalert.repository.UserRegistrationRepository;
 import com.lxisoft.redalert.service.dto.UserRegistrationDTO;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -96,16 +98,55 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         log.debug("Request to delete UserRegistration : {}", id);
         userRegistrationRepository.deleteById(id);
     }
+  
+    
+	@Override
+	public List<UserRegistration> findAll() {
+		return userRegistrationRepository.findAll();
+	}
+	
+    @Override
+
+    public Page<UserRegistrationDTO> findByLastName(String lastName,Pageable pageable){
+    	Page<UserRegistration> users=userRegistrationRepository.findAllByLastName(lastName,pageable);
+    	return users.map(userRegistrationMapper::toDto);
+    }
+    
+    
+
+	public Page<UserRegistrationDTO> getAllUsersByFirstName(String firstName, Pageable pageable){
+		return userRegistrationRepository.findAllByFirstName(firstName, pageable).map(userRegistrationMapper::toDto);
+	}
+	
+    @Override
+	public Page<UserRegistrationDTO> getAllUsersByLastName(String lastName, Pageable pageable){
+		return userRegistrationRepository.findAllByLastName(lastName, pageable).map(userRegistrationMapper::toDto);
+	}
+	
+    @Override
+	public Page<UserRegistrationDTO> getAllUsersByEmail(String email, Pageable pageable){
+		return userRegistrationRepository.findAllByEmail(email, pageable).map(userRegistrationMapper::toDto);
+	}
+
+	@Override
+	public Page<UserRegistrationDTO> getAllUsersByFirstNameLastNameEmail(String keyword, Pageable pageable) {
+		return userRegistrationRepository.findByFirstNameLastNameEmail(keyword, pageable).map(userRegistrationMapper::toDto);
+	}
+
+	@Override
+	public UserRegistration getUserByPassword(String password) {
+		// TODO Auto-generated method stub
+		return userRegistrationRepository.findByPassword(password);
+	}
 
 	@Override
 	public UserRegistrationDTO searchByUserName(String userName) {
-		return userRegistrationMapper.toDto(userRegistrationRepository.findByUserName(userName));
+		UserRegistration user=userRegistrationRepository.findByUserName(userName);
+		return userRegistrationMapper.toDto(user);
 	}
+
+
+ 
     
-    
-    
-    
-    
-    
-    
+
 }

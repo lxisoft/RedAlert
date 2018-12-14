@@ -19,6 +19,11 @@ import com.lxisoft.redalert.client.red_alert.model.PostDTO;
 import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
 import com.lxisoft.redalert.model.ImageView;
 import com.lxisoft.redalert.model.View;
+/**
+ * @author AbhinaS
+ *
+ */
+
 @Controller
 @RequestMapping("/postclose")
 public class PostCloseController {
@@ -30,6 +35,10 @@ public class PostCloseController {
 	
 	
 	
+	/**
+	 * @param postDTO
+	 * @return
+	 */
 	@RequestMapping(value="/closepost",method=RequestMethod.GET)
 	public String postclosed(@ModelAttribute PostDTO postDTO)
 	{
@@ -41,6 +50,10 @@ public class PostCloseController {
 	
 	
 	
+	/**
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/home")
 	public String changeAlerts(Model model)
 	{
@@ -56,11 +69,22 @@ public class PostCloseController {
 		return "home";
 		
 	}
+	/**
+	 * @param postDTO
+	 * @param name
+	 * @return
+	 */
 	@RequestMapping(value="/alertchange")
 	public String ChangeAlert(@ModelAttribute PostDTO postDTO, String name)
 	{
 		postResource.changeAlertLevelUsingGET(name,postDTO.getId());
 		return "home";
+		
+	}
+	@RequestMapping("/index")
+	public String signIn()
+	{
+		return "index";
 		
 	}
 	

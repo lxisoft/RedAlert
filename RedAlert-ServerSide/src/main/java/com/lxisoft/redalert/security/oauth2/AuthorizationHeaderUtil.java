@@ -1,4 +1,4 @@
-package com.lxisoft.redalert.security.oauth2;
+/*package com.lxisoft.redalert.security.oauth2;
 
 import java.util.Optional;
 
@@ -16,7 +16,7 @@ public class AuthorizationHeaderUtil {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    private final OAuth2RestTemplate oAuth2RestTemplate;
+   // private final OAuth2RestTemplate oAuth2RestTemplate;
 
     public AuthorizationHeaderUtil(OAuth2RestTemplate oAuth2RestTemplate) {
 		this.oAuth2RestTemplate = oAuth2RestTemplate;
@@ -46,3 +46,4 @@ public class AuthorizationHeaderUtil {
         }
     }
 }
+*/
