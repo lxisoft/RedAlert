@@ -1,7 +1,55 @@
-<th:block th:fragment="reports" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html>
+<head>
 
-	<div th:text="${reports}">
 
-	</div>
-</th:block>
+</head>
+<body>
+
+<div th:fragment="reports">
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+ <div th:text="${reports}" ></div>
+ <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script th:inline="javascript">
+
+      /*<![CDATA[*/
+	    
+         var fakeCount = /*[[${reports.get("FAKE")}]]*/ 'report';
+      var prankCount = /*[[${reports.get("PRANK")}]]*/ 'report';
+      var solvedCount = /*[[${reports.get("SOLVED")}]]*/ 'report';
+      var timeoutCount = /*[[${reports.get("TIMEDOUT")}]]*/ 'report';
+      var supportCount = /*[[${reports.get("SUPPORT")}]]*/ 'report';
+console.log("user reports"+fakeCount);
+
+var reports=$("#content").val();
+console.log("reports are"+reports+"|");
+var chart = new CanvasJS.Chart("chartContainer", {
+
+	animationEnabled: true,
+	title: {
+		text: "Desktop Search Engine Market Share - 2016"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 240,
+		yValueFormatString: "##0.00\"%\"", 
+		indexLabel: "{label} {y}",
+		dataPoints: [
+			{y: fakeCount, label: "Fake"},
+			{y: prankCount, label: "Prank"},
+			{y: solvedCount, label: "solve"},
+			{y: timeoutCount, label: "time-out"},
+			{y: supportCount, label: "support"}
+		]
+	}]
+});
+chart.render();
+       /*]]>*/
+</script>
+ 
+ 
+
+</div>
+</body>
+</html>

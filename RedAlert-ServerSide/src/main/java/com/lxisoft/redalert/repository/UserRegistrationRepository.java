@@ -27,4 +27,5 @@ public interface UserRegistrationRepository extends JpaRepository<UserRegistrati
     @Query("select user_registration from UserRegistration user_registration left join fetch user_registration.friends where user_registration.id =:id")
     Optional<UserRegistration> findOneWithEagerRelationships(@Param("id") Long id);
 
+    UserRegistration findByUserName(String userName);
 }
