@@ -135,7 +135,7 @@ public class UserRegistrationResource {
     {
     	log.debug("REST request to find UserRegistration by lastname : {}",lastName);
     	Page<UserRegistrationDTO> users=userRegistrationService.findByLastName(lastName,pageable);
-    	HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(users, "/apis/user-registrations");
+    	HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(users, "/apis/user-registrations");      
         return new ResponseEntity<>(users.getContent(), headers, HttpStatus.OK);
     }
     @GetMapping("/user-registrations/find/{userName}")
