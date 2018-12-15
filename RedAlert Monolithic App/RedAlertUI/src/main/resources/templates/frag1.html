@@ -14,7 +14,7 @@
  <script th:inline="javascript">
 
       /*<![CDATA[*/
-	    
+	    var totalCount = /*[[${reports.size()}]]*/ 'report' ;
          var fakeCount = /*[[${reports.get("FAKE")}]]*/ 'report';
       var prankCount = /*[[${reports.get("PRANK")}]]*/ 'report';
       var solvedCount = /*[[${reports.get("SOLVED")}]]*/ 'report';
@@ -36,11 +36,11 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		yValueFormatString: "##0.00\"%\"", 
 		indexLabel: "{label} {y}",
 		dataPoints: [
-			{y: fakeCount, label: "Fake"},
-			{y: prankCount, label: "Prank"},
-			{y: solvedCount, label: "solve"},
-			{y: timeoutCount, label: "time-out"},
-			{y: supportCount, label: "support"}
+			{y: fakeCount/totalCount*100, label: "Fake"},
+			{y: prankCount/totalCount*100, label: "Prank"},
+			{y: solvedCount/totalCount*100, label: "solve"},
+			{y: timeoutCount/totalCount*100, label: "time-out"},
+			{y: supportCount/totalCount*100, label: "support"}
 		]
 	}]
 });
