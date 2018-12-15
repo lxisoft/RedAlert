@@ -74,8 +74,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         
         */
     	http
-        /*.csrf()
-        .disable()*/
+        .csrf()
+        .disable()
         .authorizeRequests()
         .antMatchers("/controller/homelogin/**")
         .hasAnyRole("USER")
