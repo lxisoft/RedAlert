@@ -79,9 +79,6 @@ public class UserRegistrationDTO   {
 
   @JsonProperty("email")
   private String email = null;
-  
-  @JsonProperty("userId")
-  private String userId = null;
 
   @JsonProperty("firstName")
   private String firstName = null;
@@ -514,19 +511,7 @@ public class UserRegistrationDTO   {
     this.userName = userName;
   }
   
-  /**
- * @return
- */
-@ApiModelProperty(value = "")
 
-
-  public String getUserId() {
-    return userId;
-  }
-
-  public void setUserId(String userId) {
-    this.userId = userId;
-  }
 
 
   @Override
@@ -547,7 +532,6 @@ public class UserRegistrationDTO   {
         Objects.equals(this.friends, userRegistrationDTO.friends) &&
         Objects.equals(this.gender, userRegistrationDTO.gender) &&
         Objects.equals(this.id, userRegistrationDTO.id) &&
-        Objects.equals(this.userId, userRegistrationDTO.userId) &&
         Objects.equals(this.lastName, userRegistrationDTO.lastName) &&
         Objects.equals(this.password, userRegistrationDTO.password) &&
         Objects.equals(this.profilePic, userRegistrationDTO.profilePic) &&
@@ -559,7 +543,7 @@ public class UserRegistrationDTO   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(bloodGroup, contact, createdOn, dob, email, firstName, friends, gender, id, userId, lastName, password, profilePic, profilePicContentType, score, status, userName);
+    return Objects.hash(bloodGroup, contact, createdOn, dob, email, firstName, friends, gender, id, lastName, password, profilePic, profilePicContentType, score, status, userName);
   }
 
   @Override
@@ -576,7 +560,6 @@ public class UserRegistrationDTO   {
     sb.append("    friends: ").append(toIndentedString(friends)).append("\n");
     sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    profilePic: ").append(toIndentedString(profilePic)).append("\n");
