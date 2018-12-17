@@ -102,7 +102,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     
 	@Override
 	public List<UserRegistration> findAll() {
-		return userRegistrationRepository.findAll();
+		return userRegistrationRepository.findAll();	//inbuilt in repository
 	}
 	
     @Override
