@@ -7,7 +7,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>RedAlert | Home</title>
   <!-- <!-- Font Awesome -->
-  <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}"> <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- Bootstrap core CSS -->
   <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
   <!-- Material Design Bootstrap -->
   <link th:href="@{/css/mdb.min.css}" rel="stylesheet">
@@ -88,7 +88,7 @@
 
           </div>
           <div class="modal-footer d-flex justify-content-center">
-            <input type="submit" style="background: #ff7043;" value="Log In"/>
+            <button type="submit" class="btn btn-deep-orange" value="Log In">LogIn</button>
           </div>
         </form>
         <div class="col-md-12">
@@ -110,6 +110,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <p id="error" style="display: none; color:red;">Passwords don't match...</p>
         <div class="modal-body mx-3">
           <form action="#">
             <div class="row">
@@ -117,35 +118,35 @@
                 <div class="md-form mt-0">
                   <i class="fa fa-user prefix grey-text"></i>
                   <input type="text" id="fname" class="form-control validate">
-                  <label data-error="wrong" data-success="right" for="fname">First name</label>
+                  <label data-error="wrong" data-success="" for="fname">First name</label>
                 </div>
               </div>
               <div class="col">
                 <div class="md-form mt-0">
                   <i class="fa fa-user prefix grey-text"></i>
                   <input type="text" id="lname" class="form-control validate">
-                  <label data-error="wrong" data-success="right" for="lname">Last name</label>
+                  <label data-error="wrong" data-success="" for="lname">Last name</label>
                 </div>
               </div>
             </div>
             <div class="md-form mt-0">
               <i class="fa fa-envelope prefix grey-text"></i>
               <input type="email" id="orangeForm-email" class="form-control validate">
-              <label data-error="wrong" data-success="right" for="orangeForm-email">Your email</label>
+              <label data-error="wrong" data-success="" for="orangeForm-email">Your email</label>
             </div>
             <div class="row">
               <div class="col">
                 <div class="md-form mt-0">
                   <i class="fa fa-lock prefix grey-text"></i>
                   <input type="password" id="pass" class="form-control validate">
-                  <label data-error="wrong" data-success="right" for="pass">Password</label>
+                  <label data-error="wrong" data-success="" for="pass">Password</label>
                 </div>
               </div>
               <div class="col">
                 <div class="md-form mt-0">
                   <i class="fa fa-lock prefix grey-text"></i>
-                  <input onchange="checkEqual()" type="password" id="rep-pass" class="form-control validate">
-                  <label data-error="wrong" data-success="right" for="rep-pass">Confirm Password</label>
+                  <input type="password" onkeyup="checkEqual();" id="rep-pass" class="form-control validate">
+                  <label data-error="wrong" data-success="" for="rep-pass">Confirm Password</label>
                 </div>
               </div>
             </div>

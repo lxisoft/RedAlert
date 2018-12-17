@@ -49,10 +49,10 @@
           <a class="nav-link" style="color: white;" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="color: white;" href="#">News</a>
+          <a class="nav-link" style="color: white;">News</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="color: white;" href="#">Friends</a>
+          <a class="nav-link" style="color: white;" >Friends</a>
         </li>
       </ul>
       <!-- Links -->
@@ -87,9 +87,10 @@
               <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
             </div>
 
-          </div>
-          <div class="modal-footer d-flex justify-content-center">
-            <button class="btn" style="background: #ff7043;">Login</button>
+         
+          	<div class="modal-footer d-flex justify-content-center">
+            	<button class="btn btn-deep-orange" >Login</button>
+          	</div>
           </div>
         </form>
         <div class="col-md-12">
@@ -99,6 +100,7 @@
       </div>
     </div>
   </div>
+  
   <!--/.LoginForm-->
   <!--Register-->
   <div class="modal fade" id="modalRegisterForm" style="top: 20%" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -118,41 +120,41 @@
                 <div class="md-form mt-0">
                   <i class="fa fa-user prefix grey-text"></i>
                   <input type="text" id="fname" class="form-control validate">
-                  <label data-error="wrong" data-success="right" for="fname">First name</label>
+                  <label data-error="wrong" data-success="" for="fname">First name</label>
                 </div>
               </div>
               <div class="col">
                 <div class="md-form mt-0">
                   <i class="fa fa-user prefix grey-text"></i>
                   <input type="text" id="lname" class="form-control validate">
-                  <label data-error="wrong" data-success="right" for="lname">Last name</label>
+                  <label data-error="wrong" data-success="" for="lname">Last name</label>
                 </div>
               </div>
             </div>
             <div class="md-form mt-0">
               <i class="fa fa-envelope prefix grey-text"></i>
               <input type="email" id="orangeForm-email" class="form-control validate">
-              <label data-error="wrong" data-success="right" for="orangeForm-email">Your email</label>
+              <label data-error="Invalid email" data-success="" for="orangeForm-email">Your email</label>
             </div>
             <div class="row">
               <div class="col">
                 <div class="md-form mt-0">
                   <i class="fa fa-lock prefix grey-text"></i>
-                  <input type="password" id="pass" class="form-control validate">
-                  <label data-error="wrong" data-success="right" for="pass">Password</label>
+                  <input onkeyup="checkEqual()" type="password" id="pass" class="form-control">
+                  <label data-error="Passwords don't match" data-success="" for="pass">Password</label>
                 </div>
               </div>
               <div class="col">
                 <div class="md-form mt-0">
                   <i class="fa fa-lock prefix grey-text"></i>
-                  <input onchange="checkEqual()" type="password" id="rep-pass" class="form-control validate">
-                  <label data-error="wrong" data-success="right" for="rep-pass">Confirm Password</label>
+                  <input onkeyup="checkEqual()" type="password" id="rep-pass" class="form-control">
+                  <label data-error="Passwords don't match" data-success="" for="rep-pass">Confirm Password</label>
                 </div>
               </div>
             </div>
             </div>
             <div class="modal-footer d-flex justify-content-center">
-              <button class="btn btn-deep-orange">Register</button>
+              <button id="submit" class="btn btn-deep-orange">Register</button>
             </div>
           </form>
           <div class="col-md-12">

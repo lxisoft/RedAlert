@@ -55,25 +55,29 @@ document.addEventListener("DOMContentLoaded", init, false);
 		var letter = /[a-z]/;
 		var upper  =/[A-Z]/;
 		var number = /[0-9]/;
-		if(p.value!=rp.value)
-			{
+		
 			
-			 if(p != rp){
-			      var msg = document.getElementById('error');
-			      msg.style.display="block";
-			      msg.style.color="red";
-			      var btn = document.getElementById('submit');
-			      btn.type="button";
-			 }
-			 
-			}
-		else
+		if(p.value != rp.value)
+		{	          
+			p.classList.remove("valid");
+			// rp.classList.remove("valid");
+			if(rp.value!="")
 			{
-			var msg = document.getElementById('error');
-			msg.style.display="none";
+				p.classList.add("invalid");
+				rp.classList.add("invalid");
+			}
+			var btn = document.getElementById('submit');
+			btn.type="button";
+		}
+		else
+		{
+			p.classList.add("valid");
+			rp.classList.add("valid");
+			p.classList.remove("invalid");
+			rp.classList.remove("invalid");
 			var btn = document.getElementById('submit');
 			btn.type="submit";
-			}
+		}
 		
 	}
 	
@@ -114,17 +118,7 @@ $(function(){
   });
 });
 
-function toggleContent(argument) {
-	// body...
-	if(argument.innerHTML=='<i class="fa fa-plus"></i>')
-	{
-		argument.innerHTML='<i class="fa fa-plus"></i>'+'  Click to allow notification access';
-	}
-	else
-	{
-		argument.innerHTML='<i class="fa fa-plus"></i>';
-	}
-}
+
 $( document ).ready(function()
 		{
 	// GET REQUEST
