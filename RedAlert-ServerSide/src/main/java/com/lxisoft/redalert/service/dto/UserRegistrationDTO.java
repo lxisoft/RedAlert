@@ -16,8 +16,6 @@ import com.lxisoft.redalert.domain.enumeration.Alert;
 public class UserRegistrationDTO implements Serializable {
 
     private Long id;
-    
-    private String userId;
 
     private String userName;
 
@@ -168,13 +166,7 @@ public class UserRegistrationDTO implements Serializable {
     public void setCreatedOn(Instant createdOn) {
         this.createdOn = createdOn;
     }
-    public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+   
 
     public Set<UserRegistrationDTO> getFriends() {
         return friends;
@@ -211,7 +203,6 @@ public class UserRegistrationDTO implements Serializable {
         return "UserRegistrationDTO{" +
             "id=" + getId() +
             ", userName='" + getUserName() + "'" +
-            ", userId='" + getUserId() + "'" +
             ", password='" + getPassword() + "'" +
             ", profilePic='" + getProfilePic() + "'" +
             ", firstName='" + getFirstName() + "'" +

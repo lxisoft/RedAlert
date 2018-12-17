@@ -58,13 +58,13 @@ document.addEventListener("DOMContentLoaded", init, false);
 		if(p.value!=rp.value)
 			{
 			
-			 if(p != rp){
+			 
 			      var msg = document.getElementById('error');
 			      msg.style.display="block";
 			      msg.style.color="red";
 			      var btn = document.getElementById('submit');
 			      btn.type="button";
-			 }
+			 
 			 
 			}
 		else
