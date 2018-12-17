@@ -61,6 +61,9 @@ public class UserRegistration implements Serializable {
 
     @Column(name = "email")
     private String email;
+    
+    @Column(name = "user_id")
+    private String userId;
 
     @Column(name = "dob")
     private Instant dob;
@@ -88,7 +91,15 @@ public class UserRegistration implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public void setId(Long id) {
         this.id = id;
     }
 
@@ -348,6 +359,7 @@ public class UserRegistration implements Serializable {
         return "UserRegistration{" +
             "id=" + getId() +
             ", userName='" + getUserName() + "'" +
+            ", userId='" + getUserId() + "'" +
             ", password='" + getPassword() + "'" +
             ", profilePic='" + getProfilePic() + "'" +
             ", profilePicContentType='" + getProfilePicContentType() + "'" +
