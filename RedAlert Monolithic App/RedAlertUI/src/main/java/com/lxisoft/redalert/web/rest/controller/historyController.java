@@ -31,6 +31,10 @@ public class HistoryController {
 	
 	
 
+	/**
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/history")
 	public String getHistory(Model model)
 	{
