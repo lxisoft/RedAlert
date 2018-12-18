@@ -86,7 +86,7 @@ relationship OneToMany
     Action{reports} to Report
 }
 relationship ManyToMany
-{
+{
 	UserRegistration{friends} to UserRegistration
 }
 
