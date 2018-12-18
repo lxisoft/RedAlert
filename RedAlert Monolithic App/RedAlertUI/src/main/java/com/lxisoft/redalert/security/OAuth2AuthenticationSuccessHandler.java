@@ -1,4 +1,4 @@
-package com.lxisoft.redalert.security;
+/*package com.lxisoft.redalert.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +15,9 @@ import java.io.IOException;
 
 import static com.lxisoft.redalert.config.OAuth2Configuration.SAVED_LOGIN_ORIGIN_URI;
 
-/**
+*//**
  * AuthenticationSuccessHandler that looks for a saved login origin and redirects to it if it exists.
- */
+ *//*
 public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     private final Logger log = LoggerFactory.getLogger(OAuth2AuthenticationSuccessHandler.class);
@@ -66,3 +66,4 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
     }
 }
+*/

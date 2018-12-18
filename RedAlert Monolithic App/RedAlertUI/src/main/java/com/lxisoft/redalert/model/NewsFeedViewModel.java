@@ -6,17 +6,18 @@ import java.util.List;
 import com.lxisoft.redalert.client.red_alert.model.*;
 
 public class NewsFeedViewModel {
-	private UserRegistrationDTO userRegistationDTO;
+	private UserRegistrationDTO userRegistrationDTO;
 	private PostDTO postDTO;
 	private ActionDTO newActionDTO;
 	private List<ActionDTO> actionDTOList=new ArrayList<ActionDTO>();
 	private List<MediaDTO> mediaDTOList=new ArrayList<MediaDTO>();
 	private List<ReportDTO> reportDTOList=new ArrayList<ReportDTO>();
-	public UserRegistrationDTO getUserRegistationDTO() {
-		return userRegistationDTO;
+	
+	public UserRegistrationDTO getUserRegistrationDTO() {
+		return userRegistrationDTO;
 	}
-	public void setUserRegistationDTO(UserRegistrationDTO userRegistationDTO) {
-		this.userRegistationDTO = userRegistationDTO;
+	public void setUserRegistrationDTO(UserRegistrationDTO userRegistrationDTO) {
+		this.userRegistrationDTO = userRegistrationDTO;
 	}
 	public PostDTO getPostDTO() {
 		return postDTO;
