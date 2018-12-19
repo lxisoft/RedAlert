@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lxisoft.redalert.client.red_alert.api.UserRegistrationResourceApi;
+import com.lxisoft.redalert.client.red_alert.model.UserDTO;
 import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
 import com.lxisoft.redalert.model.View;
 
@@ -30,6 +31,8 @@ public class UserRegistrationController {
 	{
 		UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO();
 				userRegistrationDTO = view.getUserRegistrationDTO();
+				UserDTO userDTO=new UserDTO();
+				
 		userRegistrationResourceApi.createUserRegistrationUsingPOST(userRegistrationDTO); 
 		System.out.print(userRegistrationDTO.getFirstName());
 		return "redirect:/redAlertUi/index";

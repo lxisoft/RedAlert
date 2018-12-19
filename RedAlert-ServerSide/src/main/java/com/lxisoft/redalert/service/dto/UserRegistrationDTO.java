@@ -166,6 +166,7 @@ public class UserRegistrationDTO implements Serializable {
     public void setCreatedOn(Instant createdOn) {
         this.createdOn = createdOn;
     }
+   
 
     public Set<UserRegistrationDTO> getFriends() {
         return friends;
@@ -174,6 +175,7 @@ public class UserRegistrationDTO implements Serializable {
     public void setFriends(Set<UserRegistrationDTO> userRegistrations) {
         this.friends = userRegistrations;
     }
+    
 
     @Override
     public boolean equals(Object o) {
@@ -215,4 +217,6 @@ public class UserRegistrationDTO implements Serializable {
             ", createdOn='" + getCreatedOn() + "'" +
             "}";
     }
+
+	
 }

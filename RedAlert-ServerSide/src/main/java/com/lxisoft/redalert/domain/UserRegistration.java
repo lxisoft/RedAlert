@@ -61,6 +61,7 @@ public class UserRegistration implements Serializable {
 
     @Column(name = "email")
     private String email;
+    
 
     @Column(name = "dob")
     private Instant dob;
@@ -88,7 +89,7 @@ public class UserRegistration implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+	public void setId(Long id) {
         this.id = id;
     }
 

@@ -72,6 +72,9 @@ public interface UserRegistrationService {
 	UserRegistrationDTO searchByUserName(String userName);
 	
 	UserRegistration getUserByPassword(String password);
+	
+	Page<UserRegistrationDTO> getAllFirstNameStartingWith(String firstname,Pageable pageable);
 
+	
 	
 }

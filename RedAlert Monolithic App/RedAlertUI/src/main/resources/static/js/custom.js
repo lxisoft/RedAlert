@@ -1,4 +1,4 @@
-// This code dosen't works on Firefox and IE and works on other browesers.
+// This code dosen't works on Firefox and IE and works on other browsers.
 $(document).ready(function () {
 $('.animated-icon1,.animated-icon3,.animated-icon4').click(function () {
 $(this).toggleClass('open');
@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", init, false);
 		var number = /[0-9]/;
 		
 			
+
 		if(p.value != rp.value)
 		{	          
 			p.classList.remove("valid");
@@ -65,6 +66,8 @@ document.addEventListener("DOMContentLoaded", init, false);
 			{
 				p.classList.add("invalid");
 				rp.classList.add("invalid");
+			    var btn = document.getElementById('submit');
+			    btn.type="button";
 			}
 			var btn = document.getElementById('submit');
 			btn.type="button";
