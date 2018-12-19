@@ -31,6 +31,9 @@ public class UserRegistration implements Serializable {
 
     @Column(name = "user_name")
     private String userName;
+    
+    @Column(name = "user_id")
+    private String userId;
 
     @Column(name = "jhi_password")
     private String password;
@@ -261,6 +264,14 @@ public class UserRegistration implements Serializable {
     public void setStatus(Alert status) {
         this.status = status;
     }
+    
+    public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
     public Instant getCreatedOn() {
         return createdOn;
@@ -364,4 +375,6 @@ public class UserRegistration implements Serializable {
             ", createdOn='" + getCreatedOn() + "'" +
             "}";
     }
+
+	
 }

@@ -5,6 +5,10 @@
             "fieldName": "userName",
             "fieldType": "String"
         },
+		{
+            "fieldName": "userId",
+            "fieldType": "String"
+        },
         {
             "fieldName": "password",
             "fieldType": "String"
