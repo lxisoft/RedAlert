@@ -20,7 +20,7 @@ import com.lxisoft.redalert.model.View;
 @Controller
 @RequestMapping("/redAlertuiHistory")
 
-public class historyController {
+public class HistoryController {
 	
 	@Autowired
 	PostResourceApi postResourceApi;
