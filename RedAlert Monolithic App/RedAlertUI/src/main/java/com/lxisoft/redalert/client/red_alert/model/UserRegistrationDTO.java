@@ -19,7 +19,8 @@ import javax.validation.constraints.*;
  */
 @Validated
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-11-28T12:49:43.721+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-18T15:10:22.272+05:30[Asia/Calcutta]")
+
 
 public class UserRegistrationDTO   {
   /**
@@ -176,6 +177,9 @@ public class UserRegistrationDTO   {
 
   @JsonProperty("status")
   private StatusEnum status = null;
+
+  @JsonProperty("userId")
+  private String userId = null;
 
   @JsonProperty("userName")
   private String userName = null;
@@ -491,6 +495,26 @@ public class UserRegistrationDTO   {
     this.status = status;
   }
 
+  public UserRegistrationDTO userId(String userId) {
+    this.userId = userId;
+    return this;
+  }
+
+  /**
+   * Get userId
+   * @return userId
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
+
   public UserRegistrationDTO userName(String userName) {
     this.userName = userName;
     return this;
@@ -538,12 +562,13 @@ public class UserRegistrationDTO   {
         Objects.equals(this.profilePicContentType, userRegistrationDTO.profilePicContentType) &&
         Objects.equals(this.score, userRegistrationDTO.score) &&
         Objects.equals(this.status, userRegistrationDTO.status) &&
+        Objects.equals(this.userId, userRegistrationDTO.userId) &&
         Objects.equals(this.userName, userRegistrationDTO.userName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bloodGroup, contact, createdOn, dob, email, firstName, friends, gender, id, lastName, password, profilePic, profilePicContentType, score, status, userName);
+    return Objects.hash(bloodGroup, contact, createdOn, dob, email, firstName, friends, gender, id, lastName, password, profilePic, profilePicContentType, score, status, userId, userName);
   }
 
   @Override
@@ -566,6 +591,7 @@ public class UserRegistrationDTO   {
     sb.append("    profilePicContentType: ").append(toIndentedString(profilePicContentType)).append("\n");
     sb.append("    score: ").append(toIndentedString(score)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    userName: ").append(toIndentedString(userName)).append("\n");
     sb.append("}");
     return sb.toString();
