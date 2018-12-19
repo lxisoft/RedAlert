@@ -107,7 +107,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .csrf()
         .disable()
         .authorizeRequests()
-        .antMatchers("/redAlertUi/**")
+        .antMatchers("/khhkj/**")
         .hasAnyRole("USER")
         .and()
         .formLogin().loginPage("/loginController/login").permitAll();
