@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import java.util.Base64;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +25,12 @@ import com.lxisoft.redalert.client.red_alert.model.ActionDTO;
 import com.lxisoft.redalert.client.red_alert.model.MediaDTO;
 import com.lxisoft.redalert.client.red_alert.model.PostDTO;	
 import com.lxisoft.redalert.client.red_alert.model.PostDTO.AlertLevelEnum;	
-import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;	
+import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
+import com.lxisoft.redalert.domain.User;
 import com.lxisoft.redalert.model.ImageView;	
 import com.lxisoft.redalert.model.View;
+import com.lxisoft.redalert.repository.UserRepository;
+import com.lxisoft.redalert.security.SecurityUtils;
 /**	
  * @author Silpa	
  *	
@@ -39,6 +44,8 @@ public class HomeController {
  	MediaResourceApi mediaResourceApi;	 	
 	@Autowired		
 	UserRegistrationResourceApi userRegistrationResourceApi;
+	@Autowired
+	UserRepository userRepository;
 	
 	@GetMapping("/index")	
 	public String getIndex(Model model)		
@@ -60,6 +67,10 @@ public class HomeController {
 		view.setMediaDTO(new MediaDTO());
 		view.setPostDTO(new PostDTO());
 		view.setUserRegistrationDTO(new UserRegistrationDTO());
+		String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
+		 
+		
+		Optional<User> user=userRepository.findOneByLogin(currentUserLogin);
         view.setUserRegistrationId(1);
 	    view.getUserRegistrationDTO().setId(userRegistrationResourceApi.getUserRegistrationUsingGET((long) 1).getBody().getId());
 		model.addAttribute("view", view);

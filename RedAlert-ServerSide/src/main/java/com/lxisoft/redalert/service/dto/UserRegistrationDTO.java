@@ -18,6 +18,8 @@ public class UserRegistrationDTO implements Serializable {
     private Long id;
 
     private String userName;
+    
+    private String UserId;
 
     private String password;
 
@@ -162,6 +164,14 @@ public class UserRegistrationDTO implements Serializable {
     public Instant getCreatedOn() {
         return createdOn;
     }
+    
+    public String getUserId() {
+		return UserId;
+	}
+
+	public void setUserId(String userId) {
+		UserId = userId;
+	}
 
     public void setCreatedOn(Instant createdOn) {
         this.createdOn = createdOn;
@@ -217,6 +227,8 @@ public class UserRegistrationDTO implements Serializable {
             ", createdOn='" + getCreatedOn() + "'" +
             "}";
     }
+
+	
 
 	
 }
