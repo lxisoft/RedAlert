@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
  
 
@@ -7,8 +7,8 @@
 <body>
 
 <div th:fragment="reports">
-<div id="chartContainer" style="height: 300px; width: 100%;"></div>
- <div th:text="${reports}" ></div>
+<div id="chartContainer" style="height: 200px; width: auto;"></div>
+ 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
  
@@ -40,9 +40,9 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		dataPoints: [
 			{y: (fakeCount/totalCount)*100, label: "Fake"},
 			{y: (prankCount/totalCount)*100, label: "Prank"},
-			{y: (solvedCount/totalCount)*100, label: "solve"},
-			{y: (timeoutCount/totalCount)*100, label: "time-out"},
-			{y: (supportCount/totalCount)*100, label: "support"}
+			{y: (solvedCount/totalCount)*100, label: "Solved"},
+			{y: (timeoutCount/totalCount)*100, label: "Time-Out"},
+			{y: (supportCount/totalCount)*100, label: "Support"}
 		]
 	}]
 });
