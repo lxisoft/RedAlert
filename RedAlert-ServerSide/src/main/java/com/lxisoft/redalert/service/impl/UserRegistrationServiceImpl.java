@@ -152,6 +152,14 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		
 	}
 
+	@Override
+	public UserRegistrationDTO findByUserId(String id) {
+		 log.debug("Request to get UserRegistration using userId: {}", id);
+		UserRegistration userRegistration = userRegistrationRepository.findByUserId(id);
+	        
+		 return userRegistrationMapper.toDto(userRegistration);
+	}
+
  
     
 

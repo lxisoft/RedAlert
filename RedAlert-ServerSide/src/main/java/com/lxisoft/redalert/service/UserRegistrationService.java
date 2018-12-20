@@ -75,6 +75,8 @@ public interface UserRegistrationService {
 	
 	Page<UserRegistrationDTO> getAllFirstNameStartingWith(String firstname,Pageable pageable);
 
+	UserRegistrationDTO findByUserId(String id);
+
 	
 	
 }
