@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>RedAlert | NewsFeeds</title>
+    <title>RedAlert | History</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}">
     <!-- Bootstrap core CSS -->
@@ -98,8 +98,11 @@
                   <a class="grey-text mr-1"><i class="fa fa-lg fa-paperclip"> </i></a>
                 </li>
               </ul>
-              <h6 id="alertLevel" style="display: block;"><strong>AlertLevel</strong></h6>
-              <p th:text="${imageView.post.alertLevel}"></p>
+              <form class="md-form">
+              	<h6 id="alertLevel"><strong th:text="${imageView.post.alertLevel}+' ALERT'"></strong><a onclick="editAlert();" style="display: inline-block; text-indent: 15px; color: grey;" title="Click to change alert level" class="fa fa-pencil"></a></h6>
+              	<input id="alertInput" style="width: 150px; display: inline-block;" class="form-control" type="hidden" th:value="${imageView.post.alertLevel}"/>
+              	<button id="alertChangebtn" class="btn btn-sml btn-deep-orange" type="submit" style="display: none;" >Change</button>
+              </form>
               <p style="font-weight: 400;" th:text="${imageView.post.description}"></p>
               <input type="hidden" id="latitude" value="${imageView.post.latitude}"/>
               <input type="hidden" id="longitude" value="${imageView.post.longitude}"/>
