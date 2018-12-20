@@ -25,6 +25,7 @@ public class UserRegistrationDTO implements Serializable {
 
     @Lob
     private byte[] profilePic;
+    
     private String profilePicContentType;
 
     private String firstName;

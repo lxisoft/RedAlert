@@ -35,5 +35,5 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     Page<User> findAllByLoginNot(Pageable pageable, String login);
 
-	void save(UserRegistrationDTO userreg);
+	
 }

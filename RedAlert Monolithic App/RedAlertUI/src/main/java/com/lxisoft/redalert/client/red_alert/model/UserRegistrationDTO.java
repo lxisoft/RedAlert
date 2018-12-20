@@ -18,9 +18,7 @@ import javax.validation.constraints.*;
  * UserRegistrationDTO
  */
 @Validated
-
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-18T15:10:22.272+05:30[Asia/Calcutta]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-19T17:12:00.824596800+05:30[Asia/Calcutta]")
 
 public class UserRegistrationDTO   {
   /**
@@ -534,8 +532,6 @@ public class UserRegistrationDTO   {
   public void setUserName(String userName) {
     this.userName = userName;
   }
-  
-
 
 
   @Override
