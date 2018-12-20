@@ -147,7 +147,7 @@ public class PostServiceImpl implements PostService {
    Page<Post>posts=postRepository.findAllByUserRegistrationId(null,id);
    for(Post post0:posts)
    {
-   	if(((Post) post0).getAlertLevel().equals("ORANGE")||((Post) post0).getAlertLevel().equals("GREEN"))
+   	if((post0).getAlertLevel().equals("ORANGE")||(post0).getAlertLevel().equals("GREEN"))
    	{
     	if(alert.equals("RED"))
     	{
