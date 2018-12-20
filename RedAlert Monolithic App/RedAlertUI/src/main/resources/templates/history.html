@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -98,7 +98,7 @@
                   <a class="grey-text mr-1"><i class="fa fa-lg fa-paperclip"> </i></a>
                 </li>
               </ul>
-              <h6><strong>AlertLevel</strong></h6>
+              <h6 id="alertLevel" style="display: block;"><strong>AlertLevel</strong></h6>
               <p th:text="${imageView.post.alertLevel}"></p>
               <p style="font-weight: 400;" th:text="${imageView.post.description}"></p>
               <input type="hidden" id="latitude" value="${imageView.post.latitude}"/>
