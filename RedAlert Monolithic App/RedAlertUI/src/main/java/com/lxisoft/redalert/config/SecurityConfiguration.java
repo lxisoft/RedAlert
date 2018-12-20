@@ -107,7 +107,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .csrf()
         .disable()
         .authorizeRequests()
+
         .antMatchers("/che")
+
         .hasAnyRole("USER")
         .and()
         .formLogin().loginPage("/loginController/login").permitAll();
