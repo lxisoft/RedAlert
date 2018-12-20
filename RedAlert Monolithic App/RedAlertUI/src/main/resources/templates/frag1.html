@@ -21,15 +21,16 @@
       var solvedCount = /*[[${reports.get("SOLVED")}]]*/ 'report';
       var timeoutCount = /*[[${reports.get("TIMEDOUT")}]]*/ 'report';
       var supportCount = /*[[${reports.get("SUPPORT")}]]*/ 'report';
+      var totalCount = fakeCount+prankCount+solvedCount+timeoutCount+supportCount;
+      console.log("total countsss^^^^^^^^^^^^^^^^^^^^^"+totalCount);
 console.log("user reports"+fakeCount);
-
 var reports=$("#content").val();
 console.log("reports are"+reports+"|");
 var chart = new CanvasJS.Chart("chartContainer", {
 
 	animationEnabled: true,
 	title: {
-		text: "Desktop Search Engine Market Share - 2016"
+		text: "Genuineness-Checker"
 	},
 	data: [{
 		type: "pie",
@@ -37,11 +38,11 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		yValueFormatString: "##0.00\"%\"", 
 		indexLabel: "{label} {y}",
 		dataPoints: [
-			{y: fakeCount, label: "Fake"},
-			{y: prankCount, label: "Prank"},
-			{y: solvedCount, label: "solve"},
-			{y: timeoutCount, label: "time-out"},
-			{y: supportCount, label: "support"}
+			{y: (fakeCount/totalCount)*100, label: "Fake"},
+			{y: (prankCount/totalCount)*100, label: "Prank"},
+			{y: (solvedCount/totalCount)*100, label: "solve"},
+			{y: (timeoutCount/totalCount)*100, label: "time-out"},
+			{y: (supportCount/totalCount)*100, label: "support"}
 		]
 	}]
 });
