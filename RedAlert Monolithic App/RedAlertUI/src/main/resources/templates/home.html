@@ -7,7 +7,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>RedAlert | Home</title>
   <!-- Font Awesome -->
-  <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Bootstrap core CSS -->
   <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
   <!-- Material Design Bootstrap -->
@@ -34,7 +34,7 @@
       </a>
       <div class="dropdown-menu dropdown-menu-right animate-fadein" aria-labelledby="navbarDropdownMenuLink-5">
               <a class="dropdown-item waves-effect waves-light" href="#">Activities</a>
-              <a class="dropdown-item waves-effect waves-light" href="#">Status History</a>
+              <a class="dropdown-item waves-effect waves-light" th:href="@{/redAlertuiHistory/history}">Status History</a>
               <a class="dropdown-item waves-effect waves-light" href="#">LogOut</a>
      </div>
     </div>
@@ -57,7 +57,7 @@
           <a class="nav-link" style="color: white;" th:href="@{/redAlertUi/newsPage/newsOfFriend}">News</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="color: white;" th:href="@{/redAlertUi/friends}">Friends</a>
+          <a class="nav-link" style="color: white;" th:href="@{/redAlertUiFriends}">Friends</a>
         </li>
       </ul>
       <!-- Links -->

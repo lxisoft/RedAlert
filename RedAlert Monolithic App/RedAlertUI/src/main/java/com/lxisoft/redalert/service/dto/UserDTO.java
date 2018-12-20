@@ -5,9 +5,7 @@ import com.lxisoft.redalert.config.Constants;
 import com.lxisoft.redalert.domain.Authority;
 import com.lxisoft.redalert.domain.User;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
@@ -24,8 +22,15 @@ public class UserDTO {
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
     private String login;
+    
+    @NotBlank
+    @Pattern(regexp = Constants.LOGIN_REGEX)
+    @Size(min =1,max=50)
+    private String password;
 
-    @Size(max = 50)
+   
+
+	@Size(max = 50)
     private String firstName;
 
     @Size(max = 50)
@@ -44,6 +49,8 @@ public class UserDTO {
     private String langKey;
 
     private String createdBy;
+    
+   
 
     private Instant createdDate;
 
@@ -61,6 +68,7 @@ public class UserDTO {
         this.id = user.getId();
         this.login = user.getLogin();
         this.firstName = user.getFirstName();
+        this.password = user.getPassword();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
         this.activated = user.getActivated();
@@ -98,6 +106,14 @@ public class UserDTO {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+    
+    public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
     public String getLastName() {
         return lastName;
