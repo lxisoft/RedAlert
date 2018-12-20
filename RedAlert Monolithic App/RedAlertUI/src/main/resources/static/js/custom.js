@@ -84,6 +84,15 @@ document.addEventListener("DOMContentLoaded", init, false);
 		
 	}
 	
+	
+function  editAlert()
+{
+	var alertLevel=document.getElementById("alertLevel");
+	alertLevel.style.display="none";
+	document.getElementById("alertInput").type="text";
+	document.getElementById("alertChangebtn").style.display="inline-block";
+}
+	
 
 function setModal(button) {
 	if(button.id=='red')

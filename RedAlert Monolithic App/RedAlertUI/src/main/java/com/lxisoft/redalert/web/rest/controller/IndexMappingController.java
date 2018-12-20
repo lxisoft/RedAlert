@@ -10,7 +10,7 @@ public class IndexMappingController
 	@GetMapping("/")
 	public String indexMapper()
 	{
-		return "redirect:/redAlertUi/index";
+		return "redirect:/redAlertUi/home";
 	}
 	@GetMapping("/signup")
 	public String signupMapper()
