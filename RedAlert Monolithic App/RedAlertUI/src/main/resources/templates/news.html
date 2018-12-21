@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -60,7 +60,7 @@
 			<div class="dropdown-menu dropdown-menu-right animate-fadein"
 				aria-labelledby="navbarDropdownMenuLink-5">
 				<a class="dropdown-item waves-effect waves-light" href="#">Activities</a>
-				<a class="dropdown-item waves-effect waves-light" th:href="@{redAlertUiHistory/history}">Status
+				<a class="dropdown-item waves-effect waves-light" th:href="@{redAlertuiHistory/history}">Status
 					History</a> <a class="dropdown-item waves-effect waves-light" href="#">LogOut</a>
 			</div>
 		</div>
@@ -78,7 +78,7 @@
 		<!-- Collapsible content -->
 		<div class="collapse navbar-collapse" id="navbarSupportedContent20">
 
-			<  <!-- Links -->
+			  <!-- Links -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" style="color: white;" th:href="@{/redAlertUi/home}">Home</a>
@@ -108,10 +108,12 @@
 						src="http://mdbootstrap.com/img/Photos/Avatars/img%20(8).jpg"
 						alt="Generic placeholder image">
 					<div class="media-body">
+					<div class="row">
+					<div class="col">
 						<h5 class="font-weight-bold mt-0 mb-0"
 							style="display: inline-block;">
 							<a style="color: #fd7e14;" href=""
-								th:text="${newsFeedView.userRegistrationDTO.userName}">UsersName</a>
+								th:text="${newsFeedView.userRegistrationDTO.firstName}+' '+${newsFeedView.userRegistrationDTO.lastName}">UsersName</a>
 						</h5>
 						<p id="date" class="mb-0"
 							style="display: inline-block; font-size: 12px; color: grey;">
@@ -131,23 +133,39 @@
 						</ul>
 						<h6>
 							<strong
-								th:text="${newsFeedView.postDTO.alertLevel}+' Alert level'">AlertLevel</strong>
+								th:text="${newsFeedView.postDTO.alertLevel}+' ALERT'">AlertLevel</strong>
 						</h6>
 						<p style="font-weight: 400;"
 							th:text="${newsFeedView.postDTO.description}">Issue
 							description : Help!!!. I'm in danger. Its a fire out here. I
 							can't get out of the house. The door got locked. Currently I'm
 							away from the fire but i"m afraid, it may get close.</p>
+							
+						<!-- Collapse buttons -->
+						<div>
+							<a id="meu_div" type="button" data-toggle="collapse"
+								data-target="#collapseExample" aria-expanded="false"
+								aria-controls="collapseExample"> Comments <i id="iconDown"
+								class="fa fa-chevron-down rotate" aria-hidden="true"></i>
+							</a>
+						</div>
+						<!-- / Collapse buttons -->
+					</div>
+					<div class="col">
+							<div id="content"></div>
+					</div>					
+					</div>
+					
 						<input type="hidden" id="latitude"
 							th:value="${newsFeedView.postDTO.latitude}" /> <input
 							type="hidden" id="longitude"
 							th:value="${newsFeedView.postDTO.longitude}" />
-						
+				<br>		
                 <div style="float: right;">
-                  <div class="dropdown" style="display: inline-block; width: auto; height: auto;">  
-                   <div id="report" class="select">
+                  <div class="dropdown" style="display: inline-block; width: 100px; height: 100px; max-height: 10px; max-width: 10px;">  
+                   <div id="report" class="select" style="width:100px; position: relative; right: 100px;">
                       <span>Report</span>
-                      <i style="left: 10px;" class="fa fa-chevron-down"></i>
+                      <i style="text-indent: 10px;" class="fa fa-chevron-down"></i>
                     </div> 
                     <input type="hidden" id="reportHidden" name="report" required="required">
                      <ul class="dropdown-menu">
@@ -158,6 +176,7 @@
             th:value="${report}"
             th:text="${report}">
     </li>
+    </ul>
 <!-- 
                       <li id="fake">Fakes</li>
                       <li id="prank">Prank</li>
@@ -173,15 +192,7 @@
                 </div>
 
               
-						<!-- Collapse buttons -->
-						<div>
-							<a id="meu_div" type="button" data-toggle="collapse"
-								data-target="#collapseExample" aria-expanded="false"
-								aria-controls="collapseExample"> Comments <i id="iconDown"
-								class="fa fa-chevron-down rotate" aria-hidden="true"></i>
-							</a>
-						</div>
-						<!-- / Collapse buttons -->
+						
 
 						<!-- Collapsible element -->
 						<div class="collapse" id="collapseExample">
@@ -254,13 +265,7 @@
 				</div>
 			</section>
 		</div>
-		<!--Section: Author Box--> <div id="content">
-		
-		
-		
-		
-		
-		</div>
+		<!--Section: Author Box--> 
 		
 		
 		
@@ -269,7 +274,7 @@
 		
 		
 		
-		 <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
     
 	</div>
 
@@ -334,7 +339,7 @@
 
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Attatchments</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Attachments</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

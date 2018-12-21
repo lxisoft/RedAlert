@@ -7,6 +7,9 @@ import com.lxisoft.redalert.domain.User;
 
 import javax.persistence.Column;
 import javax.validation.constraints.*;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,8 +27,8 @@ public class UserDTO {
     private String login;
     
     @NotBlank
-    @Pattern(regexp = Constants.LOGIN_REGEX)
-    @Size(min =1,max=50)
+    
+    @Size(min =1,max=100)
     private String password;
 
    
@@ -112,7 +115,7 @@ public class UserDTO {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = new BCryptPasswordEncoder().encode(password);
 	}
 
     public String getLastName() {

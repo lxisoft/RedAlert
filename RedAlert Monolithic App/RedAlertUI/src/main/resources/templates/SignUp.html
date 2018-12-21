@@ -30,7 +30,7 @@
 			<li style="display: inline-block;"><a class="navbar-brand"
 				style="color: white;" href="#"><b>RedAlert</b></a></li>
 			<li class="nav-item" style="display: inline-block;"><a
-				class="navbar-brand" style="color: white;" href="/redAlertUi/index">Login</a></li>
+				class="navbar-brand" style="color: white;" th:href="@{/redAlertUiIndex/index}">Login</a></li>
 		</ul>
 		<!-- Collapse button -->
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -75,49 +75,50 @@
 								<h4 class="modal-title w-100 font-weight-bold" style="color: #6E6A69;">Register</h4>
 								
 							</div>
+							
 							<div class="modal-body mx-3">
-								<form action="#">
+								<form action="#" th:action="@{/redAlertUis/getUserDetails}" th:object="${view}" th:method="post">
 									<div class="row">
 										<div class="col">
 											<div class="md-form mt-0">
-												<i class="fa fa-user prefix grey-text" style="left: 0px;"></i> <input
-													type="text" id="fname" class="form-control validate">
+												<i class="fa fa-user prefix grey-text" style="left: 0px;"></i> 
+												<input type="text" id="fname" class="form-control validate" name="firstName" th:field="*{userRegistrationDTO.firstName}">
 												<label data-error="wrong" data-success="" for="fname">First
 													name</label>
 											</div>
 										</div>
 										<div class="col">
 											<div class="md-form mt-0">
-												<i class="fa fa-user prefix grey-text" style="left: 0px;"></i> <input
-													type="text" id="lname" class="form-control validate">
-												<label data-error="wrong" data-success="" for="lname">Last
-													name</label>
+												<i class="fa fa-user prefix grey-text" style="left: 0px;"></i> 
+												<input	type="text" id="lname" class="form-control validate"  name="lastName" th:field="*{userRegistrationDTO.lastName}">
+												<label data-error="wrong" data-success="" for="lname">Lastname</label>
+													
 											</div>
 										</div>
 									</div>
 									<div class="md-form mt-0">
-										<i class="fa fa-envelope prefix grey-text" style="left: 0px;"></i> <input
-											type="email" id="orangeForm-email"
-											class="form-control validate"> <label
+										<i class="fa fa-envelope prefix grey-text" style="left: 0px;"></i> 
+											<input type="email" id="orangeForm-email" class="form-control validate" th:field="*{userRegistrationDTO.email}">
+											 <label
 											data-error="Invalid email" data-success=""
 											for="orangeForm-email">Your email</label>
 									</div>
 									<div class="row">
 										<div class="col">
 											<div class="md-form mt-0">
-												<i class="fa fa-lock prefix grey-text" style="left: 0px;"></i> <input
-													onkeyup="checkEqual()" type="password" id="pass"
-													class="form-control"> <label
+												<i class="fa fa-lock prefix grey-text" style="left: 0px;"></i> 
+													<input onkeyup="checkEqual()" type="password" id="pass" class="form-control" name="password" th:field="*{userRegistrationDTO.password}">
+												 <label
 													data-error="Passwords don't match" data-success=""
 													for="pass">Password</label>
 											</div>
 										</div>
 										<div class="col">
 											<div class="md-form mt-0">
-												<i class="fa fa-lock prefix grey-text" style="left: 0px;"></i> <input
-													onkeyup="checkEqual()" type="password" id="rep-pass"
-													class="form-control"> <label
-													data-error="Passwords don't match" data-success=""
+												<i class="fa fa-lock prefix grey-text" style="left: 0px;"></i>
+													<input onkeyup="checkEqual()" type="password" id="rep-pass" class="form-control" > 
+													
+												<label	data-error="Passwords don't match" data-success=""
 													for="rep-pass">Confirm Password</label>
 											</div>
 										</div>
@@ -130,7 +131,7 @@
 									<p class="font-small d-flex justify-content-end" style="color: grey;">
 										Have an account? <a 
 											
-											href="/redAlertUi/index"
+											th:href="@{/redAlertUiIndex/index}"
 											class="orange-text ml-1 font-weight-bold"> Login</a>
 									</p>
 								</div>

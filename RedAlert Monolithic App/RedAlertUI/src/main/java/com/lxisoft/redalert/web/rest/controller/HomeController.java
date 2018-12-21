@@ -47,13 +47,13 @@ public class HomeController {
 	@Autowired
 	UserRepository userRepository;
 	
-	@GetMapping("/index")	
+	@GetMapping("/signUp")	
 	public String getIndex(Model model)		
 	{
 		View view = new View();	 		
  		view.setUserRegistrationDTO(new UserRegistrationDTO());	 		
  		model.addAttribute("view",view);	 
- 		return "index";
+ 		return "SignUp";
 	}
 	
 	/**
@@ -67,10 +67,11 @@ public class HomeController {
 		view.setMediaDTO(new MediaDTO());
 		view.setPostDTO(new PostDTO());
 		view.setUserRegistrationDTO(new UserRegistrationDTO());
-		String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
+		/*String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
 		 
 		
-		Optional<User> user=userRepository.findOneByLogin(currentUserLogin);
+		User user=userRepository.findOneByLogin(currentUserLogin).get();
+*/		//userRegistrationRepository.
         view.setUserRegistrationId(1);
 	    view.getUserRegistrationDTO().setId(userRegistrationResourceApi.getUserRegistrationUsingGET((long) 1).getBody().getId());
 		model.addAttribute("view", view);

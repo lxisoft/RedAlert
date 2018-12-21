@@ -21,6 +21,7 @@ public class View {
 	private ArrayList<MediaDTO> medias;
 	private ArrayList<ImageView> imageviews; 
 	private ArrayList<UserRegistrationDTO> users;
+	private UserRegistrationDTO userRegistrationDTO;
 
 	public ArrayList<UserRegistrationDTO> getUsers() {
 		return users;
@@ -52,7 +53,8 @@ public class View {
 	public void setUserRegistrationId(long userRegistrationId) {
 		this.userRegistrationId = userRegistrationId;
 	}
-	private UserRegistrationDTO userRegistrationDTO;
+	
+	
 	public UserRegistrationDTO getUserRegistrationDTO() {
 		return userRegistrationDTO;
 	}

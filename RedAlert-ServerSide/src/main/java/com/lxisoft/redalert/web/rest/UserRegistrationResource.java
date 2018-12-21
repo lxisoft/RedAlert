@@ -166,4 +166,11 @@ public class UserRegistrationResource {
     	return new ResponseEntity<>(users.getContent(),headers,HttpStatus.OK);
     	
     }
+    @GetMapping("/user-registration/{id}")
+    @Timed
+    public ResponseEntity<UserRegistrationDTO> findByUserId(@PathVariable String id) {
+        log.debug("REST request to get UserRegistration using user id : {}", id);
+        UserRegistrationDTO userRegistrationDTO = userRegistrationService.findByUserId(id);
+        return new ResponseEntity<UserRegistrationDTO>(userRegistrationDTO,HttpStatus.OK);
+    }
 }

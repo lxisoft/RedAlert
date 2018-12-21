@@ -76,20 +76,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .csrf()
         .disable()
         .authorizeRequests()
-        .antMatchers("/controller/homelogin/**")
+
+        .antMatchers("/redAlertUi/home")
         .hasAnyRole("USER")
         .and()
-        .formLogin();
+        .formLogin().loginPage("/redAlertUiIndex/index").permitAll();
+
     	
     	
     	
+
     	
     }
     
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) 
       throws Exception {
-      // System.out.println("configuration abhina password=========================="+new BCryptPasswordEncoder().encode("abhina"));
+
         
        /* auth.inMemoryAuthentication()      
         .withUser("abhina").password("{noop}pass1").roles("USER"); 
