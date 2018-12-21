@@ -80,9 +80,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers("/redAlertUi/home")
         .hasAnyRole("USER")
         .and()
+        
+        
         .formLogin().loginPage("/redAlertUiIndex/index").permitAll();
 
-    	
+    	http
+    	.logout()
+        .logoutUrl("/redAlertUiLogout/logout")
+     
+        .permitAll();
     	
     	
 
