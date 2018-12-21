@@ -89,7 +89,7 @@ function  editAlert()
 {
 	var alertLevel=document.getElementById("alertLevel");
 	alertLevel.style.display="none";
-	document.getElementById("alertInput").type="text";
+	document.getElementById("alertDropDown").style.display="inline-block";
 	document.getElementById("alertChangebtn").style.display="inline-block";
 }
 	
