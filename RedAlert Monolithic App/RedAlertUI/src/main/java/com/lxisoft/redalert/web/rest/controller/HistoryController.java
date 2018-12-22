@@ -3,6 +3,8 @@ package com.lxisoft.redalert.web.rest.controller;
 import java.util.ArrayList;
 import java.util.Base64;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +36,8 @@ public class HistoryController {
 	UserRegistrationResourceApi userRegistrationResourceApi;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	HttpSession session;
 	
 	
 
@@ -46,14 +50,16 @@ public class HistoryController {
 	{
 		View view = new View();
 		ArrayList<ImageView> imageViews=new ArrayList<ImageView>();
-        String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
+       // String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
 		 
-		UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO();
-		User user=userRepository.findOneByLogin(currentUserLogin).get();
-        userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin()).getBody();
+		//UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO();
+		UserRegistrationDTO userb = new UserRegistrationDTO();
+		//User user=userRepository.findOneByLogin(currentUserLogin).get();
+        //userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin()).getBody();
+       userb =  (UserRegistrationDTO) session.getAttribute("cs");
        
 		
-		ArrayList<PostDTO> posts = (ArrayList<PostDTO>) postResourceApi.getAllPostsByUserRegistrationIdUsingGET(userRegistrationDTO.getId(), null, null, null, null, null, null, null, null, null, null).getBody();
+		ArrayList<PostDTO> posts = (ArrayList<PostDTO>) postResourceApi.getAllPostsByUserRegistrationIdUsingGET(userb.getId(), null, null, null, null, null, null, null, null, null, null).getBody();
 
 		
 		for(PostDTO post:posts)
@@ -82,7 +88,7 @@ public class HistoryController {
 		
 		view.setImageViews(imageViews);
 		
-		 view.setUserRegistrationDTO(userRegistrationDTO);
+		 view.setUserRegistrationDTO(userb);
 	
 		model.addAttribute("view",view);
 	   return "history";
