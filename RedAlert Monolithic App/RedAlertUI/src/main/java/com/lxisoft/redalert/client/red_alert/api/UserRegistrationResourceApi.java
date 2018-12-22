@@ -27,10 +27,6 @@ import java.util.Map;
 import java.util.Optional;
 
 
-
-
-
-
 @Api(value = "UserRegistrationResource", description = "the UserRegistrationResource API")
 public interface UserRegistrationResourceApi {
 

@@ -14,11 +14,6 @@ import javax.validation.constraints.*;
  */
 @Validated
 
-
-
-
-
-
 public class LeaderBoardDTO   {
   @JsonProperty("id")
   private Long id = null;

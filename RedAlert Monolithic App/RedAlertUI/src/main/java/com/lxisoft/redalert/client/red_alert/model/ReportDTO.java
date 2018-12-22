@@ -16,10 +16,6 @@ import javax.validation.constraints.*;
 @Validated
 
 
-
-
-
-
 public class ReportDTO   {
   @JsonProperty("actionId")
   private Long actionId = null;

@@ -26,11 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-
-
-
-
-
 @Api(value = "PostResource", description = "the PostResource API")
 public interface PostResourceApi {
 
@@ -131,5 +126,11 @@ public interface PostResourceApi {
         consumes = "application/json",
         method = RequestMethod.PUT)
     ResponseEntity<PostDTO> updatePostUsingPUT(@ApiParam(value = "postDTO" ,required=true )  @Valid @RequestBody PostDTO postDTO);
+
+
+	
+
+
+	
 
 }

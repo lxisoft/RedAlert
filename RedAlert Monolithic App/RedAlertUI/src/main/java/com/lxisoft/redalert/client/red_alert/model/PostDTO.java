@@ -16,11 +16,6 @@ import javax.validation.constraints.*;
  */
 @Validated
 
-
-
-
-
-
 public class PostDTO   {
   @JsonProperty("active")
   private Boolean active = null;

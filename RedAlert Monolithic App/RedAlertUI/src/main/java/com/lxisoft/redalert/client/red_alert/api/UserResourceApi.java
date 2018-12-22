@@ -27,10 +27,6 @@ import java.util.Map;
 import java.util.Optional;
 
 
-
-
-
-
 @Api(value = "UserResource", description = "the UserResource API")
 public interface UserResourceApi {
 

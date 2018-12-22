@@ -30,7 +30,6 @@ import java.util.Optional;
 
 
 
-
 @Api(value = "LeaderBoardResource", description = "the LeaderBoardResource API")
 public interface LeaderBoardResourceApi {
 

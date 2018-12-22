@@ -15,10 +15,6 @@ import javax.validation.constraints.*;
 @Validated
 
 
-
-
-
-
 public class MediaDTO   {
   @JsonProperty("file")
   private byte[] file = null;

@@ -17,10 +17,6 @@ import javax.validation.constraints.*;
 @Validated
 
 
-
-
-
-
 public class ActionDTO   {
   @JsonProperty("approval")
   private Boolean approval = null;

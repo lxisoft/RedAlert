@@ -15,10 +15,6 @@ import javax.validation.constraints.*;
 @Validated
 
 
-
-
-
-
 public class OptionalOfActionDTO   {
   @JsonProperty("present")
   private Boolean present = null;

@@ -28,9 +28,6 @@ import java.util.Optional;
 
 
 
-
-
-
 @Api(value = "MediaResource", description = "the MediaResource API")
 public interface MediaResourceApi {
 

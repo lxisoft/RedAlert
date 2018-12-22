@@ -19,11 +19,6 @@ import javax.validation.constraints.*;
  */
 @Validated
 
-
-
-
-
-
 public class UserRegistrationDTO   {
   /**
    * Gets or Sets bloodGroup
