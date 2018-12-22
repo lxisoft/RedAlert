@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-21T14:11:15.521577500+05:30[Asia/Calcutta]")
 
 @Api(value = "PostResource", description = "the PostResource API")
 public interface PostResourceApi {
@@ -127,5 +127,11 @@ public interface PostResourceApi {
         consumes = "application/json",
         method = RequestMethod.PUT)
     ResponseEntity<PostDTO> updatePostUsingPUT(@ApiParam(value = "postDTO" ,required=true )  @Valid @RequestBody PostDTO postDTO);
+
+
+	
+
+
+	
 
 }

@@ -13,11 +13,7 @@ import javax.validation.constraints.*;
  * LeaderBoardDTO
  */
 @Validated
-<<<<<<< HEAD
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-19T12:18:45.431187900+05:30[Asia/Calcutta]")
-=======
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-19T17:12:00.824596800+05:30[Asia/Calcutta]")
->>>>>>> b30c733952d729fd6c7e75037fa077e2a2e1eb62
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-21T14:11:15.521577500+05:30[Asia/Calcutta]")
 
 public class LeaderBoardDTO   {
   @JsonProperty("id")

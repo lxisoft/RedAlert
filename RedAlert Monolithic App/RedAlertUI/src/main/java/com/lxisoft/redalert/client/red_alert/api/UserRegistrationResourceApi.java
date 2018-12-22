@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-21T14:11:15.521577500+05:30[Asia/Calcutta]")
 
 @Api(value = "UserRegistrationResource", description = "the UserRegistrationResource API")
 public interface UserRegistrationResourceApi {
@@ -53,6 +53,18 @@ public interface UserRegistrationResourceApi {
     @RequestMapping(value = "/apis/user-registrations/{id}",
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteUserRegistrationUsingDELETE(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
+
+
+    @ApiOperation(value = "findByUserId", nickname = "findByUserIdUsingGET", notes = "", response = UserRegistrationDTO.class, tags={ "user-registration-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = UserRegistrationDTO.class),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/apis/user-registration/{id}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<UserRegistrationDTO> findByUserIdUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") String id);
 
 
     @ApiOperation(value = "getAllUserRegistrations", nickname = "getAllUserRegistrationsUsingGET", notes = "", response = UserRegistrationDTO.class, responseContainer = "List", tags={ "user-registration-resource", })

@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-21T14:11:15.521577500+05:30[Asia/Calcutta]")
 
 @Api(value = "LeaderBoardResource", description = "the LeaderBoardResource API")
 public interface LeaderBoardResourceApi {

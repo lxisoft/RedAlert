@@ -98,7 +98,7 @@
                   <a class="grey-text mr-1"><i class="fa fa-lg fa-paperclip"> </i></a>
                 </li>
               </ul>
-              <form class="md-form">
+              <form th:action="@{postclose/alertchange}" method="post" class="md-form">
               	<h6 id="alertLevel"><strong th:text="${imageView.post.alertLevel}+' ALERT'"></strong><a onclick="editAlert();" style="display: inline-block; text-indent: 15px; color: grey;" title="Click to change alert level" class="fa fa-pencil"></a></h6>
               	<input id="alertInput" style="width: 150px; display: inline-block;" class="form-control" type="hidden" th:value="${imageView.post.alertLevel}"/>
               	<button id="alertChangebtn" class="btn btn-sml btn-deep-orange" type="submit" style="display: none;" >Change</button>
