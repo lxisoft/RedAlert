@@ -14,8 +14,12 @@ import com.lxisoft.redalert.client.red_alert.api.PostResourceApi;
 import com.lxisoft.redalert.client.red_alert.api.UserRegistrationResourceApi;
 import com.lxisoft.redalert.client.red_alert.model.MediaDTO;
 import com.lxisoft.redalert.client.red_alert.model.PostDTO;
+import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
+import com.lxisoft.redalert.domain.User;
 import com.lxisoft.redalert.model.ImageView;
 import com.lxisoft.redalert.model.View;
+import com.lxisoft.redalert.repository.UserRepository;
+import com.lxisoft.redalert.security.SecurityUtils;
 
 @Controller
 @RequestMapping("/redAlertuiHistory")
@@ -28,6 +32,8 @@ public class HistoryController {
 	MediaResourceApi mediaResourceApi;
 	@Autowired
 	UserRegistrationResourceApi userRegistrationResourceApi;
+	@Autowired
+	UserRepository userRepository;
 	
 	
 
@@ -40,8 +46,14 @@ public class HistoryController {
 	{
 		View view = new View();
 		ArrayList<ImageView> imageViews=new ArrayList<ImageView>();
+        String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
+		 
+		UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO();
+		User user=userRepository.findOneByLogin(currentUserLogin).get();
+        userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin()).getBody();
+       
 		
-		ArrayList<PostDTO> posts = (ArrayList<PostDTO>) postResourceApi.getAllPostsByUserRegistrationIdUsingGET((long)1, null, null, null, null, null, null, null, null, null, null).getBody();
+		ArrayList<PostDTO> posts = (ArrayList<PostDTO>) postResourceApi.getAllPostsByUserRegistrationIdUsingGET(userRegistrationDTO.getId(), null, null, null, null, null, null, null, null, null, null).getBody();
 
 		
 		for(PostDTO post:posts)
@@ -57,7 +69,7 @@ public class HistoryController {
 				String image="data:image/jpg;base64,"+Base64.getEncoder().encodeToString(media.getFile());
 				images.add(image);
 				imageView.setImages(images);
-				
+		
 			}
 			
 			 imageView.setMedia(medias);
@@ -70,7 +82,7 @@ public class HistoryController {
 		
 		view.setImageViews(imageViews);
 		
-		view.setUserRegistrationDTO(userRegistrationResourceApi.getUserRegistrationUsingGET((long)1).getBody());
+		 view.setUserRegistrationDTO(userRegistrationDTO);
 	
 		model.addAttribute("view",view);
 	   return "history";

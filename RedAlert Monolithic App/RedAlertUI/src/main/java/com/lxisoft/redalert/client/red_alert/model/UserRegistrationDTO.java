@@ -18,7 +18,6 @@ import javax.validation.constraints.*;
  * UserRegistrationDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-21T14:11:15.521577500+05:30[Asia/Calcutta]")
 
 public class UserRegistrationDTO   {
   /**

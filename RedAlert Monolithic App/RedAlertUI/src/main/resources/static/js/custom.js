@@ -85,12 +85,16 @@ document.addEventListener("DOMContentLoaded", init, false);
 	}
 	
 	
-function  editAlert()
+function  editAlert(alertLevel,alertDropDown,alertChangebtn)
 {
-	var alertLevel=document.getElementById("alertLevel");
-	alertLevel.style.display="none";
-	document.getElementById("alertInput").type="text";
-	document.getElementById("alertChangebtn").style.display="inline-block";
+	var alert=document.getElementById(alertLevel);
+	alert.style.display="none";
+	document.getElementById(alertDropDown).style.display="inline-block";
+	document.getElementById(alertChangebtn).style.display="inline-block";
+}
+function changeAlert(alert,input) 
+{
+	document.getElementById(input).value=alert;
 }
 	
 

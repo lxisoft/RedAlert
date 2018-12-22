@@ -61,7 +61,7 @@
 				aria-labelledby="navbarDropdownMenuLink-5">
 				<a class="dropdown-item waves-effect waves-light" href="#">Activities</a>
 				<a class="dropdown-item waves-effect waves-light" th:href="@{redAlertuiHistory/history}">Status
-					History</a> <a class="dropdown-item waves-effect waves-light" href="#">LogOut</a>
+					History</a> <a class="dropdown-item waves-effect waves-light" th:href="{redAlertUiLogout/logout}">LogOut</a>
 			</div>
 		</div>
 
@@ -87,7 +87,7 @@
             <a class="nav-link" style="color: white;" th:href="@{/redAlertUi/newsPage/newsOfFriend}">News <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">	
-            <a class="nav-link" style="color: white;" th:href="@{/redAlertUi/friends}">Friends</a>
+            <a class="nav-link" style="color: white;" th:href="@{/redAlertUiFriends}">Friends</a>
           </li>
         </ul>
         <!-- Links -->
@@ -141,8 +141,31 @@
 							can't get out of the house. The door got locked. Currently I'm
 							away from the fire but i"m afraid, it may get close.</p>
 							
+						
+					</div>
+					<div class="col">
+							<div id="content"></div>
+								<div style="float: right;">
+									<div class="dropdown" style="display: inline-block;width: auto;">
+										<div id="report" class="select">
+											<span>Report</span> 
+											<i style="text-indent: 10px;" class="fa fa-chevron-down"></i>
+										</div>
+										<input type="hidden" id="reportHidden" name="report" required="required">
+										<ul class="dropdown-menu">
+											<li	th:each="report : ${T(com.lxisoft.redalert.client.red_alert.model.ReportDTO.ReportTypeEnum).values()}" th:id="${report}" th:value="${report}" th:text="${report}">
+											</li>
+										</ul>
+									</div>					
+             							<input type="hidden" id="regId" th:name="postId" th:value="${newsFeedView.postDTO.id}" />							
+										<button id="btnrep" class="btn btn-deep-orange px-3" th:report="${newsFeedView.postDTO.id}"	th:onclick="postReport(this.getAttribute('report'));">
+											Report <i class="fa fa-bolt" aria-hidden="true"></i>
+										</button>
+								</div>
+							</div>
+						</div>
 						<!-- Collapse buttons -->
-						<div>
+						<div style="float: left;">
 							<a id="meu_div" type="button" data-toggle="collapse"
 								data-target="#collapseExample" aria-expanded="false"
 								aria-controls="collapseExample"> Comments <i id="iconDown"
@@ -150,46 +173,13 @@
 							</a>
 						</div>
 						<!-- / Collapse buttons -->
-					</div>
-					<div class="col">
-							<div id="content"></div>
-					</div>					
-					</div>
-					
+
 						<input type="hidden" id="latitude"
 							th:value="${newsFeedView.postDTO.latitude}" /> <input
 							type="hidden" id="longitude"
 							th:value="${newsFeedView.postDTO.longitude}" />
 				<br>		
-                <div style="float: right;">
-                  <div class="dropdown" style="display: inline-block; width: 100px; height: 100px; max-height: 10px; max-width: 10px;">  
-                   <div id="report" class="select" style="width:100px; position: relative; right: 100px;">
-                      <span>Report</span>
-                      <i style="text-indent: 10px;" class="fa fa-chevron-down"></i>
-                    </div> 
-                    <input type="hidden" id="reportHidden" name="report" required="required">
-                     <ul class="dropdown-menu">
-                     
-                    
-    <li th:each="report : ${T(com.lxisoft.redalert.client.red_alert.model.ReportDTO.ReportTypeEnum).values()}"
-            th:id="${report}"
-            th:value="${report}"
-            th:text="${report}">
-    </li>
-    </ul>
-<!-- 
-                      <li id="fake">Fakes</li>
-                      <li id="prank">Prank</li>
-                      <li id="solved">Solved</li>
-                      <li id="support">Support</li>
-                      <li id="timeout">Timeout</li>.
-                    </ul>
-              -->     </div>
-              <input type="hidden" id="regId" th:name = "postId" th:value="${newsFeedView.postDTO.id}"/>
-              
-              
-                  <button id="btnrep"   class="btn btn-deep-orange px-3" th:report="${newsFeedView.postDTO.id}" th:onclick="postReport(this.getAttribute('report'));" >Report <i class="fa fa-bolt" aria-hidden="true"></i 	></button>
-                </div>
+                
 
               
 						
