@@ -1,8 +1,8 @@
 package com.lxisoft.redalert.web.rest.controller;
 
-import java.util.ArrayList;
+
 import java.util.HashSet;
-import java.util.Optional;
+
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class FriendsController
 			users.add(user);
 		userRegistrationResourceApi.searchWithLastNameUsingGET(searchTerm, null, null, null, null, null, null, null, null, null, null).getBody().forEach(users::add);
 		userRegistrationResourceApi.searchWithFirstNameLastNameEmailUsingGET(searchTerm, null, null, null, null, null, null, null, null, null, null).getBody().forEach(users::add);
-		
+		userRegistrationResourceApi.inputStartingCharacterUsingGET(searchTerm, null, null, null, null, null, null, null, null, null, null).getBody().forEach(users::add);
 		model.addAttribute("searchResult", users);
 		System.out.println(users);
 		return "friends";

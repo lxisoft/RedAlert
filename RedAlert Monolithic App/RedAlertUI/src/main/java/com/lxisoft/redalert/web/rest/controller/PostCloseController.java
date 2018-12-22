@@ -31,6 +31,8 @@ public class PostCloseController {
 	PostResourceApi postResource;
 	@Autowired
 	UserRegistrationResourceApi userRegistrationResourceApi;
+	@Autowired
+	PostResourceApi postResourceApi;
 	
 	
 	
@@ -45,7 +47,9 @@ public class PostCloseController {
 	     
 	      postResource.getClosePostUsingGET(postDTO.getId());
 	    
+
 		  return "redirect:/redAlertUiHistory/history";
+		 
 	 }
 	
 	
@@ -78,15 +82,10 @@ public class PostCloseController {
 	public String ChangeAlert(@ModelAttribute PostDTO postDTO, String name)
 	{
 		postResource.changeAlertLevelUsingGET(name,postDTO.getId());
-		return "home";
+		return "redirect:/redAlertuiHistory/history";
 		
 	}
-	@RequestMapping("/index")
-	public String signIn()
-	{
-		return "index";
-		
-	}
+	
 	
 	
 	

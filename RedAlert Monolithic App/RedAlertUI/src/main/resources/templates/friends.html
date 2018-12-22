@@ -116,7 +116,7 @@
 						</div>
 						<!--./User-->
 					</div>
-					<hr />
+					<div th:if="${searchResult2!=null}"><hr/></div>
 					<!--User-->
 					<div class="media  mb-3 px-1">
 						<img class="card-img-100 rounded-circle d-flex z-depth-1 mr-3"
@@ -177,7 +177,7 @@
               </div>
             <!--./User-->
           </div>
-          <hr/>
+          <div th:if="${searchResult!=null}"><hr/></div>
             <!--User-->
               <div class="media  mb-3 px-1">
                 <img class="card-img-100 rounded-circle d-flex z-depth-1 mr-3" src="http://mdbootstrap.com/img/Photos/Avatars/img%20(8).jpg" style="width: 9%; height: 9%;" alt="Generic placeholder image">

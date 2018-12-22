@@ -91,17 +91,26 @@
 											<div class="md-form mt-0">
 												<i class="fa fa-user prefix grey-text" style="left: 0px;"></i> 
 												<input	type="text" id="lname" class="form-control validate"  name="lastName" th:field="*{userRegistrationDTO.lastName}">
-												<label data-error="wrong" data-success="" for="lname">Lastname</label>
+												<label data-error="wrong" data-success="" for="lname">Last name</label>
 													
 											</div>
 										</div>
 									</div>
-									<div class="md-form mt-0">
-										<i class="fa fa-envelope prefix grey-text" style="left: 0px;"></i> 
-											<input type="email" id="orangeForm-email" class="form-control validate" th:field="*{userRegistrationDTO.email}">
-											 <label
-											data-error="Invalid email" data-success=""
-											for="orangeForm-email">Your email</label>
+									<div class="row">
+										<div class="col">
+											<div class="md-form mt-0">
+												<i class="fa fa-envelope prefix grey-text" style="left: 0px;"></i> 
+												<input type="email" id="email" class="form-control validate" name="email" th:field="*{userRegistrationDTO.email}">
+												<label data-error="Invalid e-mail" data-success="" for="email">Your Email</label>
+											</div>
+										</div>
+										<div class="col">
+											<div class="md-form mt-0">
+												<i class="fa fa-user prefix grey-text" style="left: 0px;"></i> 
+												<input	type="text" id="username" class="form-control validate"  name="username" th:field="*{userRegistrationDTO.userName}">
+												<label data-error="wrong" data-success="" for="username">Username</label>				
+											</div>
+										</div>
 									</div>
 									<div class="row">
 										<div class="col">
