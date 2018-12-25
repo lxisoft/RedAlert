@@ -83,7 +83,7 @@
 	<!--/.Navbar-->
 	<div class="row">
 		<div class="col-6">
-			<!--Other-->
+			<!--Friends-->
 			<div
 				style="background: #ff7043; border-top-left-radius: 50px; border-bottom-left-radius: 50px; box-shadow: 2px 2px grey;">
 				<div class="row">
@@ -93,7 +93,7 @@
 							Contacts</h3>
 					</div>
 					<div class="md-form mt-0 mb-0 px-0 py-0 col">
-						<form action="friends/find">
+						<form th:action="@{/redAlertUiFriends/findFriends}">
 							<label style="color: white;" for="searchBox"><i
 								class="fa fa-search"></i> Search...</label> <input id="searchBox"
 								name="searchTerm" style="width: 300px; display: inline-block;"
@@ -107,34 +107,77 @@
 			<div class="card w-100">
 				<div class="card-body">
 					<div>
-						<!--User-->
-						<div th:each="user:${emergencyFriends}" class="media  mb-3 px-1">
-							<img class="card-img-100 rounded-circle d-flex z-depth-1 mr-3"
-								src="http://mdbootstrap.com/img/Photos/Avatars/img%20(8).jpg"
-								style="width: 9%; height: 9%;" alt="Generic placeholder image">
-							<form action="">
-								<div class="media-body" style="background: transparent;">
-									<h5 class="font-weight-bold mt-3 mb-0 "
-										style="display: inline-block;">
-										<a style="color: #fd7e14; padding-right: 100px;"
-											th:text="${user.firstName}+' '+${user.lastName}" href=""></a>
-									</h5>
-
-									<button type="submit" class="btn-deep-orange round-sm px-0"
-										title="Click to remove notification access"
-										style="display: inline-block; position: absolute; right: 150px;">
-										<i class="fa fa-minus"></i>
-									</button>
-								</div>
-							</form>
-							<hr />
+						<div th:if="${searchFriends!=null}">
+							<h6 class="grey-text">Search Results</h6>
+							<hr>
 						</div>
-						<!--./User-->
-					</div>
+						<div th:each="user:${searchFriends}">
+							<!--User-->
+							<div class="media  mb-3 px-1">
+								<img class="card-img-100 rounded-circle d-flex z-depth-1 mr-3"
+									src="http://mdbootstrap.com/img/Photos/Avatars/img%20(8).jpg"
+									style="width: 9%; height: 9%;" alt="Generic placeholder image">
+								<form action="/redAlertUiFriends/addFriend" method="POST">
+									<div class="media-body" style="background: transparent;">
+										<h5 class="font-weight-bold mt-3 mb-0 "
+											style="display: inline-block;">
+											<a style="color: #fd7e14; padding-right: 100px;"
+												th:text="${user.firstName}+' '+${user.lastName}" href=""></a>
+										</h5>
+										<input type="hidden" th:value="${user.id}" name="friendId" />
+										<button class="btn-deep-orange round-sm"
+											title="Click to allow notification access"
+											style="display: inline-block; position: absolute; right: 150px; margin-top: -35px;">
+											<i class="fa fa-minus"></i>
+										</button>
+									</div>
+								</form>
+							</div>
+							<!--./User-->
+							<hr>
+						</div>
+						<div th:if="${searchFriends!=null}">
+							<h6 class="grey-text" style="text-indent: 100px;"
+								th:if="${#lists.isEmpty(searchFriends)}">No friends found
+								matching the term...</h6>
+						</div>
+						<div th:if="${searchFriends!=null}">
+							<h6 class="grey-text">All Friends</h6>
+						</div>
+						<div th:if="${searchFriends!=null}">
+							<hr>
+						</div>
+						<div th:each="user:${emergencyFriends}">
+							<!--User-->
+							<div class="media  mb-3 px-1">
+								<img class="card-img-100 rounded-circle d-flex z-depth-1 mr-3"
+									src="http://mdbootstrap.com/img/Photos/Avatars/img%20(8).jpg"
+									style="width: 9%; height: 9%;" alt="Generic placeholder image">
+								<form action="/redAlertUiFriends/unFriend" method="post">
+									<input type="hidden" name="friendId" th:value="*{user.id}" />
+									<div class="media-body" style="background: transparent;">
+										<h5 class="font-weight-bold mt-3 mb-0 "
+											style="display: inline-block;">
+											<a style="color: #fd7e14; padding-right: 100px;"
+												th:text="${user.firstName}+' '+${user.lastName}" href=""></a>
+										</h5>
 
+										<button type="submit" class="btn-deep-orange round-sm px-0"
+											title="Click to remove notification access"
+											style="display: inline-block; position: absolute; right: 150px;">
+											<i class="fa fa-minus"></i>
+										</button>
+									</div>
+								</form>
+								<hr />
+							</div>
+							<!--./User-->
+							<hr>
+						</div>
+					</div>
 				</div>
 			</div>
-			<!--/.Other-->
+			<!--/.Friends-->
 		</div>
 		<div class="col-6">
 			<!--Other-->
@@ -147,7 +190,7 @@
 							you may know</h3>
 					</div>
 					<div class="md-form mt-0 mb-0 px-0 py-0 col">
-						<form th:action="@{/redAlertUiFriends/find}">
+						<form th:action="@{/redAlertUiFriends/findUsers}">
 							<label style="color: white;" for="searchbox"><i
 								class="fa fa-search"></i> Search...</label> <input id="searchbox"
 								name="searchTerm" style="width: 300px; display: inline-block;"
@@ -160,56 +203,91 @@
 			<hr>
 			<div class="card w-100">
 				<div class="card-body">
-					<div>
+					<div th:if="${searchUsers!=null}">
+						<h6 class="grey-text">Search Results</h6>
+						<hr>
+					</div>
+					<div th:each="entry:${searchUsers}">
 						<!--User-->
-						<div th:each="user:${searchResult}" class="media  mb-3 px-1">
+						<div class="media  mb-3 px-1">
+							<img class="card-img-100 rounded-circle d-flex z-depth-1 mr-3"
+								src="http://mdbootstrap.com/img/Photos/Avatars/img%20(8).jpg"
+								style="width: 9%; height: 9%;" alt="Generic placeholder image">
+							<form th:unless="${entry.value}"
+								action="/redAlertUiFriends/addFriend" method="POST">
+								<div class="media-body" style="background: transparent;">
+									<h5 class="font-weight-bold mt-3 mb-0 "
+										style="display: inline-block;">
+										<a style="color: #fd7e14; padding-right: 100px;"
+											th:text="${entry.key.firstName}+' '+${entry.key.lastName}"
+											href=""></a>
+									</h5>
+									<input type="hidden" th:value="${entry.key.id}" name="friendId" />
+									<button class="btn-deep-orange round-sm"
+										title="Click to allow notification access"
+										style="display: inline-block; position: absolute; right: 150px; margin-top: -35px;">
+										<i class="fa fa-plus"></i>
+									</button>
+								</div>
+							</form>
+							<form th:if="${entry.value}" action="/redAlertUiFriends/unFriend"
+								method="post">
+								<input type="hidden" name="friendId" th:value="*{entry.key.id}" />
+								<div class="media-body" style="background: transparent;">
+									<h5 class="font-weight-bold mt-3 mb-0 "
+										style="display: inline-block;">
+										<a style="color: #fd7e14; padding-right: 100px;"
+											th:text="${entry.key.firstName}+' '+${entry.key.lastName}"
+											href=""></a>
+									</h5>
+
+									<button type="submit" class="btn-deep-orange round-sm px-0"
+										title="Click to remove notification access"
+										style="display: inline-block; position: absolute; right: 150px; margin-top: 7px;">
+										<i class="fa fa-minus"></i>
+									</button>
+								</div>
+							</form>
+						</div>
+						<hr style="width: 100%; position: relative;">
+						<!--./User-->
+					</div>
+					<div th:if="${searchUsers!=null}">
+						<h6 class="grey-text" style="text-indent: 100px;"
+							th:if="${#lists.isEmpty(searchUsers)}">No users found
+							matching the term...</h6>
+					</div>
+					<div th:if="${searchUsers!=null}">
+						<h6 class="grey-text">People you may know</h6>
+					</div>
+					<div th:if="${searchUsers!=null}">
+						<hr />
+					</div>
+					<div th:each="user:${allUsers}">
+						<!--User-->
+						<div class="media  mb-3 px-1">
 							<img class="card-img-100 rounded-circle d-flex z-depth-1 mr-3"
 								src="http://mdbootstrap.com/img/Photos/Avatars/img%20(8).jpg"
 								style="width: 9%; height: 9%;" alt="Generic placeholder image">
 							<form action="/redAlertUiFriends/addFriend" method="POST">
+								<input type="hidden" th:value="${user.id}" name="friendId" />
 								<div class="media-body" style="background: transparent;">
 									<h5 class="font-weight-bold mt-3 mb-0 "
 										style="display: inline-block;">
 										<a style="color: #fd7e14; padding-right: 100px;"
 											th:text="${user.firstName}+' '+${user.lastName}" href=""></a>
 									</h5>
-									<input type="hidden" th:value="${user.id}" name="friendId" />
-									<button class="btn-deep-orange round-sm"
+									<button type="submit" class="btn-deep-orange round-sm px-0"
 										title="Click to allow notification access"
-										style="display: inline-block; position: absolute; right: 150px; top: 25px;">
+										style="display: inline-block; position: absolute; right: 150px;">
 										<i class="fa fa-plus"></i>
 									</button>
 								</div>
 							</form>
 						</div>
 						<!--./User-->
+						<hr>
 					</div>
-					<div th:if="${searchResult!=null}">
-						<hr />
-					</div>
-					<!--User-->
-					<div th:each="user:${allUsers}" class="media  mb-3 px-1">
-						<img class="card-img-100 rounded-circle d-flex z-depth-1 mr-3"
-							src="http://mdbootstrap.com/img/Photos/Avatars/img%20(8).jpg"
-							style="width: 9%; height: 9%;" alt="Generic placeholder image">
-						<form action="/redAlertUiFriends/addFriend" method="POST">
-								<input type="hidden" th:value="${user.id}" name="friendId" />
-							<div class="media-body" style="background: transparent;">
-								<h5 class="font-weight-bold mt-3 mb-0 "
-									style="display: inline-block;">
-									<a style="color: #fd7e14; padding-right: 100px;"
-										th:text="${user.firstName}+' '+${user.lastName}" href=""></a>
-								</h5>
-								<button type="submit" class="btn-deep-orange round-sm px-0"
-									title="Click to remove notification access"
-									style="display: inline-block; position: absolute; right: 150px;">
-									<i class="fa fa-plus"></i>
-								</button>
-							</div>
-						</form>
-						<hr />
-					</div>
-					<!--./User-->
 				</div>
 			</div>
 			<!--/.Other-->
