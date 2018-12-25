@@ -1,0 +1,46 @@
+
+
+entity Complaint 
+{
+	userId Long,
+	name String,
+    description String,
+    time Instant,
+    timeOfIncident Instant,
+    media Blob,
+    status Status,
+    votes Long
+}
+
+entity Location
+{
+	name String,
+ 	latitude String ,
+    longitutde String
+    // add more from Swiggy, discuss with RedAlert, Karma, Diviso
+}
+
+entity Department
+{
+	name String
+}
+
+enum Status
+{
+	SEEN, ACTION_TAKEN
+}
+
+relationship ManyToOne
+{
+	Complaint{location} to Location
+}
+
+relationship ManyToMany
+{
+	Complaint{department} to Department{complaint }
+}
+ 
+dto * with mapstruct
+service all with serviceImpl 
+paginate * with pagination
+
