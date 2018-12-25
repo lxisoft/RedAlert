@@ -26,7 +26,7 @@ import com.lxisoft.redalert.model.View;
 
 @Controller
 @RequestMapping("/postclose")
-public class PostCloseController {
+public class UserActivity {
 	@Autowired
 	PostResourceApi postResource;
 	@Autowired
@@ -80,9 +80,7 @@ public class PostCloseController {
 	 */
 	@RequestMapping(value="/alertchange")
 	public String ChangeAlert(@RequestParam Long postId, String newAlertType)
-	{
-		System.out.println("id>>>>>>>>>>>>>>>>>"+postId);
-		System.out.println("id>>>>>>>>>>>>>>>>>"+newAlertType);
+	{  
 		
 		postResource.changeAlertLevelUsingGET(newAlertType,postId);
 		return "redirect:/redAlertuiHistory/history";
