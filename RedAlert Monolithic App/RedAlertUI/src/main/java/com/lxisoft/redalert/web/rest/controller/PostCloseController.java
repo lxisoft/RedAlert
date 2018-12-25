@@ -77,9 +77,12 @@ public class PostCloseController {
 	 * @return
 	 */
 	@RequestMapping(value="/alertchange")
-	public String ChangeAlert(@ModelAttribute PostDTO postDTO, String name)
+	public String ChangeAlert(@RequestParam Long postId, String newAlertType)
 	{
-		postResource.changeAlertLevelUsingGET(name,postDTO.getId());
+		System.out.println("id>>>>>>>>>>>>>>>>>"+postId);
+		System.out.println("id>>>>>>>>>>>>>>>>>"+newAlertType);
+		
+		postResource.changeAlertLevelUsingGET(newAlertType,postId);
 		return "redirect:/redAlertuiHistory/history";
 		
 	}

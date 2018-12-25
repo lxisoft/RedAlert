@@ -55,7 +55,7 @@ public class HistoryController {
 		
 		ArrayList<PostDTO> posts = (ArrayList<PostDTO>) postResourceApi.getAllPostsByUserRegistrationIdUsingGET(userRegistrationDTO.getId(), null, null, null, null, null, null, null, null, null, null).getBody();
 
-		
+		System.out.println("posts********8"+posts);
 		for(PostDTO post:posts)
 		{
 			ImageView imageView=new ImageView(); 

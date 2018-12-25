@@ -34,7 +34,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         this.userRegistrationRepository = userRegistrationRepository;
         this.userRegistrationMapper = userRegistrationMapper;
     }
-
+  
     /**
      * Save a userRegistration.
      *
