@@ -4,7 +4,6 @@ import com.lxisoft.crimestopper.CrimeStopperApp;
 import com.lxisoft.crimestopper.domain.Authority;
 import com.lxisoft.crimestopper.domain.User;
 import com.lxisoft.crimestopper.repository.UserRepository;
-import com.lxisoft.crimestopper.repository.search.UserSearchRepository;
 import com.lxisoft.crimestopper.security.AuthoritiesConstants;
 
 import com.lxisoft.crimestopper.service.UserService;
@@ -63,14 +62,6 @@ public class UserResourceIntTest {
     @Autowired
     private UserRepository userRepository;
 
-    /**
-     * This repository is mocked in the com.lxisoft.crimestopper.repository.search test package.
-     *
-     * @see com.lxisoft.crimestopper.repository.search.UserSearchRepositoryMockConfiguration
-     */
-    @Autowired
-    private UserSearchRepository mockUserSearchRepository;
-
     @Autowired
     private UserService userService;
 
@@ -95,7 +86,7 @@ public class UserResourceIntTest {
 
     @Before
     public void setup() {
-        UserResource userResource = new UserResource(userService, mockUserSearchRepository);
+        UserResource userResource = new UserResource(userService);
 
         this.restUserMockMvc = MockMvcBuilders.standaloneSetup(userResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
@@ -135,7 +126,6 @@ public class UserResourceIntTest {
     public void getAllUsers() throws Exception {
         // Initialize the database
         userRepository.saveAndFlush(user);
-        mockUserSearchRepository.save(user);
 
         // Get all the users
         restUserMockMvc.perform(get("/api/users?sort=id,desc")
@@ -155,7 +145,6 @@ public class UserResourceIntTest {
     public void getUser() throws Exception {
         // Initialize the database
         userRepository.saveAndFlush(user);
-        mockUserSearchRepository.save(user);
 
         // Get the user
         restUserMockMvc.perform(get("/api/users/{login}", user.getLogin()))

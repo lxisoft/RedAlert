@@ -3,7 +3,6 @@ package com.lxisoft.crimestopper.domain;
 
 import javax.persistence.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,7 +11,6 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "location")
-@Document(indexName = "location")
 public class Location implements Serializable {
 
     private static final long serialVersionUID = 1L;

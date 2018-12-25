@@ -17,7 +17,7 @@
     <!--
         Added the entity Complaint.
     -->
-    <changeSet id="20181225044125-1" author="jhipster">
+    <changeSet id="20181225100317-1" author="jhipster">
         <createTable tableName="complaint">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>

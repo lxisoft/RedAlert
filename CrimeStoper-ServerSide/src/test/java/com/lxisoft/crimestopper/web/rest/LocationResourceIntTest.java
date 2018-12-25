@@ -4,7 +4,6 @@ import com.lxisoft.crimestopper.CrimeStopperApp;
 
 import com.lxisoft.crimestopper.domain.Location;
 import com.lxisoft.crimestopper.repository.LocationRepository;
-import com.lxisoft.crimestopper.repository.search.LocationSearchRepository;
 import com.lxisoft.crimestopper.service.LocationService;
 import com.lxisoft.crimestopper.service.dto.LocationDTO;
 import com.lxisoft.crimestopper.service.mapper.LocationMapper;
@@ -16,8 +15,6 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -27,15 +24,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.util.Collections;
 import java.util.List;
 
 
 import static com.lxisoft.crimestopper.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -65,14 +59,6 @@ public class LocationResourceIntTest {
 
     @Autowired
     private LocationService locationService;
-
-    /**
-     * This repository is mocked in the com.lxisoft.crimestopper.repository.search test package.
-     *
-     * @see com.lxisoft.crimestopper.repository.search.LocationSearchRepositoryMockConfiguration
-     */
-    @Autowired
-    private LocationSearchRepository mockLocationSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -139,9 +125,6 @@ public class LocationResourceIntTest {
         assertThat(testLocation.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testLocation.getLatitude()).isEqualTo(DEFAULT_LATITUDE);
         assertThat(testLocation.getLongitutde()).isEqualTo(DEFAULT_LONGITUTDE);
-
-        // Validate the Location in Elasticsearch
-        verify(mockLocationSearchRepository, times(1)).save(testLocation);
     }
 
     @Test
@@ -162,9 +145,6 @@ public class LocationResourceIntTest {
         // Validate the Location in the database
         List<Location> locationList = locationRepository.findAll();
         assertThat(locationList).hasSize(databaseSizeBeforeCreate);
-
-        // Validate the Location in Elasticsearch
-        verify(mockLocationSearchRepository, times(0)).save(location);
     }
 
     @Test
@@ -237,9 +217,6 @@ public class LocationResourceIntTest {
         assertThat(testLocation.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testLocation.getLatitude()).isEqualTo(UPDATED_LATITUDE);
         assertThat(testLocation.getLongitutde()).isEqualTo(UPDATED_LONGITUTDE);
-
-        // Validate the Location in Elasticsearch
-        verify(mockLocationSearchRepository, times(1)).save(testLocation);
     }
 
     @Test
@@ -259,9 +236,6 @@ public class LocationResourceIntTest {
         // Validate the Location in the database
         List<Location> locationList = locationRepository.findAll();
         assertThat(locationList).hasSize(databaseSizeBeforeUpdate);
-
-        // Validate the Location in Elasticsearch
-        verify(mockLocationSearchRepository, times(0)).save(location);
     }
 
     @Test
@@ -280,26 +254,6 @@ public class LocationResourceIntTest {
         // Validate the database is empty
         List<Location> locationList = locationRepository.findAll();
         assertThat(locationList).hasSize(databaseSizeBeforeDelete - 1);
-
-        // Validate the Location in Elasticsearch
-        verify(mockLocationSearchRepository, times(1)).deleteById(location.getId());
-    }
-
-    @Test
-    @Transactional
-    public void searchLocation() throws Exception {
-        // Initialize the database
-        locationRepository.saveAndFlush(location);
-        when(mockLocationSearchRepository.search(queryStringQuery("id:" + location.getId()), PageRequest.of(0, 20)))
-            .thenReturn(new PageImpl<>(Collections.singletonList(location), PageRequest.of(0, 1), 1));
-        // Search the location
-        restLocationMockMvc.perform(get("/api/_search/locations?query=id:" + location.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(location.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE)))
-            .andExpect(jsonPath("$.[*].longitutde").value(hasItem(DEFAULT_LONGITUTDE)));
     }
 
     @Test

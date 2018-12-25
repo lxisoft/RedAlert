@@ -3,7 +3,6 @@ package com.lxisoft.crimestopper.service;
 import com.lxisoft.crimestopper.CrimeStopperApp;
 import com.lxisoft.crimestopper.config.Constants;
 import com.lxisoft.crimestopper.domain.User;
-import com.lxisoft.crimestopper.repository.search.UserSearchRepository;
 import com.lxisoft.crimestopper.repository.UserRepository;
 import com.lxisoft.crimestopper.service.dto.UserDTO;
 import com.lxisoft.crimestopper.security.AuthoritiesConstants;
@@ -36,8 +35,6 @@ import java.util.Map;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -55,14 +52,6 @@ public class UserServiceIntTest {
 
     @Autowired
     private UserService userService;
-
-    /**
-     * This repository is mocked in the com.lxisoft.crimestopper.repository.search test package.
-     *
-     * @see com.lxisoft.crimestopper.repository.search.UserSearchRepositoryMockConfiguration
-     */
-    @Autowired
-    private UserSearchRepository mockUserSearchRepository;
 
     @Autowired
     private AuditingHandler auditingHandler;

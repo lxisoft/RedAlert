@@ -4,7 +4,6 @@ import com.lxisoft.crimestopper.CrimeStopperApp;
 
 import com.lxisoft.crimestopper.domain.Complaint;
 import com.lxisoft.crimestopper.repository.ComplaintRepository;
-import com.lxisoft.crimestopper.repository.search.ComplaintSearchRepository;
 import com.lxisoft.crimestopper.service.ComplaintService;
 import com.lxisoft.crimestopper.service.dto.ComplaintDTO;
 import com.lxisoft.crimestopper.service.mapper.ComplaintMapper;
@@ -32,13 +31,11 @@ import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
 import static com.lxisoft.crimestopper.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -94,14 +91,6 @@ public class ComplaintResourceIntTest {
 
     @Autowired
     private ComplaintService complaintService;
-
-    /**
-     * This repository is mocked in the com.lxisoft.crimestopper.repository.search test package.
-     *
-     * @see com.lxisoft.crimestopper.repository.search.ComplaintSearchRepositoryMockConfiguration
-     */
-    @Autowired
-    private ComplaintSearchRepository mockComplaintSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -180,9 +169,6 @@ public class ComplaintResourceIntTest {
         assertThat(testComplaint.getMediaContentType()).isEqualTo(DEFAULT_MEDIA_CONTENT_TYPE);
         assertThat(testComplaint.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testComplaint.getVotes()).isEqualTo(DEFAULT_VOTES);
-
-        // Validate the Complaint in Elasticsearch
-        verify(mockComplaintSearchRepository, times(1)).save(testComplaint);
     }
 
     @Test
@@ -203,9 +189,6 @@ public class ComplaintResourceIntTest {
         // Validate the Complaint in the database
         List<Complaint> complaintList = complaintRepository.findAll();
         assertThat(complaintList).hasSize(databaseSizeBeforeCreate);
-
-        // Validate the Complaint in Elasticsearch
-        verify(mockComplaintSearchRepository, times(0)).save(complaint);
     }
 
     @Test
@@ -335,9 +318,6 @@ public class ComplaintResourceIntTest {
         assertThat(testComplaint.getMediaContentType()).isEqualTo(UPDATED_MEDIA_CONTENT_TYPE);
         assertThat(testComplaint.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testComplaint.getVotes()).isEqualTo(UPDATED_VOTES);
-
-        // Validate the Complaint in Elasticsearch
-        verify(mockComplaintSearchRepository, times(1)).save(testComplaint);
     }
 
     @Test
@@ -357,9 +337,6 @@ public class ComplaintResourceIntTest {
         // Validate the Complaint in the database
         List<Complaint> complaintList = complaintRepository.findAll();
         assertThat(complaintList).hasSize(databaseSizeBeforeUpdate);
-
-        // Validate the Complaint in Elasticsearch
-        verify(mockComplaintSearchRepository, times(0)).save(complaint);
     }
 
     @Test
@@ -378,32 +355,6 @@ public class ComplaintResourceIntTest {
         // Validate the database is empty
         List<Complaint> complaintList = complaintRepository.findAll();
         assertThat(complaintList).hasSize(databaseSizeBeforeDelete - 1);
-
-        // Validate the Complaint in Elasticsearch
-        verify(mockComplaintSearchRepository, times(1)).deleteById(complaint.getId());
-    }
-
-    @Test
-    @Transactional
-    public void searchComplaint() throws Exception {
-        // Initialize the database
-        complaintRepository.saveAndFlush(complaint);
-        when(mockComplaintSearchRepository.search(queryStringQuery("id:" + complaint.getId()), PageRequest.of(0, 20)))
-            .thenReturn(new PageImpl<>(Collections.singletonList(complaint), PageRequest.of(0, 1), 1));
-        // Search the complaint
-        restComplaintMockMvc.perform(get("/api/_search/complaints?query=id:" + complaint.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(complaint.getId().intValue())))
-            .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())))
-            .andExpect(jsonPath("$.[*].timeOfIncident").value(hasItem(DEFAULT_TIME_OF_INCIDENT.toString())))
-            .andExpect(jsonPath("$.[*].mediaContentType").value(hasItem(DEFAULT_MEDIA_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].media").value(hasItem(Base64Utils.encodeToString(DEFAULT_MEDIA))))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].votes").value(hasItem(DEFAULT_VOTES.intValue())));
     }
 
     @Test

@@ -52,7 +52,7 @@
             "ownerSide": true
         }
     ],
-    "changelogDate": "20181225044125",
+    "changelogDate": "20181225100317",
     "entityTableName": "complaint",
     "dto": "mapstruct",
     "pagination": "pagination",

@@ -21,9 +21,6 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Department.
@@ -126,22 +123,4 @@ public class DepartmentResource {
         departmentService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
-
-    /**
-     * SEARCH  /_search/departments?query=:query : search for the department corresponding
-     * to the query.
-     *
-     * @param query the query of the department search
-     * @param pageable the pagination information
-     * @return the result of the search
-     */
-    @GetMapping("/_search/departments")
-    @Timed
-    public ResponseEntity<List<DepartmentDTO>> searchDepartments(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of Departments for query {}", query);
-        Page<DepartmentDTO> page = departmentService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/departments");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
-
 }

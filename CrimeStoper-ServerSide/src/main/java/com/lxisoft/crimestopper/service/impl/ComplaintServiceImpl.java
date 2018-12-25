@@ -3,7 +3,6 @@ package com.lxisoft.crimestopper.service.impl;
 import com.lxisoft.crimestopper.service.ComplaintService;
 import com.lxisoft.crimestopper.domain.Complaint;
 import com.lxisoft.crimestopper.repository.ComplaintRepository;
-import com.lxisoft.crimestopper.repository.search.ComplaintSearchRepository;
 import com.lxisoft.crimestopper.service.dto.ComplaintDTO;
 import com.lxisoft.crimestopper.service.mapper.ComplaintMapper;
 import org.slf4j.Logger;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing Complaint.
@@ -31,12 +28,9 @@ public class ComplaintServiceImpl implements ComplaintService {
 
     private final ComplaintMapper complaintMapper;
 
-    private final ComplaintSearchRepository complaintSearchRepository;
-
-    public ComplaintServiceImpl(ComplaintRepository complaintRepository, ComplaintMapper complaintMapper, ComplaintSearchRepository complaintSearchRepository) {
+    public ComplaintServiceImpl(ComplaintRepository complaintRepository, ComplaintMapper complaintMapper) {
         this.complaintRepository = complaintRepository;
         this.complaintMapper = complaintMapper;
-        this.complaintSearchRepository = complaintSearchRepository;
     }
 
     /**
@@ -51,9 +45,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 
         Complaint complaint = complaintMapper.toEntity(complaintDTO);
         complaint = complaintRepository.save(complaint);
-        ComplaintDTO result = complaintMapper.toDto(complaint);
-        complaintSearchRepository.save(complaint);
-        return result;
+        return complaintMapper.toDto(complaint);
     }
 
     /**
@@ -103,21 +95,5 @@ public class ComplaintServiceImpl implements ComplaintService {
     public void delete(Long id) {
         log.debug("Request to delete Complaint : {}", id);
         complaintRepository.deleteById(id);
-        complaintSearchRepository.deleteById(id);
-    }
-
-    /**
-     * Search for the complaint corresponding to the query.
-     *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public Page<ComplaintDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of Complaints for query {}", query);
-        return complaintSearchRepository.search(queryStringQuery(query), pageable)
-            .map(complaintMapper::toDto);
     }
 }

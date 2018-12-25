@@ -3,7 +3,6 @@ package com.lxisoft.crimestopper.service.impl;
 import com.lxisoft.crimestopper.service.DepartmentService;
 import com.lxisoft.crimestopper.domain.Department;
 import com.lxisoft.crimestopper.repository.DepartmentRepository;
-import com.lxisoft.crimestopper.repository.search.DepartmentSearchRepository;
 import com.lxisoft.crimestopper.service.dto.DepartmentDTO;
 import com.lxisoft.crimestopper.service.mapper.DepartmentMapper;
 import org.slf4j.Logger;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing Department.
@@ -31,12 +28,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentMapper departmentMapper;
 
-    private final DepartmentSearchRepository departmentSearchRepository;
-
-    public DepartmentServiceImpl(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper, DepartmentSearchRepository departmentSearchRepository) {
+    public DepartmentServiceImpl(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper) {
         this.departmentRepository = departmentRepository;
         this.departmentMapper = departmentMapper;
-        this.departmentSearchRepository = departmentSearchRepository;
     }
 
     /**
@@ -51,9 +45,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         Department department = departmentMapper.toEntity(departmentDTO);
         department = departmentRepository.save(department);
-        DepartmentDTO result = departmentMapper.toDto(department);
-        departmentSearchRepository.save(department);
-        return result;
+        return departmentMapper.toDto(department);
     }
 
     /**
@@ -94,21 +86,5 @@ public class DepartmentServiceImpl implements DepartmentService {
     public void delete(Long id) {
         log.debug("Request to delete Department : {}", id);
         departmentRepository.deleteById(id);
-        departmentSearchRepository.deleteById(id);
-    }
-
-    /**
-     * Search for the department corresponding to the query.
-     *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public Page<DepartmentDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of Departments for query {}", query);
-        return departmentSearchRepository.search(queryStringQuery(query), pageable)
-            .map(departmentMapper::toDto);
     }
 }

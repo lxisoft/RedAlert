@@ -43,14 +43,4 @@ public interface LocationService {
      * @param id the id of the entity
      */
     void delete(Long id);
-
-    /**
-     * Search for the location corresponding to the query.
-     *
-     * @param query the query of the search
-     * 
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    Page<LocationDTO> search(String query, Pageable pageable);
 }

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -18,7 +17,6 @@ import com.lxisoft.crimestopper.domain.enumeration.Status;
  */
 @Entity
 @Table(name = "complaint")
-@Document(indexName = "complaint")
 public class Complaint implements Serializable {
 
     private static final long serialVersionUID = 1L;

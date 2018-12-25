@@ -3,7 +3,6 @@ package com.lxisoft.crimestopper.service.impl;
 import com.lxisoft.crimestopper.service.LocationService;
 import com.lxisoft.crimestopper.domain.Location;
 import com.lxisoft.crimestopper.repository.LocationRepository;
-import com.lxisoft.crimestopper.repository.search.LocationSearchRepository;
 import com.lxisoft.crimestopper.service.dto.LocationDTO;
 import com.lxisoft.crimestopper.service.mapper.LocationMapper;
 import org.slf4j.Logger;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing Location.
@@ -31,12 +28,9 @@ public class LocationServiceImpl implements LocationService {
 
     private final LocationMapper locationMapper;
 
-    private final LocationSearchRepository locationSearchRepository;
-
-    public LocationServiceImpl(LocationRepository locationRepository, LocationMapper locationMapper, LocationSearchRepository locationSearchRepository) {
+    public LocationServiceImpl(LocationRepository locationRepository, LocationMapper locationMapper) {
         this.locationRepository = locationRepository;
         this.locationMapper = locationMapper;
-        this.locationSearchRepository = locationSearchRepository;
     }
 
     /**
@@ -51,9 +45,7 @@ public class LocationServiceImpl implements LocationService {
 
         Location location = locationMapper.toEntity(locationDTO);
         location = locationRepository.save(location);
-        LocationDTO result = locationMapper.toDto(location);
-        locationSearchRepository.save(location);
-        return result;
+        return locationMapper.toDto(location);
     }
 
     /**
@@ -94,21 +86,5 @@ public class LocationServiceImpl implements LocationService {
     public void delete(Long id) {
         log.debug("Request to delete Location : {}", id);
         locationRepository.deleteById(id);
-        locationSearchRepository.deleteById(id);
-    }
-
-    /**
-     * Search for the location corresponding to the query.
-     *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public Page<LocationDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of Locations for query {}", query);
-        return locationSearchRepository.search(queryStringQuery(query), pageable)
-            .map(locationMapper::toDto);
     }
 }

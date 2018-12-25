@@ -5,7 +5,6 @@ import com.lxisoft.crimestopper.domain.Authority;
 import com.lxisoft.crimestopper.domain.User;
 import com.lxisoft.crimestopper.repository.AuthorityRepository;
 import com.lxisoft.crimestopper.repository.UserRepository;
-import com.lxisoft.crimestopper.repository.search.UserSearchRepository;
 import com.lxisoft.crimestopper.security.SecurityUtils;
 import com.lxisoft.crimestopper.service.dto.UserDTO;
 
@@ -38,13 +37,10 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    private final UserSearchRepository userSearchRepository;
-
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, UserSearchRepository userSearchRepository, AuthorityRepository authorityRepository) {
+    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
-        this.userSearchRepository = userSearchRepository;
         this.authorityRepository = authorityRepository;
     }
 
@@ -66,7 +62,6 @@ public class UserService {
                 user.setEmail(email.toLowerCase());
                 user.setLangKey(langKey);
                 user.setImageUrl(imageUrl);
-                userSearchRepository.save(user);
                 log.debug("Changed Information for User: {}", user);
             });
     }
@@ -97,7 +92,6 @@ public class UserService {
                     .filter(Optional::isPresent)
                     .map(Optional::get)
                     .forEach(managedAuthorities::add);
-                userSearchRepository.save(user);
                 log.debug("Changed Information for User: {}", user);
                 return user;
             })
@@ -107,7 +101,6 @@ public class UserService {
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
             userRepository.delete(user);
-            userSearchRepository.delete(user);
             log.debug("Deleted User: {}", user);
         });
     }

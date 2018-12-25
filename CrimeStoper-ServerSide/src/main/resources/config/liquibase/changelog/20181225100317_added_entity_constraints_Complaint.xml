@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity Complaint.
     -->
-    <changeSet id="20181225044125-2" author="jhipster">
+    <changeSet id="20181225100317-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="location_id"
                                  baseTableName="complaint"
