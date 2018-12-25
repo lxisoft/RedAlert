@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -74,7 +74,7 @@
       <div style="height: inherit; width: 75%; margin-left: 12.5%"><br/>
         <h2 class="card-title h1-responsive  font-bold" style="text-shadow: 2px 2px black;"><strong>RedAlert | Your Social Emergency Handler</strong></h2>
         <p style="text-shadow: 1px 1px black;">Handle your social and personal emergency at ease. We are with you at your unfortunate tough times. Broadcast your emergency to those you trust. Receive help on the quickest possible way. 
-        </p>
+        </p><p th:text="${session.cs.firstName}"></p>
         <a class="btn btn-outline-white btn-md"><i class="fa fa-clone left"></i> About Us</a>
       </div>
     </div>
@@ -84,9 +84,9 @@
   <!--alerts--> 
   <div style="text-align: center;">
     <h3 style="margin: auto; font-weight: 400;">Broadcast Your Emergency</h3>
-
+    
     <button id="red" type="button" class="btn btn-danger round" data-toggle="modal" data-target="#alert" onclick="getLocation();setModal(this)">RED</button>
-    </form>
+    
 <button id="orange" type="button" class="btn btn-deep-orange round" data-toggle="modal" data-target="#alert" onclick="getLocation();setModal(this)">ORANGE</button>
  <button type="button" class="btn btn-success round" data-toggle="modal" data-target="#centralModalSm">GREEN</button>
   </div>

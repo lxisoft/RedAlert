@@ -43,7 +43,17 @@ public interface UserRegistrationResourceApi {
         method = RequestMethod.POST)
     ResponseEntity<UserRegistrationDTO> createUserRegistrationUsingPOST(@ApiParam(value = "userRegistrationDTO" ,required=true )  @Valid @RequestBody UserRegistrationDTO userRegistrationDTO);
 
-
+    @ApiOperation(value = "getAllFriends", nickname = "getAllFriendsUsingGET", notes = "", response = UserRegistrationDTO.class, responseContainer = "List", tags={ "user-registration-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = UserRegistrationDTO.class, responseContainer = "List"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/apis/user-registrations/getFriends/{userId}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<List<UserRegistrationDTO>> getAllFriendsUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") Long userId);
+    
     @ApiOperation(value = "deleteUserRegistration", nickname = "deleteUserRegistrationUsingDELETE", notes = "", tags={ "user-registration-resource", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK"),
@@ -151,5 +161,15 @@ public interface UserRegistrationResourceApi {
         consumes = "application/json",
         method = RequestMethod.PUT)
     ResponseEntity<UserRegistrationDTO> updateUserRegistrationUsingPUT(@ApiParam(value = "userRegistrationDTO" ,required=true )  @Valid @RequestBody UserRegistrationDTO userRegistrationDTO);
-
+    
+    @ApiOperation(value = "addFriend", nickname = "addFriendUsingPOST", notes = "", tags={ "user-registration-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK"),
+        @ApiResponse(code = 201, message = "Created"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/apis/user-registrations/addFriend/{userId}/{friendId}",
+        method = RequestMethod.POST)
+    ResponseEntity<Void> addFriendUsingPOST(@ApiParam(value = "friendId",required=true) @PathVariable("friendId") Long friendId,@ApiParam(value = "userId",required=true) @PathVariable("userId") Long userId);
 }

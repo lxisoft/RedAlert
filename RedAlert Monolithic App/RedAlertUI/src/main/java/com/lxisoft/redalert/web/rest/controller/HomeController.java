@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import java.util.Base64;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +48,8 @@ public class HomeController {
 	UserRegistrationResourceApi userRegistrationResourceApi;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	HttpSession session;
 	
 	@GetMapping("/signUp")	
 	public String getIndex(Model model)		
@@ -77,6 +81,7 @@ public class HomeController {
        // view.setUserRegistrationId(1);
 	    //view.getUserRegistrationDTO().setId(userRegistrationResourceApi.getUserRegistrationUsingGET((long) 1).getBody().getId());
 		model.addAttribute("view", view);
+		session.setAttribute("cs",userRegistrationDTO );
 		return "home";
 	}
 	

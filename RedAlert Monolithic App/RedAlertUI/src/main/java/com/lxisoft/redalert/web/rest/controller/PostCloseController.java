@@ -47,7 +47,9 @@ public class PostCloseController {
 	     
 	      postResource.getClosePostUsingGET(postDTO.getId());
 	    
-		  return "redirect:/redAlertuiHistory/history";
+
+		  return "redirect:/redAlertUiHistory/history";
+		 
 	 }
 	
 	
