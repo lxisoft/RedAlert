@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -7,7 +7,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>RedAlert | Home</title>
   <!-- Font Awesome -->
-  <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Bootstrap core CSS -->
   <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
   <!-- Material Design Bootstrap -->
@@ -34,8 +34,8 @@
       </a>
       <div class="dropdown-menu dropdown-menu-right animate-fadein" aria-labelledby="navbarDropdownMenuLink-5">
               <a class="dropdown-item waves-effect waves-light" href="#">Activities</a>
-              <a class="dropdown-item waves-effect waves-light" href="#">Status History</a>
-              <a class="dropdown-item waves-effect waves-light" href="#">LogOut</a>
+              <a class="dropdown-item waves-effect waves-light" th:href="@{/redAlertuiHistory/history}">Status History</a>
+              <a class="dropdown-item waves-effect waves-light" th:href="@{/redAlertUiLogout/logout}">LogOut</a>
      </div>
     </div>
 
@@ -57,7 +57,7 @@
           <a class="nav-link" style="color: white;" th:href="@{/redAlertUi/newsPage/newsOfFriend}">News</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="color: white;" th:href="@{/redAlertUi/friends}">Friends</a>
+          <a class="nav-link" style="color: white;" th:href="@{/redAlertUiFriends}">Friends</a>
         </li>
       </ul>
       <!-- Links -->
@@ -74,7 +74,7 @@
       <div style="height: inherit; width: 75%; margin-left: 12.5%"><br/>
         <h2 class="card-title h1-responsive  font-bold" style="text-shadow: 2px 2px black;"><strong>RedAlert | Your Social Emergency Handler</strong></h2>
         <p style="text-shadow: 1px 1px black;">Handle your social and personal emergency at ease. We are with you at your unfortunate tough times. Broadcast your emergency to those you trust. Receive help on the quickest possible way. 
-        </p>
+        </p><p th:text="${session.cs.firstName}"></p>
         <a class="btn btn-outline-white btn-md"><i class="fa fa-clone left"></i> About Us</a>
       </div>
     </div>
@@ -84,9 +84,9 @@
   <!--alerts--> 
   <div style="text-align: center;">
     <h3 style="margin: auto; font-weight: 400;">Broadcast Your Emergency</h3>
-
+    
     <button id="red" type="button" class="btn btn-danger round" data-toggle="modal" data-target="#alert" onclick="getLocation();setModal(this)">RED</button>
-    </form>
+    
 <button id="orange" type="button" class="btn btn-deep-orange round" data-toggle="modal" data-target="#alert" onclick="getLocation();setModal(this)">ORANGE</button>
  <button type="button" class="btn btn-success round" data-toggle="modal" data-target="#centralModalSm">GREEN</button>
   </div>

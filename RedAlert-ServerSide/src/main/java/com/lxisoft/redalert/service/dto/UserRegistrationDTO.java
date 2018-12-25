@@ -18,11 +18,14 @@ public class UserRegistrationDTO implements Serializable {
     private Long id;
 
     private String userName;
+    
+    private String UserId;
 
     private String password;
 
     @Lob
     private byte[] profilePic;
+    
     private String profilePicContentType;
 
     private String firstName;
@@ -162,10 +165,19 @@ public class UserRegistrationDTO implements Serializable {
     public Instant getCreatedOn() {
         return createdOn;
     }
+    
+    public String getUserId() {
+		return UserId;
+	}
+
+	public void setUserId(String userId) {
+		UserId = userId;
+	}
 
     public void setCreatedOn(Instant createdOn) {
         this.createdOn = createdOn;
     }
+   
 
     public Set<UserRegistrationDTO> getFriends() {
         return friends;
@@ -174,6 +186,7 @@ public class UserRegistrationDTO implements Serializable {
     public void setFriends(Set<UserRegistrationDTO> userRegistrations) {
         this.friends = userRegistrations;
     }
+    
 
     @Override
     public boolean equals(Object o) {
@@ -215,4 +228,8 @@ public class UserRegistrationDTO implements Serializable {
             ", createdOn='" + getCreatedOn() + "'" +
             "}";
     }
+
+	
+
+	
 }

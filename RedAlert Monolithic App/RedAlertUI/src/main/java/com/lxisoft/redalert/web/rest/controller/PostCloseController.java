@@ -19,6 +19,11 @@ import com.lxisoft.redalert.client.red_alert.model.PostDTO;
 import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
 import com.lxisoft.redalert.model.ImageView;
 import com.lxisoft.redalert.model.View;
+/**
+ * @author AbhinaS
+ *
+ */
+
 @Controller
 @RequestMapping("/postclose")
 public class PostCloseController {
@@ -26,21 +31,33 @@ public class PostCloseController {
 	PostResourceApi postResource;
 	@Autowired
 	UserRegistrationResourceApi userRegistrationResourceApi;
+	@Autowired
+	PostResourceApi postResourceApi;
 	
 	
 	
 	
+	/**
+	 * @param postDTO
+	 * @return
+	 */
 	@RequestMapping(value="/closepost",method=RequestMethod.GET)
 	public String postclosed(@ModelAttribute PostDTO postDTO)
 	{
 	     
 	      postResource.getClosePostUsingGET(postDTO.getId());
 	    
-		  return "redirect:/postclose/history";
+
+		  return "redirect:/redAlertUiHistory/history";
+		 
 	 }
 	
 	
 	
+	/**
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/home")
 	public String changeAlerts(Model model)
 	{
@@ -56,13 +73,22 @@ public class PostCloseController {
 		return "home";
 		
 	}
+	/**
+	 * @param postDTO
+	 * @param name
+	 * @return
+	 */
 	@RequestMapping(value="/alertchange")
-	public String ChangeAlert(@ModelAttribute PostDTO postDTO, String name)
+	public String ChangeAlert(@RequestParam Long postId, String newAlertType)
 	{
-		postResource.changeAlertLevelUsingGET(name,postDTO.getId());
-		return "home";
+		System.out.println("id>>>>>>>>>>>>>>>>>"+postId);
+		System.out.println("id>>>>>>>>>>>>>>>>>"+newAlertType);
+		
+		postResource.changeAlertLevelUsingGET(newAlertType,postId);
+		return "redirect:/redAlertuiHistory/history";
 		
 	}
+	
 	
 	
 	

@@ -1,4 +1,4 @@
-package com.lxisoft.redalert.client;
+/*package com.lxisoft.redalert.client;
 
 import java.io.IOException;
 
@@ -15,3 +15,4 @@ public class OAuth2InterceptedFeignConfiguration {
         return new TokenRelayRequestInterceptor(authorizationHeaderUtil);
     }
 }
+*/

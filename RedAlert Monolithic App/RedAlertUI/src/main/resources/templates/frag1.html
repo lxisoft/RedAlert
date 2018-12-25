@@ -1,3 +1,63 @@
-<th:block th:fragment="reports" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <div th:text="${reports}"></div>
-</th:block>
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+ 
+
+</head>
+<body>
+
+<div th:fragment="reports">
+<div id="chartContainer" style="height: 200px; width: auto;"></div>
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+ 
+ <script th:inline="javascript">
+
+      /*<![CDATA[*/
+	    
+         var fakeCount = /*[[${reports.get("FAKE")}]]*/ 'report';
+      var prankCount = /*[[${reports.get("PRANK")}]]*/ 'report';
+      var solvedCount = /*[[${reports.get("SOLVED")}]]*/ 'report';
+      var timeoutCount = /*[[${reports.get("TIMEDOUT")}]]*/ 'report';
+      var supportCount = /*[[${reports.get("SUPPORT")}]]*/ 'report';
+      var totalCount = fakeCount+prankCount+solvedCount+timeoutCount+supportCount;
+      
+      if(fakeCount==null) fakeCount=0;
+      if(prankCount==null) prankCount=0;
+      if(solvedCount==null) solvedCount=0;
+      if(timeoutCount==null) timeoutCount=0;
+      if(supportCount==null) supportCount=0;
+      console.log("total countsss^^^^^^^^^^^^^^^^^^^^^"+totalCount);
+console.log("user reports"+fakeCount);
+var reports=$("#content").val();
+console.log("reports are"+reports+"|");
+var chart = new CanvasJS.Chart("chartContainer", {
+
+	animationEnabled: true,
+	title: {
+		text: "Genuineness-Checker"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 240,
+		yValueFormatString: "##0.00\"%\"", 
+		indexLabel: "{label} {y}",
+		dataPoints: [
+			{y: (fakeCount/totalCount)*100, label: "Fake ("+fakeCount+")"},
+			{y: (prankCount/totalCount)*100, label: "Prank ("+prankCount+")"},
+			{y: (solvedCount/totalCount)*100, label: "Solved ("+solvedCount+")"},
+			{y: (timeoutCount/totalCount)*100, label: "Time-Out ("+timeoutCount+")"},
+			{y: (supportCount/totalCount)*100, label: "Support ("+supportCount+")"}
+		]
+	}]
+});
+chart.render();
+       /*]]>*/
+</script>
+ 
+ 
+
+</div>
+</body>
+</html>

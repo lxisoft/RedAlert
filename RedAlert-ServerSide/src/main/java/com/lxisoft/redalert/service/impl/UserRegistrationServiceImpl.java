@@ -34,7 +34,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         this.userRegistrationRepository = userRegistrationRepository;
         this.userRegistrationMapper = userRegistrationMapper;
     }
-
+  
     /**
      * Save a userRegistration.
      *
@@ -106,6 +106,14 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	}
 	
     @Override
+
+    public Page<UserRegistrationDTO> findByLastName(String lastName,Pageable pageable){
+    	Page<UserRegistration> users=userRegistrationRepository.findAllByLastName(lastName,pageable);
+    	return users.map(userRegistrationMapper::toDto);
+    }
+    
+    
+
 	public Page<UserRegistrationDTO> getAllUsersByFirstName(String firstName, Pageable pageable){
 		return userRegistrationRepository.findAllByFirstName(firstName, pageable).map(userRegistrationMapper::toDto);
 	}
@@ -131,7 +139,28 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		return userRegistrationRepository.findByPassword(password);
 	}
 
+	@Override
+	public UserRegistrationDTO searchByUserName(String userName) {
+		UserRegistration user=userRegistrationRepository.findByUserName(userName);
+		if(user==null)
+			return null;
+		return userRegistrationMapper.toDto(user);
+	}
+	@Override
+	public Page<UserRegistrationDTO> getAllFirstNameStartingWith(String firstname,Pageable pageable) {
+		return userRegistrationRepository.findAllByFirstNameStartingWith(firstname,pageable).map(userRegistrationMapper::toDto);
+		
+	}
+
+	@Override
+	public UserRegistrationDTO findByUserId(String id) {
+		 log.debug("Request to get UserRegistration using userId: {}", id);
+		UserRegistration userRegistration = userRegistrationRepository.findByUserId(id);
+	        
+		 return userRegistrationMapper.toDto(userRegistration);
+	}
 
  
     
+
 }

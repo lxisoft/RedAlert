@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>RedAlert | Home</title>
+<!-- <!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Bootstrap core CSS -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link th:href="@{/css/mdb.min.css}" rel="stylesheet">
+<!-- Your custom styles (optional) -->
+<link th:href="@{/css/style.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!--Navbar-->
+	<nav class="navbar navbar-light lighten-4 mb-4 fixed-top"
+		style="background: #ff7043;">
+
+		<ul class="navbar-nav mr-auto" style="display: inline-block;">
+			<!-- Navbar brand -->
+			<li style="display: inline-block;"><a class="navbar-brand"
+				style="color: white;" href="#"><b>RedAlert</b></a></li>
+			<li class="nav-item" style="display: inline-block;"><a
+				class="navbar-brand" style="color: white;" th:href="@{/redAlertUiIndex/index}">Login</a></li>
+		</ul>
+		<!-- Collapse button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent20"
+			aria-controls="navbarSupportedContent20" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<div class="animated-icon1">
+				<span></span><span></span><span></span>
+			</div>
+		</button>
+
+		<!-- Collapsible content -->
+		<div class="collapse navbar-collapse" id="navbarSupportedContent20">
+
+			<!-- Links -->
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link"
+					style="color: white;" th:href="@{/redAlertUi/home}">Home <span
+						class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link" style="color: white;"
+					th:href="@{/redAlertUi/newsPage/newsOfFriend}">News</a></li>
+				<li class="nav-item"><a class="nav-link" style="color: white;"
+					th:href="@{/redAlertUi/friends}">Friends</a></li>
+			</ul>
+			<!-- Links -->
+
+		</div>
+		<!-- Collapsible content -->
+
+	</nav>
+	<!--/.Navbar-->
+	<!--panel-->
+	<div class="card card-image animate-opacity"
+		style="top: 63px; background-image: url('../img/overlays/bg-banner.jpg'); min-height: 500px;">
+		<div class="text-white text-center py-5 px-4 my-5 ">
+			<div>
+				<!--Register-->
+				<div class="" style="position: absolute; top: -1px; right: 5%;">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header text-center">
+								<h4 class="modal-title w-100 font-weight-bold" style="color: #6E6A69;">Register</h4>
+								
+							</div>
+							
+							<div class="modal-body mx-3">
+								<form action="#" th:action="@{/redAlertUis/getUserDetails}" th:object="${view}" th:method="post">
+									<div class="row">
+										<div class="col">
+											<div class="md-form mt-0">
+												<i class="fa fa-user prefix grey-text" style="left: 0px;"></i> 
+												<input type="text" id="fname" class="form-control validate" name="firstName" th:field="*{userRegistrationDTO.firstName}">
+												<label data-error="wrong" data-success="" for="fname">First
+													name</label>
+											</div>
+										</div>
+										<div class="col">
+											<div class="md-form mt-0">
+												<i class="fa fa-user prefix grey-text" style="left: 0px;"></i> 
+												<input	type="text" id="lname" class="form-control validate"  name="lastName" th:field="*{userRegistrationDTO.lastName}">
+												<label data-error="wrong" data-success="" for="lname">Last name</label>
+													
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+											<div class="md-form mt-0">
+												<i class="fa fa-envelope prefix grey-text" style="left: 0px;"></i> 
+												<input type="email" id="email" class="form-control validate" name="email" th:field="*{userRegistrationDTO.email}">
+												<label data-error="Invalid e-mail" data-success="" for="email">Your Email</label>
+											</div>
+										</div>
+										<div class="col">
+											<div class="md-form mt-0">
+												<i class="fa fa-user prefix grey-text" style="left: 0px;"></i> 
+												<input	type="text" id="username" class="form-control validate"  name="username" th:field="*{userRegistrationDTO.userName}">
+												<label data-error="wrong" data-success="" for="username">Username</label>				
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+											<div class="md-form mt-0">
+												<i class="fa fa-lock prefix grey-text" style="left: 0px;"></i> 
+													<input onkeyup="checkEqual()" type="password" id="pass" class="form-control" name="password" th:field="*{userRegistrationDTO.password}">
+												 <label
+													data-error="Passwords don't match" data-success=""
+													for="pass">Password</label>
+											</div>
+										</div>
+										<div class="col">
+											<div class="md-form mt-0">
+												<i class="fa fa-lock prefix grey-text" style="left: 0px;"></i>
+													<input onkeyup="checkEqual()" type="password" id="rep-pass" class="form-control" > 
+													
+												<label	data-error="Passwords don't match" data-success=""
+													for="rep-pass">Confirm Password</label>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer d-flex justify-content-center">
+										<button id="submit" class="btn btn-deep-orange">Register</button>
+									</div>
+								</form>
+								<div class="col-md-12">
+									<p class="font-small d-flex justify-content-end" style="color: grey;">
+										Have an account? <a 
+											
+											th:href="@{/redAlertUiIndex/index}"
+											class="orange-text ml-1 font-weight-bold"> Login</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--/.Register-->
+			</div>
+		</div>
+	</div>
+	<!--/.panel-->
+	<!-- SCRIPTS -->
+	<!-- JQuery -->
+	<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript" th:src="@{/js/mdb.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/custom.js}"></script>
+</body>
+
+</html>

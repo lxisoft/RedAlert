@@ -1,4 +1,4 @@
-// This code dosen't works on Firefox and IE and works on other browesers.
+// This code dosen't works on Firefox and IE and works on other browsers.
 $(document).ready(function () {
 $('.animated-icon1,.animated-icon3,.animated-icon4').click(function () {
 $(this).toggleClass('open');
@@ -55,27 +55,47 @@ document.addEventListener("DOMContentLoaded", init, false);
 		var letter = /[a-z]/;
 		var upper  =/[A-Z]/;
 		var number = /[0-9]/;
-		if(p.value!=rp.value)
-			{
+		
 			
-			 if(p != rp){
-			      var msg = document.getElementById('error');
-			      msg.style.display="block";
-			      msg.style.color="red";
-			      var btn = document.getElementById('submit');
-			      btn.type="button";
-			 }
-			 
-			}
-		else
+
+		if(p.value != rp.value)
+		{	          
+			p.classList.remove("valid");
+			// rp.classList.remove("valid");
+			if(rp.value!="")
 			{
-			var msg = document.getElementById('error');
-			msg.style.display="none";
+				p.classList.add("invalid");
+				rp.classList.add("invalid");
+			    var btn = document.getElementById('submit');
+			    btn.type="button";
+			}
+			var btn = document.getElementById('submit');
+			btn.type="button";
+		}
+		else
+		{
+			p.classList.add("valid");
+			rp.classList.add("valid");
+			p.classList.remove("invalid");
+			rp.classList.remove("invalid");
 			var btn = document.getElementById('submit');
 			btn.type="submit";
-			}
+		}
 		
 	}
+	
+	
+function  editAlert(alertLevel,alertDropDown,alertChangebtn)
+{
+	var alert=document.getElementById(alertLevel);
+	alert.style.display="none";
+	document.getElementById(alertDropDown).style.display="inline-block";
+	document.getElementById(alertChangebtn).style.display="inline-block";
+}
+function changeAlert(alert,input) 
+{
+	document.getElementById(input).value=alert;
+}
 	
 
 function setModal(button) {
@@ -114,17 +134,7 @@ $(function(){
   });
 });
 
-function toggleContent(argument) {
-	// body...
-	if(argument.innerHTML=='<i class="fa fa-plus"></i>')
-	{
-		argument.innerHTML='<i class="fa fa-plus"></i>'+'  Click to allow notification access';
-	}
-	else
-	{
-		argument.innerHTML='<i class="fa fa-plus"></i>';
-	}
-}
+
 $( document ).ready(function()
 		{
 	// GET REQUEST

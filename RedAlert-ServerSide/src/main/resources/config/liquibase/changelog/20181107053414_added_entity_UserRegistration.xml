@@ -25,6 +25,10 @@
             <column name="user_name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            
+            <column name="user_Id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
 
             <column name="jhi_password" type="varchar(255)">
                 <constraints nullable="true" />

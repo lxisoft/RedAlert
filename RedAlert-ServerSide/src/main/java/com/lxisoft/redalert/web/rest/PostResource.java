@@ -153,7 +153,7 @@ public class PostResource {
    public ResponseEntity<PostDTO> changeAlertLevel(@PathVariable Long id,@PathVariable String alertLevel)
    {
 	   
-	    Optional<PostDTO>postDTO=postService.changeAlert(id,alertLevel);
+	    Optional<PostDTO>postDTO=Optional.of(postService.changeAlert(id,alertLevel));
 	   
 	    return ResponseUtil.wrapOrNotFound(postDTO);
 	   

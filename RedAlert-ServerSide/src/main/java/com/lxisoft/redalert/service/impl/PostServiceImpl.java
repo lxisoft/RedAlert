@@ -28,6 +28,7 @@ import java.util.Optional;
 @Service
 @Transactional
 public class PostServiceImpl implements PostService {
+	
 
     private final Logger log = LoggerFactory.getLogger(PostServiceImpl.class);
 
@@ -128,7 +129,7 @@ public class PostServiceImpl implements PostService {
     	 post.setActive(false);
    
     	postRepository.save(post);
-    	//postRepository.delete(post);
+    	
     	optionalPost=postRepository.findById(id);
     	
     	return optionalPost.map(postMapper::toDto);
@@ -137,40 +138,39 @@ public class PostServiceImpl implements PostService {
      }
     
     
-    
-    
-    public Optional<PostDTO> changeAlert(Long id,String alert)
+    public PostDTO changeAlert(Long id,String alert)
     {
+    	
     	Optional<Post>optionalPost=postRepository.findById(id);
-    	
-    	
+    	Post post = null;
+    	   
     	if(alert.equals("RED"))
     	{
-    		 Post post= optionalPost.get();
-    		post.setAlertLevel(Alert.RED);
-    		postRepository.save(post);
+    		
+    		optionalPost.get().setAlertLevel(Alert.RED);
+    		post=postRepository.save(optionalPost.get());
     		
     	}
+   	
+ 	
     	else if(alert.equals("GREEN"))
     	{
-    		 Post post= optionalPost.get();
+    		 
     		optionalPost.get().setAlertLevel(Alert.GREEN);
-    		postRepository.save(post);
+    		post=postRepository.save(optionalPost.get());
     	}
+   	
     	else if(alert.equals("ORANGE"))
     	{
-    		 Post post= optionalPost.get();
+    		
     	optionalPost.get().setAlertLevel(Alert.ORANGE);
-    	postRepository.save(post);
+    	post=postRepository.save(optionalPost.get());
     	}
-    	
-    	//post.setAlertLevel(alertLevel);
-    	optionalPost=postRepository.findById(id);
-    	return optionalPost.map(postMapper::toDto);
-    	
-    	
-    	
+   	
+            return postMapper.toDto(post);
+
     }
-
-
 }
+
+
+
