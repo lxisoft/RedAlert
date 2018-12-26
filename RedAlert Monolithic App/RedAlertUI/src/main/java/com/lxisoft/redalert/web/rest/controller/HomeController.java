@@ -112,9 +112,9 @@ public class HomeController {
 		postDTO.setDescription(view.getPostDTO().getDescription());
 		postDTO.setLatitude(view.getPostDTO().getLatitude());
 		postDTO.setLongitude(view.getPostDTO().getLongitude());
-	    OffsetDateTime o = OffsetDateTime.ofInstant(Instant.now(),ZoneId.systemDefault());
+	   // OffsetDateTime o = OffsetDateTime.ofInstant(Instant.now(),ZoneId.systemDefault());
 		    
-		postDTO.setCreatedOn(o);
+		postDTO.setCreatedOn(Instant.now());
 		ResponseEntity<PostDTO> postDto = postResourceApi.createPostUsingPOST(postDTO);
 		MediaDTO mediaDTO = new MediaDTO();
 		
