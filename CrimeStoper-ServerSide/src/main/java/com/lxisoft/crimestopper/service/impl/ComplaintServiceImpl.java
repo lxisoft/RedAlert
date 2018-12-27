@@ -1,19 +1,20 @@
 package com.lxisoft.crimestopper.service.impl;
 
-import com.lxisoft.crimestopper.service.ComplaintService;
-import com.lxisoft.crimestopper.domain.Complaint;
-import com.lxisoft.crimestopper.repository.ComplaintRepository;
-import com.lxisoft.crimestopper.service.dto.ComplaintDTO;
-import com.lxisoft.crimestopper.service.mapper.ComplaintMapper;
+import java.time.Instant;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import com.lxisoft.crimestopper.domain.Complaint;
+import com.lxisoft.crimestopper.repository.ComplaintRepository;
+import com.lxisoft.crimestopper.service.ComplaintService;
+import com.lxisoft.crimestopper.service.dto.ComplaintDTO;
+import com.lxisoft.crimestopper.service.mapper.ComplaintMapper;
 
 /**
  * Service Implementation for managing Complaint.
@@ -42,7 +43,11 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Override
     public ComplaintDTO save(ComplaintDTO complaintDTO) {
         log.debug("Request to save Complaint : {}", complaintDTO);
-
+    	String parseDate = (complaintDTO.getTimeInString().replace(" ", "T").concat("Z"));
+    	
+    	log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>time in string="+parseDate);
+		Instant dateInstant = Instant.parse(parseDate);
+		complaintDTO.setTime(dateInstant);
         Complaint complaint = complaintMapper.toEntity(complaintDTO);
         complaint = complaintRepository.save(complaint);
         return complaintMapper.toDto(complaint);
@@ -67,7 +72,8 @@ public class ComplaintServiceImpl implements ComplaintService {
      *
      * @return the list of entities
      */
-    public Page<ComplaintDTO> findAllWithEagerRelationships(Pageable pageable) {
+    @Override
+	public Page<ComplaintDTO> findAllWithEagerRelationships(Pageable pageable) {
         return complaintRepository.findAllWithEagerRelationships(pageable).map(complaintMapper::toDto);
     }
     
@@ -96,4 +102,11 @@ public class ComplaintServiceImpl implements ComplaintService {
         log.debug("Request to delete Complaint : {}", id);
         complaintRepository.deleteById(id);
     }
+
+	@Override
+	public Page<ComplaintDTO> fingAllComplaintsByUserId(Long userId, Pageable pageable) {
+		  log.debug("Request to get all Complaints by user id:"+userId);
+	        return complaintRepository.findAllComplaintsByUserId(userId,pageable)
+	            .map(complaintMapper::toDto);
+	}
 }

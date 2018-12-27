@@ -1,19 +1,30 @@
 package com.lxisoft.crimestopper.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lxisoft.crimestopper.domain.enumeration.Status;
 
 /**
- * A Complaint.
+ * A Complaint. 
  */
 @Entity
 @Table(name = "complaint")
@@ -63,8 +74,10 @@ public class Complaint implements Serializable {
                joinColumns = @JoinColumn(name = "complaints_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "departments_id", referencedColumnName = "id"))
     private Set<Department> departments = new HashSet<>();
+    
+ 
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+	// jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
