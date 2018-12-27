@@ -93,6 +93,6 @@ public class NewsController {
 		 */
 		return "redirect:/redAlertUi/newsPage/newsOfFriend";
 
-	}
+	} 
 
 }
