@@ -172,4 +172,17 @@ public interface UserRegistrationResourceApi {
     @RequestMapping(value = "/apis/user-registrations/addFriend/{userId}/{friendId}",
         method = RequestMethod.POST)
     ResponseEntity<Void> addFriendUsingPOST(@ApiParam(value = "friendId",required=true) @PathVariable("friendId") Long friendId,@ApiParam(value = "userId",required=true) @PathVariable("userId") Long userId);
+
+    @ApiOperation(value = "unFriend", nickname = "unFriendUsingPOST", notes = "", tags={ "user-registration-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK"),
+        @ApiResponse(code = 201, message = "Created"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/apis/user-registrations/unFriend/{userId}/{friendId}",
+        method = RequestMethod.POST)
+    ResponseEntity<Void> unFriendUsingPOST(@ApiParam(value = "friendId",required=true) @PathVariable("friendId") Long friendId,@ApiParam(value = "userId",required=true) @PathVariable("userId") Long userId);
+
+
 }

@@ -11,7 +11,7 @@ import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.boolex.OnMarkerEvaluator;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.LoggerContextListener;
-import ch.qos.logback.core.Appendez;
+import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.filter.EvaluatorFilter;
 import ch.qos.logback.core.spi.ContextAwareBase;
 import ch.qos.logback.core.spi.FilterReply;
