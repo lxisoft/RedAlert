@@ -1,11 +1,13 @@
 package com.lxisoft.crimestopper.service.dto;
 
-import java.time.Instant;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.Lob;
+
 import com.lxisoft.crimestopper.domain.enumeration.Status;
 
 /**
@@ -37,6 +39,16 @@ public class ComplaintDTO implements Serializable {
 
     private Set<DepartmentDTO> departments = new HashSet<>();
 
+   private String timeInString;
+    
+
+    public String getTimeInString() {
+		return timeInString;
+	}
+
+	public void setTimeInString(String timeInString) {
+		this.timeInString = timeInString;
+	}
     public Long getId() {
         return id;
     }
