@@ -1,7 +1,10 @@
 package com.lxisoft.redalert.web.rest.controller;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +31,8 @@ public class NewsController {
 
 	@Autowired
 	ActionResourceApi actionResourceApi;
+	@Autowired
+	HttpSession session;
 
 	@GetMapping("/dummyData")
 	public void getDummyData() {
@@ -39,8 +44,10 @@ public class NewsController {
 	@GetMapping("/newsOfFriend")
 	public String getNewsOfFriend(Model model) {
 		NewsFeedViewModel newsFeedView = new NewsFeedViewModel();
-		UserRegistrationDTO userRegistrationDto = userRegistrationResouceApi.getUserRegistrationUsingGET((long)1 )
-				.getBody();
+		
+		//UserRegistrationDTO userRegistrationDto = userRegistrationResouceApi.getUserRegistrationUsingGET((long)1 )
+			//	.getBody();
+		UserRegistrationDTO userRegistrationDto = (UserRegistrationDTO) session.getAttribute("cs");
 		System.out.println("Userregistration is ******************* " + userRegistrationDto);
 		newsFeedView.setUserRegistrationDTO(userRegistrationDto);
 		List<PostDTO> postDtoList = postResourceApi
@@ -76,6 +83,7 @@ public class NewsController {
 
 		ActionDTO actionDTO = newsFeedView.getNewActionDTO();
 		actionDTO.setPostId(newsFeedView.getPostDTO().getId());
+		actionDTO.setTakenOn(Instant.now());
 	actionResourceApi.createActionUsingPOST(actionDTO);
 		
 		/*

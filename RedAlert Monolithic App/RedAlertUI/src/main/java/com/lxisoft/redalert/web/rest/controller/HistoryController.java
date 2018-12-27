@@ -53,7 +53,7 @@ public class HistoryController {
        // String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
 		 
 		//UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO();
-		UserRegistrationDTO userb = new UserRegistrationDTO();
+		UserRegistrationDTO userb;
 		//User user=userRepository.findOneByLogin(currentUserLogin).get();
         //userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin()).getBody();
        userb =  (UserRegistrationDTO) session.getAttribute("cs");
