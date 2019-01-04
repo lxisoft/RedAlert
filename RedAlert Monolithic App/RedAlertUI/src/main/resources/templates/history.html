@@ -89,7 +89,7 @@
                 <a style="color: #fd7e14;" th:text="${view.userRegistrationDTO.firstName}+' '+${view.userRegistrationDTO.lastName}"></a>
               </h5>
              
-              <p id="date" class="mb-0" style="display: inline-block; font-size: 12px; color: grey;" th:text=${imageView.post.createdOn}> <i class="fa fa-history" aria-hidden="true"></i></p>
+              <p id="date" class="mb-0" style="display: inline-block; font-size: 12px; color: grey;" th:text=${#dates.format(imageView.post.createdOn)}> <i class="fa fa-history" aria-hidden="true"></i></p>
               <ul class="list-unstyled list-inline mt-0 mb-0 pt-1">
                 <li class="list-inline-item" data-toggle="modal" data-target="#locationModalCenter" th:lat="${imageView.post.latitude}" th:long="${imageView.post.longitude}" th:onclick="showMap(this.getAttribute('lat'),this.getAttribute('long'));">
                   <a class="grey-text mr-1"><i class="fa fa-lg fa-map-marker"> </i></a>
