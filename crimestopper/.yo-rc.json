@@ -1,0 +1,31 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.lxisoft"
+    },
+    "jhipsterVersion": "5.4.2",
+    "applicationType": "microservice",
+    "baseName": "crimestopper",
+    "packageName": "com.lxisoft",
+    "packageFolder": "com/lxisoft",
+    "serverPort": "8084",
+    "authenticationType": "oauth2",
+    "cacheProvider": "no",
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NGU5YzQ1MmNkZTY3YzNiOWIzNjEyZjI0ZDgxMDA5NzExNWI0ODcyNmM3OTBkZTAxMDdlY2RkMzk2MmEzM2FiNzUxOGNmOWQ0MGIwOWUyY2Y3ODdlODUxYjhhNjRmZDU0NDhkNWE4MjVkMTM3YmRhOTQ3NTgzMWNmMzcxMmU0ODY=",
+    "enableTranslation": false,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "clientPackageManager": "npm",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
