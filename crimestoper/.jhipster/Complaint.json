@@ -1,0 +1,77 @@
+{
+    "name": "Complaint",
+    "fields": [
+        {
+            "fieldName": "subject",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "time",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "timeOfIncident",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "media",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Status",
+            "fieldValues": "SEEN,ACTION_TAKEN"
+        },
+        {
+            "fieldName": "noOfLikes",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "noOfDislikes",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "userResponses",
+            "otherEntityName": "userResponse",
+            "otherEntityRelationshipName": "complaint"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "comments",
+            "otherEntityName": "comment",
+            "otherEntityRelationshipName": "complaint"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "location",
+            "otherEntityName": "location",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "complaint",
+            "relationshipName": "department",
+            "otherEntityName": "department",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20190111085502",
+    "entityTableName": "complaint",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "crimestopper",
+    "applications": "*",
+    "microserviceName": "crimestopper"
+}
