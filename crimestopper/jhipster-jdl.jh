@@ -75,7 +75,7 @@ Reply{UserResponses} to UserResponse
 }
 relationship ManyToMany
 {
-	Complaint{department} to Department{complaint }
+	Complaint{departments} to Department{complaints } User{friends} to User{friends}
 }
  
 dto * with mapstruct
