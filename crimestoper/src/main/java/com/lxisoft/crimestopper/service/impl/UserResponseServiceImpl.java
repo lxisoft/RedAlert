@@ -1,23 +1,25 @@
 package com.lxisoft.crimestopper.service.impl;
 
-import com.lxisoft.crimestopper.service.UserResponseService;
-import com.lxisoft.crimestopper.domain.UserResponse;
-import com.lxisoft.crimestopper.repository.UserResponseRepository;
-import com.lxisoft.crimestopper.service.dto.UserResponseDTO;
-import com.lxisoft.crimestopper.service.mapper.UserResponseMapper;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import com.lxisoft.crimestopper.domain.UserResponse;
+import com.lxisoft.crimestopper.repository.UserResponseRepository;
+import com.lxisoft.crimestopper.service.UserResponseService;
+import com.lxisoft.crimestopper.service.dto.UserResponseDTO;
+import com.lxisoft.crimestopper.service.mapper.UserResponseMapper;
 
 /**
  * Service Implementation for managing UserResponse.
  */
+
+ 
 @Service
 @Transactional
 public class UserResponseServiceImpl implements UserResponseService {
@@ -87,4 +89,16 @@ public class UserResponseServiceImpl implements UserResponseService {
         log.debug("Request to delete UserResponse : {}", id);
         userResponseRepository.deleteById(id);
     }
+
+    
+	/* like the complaint with the given complaint id
+	 * 
+	 */
+	@Override
+	public void likeComplaint(Long id) {
+		log.debug("request to like an complaint by using complaint id:"+id);
+		userResponseRepository.likeComplaint(id);
+	}
+	
+	
 }
