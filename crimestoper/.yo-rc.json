@@ -28,5 +28,11 @@
     "clientPackageManager": "npm",
     "skipClient": true,
     "skipUserManagement": true
+  },
+  "generator-jhipster-swagger-cli": {
+    "promptValues": {
+      "inputSpec": "http://localhost:8082/RedAlert/v2/api-docs",
+      "cliName": "RedAlert"
+    }
   }
 }
