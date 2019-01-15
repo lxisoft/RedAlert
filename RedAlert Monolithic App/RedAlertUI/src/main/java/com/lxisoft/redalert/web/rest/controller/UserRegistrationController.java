@@ -68,7 +68,8 @@ public class UserRegistrationController {
 				
 				userRepository.save(user);
 				
-				
+
+
 		userRegistrationResourceApi.createUserRegistrationUsingPOST(userRegistrationDTO); 
 		System.out.print(userRegistrationDTO.getFirstName());
 		return "redirect:/redAlertUiIndex/index";

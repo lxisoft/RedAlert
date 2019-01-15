@@ -25,8 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-25T17:38:11.449934700+05:30[Asia/Colombo]")
 
 @Api(value = "MediaResource", description = "the MediaResource API")
 public interface MediaResourceApi {

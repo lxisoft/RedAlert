@@ -16,11 +16,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Implementation for managing Post.
@@ -170,6 +173,45 @@ public class PostServiceImpl implements PostService {
             return postMapper.toDto(post);
 
     }
+
+    
+    
+    
+    
+    
+	@Override
+	public Page<PostDTO> nonClosedPostsOfFriends(Pageable pageable, Long userRegistrationId) {
+	
+		Optional<UserRegistration> userRegistration=userRegistrationRepository.findById(userRegistrationId);
+		ArrayList<Post> posts=new ArrayList<Post>();
+	
+		Set<UserRegistration> friends=userRegistration.get().getFriends();
+		
+		
+		for(UserRegistration friend:friends)
+		{
+	
+			Page<Post> friendPosts=postRepository.findAllByUserRegistrationIdAndActiveIsNull(pageable, friend.getId());
+			log.debug("id : "+friend.getId()+"after geting friends post size :");
+			if(friendPosts.hasContent())
+			{
+				for(Post friendPost:friendPosts.getContent())
+				{
+					posts.add(friendPost);
+				
+				}
+			}
+			
+			
+			
+		}
+		Page<Post> page=new PageImpl<Post>(posts);
+		
+		
+		
+		return page
+        .map(postMapper::toDto);
+	}
 }
 
 

@@ -25,6 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-25T17:38:11.449934700+05:30[Asia/Colombo]")
 
 @Api(value = "PostResource", description = "the PostResource API")
 public interface PostResourceApi {
@@ -114,6 +115,18 @@ public interface PostResourceApi {
     ResponseEntity<PostDTO> getPostUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
 
+    @ApiOperation(value = "nonClosedPostsOfFriends", nickname = "nonClosedPostsOfFriendsUsingGET", notes = "", response = PostDTO.class, responseContainer = "List", tags={ "post-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = PostDTO.class, responseContainer = "List"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/apis/nonClosedPostsOfFriends/{userRegistrationId}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<List<PostDTO>> nonClosedPostsOfFriendsUsingGET(@ApiParam(value = "userRegistrationId",required=true) @PathVariable("userRegistrationId") Long userRegistrationId,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
+
+
     @ApiOperation(value = "updatePost", nickname = "updatePostUsingPUT", notes = "", response = PostDTO.class, tags={ "post-resource", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = PostDTO.class),
@@ -126,11 +139,5 @@ public interface PostResourceApi {
         consumes = "application/json",
         method = RequestMethod.PUT)
     ResponseEntity<PostDTO> updatePostUsingPUT(@ApiParam(value = "postDTO" ,required=true )  @Valid @RequestBody PostDTO postDTO);
-
-
-	
-
-
-	
 
 }

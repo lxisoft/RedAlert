@@ -60,8 +60,8 @@
 			<div class="dropdown-menu dropdown-menu-right animate-fadein"
 				aria-labelledby="navbarDropdownMenuLink-5">
 				<a class="dropdown-item waves-effect waves-light" href="#">Activities</a>
-				<a class="dropdown-item waves-effect waves-light" th:href="@{redAlertuiHistory/history}">Status
-					History</a> <a class="dropdown-item waves-effect waves-light" th:href="{redAlertUiLogout/logout}">LogOut</a>
+				<a class="dropdown-item waves-effect waves-light" th:href="@{/redAlertuiHistory/history}">Status
+					History</a> <a class="dropdown-item waves-effect waves-light" th:href="@{/redAlertUiLogout/logout}">LogOut</a>
 			</div>
 		</div>
 
@@ -99,6 +99,8 @@
 	<!--/.Navbar-->
 	<!--post-->
 	<br />
+	
+	<th:block th:each="newsFeedView:${newsFeedViews}">
 	<div class="card w-100">
 		<div class="card-body">
 			<!--Section: Author Box-->
@@ -214,9 +216,10 @@
 										src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
 										style="height: 3%; width: 3%;">
 									<form action="/redAlertUi/newsPage/newAction" method="post" style="display: inline-block;">
+								
 										<div class="md-form mt-0 mx-3" style="display: inline-block;">
 											<input style="display: inline-block; width: 100%;"
-												type="text" id="comment" class="form-control" th:field="${newsFeedView.newActionDTO.description}"> <label
+												type="text" id="comment" class="form-control" th:field="${newAction.description}"> <label
 												for="comment">Add Comment...</label>
 										</div>
 										<div class="dropdown" 
@@ -225,9 +228,9 @@
 												<span>Action </span> <i style="left: 10px;"
 													class="fa fa-chevron-down"></i>
 											</div>
-											<input type="hidden" th:field="${newsFeedView.newActionDTO.reaction}">
+											<input type="hidden" th:field="${newAction.reaction}">
 											
-											<ul class="dropdown-menu" th:field="${newsFeedView.newActionDTO.reaction}">
+											<ul class="dropdown-menu" th:field="${newAction.reaction}">
 												
 													<!-- th:each="actionType : ${T(com.lxisoft.redalert.client.red_alert.model.ActionDTO.ReactionEnum).values()}" -->
 												 <li th:id="${T(com.lxisoft.redalert.client.red_alert.model.ActionDTO.ReactionEnum).COMMENT}"  th:text="${'Action'}"/>
@@ -237,9 +240,9 @@
 											</ul>
 										</div>
 										
-										<input type="hidden" name="newsFeedView" th:value="${newsFeedView}">
-										<input type="hidden" th:field="${newsFeedView.postDTO.id}">
-										<!-- <input type="hidden" name="" th:value="${newsFeedView.}">
+									<!-- <input type="hidden" name="newsFeedView" th:value="${newsFeedView}"> -->
+										<!-- <input type="hidden" th:field="${newsFeedView.postDTO.id}"> -->
+										<input type="hidden" name="postId" th:value="${newsFeedView.postDTO.id}">
  -->
 										<button type="submit" class="btn waves-effect px-3"
 											style="border-radius: 50%;">
@@ -426,6 +429,7 @@
   
     //]]> 
 </script>
+</th:block>
 
 	<!-- JQuery -->
 <!-- 	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script> -->

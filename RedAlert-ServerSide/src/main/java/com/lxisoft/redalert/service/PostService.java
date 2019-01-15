@@ -59,6 +59,8 @@ public interface PostService {
 
 	PostDTO changeAlert(Long id, String alertLevel);
 
+	Page<PostDTO> nonClosedPostsOfFriends(Pageable pageable, Long userRegistrationId);
+
 
 
 
