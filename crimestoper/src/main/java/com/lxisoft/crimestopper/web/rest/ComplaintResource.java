@@ -150,15 +150,15 @@ public class ComplaintResource {
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
      * @return the ResponseEntity with status 200 (OK) and the list of complaints in body
      */
-    @GetMapping("friends/complaints/{id}")
+    @GetMapping("friends/complaints/{userId}")
     @Timed
     public ResponseEntity<List<ComplaintDTO>> getAllComplaintsOfFriends(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload,@PathVariable Long userId) {
         
     	log.debug("REST request to get a page of Complaints");
         Page<ComplaintDTO> page;      
             page = complaintService.findAllComplaintsOfFriends(pageable,userId);
+            HttpHeaders	headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/complaints?eagerload=%b", eagerload));
             
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/complaints?eagerload=%b", eagerload));
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
     

@@ -91,14 +91,6 @@ public class UserResponseServiceImpl implements UserResponseService {
     }
 
     
-	/* like the complaint with the given complaint id
-	 * 
-	 */
-	@Override
-	public void likeComplaint(Long id) {
-		log.debug("request to like an complaint by using complaint id:"+id);
-		userResponseRepository.likeComplaint(id);
-	}
-	
+   
 	
 }

@@ -51,11 +51,11 @@ public interface UserResponseService {
      * @param id the id of the entity
      */
     void delete(Long id);
-   
-	/**
+   /*
+	*//**
 	 * like an complaint
 	 * @param id
-	 */
-	void likeComplaint(Long id);
+	 *//*
+	void likeComplaint(Long id);*/
 	
 }

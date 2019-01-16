@@ -33,7 +33,5 @@ public interface UserResponseRepository extends JpaRepository<UserResponse, Long
 	 * like an complaint with compliant id
 	 */
 	
-	//@Query(value="")
-	void likeComplaint(Long id);
 	 
 }

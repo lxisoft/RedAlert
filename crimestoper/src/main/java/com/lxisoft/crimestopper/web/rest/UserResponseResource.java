@@ -131,21 +131,18 @@ public class UserResponseResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
     
-    
-    
     /**
-     * DELETE  /user-responses/:id : delete the "id" userResponse.
-     *
+     * POST /user-responses/:id : delete the "id" userResponse.
      * @param id the id of the userResponseDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @PostMapping("/user-responses/likeComplaint/{id}")
+   /* @PostMapping("/user-responses/likeComplaint/{id}")
     @Timed
     public ResponseEntity<Void> UserResponseLikeCompalint(@PathVariable Long id) {
         log.debug("REST request to delete UserResponse : {}", id);
         userResponseService.likeComplaint(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-    }
+    }*/
         
     
 }

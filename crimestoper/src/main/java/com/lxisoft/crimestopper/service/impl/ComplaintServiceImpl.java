@@ -1,14 +1,20 @@
 package com.lxisoft.crimestopper.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lxisoft.crimestopper.client.red_alert.api.UserRegistrationResourceApi;
+import com.lxisoft.crimestopper.client.red_alert.model.UserRegistrationDTO;
 import com.lxisoft.crimestopper.domain.Complaint;
 import com.lxisoft.crimestopper.repository.ComplaintRepository;
 import com.lxisoft.crimestopper.repository.UserRepository;
@@ -33,6 +39,9 @@ public class ComplaintServiceImpl implements ComplaintService {
     private final ComplaintMapper complaintMapper;
     
     private final UserResponseRepository userResponseRepository;
+    
+    @Autowired
+    UserRegistrationResourceApi  userRegistrationResourceApi;
 
 
     public ComplaintServiceImpl(ComplaintRepository complaintRepository, ComplaintMapper complaintMapper,UserRepository userRepository,UserResponseRepository userResponseRepository) {
@@ -130,9 +139,15 @@ public class ComplaintServiceImpl implements ComplaintService {
 	public Page<ComplaintDTO> findAllComplaintsOfFriends(Pageable pageable, Long userId) {
 		
 		log.debug("request to get all complaints of friends by userId:"+userId);
+		List<ComplaintDTO> list=new ArrayList<ComplaintDTO>(); 
+		List<UserRegistrationDTO> users=userRegistrationResourceApi.getAllFriendsUsingGET(userId).getBody();
+		for(UserRegistrationDTO userDTO:users)
+		{
+			list.addAll(complaintRepository.findByUserId(userDTO.getId(),pageable).map(complaintMapper::toDto).getContent());
 		
-		//userRepository.findFriendsIdByUserId(pageable,userId);
-		return null;
+		}
+		Page<ComplaintDTO> pages = new PageImpl<ComplaintDTO>(list, pageable, list.size());
+		return pages;
 	}
 	
 	
