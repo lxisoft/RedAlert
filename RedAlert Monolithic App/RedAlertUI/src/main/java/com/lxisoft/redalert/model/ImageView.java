@@ -2,6 +2,7 @@ package com.lxisoft.redalert.model;
 
 import java.util.ArrayList;
 
+import com.lxisoft.redalert.client.red_alert.model.ActionDTO;
 import com.lxisoft.redalert.client.red_alert.model.MediaDTO;
 import com.lxisoft.redalert.client.red_alert.model.PostDTO;
 
@@ -13,6 +14,7 @@ public class ImageView {
 	private PostDTO post;
 	private ArrayList<MediaDTO> media;
 	private ArrayList<String> images;
+	private ArrayList<ActionDTO>actionDTO;
 	public PostDTO getPost() {
 		return post;
 	}
@@ -30,6 +32,12 @@ public class ImageView {
 	}
 	public void setImages(ArrayList<String> images) {
 		this.images = images;
+	}
+	public ArrayList<ActionDTO> getActionDTO() {
+		return actionDTO;
+	}
+	public void setActionDTO(ArrayList<ActionDTO> actionDTO) {
+		this.actionDTO = actionDTO;
 	}
 	
 	
