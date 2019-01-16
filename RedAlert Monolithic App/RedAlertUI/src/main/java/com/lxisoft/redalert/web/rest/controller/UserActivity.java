@@ -48,7 +48,7 @@ public class UserActivity {
 	      postResource.getClosePostUsingGET(postDTO.getId());
 	    
 
-		  return "redirect:/redAlertUiHistory/history";
+		  return "redirect:/redAlertuiHistory/history";
 		 
 	 }
 	
