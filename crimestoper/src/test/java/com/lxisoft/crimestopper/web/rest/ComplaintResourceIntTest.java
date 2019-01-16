@@ -51,6 +51,9 @@ import com.lxisoft.crimestopper.domain.enumeration.Status;
 @SpringBootTest(classes = CrimestopperApp.class)
 public class ComplaintResourceIntTest {
 
+    private static final Long DEFAULT_USER_ID = 1L;
+    private static final Long UPDATED_USER_ID = 2L;
+
     private static final String DEFAULT_SUBJECT = "AAAAAAAAAA";
     private static final String UPDATED_SUBJECT = "BBBBBBBBBB";
 
@@ -127,6 +130,7 @@ public class ComplaintResourceIntTest {
      */
     public static Complaint createEntity(EntityManager em) {
         Complaint complaint = new Complaint()
+            .userId(DEFAULT_USER_ID)
             .subject(DEFAULT_SUBJECT)
             .description(DEFAULT_DESCRIPTION)
             .time(DEFAULT_TIME)
@@ -160,6 +164,7 @@ public class ComplaintResourceIntTest {
         List<Complaint> complaintList = complaintRepository.findAll();
         assertThat(complaintList).hasSize(databaseSizeBeforeCreate + 1);
         Complaint testComplaint = complaintList.get(complaintList.size() - 1);
+        assertThat(testComplaint.getUserId()).isEqualTo(DEFAULT_USER_ID);
         assertThat(testComplaint.getSubject()).isEqualTo(DEFAULT_SUBJECT);
         assertThat(testComplaint.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testComplaint.getTime()).isEqualTo(DEFAULT_TIME);
@@ -202,6 +207,7 @@ public class ComplaintResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(complaint.getId().intValue())))
+            .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.intValue())))
             .andExpect(jsonPath("$.[*].subject").value(hasItem(DEFAULT_SUBJECT.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())))
@@ -257,6 +263,7 @@ public class ComplaintResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(complaint.getId().intValue()))
+            .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID.intValue()))
             .andExpect(jsonPath("$.subject").value(DEFAULT_SUBJECT.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.time").value(DEFAULT_TIME.toString()))
@@ -289,6 +296,7 @@ public class ComplaintResourceIntTest {
         // Disconnect from session so that the updates on updatedComplaint are not directly saved in db
         em.detach(updatedComplaint);
         updatedComplaint
+            .userId(UPDATED_USER_ID)
             .subject(UPDATED_SUBJECT)
             .description(UPDATED_DESCRIPTION)
             .time(UPDATED_TIME)
@@ -309,6 +317,7 @@ public class ComplaintResourceIntTest {
         List<Complaint> complaintList = complaintRepository.findAll();
         assertThat(complaintList).hasSize(databaseSizeBeforeUpdate);
         Complaint testComplaint = complaintList.get(complaintList.size() - 1);
+        assertThat(testComplaint.getUserId()).isEqualTo(UPDATED_USER_ID);
         assertThat(testComplaint.getSubject()).isEqualTo(UPDATED_SUBJECT);
         assertThat(testComplaint.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testComplaint.getTime()).isEqualTo(UPDATED_TIME);

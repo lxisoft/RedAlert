@@ -2,6 +2,10 @@
     "name": "Complaint",
     "fields": [
         {
+            "fieldName": "userId",
+            "fieldType": "Long"
+        },
+        {
             "fieldName": "subject",
             "fieldType": "String"
         },

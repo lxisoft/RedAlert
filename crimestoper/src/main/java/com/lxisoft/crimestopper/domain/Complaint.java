@@ -26,6 +26,9 @@ public class Complaint implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "user_id")
+    private Long userId;
+
     @Column(name = "subject")
     private String subject;
 
@@ -84,6 +87,19 @@ public class Complaint implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public Complaint userId(Long userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getSubject() {
@@ -364,6 +380,7 @@ public class Complaint implements Serializable {
     public String toString() {
         return "Complaint{" +
             "id=" + getId() +
+            ", userId=" + getUserId() +
             ", subject='" + getSubject() + "'" +
             ", description='" + getDescription() + "'" +
             ", time='" + getTime() + "'" +
