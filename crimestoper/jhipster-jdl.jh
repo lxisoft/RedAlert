@@ -1,7 +1,6 @@
-
 entity Complaint 
 {
-	subject String,
+	userId Long, subject String,
     description String,
     time Instant,
     timeOfIncident Instant,
@@ -47,6 +46,11 @@ entity Department
 	name String
 }
 
+entity Media
+{
+	file Blob
+}
+
 enum Status
 {
 	SEEN, ACTION_TAKEN
@@ -54,27 +58,24 @@ enum Status
 
 relationship ManyToOne
 {
-	Complaint{location} to Location
-   
-    
+	Complaint{location} to Location    
 }
 
 relationship OneToMany
 {
-Complaint{userResponses} to UserResponse
-Complaint{comments} to Comment
-Comment{replies} to Reply
-Comment{userResponses} to UserResponse
-Reply{UserResponses} to UserResponse 
+	Complaint{userResponses} to UserResponse
+	Complaint{comments} to Comment
+	Comment{replies} to Reply
+	Comment{userResponses} to UserResponse
+	Reply{UserResponses} to UserResponse 
+	Complaint{attatchments} to Media{complaint}
 }
 relationship ManyToMany
 {
 	Complaint{department} to Department{complaint }
+    Complaint{linkedComplaints} to Complaint
 }
  
 dto * with mapstruct
 service all with serviceImpl 
 paginate * with pagination
-
-
- 

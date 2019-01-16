@@ -26,7 +26,7 @@ import com.lxisoft.redalert.model.View;
 
 @Controller
 @RequestMapping("/postclose")
-public class UserActivityController {
+public class UserActivity {
 	@Autowired
 	PostResourceApi postResource;
 	@Autowired
@@ -48,7 +48,7 @@ public class UserActivityController {
 	      postResource.getClosePostUsingGET(postDTO.getId());
 	    
 
-		  return "redirect:/redAlertUiHistory/history";
+		  return "redirect:/redAlertuiHistory/history";
 		 
 	 }
 	
