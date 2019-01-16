@@ -37,6 +37,8 @@ public class ComplaintDTO implements Serializable {
 
     private Set<DepartmentDTO> departments = new HashSet<>();
 
+    private Set<ComplaintDTO> linkedComplaints = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -131,6 +133,14 @@ public class ComplaintDTO implements Serializable {
 
     public void setDepartments(Set<DepartmentDTO> departments) {
         this.departments = departments;
+    }
+
+    public Set<ComplaintDTO> getLinkedComplaints() {
+        return linkedComplaints;
+    }
+
+    public void setLinkedComplaints(Set<ComplaintDTO> complaints) {
+        this.linkedComplaints = complaints;
     }
 
     @Override

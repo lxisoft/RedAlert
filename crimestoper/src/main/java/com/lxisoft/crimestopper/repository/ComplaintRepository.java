@@ -17,14 +17,14 @@ import java.util.Optional;
 @Repository
 public interface ComplaintRepository extends JpaRepository<Complaint, Long> {
 
-    @Query(value = "select distinct complaint from Complaint complaint left join fetch complaint.departments",
+    @Query(value = "select distinct complaint from Complaint complaint left join fetch complaint.departments left join fetch complaint.linkedComplaints",
         countQuery = "select count(distinct complaint) from Complaint complaint")
     Page<Complaint> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(value = "select distinct complaint from Complaint complaint left join fetch complaint.departments")
+    @Query(value = "select distinct complaint from Complaint complaint left join fetch complaint.departments left join fetch complaint.linkedComplaints")
     List<Complaint> findAllWithEagerRelationships();
 
-    @Query("select complaint from Complaint complaint left join fetch complaint.departments where complaint.id =:id")
+    @Query("select complaint from Complaint complaint left join fetch complaint.departments left join fetch complaint.linkedComplaints where complaint.id =:id")
     Optional<Complaint> findOneWithEagerRelationships(@Param("id") Long id);
 
 }
