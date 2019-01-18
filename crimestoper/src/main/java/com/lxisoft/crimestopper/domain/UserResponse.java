@@ -7,6 +7,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.lxisoft.crimestopper.domain.enumeration.Flag;
+
 /**
  * A UserResponse.
  */
@@ -23,8 +25,9 @@ public class UserResponse implements Serializable {
     @Column(name = "user_id")
     private Long userId;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "flag")
-    private String flag;
+    private Flag flag;
 
     @ManyToOne
     @JsonIgnoreProperties("userResponses")
@@ -60,16 +63,16 @@ public class UserResponse implements Serializable {
         this.userId = userId;
     }
 
-    public String getFlag() {
+    public Flag getFlag() {
         return flag;
     }
 
-    public UserResponse flag(String flag) {
+    public UserResponse flag(Flag flag) {
         this.flag = flag;
         return this;
     }
 
-    public void setFlag(String flag) {
+    public void setFlag(Flag flag) {
         this.flag = flag;
     }
 
