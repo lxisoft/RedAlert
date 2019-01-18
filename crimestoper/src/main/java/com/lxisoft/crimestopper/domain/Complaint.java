@@ -26,6 +26,9 @@ public class Complaint implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "user_id")
+    private Long userId;
+
     @Column(name = "subject")
     private String subject;
 
@@ -59,6 +62,8 @@ public class Complaint implements Serializable {
     private Set<UserResponse> userResponses = new HashSet<>();
     @OneToMany(mappedBy = "complaint")
     private Set<Comment> comments = new HashSet<>();
+    @OneToMany(mappedBy = "complaint")
+    private Set<Media> attatchments = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("")
     private Location location;
@@ -69,6 +74,12 @@ public class Complaint implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "departments_id", referencedColumnName = "id"))
     private Set<Department> departments = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(name = "complaint_linked_complaints",
+               joinColumns = @JoinColumn(name = "complaints_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "linked_complaints_id", referencedColumnName = "id"))
+    private Set<Complaint> linkedComplaints = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -76,6 +87,19 @@ public class Complaint implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public Complaint userId(Long userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getSubject() {
@@ -245,6 +269,31 @@ public class Complaint implements Serializable {
         this.comments = comments;
     }
 
+    public Set<Media> getAttatchments() {
+        return attatchments;
+    }
+
+    public Complaint attatchments(Set<Media> media) {
+        this.attatchments = media;
+        return this;
+    }
+
+    public Complaint addAttatchments(Media media) {
+        this.attatchments.add(media);
+        media.setComplaint(this);
+        return this;
+    }
+
+    public Complaint removeAttatchments(Media media) {
+        this.attatchments.remove(media);
+        media.setComplaint(null);
+        return this;
+    }
+
+    public void setAttatchments(Set<Media> media) {
+        this.attatchments = media;
+    }
+
     public Location getLocation() {
         return location;
     }
@@ -282,6 +331,29 @@ public class Complaint implements Serializable {
     public void setDepartments(Set<Department> departments) {
         this.departments = departments;
     }
+
+    public Set<Complaint> getLinkedComplaints() {
+        return linkedComplaints;
+    }
+
+    public Complaint linkedComplaints(Set<Complaint> complaints) {
+        this.linkedComplaints = complaints;
+        return this;
+    }
+
+    public Complaint addLinkedComplaints(Complaint complaint) {
+        this.linkedComplaints.add(complaint);
+        return this;
+    }
+
+    public Complaint removeLinkedComplaints(Complaint complaint) {
+        this.linkedComplaints.remove(complaint);
+        return this;
+    }
+
+    public void setLinkedComplaints(Set<Complaint> complaints) {
+        this.linkedComplaints = complaints;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -308,6 +380,7 @@ public class Complaint implements Serializable {
     public String toString() {
         return "Complaint{" +
             "id=" + getId() +
+            ", userId=" + getUserId() +
             ", subject='" + getSubject() + "'" +
             ", description='" + getDescription() + "'" +
             ", time='" + getTime() + "'" +

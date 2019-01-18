@@ -15,6 +15,8 @@ public class ComplaintDTO implements Serializable {
 
     private Long id;
 
+    private Long userId;
+
     private String subject;
 
     private String description;
@@ -37,12 +39,22 @@ public class ComplaintDTO implements Serializable {
 
     private Set<DepartmentDTO> departments = new HashSet<>();
 
+    private Set<ComplaintDTO> linkedComplaints = new HashSet<>();
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getSubject() {
@@ -133,6 +145,14 @@ public class ComplaintDTO implements Serializable {
         this.departments = departments;
     }
 
+    public Set<ComplaintDTO> getLinkedComplaints() {
+        return linkedComplaints;
+    }
+
+    public void setLinkedComplaints(Set<ComplaintDTO> complaints) {
+        this.linkedComplaints = complaints;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -158,6 +178,7 @@ public class ComplaintDTO implements Serializable {
     public String toString() {
         return "ComplaintDTO{" +
             "id=" + getId() +
+            ", userId=" + getUserId() +
             ", subject='" + getSubject() + "'" +
             ", description='" + getDescription() + "'" +
             ", time='" + getTime() + "'" +

@@ -2,6 +2,10 @@
     "name": "Complaint",
     "fields": [
         {
+            "fieldName": "userId",
+            "fieldType": "Long"
+        },
+        {
             "fieldName": "subject",
             "fieldType": "String"
         },
@@ -50,6 +54,12 @@
             "otherEntityRelationshipName": "complaint"
         },
         {
+            "relationshipType": "one-to-many",
+            "relationshipName": "attatchments",
+            "otherEntityName": "media",
+            "otherEntityRelationshipName": "complaint"
+        },
+        {
             "relationshipType": "many-to-one",
             "relationshipName": "location",
             "otherEntityName": "location",
@@ -60,6 +70,14 @@
             "otherEntityRelationshipName": "complaint",
             "relationshipName": "department",
             "otherEntityName": "department",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "linkedComplaints",
+            "otherEntityName": "complaint",
             "otherEntityField": "id",
             "ownerSide": true
         }

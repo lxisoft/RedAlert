@@ -11,9 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lxisoft.redalert.client.red_alert.api.ActionResourceApi;
 import com.lxisoft.redalert.client.red_alert.api.MediaResourceApi;
 import com.lxisoft.redalert.client.red_alert.api.PostResourceApi;
 import com.lxisoft.redalert.client.red_alert.api.UserRegistrationResourceApi;
+import com.lxisoft.redalert.client.red_alert.model.ActionDTO;
 import com.lxisoft.redalert.client.red_alert.model.MediaDTO;
 import com.lxisoft.redalert.client.red_alert.model.PostDTO;
 import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
@@ -38,6 +40,9 @@ public class HistoryController {
 	UserRepository userRepository;
 	@Autowired
 	HttpSession session;
+	
+	@Autowired
+	ActionResourceApi actionResourceApi;
 	
 	
 
@@ -68,6 +73,9 @@ public class HistoryController {
 			
 		
 			ArrayList<MediaDTO> medias = (ArrayList<MediaDTO>) mediaResourceApi.getAllMediaByPostIdUsingGET(post.getId(), null, null, null, null, null,null, null, null, null, null).getBody();
+			
+	ArrayList<ActionDTO>actiondto=(ArrayList<ActionDTO>) actionResourceApi.getAllActionsByPostIdUsingGET(post.getId(), null, null, null, null, null, null, null, null, null,null).getBody();
+			
 			ArrayList<String> images = new ArrayList<String>();
 			for(MediaDTO media:medias)
 			{
@@ -80,7 +88,9 @@ public class HistoryController {
 			
 			 imageView.setMedia(medias);
 			 imageView.setPost(post);
+			 imageView.setActionDTO(actiondto);
 			 imageViews.add(imageView);
+			
 		}
 		  
 		

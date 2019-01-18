@@ -25,5 +25,16 @@
                                  referencedColumnNames="id"
                                  referencedTableName="department"/>
         
+        <addForeignKeyConstraint baseColumnNames="complaints_id"
+                                 baseTableName="complaint_linked_complaints"
+                                 constraintName="fk_complaint_linked_complaints_complaints_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="complaint"/>
+        <addForeignKeyConstraint baseColumnNames="linked_complaints_id"
+                                 baseTableName="complaint_linked_complaints"
+                                 constraintName="fk_complaint_linked_complaints_linked_complaints_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="complaint"/>
+        
     </changeSet>
 </databaseChangeLog>
