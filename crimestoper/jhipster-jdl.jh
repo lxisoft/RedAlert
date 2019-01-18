@@ -1,6 +1,7 @@
 entity Complaint 
 {
-	userId Long, subject String,
+	userId Long, 
+	subject String,
     description String,
     time Instant,
     timeOfIncident Instant,
@@ -13,26 +14,27 @@ entity Complaint
 
 entity UserResponse
 {
-	userId Long
-    flag String,
+	userId Long,
+    flag Flag
 }
 
 entity Comment
 {
-userId Long,
-noOfLikes Long,
-noOfDislikes Long,
-noOfReplys Long
+	userId Long,
+	noOfLikes Long,
+	noOfDislikes Long,
+	noOfReplys Long
 
 }
 
 entity Reply
 {
-userId Long,
-noOfLikes Long,
-noOfDislikes Long,
+	userId Long,
+	noOfLikes Long,
+	noOfDislikes Long
 
 }
+
 entity Location
 {
 	
@@ -54,6 +56,11 @@ entity Media
 enum Status
 {
 	SEEN, ACTION_TAKEN
+}
+
+enum Flag
+{
+	LIKE, DISLIKE
 }
 
 relationship ManyToOne

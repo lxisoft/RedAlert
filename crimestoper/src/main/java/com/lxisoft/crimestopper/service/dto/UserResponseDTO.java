@@ -2,6 +2,7 @@ package com.lxisoft.crimestopper.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+import com.lxisoft.crimestopper.domain.enumeration.Flag;
 
 /**
  * A DTO for the UserResponse entity.
@@ -12,7 +13,7 @@ public class UserResponseDTO implements Serializable {
 
     private Long userId;
 
-    private String flag;
+    private Flag flag;
 
     private Long complaintId;
 
@@ -36,11 +37,11 @@ public class UserResponseDTO implements Serializable {
         this.userId = userId;
     }
 
-    public String getFlag() {
+    public Flag getFlag() {
         return flag;
     }
 
-    public void setFlag(String flag) {
+    public void setFlag(Flag flag) {
         this.flag = flag;
     }
 

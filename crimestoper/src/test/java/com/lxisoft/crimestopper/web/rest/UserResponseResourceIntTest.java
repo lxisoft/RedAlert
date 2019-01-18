@@ -33,6 +33,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.lxisoft.crimestopper.domain.enumeration.Flag;
 /**
  * Test class for the UserResponseResource REST controller.
  *
@@ -45,8 +46,8 @@ public class UserResponseResourceIntTest {
     private static final Long DEFAULT_USER_ID = 1L;
     private static final Long UPDATED_USER_ID = 2L;
 
-    private static final String DEFAULT_FLAG = "AAAAAAAAAA";
-    private static final String UPDATED_FLAG = "BBBBBBBBBB";
+    private static final Flag DEFAULT_FLAG = Flag.LIKE;
+    private static final Flag UPDATED_FLAG = Flag.DISLIKE;
 
     @Autowired
     private UserResponseRepository userResponseRepository;
