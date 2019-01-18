@@ -1,6 +1,10 @@
 package com.lxisoft.redalert.web.rest.controller;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+import java.time.Instant;
+>>>>>>> e006040468395f6cc1eeea3706e545ad9197e66a
 import java.util.Date;
 import java.util.List;
 
@@ -36,14 +40,27 @@ public class NewsController {
 
 	@Autowired
 	ActionResourceApi actionResourceApi;
+	@Autowired
+	HttpSession session;
 
 	
 	@GetMapping("/newsOfFriend")
+<<<<<<< HEAD
 	public String getNewsOfFriend(Model model, HttpSession session) {
 		NewsFeedViewModels newsFeedViews=new NewsFeedViewModels();
 		newsFeedViews.setNewsFeedViewList(new ArrayList<NewsFeedViewModel>() );
 		UserRegistrationDTO currentUser =   (UserRegistrationDTO) session.getAttribute("cs");
 		
+=======
+	public String getNewsOfFriend(Model model) {
+		NewsFeedViewModel newsFeedView = new NewsFeedViewModel();
+		
+		//UserRegistrationDTO userRegistrationDto = userRegistrationResouceApi.getUserRegistrationUsingGET((long)1 )
+			//	.getBody();
+		UserRegistrationDTO userRegistrationDto = (UserRegistrationDTO) session.getAttribute("cs");
+		System.out.println("Userregistration is ******************* " + userRegistrationDto);
+		newsFeedView.setUserRegistrationDTO(userRegistrationDto);
+>>>>>>> e006040468395f6cc1eeea3706e545ad9197e66a
 		List<PostDTO> postDtoList = postResourceApi
 				.nonClosedPostsOfFriendsUsingGET(currentUser.getId(), null, null, null,
 						null, null, null, null, null, null, null)
@@ -95,12 +112,18 @@ public class NewsController {
 	@PostMapping("/newAction")
 	public String newAction(@ModelAttribute ActionDTO  actionDTO) {
 
+<<<<<<< HEAD
 		
+=======
+		ActionDTO actionDTO = newsFeedView.getNewActionDTO();
+		actionDTO.setPostId(newsFeedView.getPostDTO().getId());
+		actionDTO.setTakenOn(Instant.now());
+>>>>>>> e006040468395f6cc1eeea3706e545ad9197e66a
 	actionResourceApi.createActionUsingPOST(actionDTO);
 		
 		
 		return "redirect:/redAlertUi/newsPage/newsOfFriend";
 
-	}
+	} 
 
 }

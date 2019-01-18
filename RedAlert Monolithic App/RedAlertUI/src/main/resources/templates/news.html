@@ -118,8 +118,8 @@
 								th:text="${newsFeedView.userRegistrationDTO.firstName}+' '+${newsFeedView.userRegistrationDTO.lastName}">UsersName</a>
 						</h5>
 						<p id="date" class="mb-0"
-							style="display: inline-block; font-size: 12px; color: grey;">
-							15m Ago <i class="fa fa-history" aria-hidden="true"></i>
+							style="display: inline-block; font-size: 12px; color: grey;" th:text=${#dates.format(newsFeedView.postDTO.createdOn)}>
+							 <i class="fa fa-history" aria-hidden="true"></i>
 						</p>
 						<ul class="list-unstyled list-inline mt-0 mb-0 pt-1">
 							<li class="list-inline-item" data-toggle="modal"

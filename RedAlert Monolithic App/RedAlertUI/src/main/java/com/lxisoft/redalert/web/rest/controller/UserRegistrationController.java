@@ -1,6 +1,7 @@
 package com.lxisoft.redalert.web.rest.controller;
 
 import java.util.ArrayList;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -50,6 +51,7 @@ public class UserRegistrationController {
 
 				userRegistrationDTO = view.getUserRegistrationDTO();
 				userRegistrationDTO.setUserId(userRegistrationDTO.getEmail());
+				userRegistrationDTO.setCreatedOn(Instant.now());
 				User user=new User();
 				user.setId(userRegistrationDTO.getEmail());
 				user.setEmail(userRegistrationDTO.getEmail());

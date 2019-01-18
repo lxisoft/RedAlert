@@ -1,11 +1,15 @@
 package com.lxisoft.redalert.web.rest.controller;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.net.URISyntaxException;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import java.util.Base64;
+import java.util.Date;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -82,6 +86,7 @@ public class HomeController {
 	    //view.getUserRegistrationDTO().setId(userRegistrationResourceApi.getUserRegistrationUsingGET((long) 1).getBody().getId());
 		model.addAttribute("view", view);
 		session.setAttribute("cs",userRegistrationDTO );
+		
 		return "home";
 	}
 	
@@ -107,7 +112,9 @@ public class HomeController {
 		postDTO.setDescription(view.getPostDTO().getDescription());
 		postDTO.setLatitude(view.getPostDTO().getLatitude());
 		postDTO.setLongitude(view.getPostDTO().getLongitude());
-		postDTO.setCreatedOn(view.getPostDTO().getCreatedOn());
+	   // OffsetDateTime o = OffsetDateTime.ofInstant(Instant.now(),ZoneId.systemDefault());
+		    
+		postDTO.setCreatedOn(Instant.now());
 		ResponseEntity<PostDTO> postDto = postResourceApi.createPostUsingPOST(postDTO);
 		MediaDTO mediaDTO = new MediaDTO();
 		
