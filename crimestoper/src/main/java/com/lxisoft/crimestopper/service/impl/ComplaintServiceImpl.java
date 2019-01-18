@@ -141,6 +141,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 		log.debug("request to get all complaints of friends by userId:"+userId);
 		List<ComplaintDTO> list=new ArrayList<ComplaintDTO>(); 
 		List<UserRegistrationDTO> users=userRegistrationResourceApi.getAllFriendsUsingGET(userId).getBody();
+		complaintRepository.findByUserId(userId,pageable);
 		for(UserRegistrationDTO userDTO:users)
 		{
 			list.addAll(complaintRepository.findByUserId(userDTO.getId(),pageable).map(complaintMapper::toDto).getContent());

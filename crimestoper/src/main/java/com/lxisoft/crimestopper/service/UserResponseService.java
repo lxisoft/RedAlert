@@ -51,11 +51,14 @@ public interface UserResponseService {
      * @param id the id of the entity
      */
     void delete(Long id);
-   /*
-	*//**
-	 * like an complaint
-	 * @param id
-	 *//*
-	void likeComplaint(Long id);*/
+
+    /**
+     * @param complaintID
+     * @param userId
+     * @return UserResponce 
+     */
+
+	Optional<UserResponseDTO> saveComplaintUserResponse(Long complaintId, Long userId);
+	
 	
 }

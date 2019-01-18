@@ -106,7 +106,7 @@ public class UserResponseResource {
     /**
      * GET  /user-responses/:id : get the "id" userResponse.
      *
-     * @param id the id of the userResponseDTO to retrieve
+     *  @param id the id of the userResponseDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the userResponseDTO, or with status 404 (Not Found)
      */
     @GetMapping("/user-responses/{id}")
@@ -132,17 +132,36 @@ public class UserResponseResource {
     }
     
     /**
-     * POST /user-responses/:id : delete the "id" userResponse.
+     * POST /compliant/like : like the "id" complaint
      * @param id the id of the userResponseDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-   /* @PostMapping("/user-responses/likeComplaint/{id}")
+    
+    
+    @PostMapping("complaint/userResponce/{complaintId}/{userId}")
     @Timed
-    public ResponseEntity<Void> UserResponseLikeCompalint(@PathVariable Long id) {
-        log.debug("REST request to delete UserResponse : {}", id);
-        userResponseService.likeComplaint(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-    }*/
+    
+    public ResponseEntity<UserResponseDTO> likeAnComplaint(@PathVariable Long complaintId,@PathVariable Long userId) throws URISyntaxException 
+    {
+    	
+    	log.debug("give userResponce to an complain userID+:"+userId+"  complaintId:"+complaintId);
+    	
+    	if(complaintId==null)
+    	{
+    		throw new BadRequestAlertException("invalid complaintId",ENTITY_NAME,"COMPLAINT ID NOT FOUND");
+    	}
+    	if(userId==null)
+    	{
+    		throw new BadRequestAlertException("invalid user id",ENTITY_NAME,"user ID not found");
+    	}
+    	
+    	userResponseService.saveComplaintUserResponse(complaintId,userId);
+    	return null;
+   
+    	
+    }
+    
+   
         
     
 }

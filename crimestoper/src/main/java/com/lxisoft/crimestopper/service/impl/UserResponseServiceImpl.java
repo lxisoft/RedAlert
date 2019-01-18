@@ -20,6 +20,10 @@ import com.lxisoft.crimestopper.service.mapper.UserResponseMapper;
  */
 
  
+/**
+ * @author sooraj pn
+ *
+ */
 @Service
 @Transactional
 public class UserResponseServiceImpl implements UserResponseService {
@@ -89,6 +93,28 @@ public class UserResponseServiceImpl implements UserResponseService {
         log.debug("Request to delete UserResponse : {}", id);
         userResponseRepository.deleteById(id);
     }
+    
+    
+    /**
+     * method to like dislike an complaint
+     * @param complaintId
+     * @param userID
+     * @return
+     * 
+     */
+
+	@Override
+	public Optional<UserResponseDTO> saveComplaintUserResponse(Long complaintId, Long userId) {
+		
+		log.debug("request to save or update an userResport aginst complaint complaint id:"+complaintId+"  userId"+userId);
+		Optional<UserResponseDTO>result=userResponseRepository.findUserResponseWithUserIdAndComplaintId(complaintId,userId).map(userResponseMapper::toDto);
+		if(result.isPresent())
+		{
+			 
+		}
+		return  null;
+		
+	}
 
     
    

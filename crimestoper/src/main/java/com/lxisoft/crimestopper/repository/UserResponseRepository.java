@@ -1,5 +1,7 @@
 package com.lxisoft.crimestopper.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,10 +30,14 @@ public interface UserResponseRepository extends JpaRepository<UserResponse, Long
 	 */
 	@Query(value = "select count(u) from UserResponse u where u.complaint"+"=:complaint and u.flag='dislike'")
 	long countDislikesOfComplaint(@Param("complaint") Complaint complaint);
+
 	
 	/**
-	 * like an complaint with compliant id
+	 * find  an complaint with compliant id and userId
 	 */
 	
+	@Query(value="select ur from UserResponse ur where ur.id=:complaintId and ur.userId=:userId")
+	Optional<UserResponse> findUserResponseWithUserIdAndComplaintId(@Param("complaintId")Long complaintId,@Param("userId") Long userId);
+
 	 
 }
