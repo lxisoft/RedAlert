@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import java.time.Instant;
 import java.time.OffsetDateTime;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -17,6 +15,7 @@ import javax.validation.constraints.*;
  * PostDTO
  */
 @Validated
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-17T14:30:07.868+05:30[Asia/Calcutta]")
 
 public class PostDTO   {
   @JsonProperty("active")
@@ -59,7 +58,7 @@ public class PostDTO   {
   private AlertLevelEnum alertLevel = null;
 
   @JsonProperty("createdOn")
-  private Instant createdOn = null;
+  private OffsetDateTime createdOn = null;
 
   @JsonProperty("description")
   private String description = null;
@@ -116,7 +115,7 @@ public class PostDTO   {
     this.alertLevel = alertLevel;
   }
 
-  public PostDTO createdOn(Instant createdOn) {
+  public PostDTO createdOn(OffsetDateTime createdOn) {
     this.createdOn = createdOn;
     return this;
   }
@@ -129,11 +128,11 @@ public class PostDTO   {
 
   @Valid
 
-  public Instant getCreatedOn() {
+  public OffsetDateTime getCreatedOn() {
     return createdOn;
   }
 
-  public void setCreatedOn(Instant createdOn) {
+  public void setCreatedOn(OffsetDateTime createdOn) {
     this.createdOn = createdOn;
   }
 

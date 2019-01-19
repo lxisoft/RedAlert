@@ -55,8 +55,6 @@ public interface UserRegistrationService {
      */
     void delete(Long id);
     
-    
-
     Page<UserRegistrationDTO> findByLastName(String lastName,Pageable pageable);
 
 	List<UserRegistration> findAll();
@@ -77,6 +75,7 @@ public interface UserRegistrationService {
 
 	UserRegistrationDTO findByUserId(String id);
 
+	Page<UserRegistrationDTO> getAllFirstNameLastNameUserNameContainingIgnoreCase(String firstname,String lastname,String username,Pageable pageable);
 	
 	
 }

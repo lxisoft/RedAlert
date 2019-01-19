@@ -159,8 +159,10 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	        
 		 return userRegistrationMapper.toDto(userRegistration);
 	}
-
- 
-    
-
+	@Override
+	public Page<UserRegistrationDTO> getAllFirstNameLastNameUserNameContainingIgnoreCase(String firstname,String lastname,String username,Pageable pageable){
+		return userRegistrationRepository.findAllByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCaseOrUserNameContainingIgnoreCase
+				(firstname,lastname,username,pageable).map(userRegistrationMapper::toDto);
+	}
+	
 }
