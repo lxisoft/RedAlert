@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">st
+<title>Search page</title>
+</head>
+<center> 
+<h1>Search Names</h1>
+</center>
+<body>
+<form th:action="@{/searchcontroller/submitPage}" method="Post">
+Search Character : <input type="text" placeholder="username,firstname,lastname" name="search">
+<input type="submit" value="Ok">
+
+</body>
+</html>

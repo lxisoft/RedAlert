@@ -172,8 +172,4 @@ public class UserResponseServiceImpl implements UserResponseService {
 	}
 	
 	
-
-    
-   
-	
-}
+} 

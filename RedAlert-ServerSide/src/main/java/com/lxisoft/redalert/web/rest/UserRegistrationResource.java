@@ -52,11 +52,13 @@ public class UserRegistrationResource {
 	/**
 	 * POST /user-registrations : Create a new userRegistration.
 	 *
-	 * @param userRegistrationDTO the userRegistrationDTO to create
+	 * @param userRegistrationDTO
+	 *            the userRegistrationDTO to create
 	 * @return the ResponseEntity with status 201 (Created) and with body the new
 	 *         userRegistrationDTO, or with status 400 (Bad Request) if the
 	 *         userRegistration has already an ID
-	 * @throws URISyntaxException if the Location URI syntax is incorrect
+	 * @throws URISyntaxException
+	 *             if the Location URI syntax is incorrect
 	 */
 	@PostMapping("/user-registrations")
 	@Timed
@@ -75,12 +77,14 @@ public class UserRegistrationResource {
 	/**
 	 * PUT /user-registrations : Updates an existing userRegistration.
 	 *
-	 * @param userRegistrationDTO the userRegistrationDTO to update
+	 * @param userRegistrationDTO
+	 *            the userRegistrationDTO to update
 	 * @return the ResponseEntity with status 200 (OK) and with body the updated
 	 *         userRegistrationDTO, or with status 400 (Bad Request) if the
 	 *         userRegistrationDTO is not valid, or with status 500 (Internal Server
 	 *         Error) if the userRegistrationDTO couldn't be updated
-	 * @throws URISyntaxException if the Location URI syntax is incorrect
+	 * @throws URISyntaxException
+	 *             if the Location URI syntax is incorrect
 	 */
 	@PutMapping("/user-registrations")
 	@Timed
@@ -99,9 +103,11 @@ public class UserRegistrationResource {
 	/**
 	 * GET /user-registrations : get all the userRegistrations.
 	 *
-	 * @param pageable  the pagination information
-	 * @param eagerload flag to eager load entities from relationships (This is
-	 *                  applicable for many-to-many)
+	 * @param pageable
+	 *            the pagination information
+	 * @param eagerload
+	 *            flag to eager load entities from relationships (This is applicable
+	 *            for many-to-many)
 	 * @return the ResponseEntity with status 200 (OK) and the list of
 	 *         userRegistrations in body
 	 */
@@ -124,7 +130,8 @@ public class UserRegistrationResource {
 	/**
 	 * GET /user-registrations/:id : get the "id" userRegistration.
 	 *
-	 * @param id the id of the userRegistrationDTO to retrieve
+	 * @param id
+	 *            the id of the userRegistrationDTO to retrieve
 	 * @return the ResponseEntity with status 200 (OK) and with body the
 	 *         userRegistrationDTO, or with status 404 (Not Found)
 	 */
@@ -139,7 +146,8 @@ public class UserRegistrationResource {
 	/**
 	 * DELETE /user-registrations/:id : delete the "id" userRegistration.
 	 *
-	 * @param id the id of the userRegistrationDTO to delete
+	 * @param id
+	 *            the id of the userRegistrationDTO to delete
 	 * @return the ResponseEntity with status 200 (OK)
 	 */
 	@DeleteMapping("/user-registrations/{id}")
@@ -209,7 +217,11 @@ public class UserRegistrationResource {
 		user.getFriends().add(friend);
 		userRegistrationService.save(user);
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 0b1e1a02b3a1c0c834d923537deac2c0b1803a8a
 	@PostMapping("/user-registrations/unFriend/{userId}/{friendId}")
 	@Timed
 	public void unFriend(@PathVariable Long userId, @PathVariable Long friendId) {
@@ -225,5 +237,21 @@ public class UserRegistrationResource {
 		UserRegistrationDTO user = userRegistrationService.findOne(userId).get();
 		return new ResponseEntity<Set<UserRegistrationDTO>>(user.getFriends(), HttpStatus.OK);
 	}
+<<<<<<< HEAD
 	
+=======
+
+	@GetMapping("/user-registration/startcharacter")
+	@Timed
+	public ResponseEntity<List<UserRegistrationDTO>> inputCharacterContaining(@RequestParam String searchTerm,
+			Pageable pageable) {
+		Page<UserRegistrationDTO> users = userRegistrationService
+				.getAllFirstNameLastNameUserNameContainingIgnoreCase(searchTerm, searchTerm, searchTerm, pageable);
+
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(users, "/apis/user-registrations");
+		return new ResponseEntity<>(users.getContent(), headers, HttpStatus.OK);
+
+	}
+
+>>>>>>> 0b1e1a02b3a1c0c834d923537deac2c0b1803a8a
 }

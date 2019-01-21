@@ -7,8 +7,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +18,7 @@ import javax.validation.constraints.*;
  * UserRegistrationDTO
  */
 @Validated
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-17T14:30:07.868+05:30[Asia/Calcutta]")
 
 public class UserRegistrationDTO   {
   /**
@@ -72,7 +71,7 @@ public class UserRegistrationDTO   {
   private Long contact = null;
 
   @JsonProperty("createdOn")
-  private Instant createdOn = null;
+  private OffsetDateTime createdOn = null;
 
   @JsonProperty("dob")
   private OffsetDateTime dob = null;
@@ -223,7 +222,7 @@ public class UserRegistrationDTO   {
     this.contact = contact;
   }
 
-  public UserRegistrationDTO createdOn(Instant createdOn) {
+  public UserRegistrationDTO createdOn(OffsetDateTime createdOn) {
     this.createdOn = createdOn;
     return this;
   }
@@ -236,12 +235,12 @@ public class UserRegistrationDTO   {
 
   @Valid
 
-  public Instant getCreatedOn() {
+  public OffsetDateTime getCreatedOn() {
     return createdOn;
   }
 
-  public void setCreatedOn(Instant instant) {
-    this.createdOn = instant;
+  public void setCreatedOn(OffsetDateTime createdOn) {
+    this.createdOn = createdOn;
   }
 
   public UserRegistrationDTO dob(OffsetDateTime dob) {

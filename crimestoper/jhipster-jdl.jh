@@ -21,6 +21,7 @@ entity UserResponse
 entity Comment
 {
 	userId Long,
+	description String,
 	noOfLikes Long,
 	noOfDislikes Long,
 	noOfReplys Long
@@ -40,7 +41,7 @@ entity Location
 	
  	latitude Double ,
     longitutde Double
-    // add more from Swiggy, discuss with RedAlert, Karma, Diviso
+    
 }
  
 entity Department

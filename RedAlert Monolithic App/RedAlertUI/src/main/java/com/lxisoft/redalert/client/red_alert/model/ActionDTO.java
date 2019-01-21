@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import java.time.Instant;
 import java.time.OffsetDateTime;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -17,7 +15,7 @@ import javax.validation.constraints.*;
  * ActionDTO
  */
 @Validated
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-17T14:30:07.868+05:30[Asia/Calcutta]")
 
 public class ActionDTO   {
   @JsonProperty("approval")
@@ -67,7 +65,7 @@ public class ActionDTO   {
   private ReactionEnum reaction = null;
 
   @JsonProperty("takenOn")
-  private Instant takenOn = null;
+  private OffsetDateTime takenOn = null;
 
   @JsonProperty("userId")
   private Integer userId = null;
@@ -175,7 +173,7 @@ public class ActionDTO   {
     this.reaction = reaction;
   }
 
-  public ActionDTO takenOn(Instant takenOn) {
+  public ActionDTO takenOn(OffsetDateTime takenOn) {
     this.takenOn = takenOn;
     return this;
   }
@@ -188,12 +186,12 @@ public class ActionDTO   {
 
   @Valid
 
-  public Instant getTakenOn() {
+  public OffsetDateTime getTakenOn() {
     return takenOn;
   }
 
-  public void setTakenOn(Instant instant) {
-    this.takenOn = instant;
+  public void setTakenOn(OffsetDateTime takenOn) {
+    this.takenOn = takenOn;
   }
 
   public ActionDTO userId(Integer userId) {
