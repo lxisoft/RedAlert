@@ -1,11 +1,11 @@
 package com.lxisoft.crimestopper.service;
 
-import com.lxisoft.crimestopper.service.dto.CommentDTO;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Optional;
+import com.lxisoft.crimestopper.service.dto.CommentDTO;
 
 /**
  * Service Interface for managing Comment.
@@ -43,4 +43,12 @@ public interface CommentService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    /**
+     * comment in an complaint
+     * 
+     */
+    
+	Optional<CommentDTO> saveCommentInComplaint(CommentDTO comment);
+	
 }

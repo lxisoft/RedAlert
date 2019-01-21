@@ -138,30 +138,120 @@ public class UserResponseResource {
      */
     
     
-    @PostMapping("complaint/userResponce/{complaintId}/{userId}")
+    @PostMapping("complaint/user-responce")
     @Timed
     
-    public ResponseEntity<UserResponseDTO> likeAnComplaint(@PathVariable Long complaintId,@PathVariable Long userId) throws URISyntaxException 
+    public ResponseEntity<UserResponseDTO> addUserResponseOfComplaint(@RequestBody UserResponseDTO userResponse) throws URISyntaxException 
     {
     	
-    	log.debug("give userResponce to an complain userID+:"+userId+"  complaintId:"+complaintId);
+    	log.debug("give userResponce to an complain userID+:"+userResponse.getUserId()+"  complaintId:"+userResponse.getId());
     	
-    	if(complaintId==null)
+    	if(userResponse.getId()==null)
     	{
     		throw new BadRequestAlertException("invalid complaintId",ENTITY_NAME,"COMPLAINT ID NOT FOUND");
     	}
-    	if(userId==null)
+    	if(userResponse.getUserId()==null)
     	{
     		throw new BadRequestAlertException("invalid user id",ENTITY_NAME,"user ID not found");
     	}
     	
-    	userResponseService.saveComplaintUserResponse(complaintId,userId);
-    	return null;
+    	if(userResponse.getFlag()==null)
+    	{
+    		throw new BadRequestAlertException("invalid user id",ENTITY_NAME,"flag not found");
+    	}
+    	
+    	
+    	return ResponseUtil.wrapOrNotFound(userResponseService.saveComplaintUserResponse(userResponse));
    
+    	 
+    }
+    
+    
+   /**
+    * 
+    * 
+    */
+    @PostMapping("comment/user-responses")
+    @Timed
+    
+    public ResponseEntity<UserResponseDTO> userResponceToAnComment(@RequestBody UserResponseDTO userResponse)
+    {
+    	
+    	log.debug("post resquest to save an user responce of an comment:"+userResponse);
+    	
+    	userResponseService.saveCommentUserResponse(userResponse);
+    	
+    	
+    	//serResponseService.saveCommentUserResponce();
+    	
+    	return null;
     	
     }
     
+    /**
+     * to get userResponce of An complaint
+     * @param complaintId
+     * @param pageable
+     * @return
+     */
+    
+    @GetMapping("complaint/user-responses/{complaintId}")
+    @Timed
+    public ResponseEntity<List<UserResponseDTO>> getUserResponseOfComplaint(@PathVariable Long complaintId,Pageable pageable)
+    {
+    	log.debug("request to get an userResponse of given complaint"+complaintId);
+    	
+    	Page<UserResponseDTO> result=userResponseService.getComplaintUserResponses(complaintId,pageable);
+    	
+    	 HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(result, "/api/complaint/user-responses");
+         return ResponseEntity.ok().headers(headers).body(result.getContent());
+ 
+    }
+    
+    
+    /**
+     * to get userResponce of An complaint
+     * @param complaintId
+     * @param pageable
+     * @return
+     */
+    
+    @GetMapping("comment/user-responses/{commentId}")
+    @Timed
+    public ResponseEntity<List<UserResponseDTO>> getUserResponseOfComment(@PathVariable Long commentId,Pageable pageable)
+    {
+    	log.debug("request to get an userResponse of given comment"+commentId);
+    	
+    	Page<UserResponseDTO> result=userResponseService.getCommentUserResponses(commentId,pageable);
+    	
+    	 HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(result, "/api/comment/user-responses");
+         return ResponseEntity.ok().headers(headers).body(result.getContent());
+ 
+    }
+    
+    
+    /**
+     * to get userResponce of An complaint
+     * @param complaintId
+     * @param pageable
+     * @return
+     */
+    
+    @GetMapping("reply/user-responses/{commentId}")
+    @Timed
+    public ResponseEntity<List<UserResponseDTO>> getUserResponseOfReply(@PathVariable Long replyId,Pageable pageable)
+    {
+    	log.debug("request to get an userResponse of given reply id:"+replyId);
+    	
+    	Page<UserResponseDTO> result=userResponseService.getReplyUserResponses(replyId,pageable);
+    	
+    	 HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(result, "/api/reply/user-responses");
+         return ResponseEntity.ok().headers(headers).body(result.getContent());
+ 
+    }
+    
    
-        
+    
+    
     
 }

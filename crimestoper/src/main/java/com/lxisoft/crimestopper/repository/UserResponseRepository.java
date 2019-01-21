@@ -1,7 +1,7 @@
 package com.lxisoft.crimestopper.repository;
 
-import java.util.Optional;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -32,12 +32,28 @@ public interface UserResponseRepository extends JpaRepository<UserResponse, Long
 	long countDislikesOfComplaint(@Param("complaint") Complaint complaint);
 
 	
+
+	/** 
+	*finding all userResponse by complaintId
+	*
+	*/
+	
+	
+	Page<UserResponse> findAllUserResponseByComplaintId(Long complaintId, Pageable pageable);
+
 	/**
-	 * find  an complaint with compliant id and userId
+	 * find all user Response by comment id
+	 * 
+	 */
+
+	Page<UserResponse> findAllUserResponseByCommentId(Long commentId, Pageable pageable);
+	
+	/**
+	 * find all user Response by reply id
+	 * 
 	 */
 	
-	@Query(value="select ur from UserResponse ur where ur.id=:complaintId and ur.userId=:userId")
-	Optional<UserResponse> findUserResponseWithUserIdAndComplaintId(@Param("complaintId")Long complaintId,@Param("userId") Long userId);
+	Page<UserResponse> findAllUserResponseByReplyId(Long replyId, Pageable pageable);
 
 	 
 }

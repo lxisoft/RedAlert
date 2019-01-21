@@ -53,12 +53,43 @@ public interface UserResponseService {
     void delete(Long id);
 
     /**
-     * @param complaintID
-     * @param userId
+     * @param userResponce
      * @return UserResponce 
      */
 
-	Optional<UserResponseDTO> saveComplaintUserResponse(Long complaintId, Long userId);
+	Optional<UserResponseDTO> saveComplaintUserResponse(UserResponseDTO userResponse);
+	
+	/**
+	 * method to save userResponse against an comment
+	 * @Param UserResponse
+	 * @return UserResponse
+	 */
+
+	Optional<UserResponseDTO> saveCommentUserResponse(UserResponseDTO userResponse);
+	
+	/**method to get all userResponse of an complaint
+	 * @param complaintId
+	 * @return userResponses
+	 */
+
+	Page<UserResponseDTO> getComplaintUserResponses(Long complaintId, Pageable pageable);
+	
+	/**
+	 * method to get all userResponse of an comment
+	 * 
+	 */
+	
+	
+	Page<UserResponseDTO> getCommentUserResponses(Long commentId, Pageable pageable);
+
+	/**
+	 * method to get all userResponse of an reply
+	 * 
+	 */
+	
+	
+	
+	Page<UserResponseDTO> getReplyUserResponses(Long replyId, Pageable pageable);
 	
 	
 }

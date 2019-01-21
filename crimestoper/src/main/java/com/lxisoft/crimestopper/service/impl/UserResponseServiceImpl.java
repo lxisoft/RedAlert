@@ -104,17 +104,74 @@ public class UserResponseServiceImpl implements UserResponseService {
      */
 
 	@Override
-	public Optional<UserResponseDTO> saveComplaintUserResponse(Long complaintId, Long userId) {
+	public Optional<UserResponseDTO> saveComplaintUserResponse(UserResponseDTO userResponse) {
 		
-		log.debug("request to save or update an userResport aginst complaint complaint id:"+complaintId+"  userId"+userId);
-		Optional<UserResponseDTO>result=userResponseRepository.findUserResponseWithUserIdAndComplaintId(complaintId,userId).map(userResponseMapper::toDto);
-		if(result.isPresent())
-		{
-			 
-		}
-		return  null;
+		log.debug("request to save or update an userResport "+userResponse);
+	//	Optional<UserResponseDTO>result=userResponseRepository.findUserResponseWithUserIdAndComplaintId(userResponsecomplaintId,userId).map(userResponseMapper::toDto);
+		UserResponseDTO urDTO=userResponseMapper.toDto(userResponseRepository.save(userResponseMapper.toEntity(userResponse)));
+		Optional<UserResponseDTO>optional=Optional.of(urDTO);
+		return optional;
 		
 	}
+	
+	/**
+	 * method to save ann user responce towards an comment
+	 * @param userResponce 
+	 * @return userResponce
+	 */
+
+	@Override
+	public Optional<UserResponseDTO> saveCommentUserResponse(UserResponseDTO userResponse) {
+		
+		log.debug("request to save an user responce for an comlaint:"+userResponse);
+		
+		
+		return null;
+		
+	}
+	
+	/**
+	 * method to get user responses of an given complaint id
+	 * 
+	 */
+
+	@Override
+	public Page<UserResponseDTO> getComplaintUserResponses(Long complaintId, Pageable pageable) {
+		log.debug("request to get user responses of an given complaint "+complaintId);
+		Page<UserResponseDTO>result=userResponseRepository.findAllUserResponseByComplaintId(complaintId,pageable).map(userResponseMapper::toDto);
+		return result;
+	}
+
+	/**
+	 * method to get user Responses of an given comment id
+	 * 
+	 */
+	
+	@Override
+	public Page<UserResponseDTO> getCommentUserResponses(Long commentId, Pageable pageable) {
+	
+		log.debug("request to get user responses of an given commentid:"+commentId);
+		Page<UserResponseDTO>result=userResponseRepository.findAllUserResponseByCommentId(commentId,pageable).map(userResponseMapper::toDto);
+		return result;
+		
+	
+	}
+	
+	/**
+	 * method to get all user response of an reply
+	 * 
+	 */
+	
+	@Override
+	public Page<UserResponseDTO> getReplyUserResponses(Long replyId, Pageable pageable) {
+		
+		log.debug("request to get user responses of an given reply id: "+replyId);
+		Page<UserResponseDTO>result=userResponseRepository.findAllUserResponseByReplyId(replyId,pageable).map(userResponseMapper::toDto);
+		return result;
+		
+	}
+	
+	
 
     
    
