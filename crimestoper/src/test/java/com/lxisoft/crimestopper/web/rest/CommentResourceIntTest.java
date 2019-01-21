@@ -45,6 +45,9 @@ public class CommentResourceIntTest {
     private static final Long DEFAULT_USER_ID = 1L;
     private static final Long UPDATED_USER_ID = 2L;
 
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
     private static final Long DEFAULT_NO_OF_LIKES = 1L;
     private static final Long UPDATED_NO_OF_LIKES = 2L;
 
@@ -99,6 +102,7 @@ public class CommentResourceIntTest {
     public static Comment createEntity(EntityManager em) {
         Comment comment = new Comment()
             .userId(DEFAULT_USER_ID)
+            .description(DEFAULT_DESCRIPTION)
             .noOfLikes(DEFAULT_NO_OF_LIKES)
             .noOfDislikes(DEFAULT_NO_OF_DISLIKES)
             .noOfReplys(DEFAULT_NO_OF_REPLYS);
@@ -127,6 +131,7 @@ public class CommentResourceIntTest {
         assertThat(commentList).hasSize(databaseSizeBeforeCreate + 1);
         Comment testComment = commentList.get(commentList.size() - 1);
         assertThat(testComment.getUserId()).isEqualTo(DEFAULT_USER_ID);
+        assertThat(testComment.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testComment.getNoOfLikes()).isEqualTo(DEFAULT_NO_OF_LIKES);
         assertThat(testComment.getNoOfDislikes()).isEqualTo(DEFAULT_NO_OF_DISLIKES);
         assertThat(testComment.getNoOfReplys()).isEqualTo(DEFAULT_NO_OF_REPLYS);
@@ -164,6 +169,7 @@ public class CommentResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(comment.getId().intValue())))
             .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.intValue())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].noOfLikes").value(hasItem(DEFAULT_NO_OF_LIKES.intValue())))
             .andExpect(jsonPath("$.[*].noOfDislikes").value(hasItem(DEFAULT_NO_OF_DISLIKES.intValue())))
             .andExpect(jsonPath("$.[*].noOfReplys").value(hasItem(DEFAULT_NO_OF_REPLYS.intValue())));
@@ -181,6 +187,7 @@ public class CommentResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(comment.getId().intValue()))
             .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID.intValue()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.noOfLikes").value(DEFAULT_NO_OF_LIKES.intValue()))
             .andExpect(jsonPath("$.noOfDislikes").value(DEFAULT_NO_OF_DISLIKES.intValue()))
             .andExpect(jsonPath("$.noOfReplys").value(DEFAULT_NO_OF_REPLYS.intValue()));
@@ -208,6 +215,7 @@ public class CommentResourceIntTest {
         em.detach(updatedComment);
         updatedComment
             .userId(UPDATED_USER_ID)
+            .description(UPDATED_DESCRIPTION)
             .noOfLikes(UPDATED_NO_OF_LIKES)
             .noOfDislikes(UPDATED_NO_OF_DISLIKES)
             .noOfReplys(UPDATED_NO_OF_REPLYS);
@@ -223,6 +231,7 @@ public class CommentResourceIntTest {
         assertThat(commentList).hasSize(databaseSizeBeforeUpdate);
         Comment testComment = commentList.get(commentList.size() - 1);
         assertThat(testComment.getUserId()).isEqualTo(UPDATED_USER_ID);
+        assertThat(testComment.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testComment.getNoOfLikes()).isEqualTo(UPDATED_NO_OF_LIKES);
         assertThat(testComment.getNoOfDislikes()).isEqualTo(UPDATED_NO_OF_DISLIKES);
         assertThat(testComment.getNoOfReplys()).isEqualTo(UPDATED_NO_OF_REPLYS);

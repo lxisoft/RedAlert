@@ -6,6 +6,10 @@
             "fieldType": "Long"
         },
         {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "noOfLikes",
             "fieldType": "Long"
         },

@@ -21,6 +21,7 @@ entity UserResponse
 entity Comment
 {
 	userId Long,
+	description String,
 	noOfLikes Long,
 	noOfDislikes Long,
 	noOfReplys Long

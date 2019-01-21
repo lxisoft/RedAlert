@@ -26,6 +26,9 @@ public class Comment implements Serializable {
     @Column(name = "user_id")
     private Long userId;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "no_of_likes")
     private Long noOfLikes;
 
@@ -63,6 +66,19 @@ public class Comment implements Serializable {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Comment description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Long getNoOfLikes() {
@@ -193,6 +209,7 @@ public class Comment implements Serializable {
         return "Comment{" +
             "id=" + getId() +
             ", userId=" + getUserId() +
+            ", description='" + getDescription() + "'" +
             ", noOfLikes=" + getNoOfLikes() +
             ", noOfDislikes=" + getNoOfDislikes() +
             ", noOfReplys=" + getNoOfReplys() +
