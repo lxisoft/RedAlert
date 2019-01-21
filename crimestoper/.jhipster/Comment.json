@@ -18,7 +18,7 @@
             "fieldType": "Long"
         },
         {
-            "fieldName": "noOfReplys",
+            "fieldName": "noOfReplies",
             "fieldType": "Long"
         }
     ],

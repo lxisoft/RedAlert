@@ -35,8 +35,8 @@ public class Comment implements Serializable {
     @Column(name = "no_of_dislikes")
     private Long noOfDislikes;
 
-    @Column(name = "no_of_replys")
-    private Long noOfReplys;
+    @Column(name = "no_of_replies")
+    private Long noOfReplies;
 
     @ManyToOne
     @JsonIgnoreProperties("comments")
@@ -107,17 +107,17 @@ public class Comment implements Serializable {
         this.noOfDislikes = noOfDislikes;
     }
 
-    public Long getNoOfReplys() {
-        return noOfReplys;
+    public Long getNoOfReplies() {
+        return noOfReplies;
     }
 
-    public Comment noOfReplys(Long noOfReplys) {
-        this.noOfReplys = noOfReplys;
+    public Comment noOfReplies(Long noOfReplies) {
+        this.noOfReplies = noOfReplies;
         return this;
     }
 
-    public void setNoOfReplys(Long noOfReplys) {
-        this.noOfReplys = noOfReplys;
+    public void setNoOfReplies(Long noOfReplies) {
+        this.noOfReplies = noOfReplies;
     }
 
     public Complaint getComplaint() {
@@ -212,7 +212,7 @@ public class Comment implements Serializable {
             ", description='" + getDescription() + "'" +
             ", noOfLikes=" + getNoOfLikes() +
             ", noOfDislikes=" + getNoOfDislikes() +
-            ", noOfReplys=" + getNoOfReplys() +
+            ", noOfReplies=" + getNoOfReplies() +
             "}";
     }
 }

@@ -18,7 +18,7 @@ public class CommentDTO implements Serializable {
 
     private Long noOfDislikes;
 
-    private Long noOfReplys;
+    private Long noOfReplies;
 
     private Long complaintId;
 
@@ -62,12 +62,12 @@ public class CommentDTO implements Serializable {
         this.noOfDislikes = noOfDislikes;
     }
 
-    public Long getNoOfReplys() {
-        return noOfReplys;
+    public Long getNoOfReplies() {
+        return noOfReplies;
     }
 
-    public void setNoOfReplys(Long noOfReplys) {
-        this.noOfReplys = noOfReplys;
+    public void setNoOfReplies(Long noOfReplies) {
+        this.noOfReplies = noOfReplies;
     }
 
     public Long getComplaintId() {
@@ -107,7 +107,7 @@ public class CommentDTO implements Serializable {
             ", description='" + getDescription() + "'" +
             ", noOfLikes=" + getNoOfLikes() +
             ", noOfDislikes=" + getNoOfDislikes() +
-            ", noOfReplys=" + getNoOfReplys() +
+            ", noOfReplies=" + getNoOfReplies() +
             ", complaint=" + getComplaintId() +
             "}";
     }
