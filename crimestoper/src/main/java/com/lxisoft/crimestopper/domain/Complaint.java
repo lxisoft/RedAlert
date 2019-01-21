@@ -63,7 +63,7 @@ public class Complaint implements Serializable {
     @OneToMany(mappedBy = "complaint")
     private Set<Comment> comments = new HashSet<>();
     @OneToMany(mappedBy = "complaint")
-    private Set<Media> attatchments = new HashSet<>();
+    private Set<Media> attachments = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("")
     private Location location;
@@ -269,29 +269,29 @@ public class Complaint implements Serializable {
         this.comments = comments;
     }
 
-    public Set<Media> getAttatchments() {
-        return attatchments;
+    public Set<Media> getAttachments() {
+        return attachments;
     }
 
-    public Complaint attatchments(Set<Media> media) {
-        this.attatchments = media;
+    public Complaint attachments(Set<Media> media) {
+        this.attachments = media;
         return this;
     }
 
-    public Complaint addAttatchments(Media media) {
-        this.attatchments.add(media);
+    public Complaint addAttachments(Media media) {
+        this.attachments.add(media);
         media.setComplaint(this);
         return this;
     }
 
-    public Complaint removeAttatchments(Media media) {
-        this.attatchments.remove(media);
+    public Complaint removeAttachments(Media media) {
+        this.attachments.remove(media);
         media.setComplaint(null);
         return this;
     }
 
-    public void setAttatchments(Set<Media> media) {
-        this.attatchments = media;
+    public void setAttachments(Set<Media> media) {
+        this.attachments = media;
     }
 
     public Location getLocation() {

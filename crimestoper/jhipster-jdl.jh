@@ -24,7 +24,7 @@ entity Comment
 	description String,
 	noOfLikes Long,
 	noOfDislikes Long,
-	noOfReplys Long
+	noOfReplies Long
 
 }
 
@@ -76,7 +76,7 @@ relationship OneToMany
 	Comment{replies} to Reply
 	Comment{userResponses} to UserResponse
 	Reply{UserResponses} to UserResponse 
-	Complaint{attatchments} to Media{complaint}
+	Complaint{attachments} to Media{complaint}
 }
 relationship ManyToMany
 {
