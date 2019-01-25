@@ -30,17 +30,7 @@ import java.util.Optional;
 @Api(value = "UserRegistrationResource", description = "the UserRegistrationResource API")
 public interface UserRegistrationResourceApi {
 
-    @ApiOperation(value = "addFriend", nickname = "addFriendUsingPOST", notes = "", tags={ "user-registration-resource", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK"),
-        @ApiResponse(code = 201, message = "Created"),
-        @ApiResponse(code = 401, message = "Unauthorized"),
-        @ApiResponse(code = 403, message = "Forbidden"),
-        @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/user-registrations/addFriend/{userId}/{friendId}",
-        method = RequestMethod.POST)
-    ResponseEntity<Void> addFriendUsingPOST(@ApiParam(value = "friendId",required=true) @PathVariable("friendId") Long friendId,@ApiParam(value = "userId",required=true) @PathVariable("userId") Long userId);
-
+   
 
     @ApiOperation(value = "createUserRegistration", nickname = "createUserRegistrationUsingPOST", notes = "", response = UserRegistrationDTO.class, tags={ "user-registration-resource", })
     @ApiResponses(value = { 
@@ -175,9 +165,7 @@ public interface UserRegistrationResourceApi {
         consumes = "application/json",
         method = RequestMethod.PUT)
     ResponseEntity<UserRegistrationDTO> updateUserRegistrationUsingPUT(@ApiParam(value = "userRegistrationDTO" ,required=true )  @Valid @RequestBody UserRegistrationDTO userRegistrationDTO);
-<<<<<<< HEAD
-=======
-    
+
     @ApiOperation(value = "addFriend", nickname = "addFriendUsingPOST", notes = "", tags={ "user-registration-resource", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK"),
@@ -200,6 +188,6 @@ public interface UserRegistrationResourceApi {
         method = RequestMethod.POST)
     ResponseEntity<Void> unFriendUsingPOST(@ApiParam(value = "friendId",required=true) @PathVariable("friendId") Long friendId,@ApiParam(value = "userId",required=true) @PathVariable("userId") Long userId);
 
->>>>>>> e006040468395f6cc1eeea3706e545ad9197e66a
+
 
 }
