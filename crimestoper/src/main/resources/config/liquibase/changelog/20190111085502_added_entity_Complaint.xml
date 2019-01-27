@@ -22,6 +22,10 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <column name="subject" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -76,6 +80,17 @@
         </createTable>
 
         <addPrimaryKey columnNames="complaints_id, departments_id" tableName="complaint_department"/>
+        
+        <createTable tableName="complaint_linked_complaints">
+            <column name="linked_complaints_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="complaints_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="complaints_id, linked_complaints_id" tableName="complaint_linked_complaints"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

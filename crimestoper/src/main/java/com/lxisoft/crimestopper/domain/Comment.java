@@ -26,14 +26,17 @@ public class Comment implements Serializable {
     @Column(name = "user_id")
     private Long userId;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "no_of_likes")
     private Long noOfLikes;
 
     @Column(name = "no_of_dislikes")
     private Long noOfDislikes;
 
-    @Column(name = "no_of_replys")
-    private Long noOfReplys;
+    @Column(name = "no_of_replies")
+    private Long noOfReplies;
 
     @ManyToOne
     @JsonIgnoreProperties("comments")
@@ -65,6 +68,19 @@ public class Comment implements Serializable {
         this.userId = userId;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public Comment description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Long getNoOfLikes() {
         return noOfLikes;
     }
@@ -91,17 +107,17 @@ public class Comment implements Serializable {
         this.noOfDislikes = noOfDislikes;
     }
 
-    public Long getNoOfReplys() {
-        return noOfReplys;
+    public Long getNoOfReplies() {
+        return noOfReplies;
     }
 
-    public Comment noOfReplys(Long noOfReplys) {
-        this.noOfReplys = noOfReplys;
+    public Comment noOfReplies(Long noOfReplies) {
+        this.noOfReplies = noOfReplies;
         return this;
     }
 
-    public void setNoOfReplys(Long noOfReplys) {
-        this.noOfReplys = noOfReplys;
+    public void setNoOfReplies(Long noOfReplies) {
+        this.noOfReplies = noOfReplies;
     }
 
     public Complaint getComplaint() {
@@ -193,9 +209,10 @@ public class Comment implements Serializable {
         return "Comment{" +
             "id=" + getId() +
             ", userId=" + getUserId() +
+            ", description='" + getDescription() + "'" +
             ", noOfLikes=" + getNoOfLikes() +
             ", noOfDislikes=" + getNoOfDislikes() +
-            ", noOfReplys=" + getNoOfReplys() +
+            ", noOfReplies=" + getNoOfReplies() +
             "}";
     }
 }

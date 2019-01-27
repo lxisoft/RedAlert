@@ -16,6 +16,7 @@ public interface ComplaintMapper extends EntityMapper<ComplaintDTO, Complaint> {
 
     @Mapping(target = "userResponses", ignore = true)
     @Mapping(target = "comments", ignore = true)
+    @Mapping(target = "attachments", ignore = true)
     @Mapping(source = "locationId", target = "location")
     Complaint toEntity(ComplaintDTO complaintDTO);
 

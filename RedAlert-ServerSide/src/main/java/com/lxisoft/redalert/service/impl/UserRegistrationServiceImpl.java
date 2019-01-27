@@ -171,6 +171,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		 return userRegistrationMapper.toDto(userRegistration);
 	}
 
+
 	public UserRegistrationDTO sendSMS(String phoneNo,String userId) {
 		// TODO Auto-generated method stub
 		final String ACCOUNT_SID = "AC5b7eefb2b599f290036b2780f4815df6";
@@ -261,4 +262,11 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	
 		
 
+
+	@Override
+	public Page<UserRegistrationDTO> getAllFirstNameLastNameUserNameContainingIgnoreCase(String firstname,String lastname,String username,Pageable pageable){
+		return userRegistrationRepository.findAllByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCaseOrUserNameContainingIgnoreCase
+				(firstname,lastname,username,pageable).map(userRegistrationMapper::toDto);
+	}
+	
 }

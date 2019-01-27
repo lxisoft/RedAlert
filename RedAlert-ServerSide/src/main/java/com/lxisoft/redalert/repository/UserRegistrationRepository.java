@@ -50,4 +50,8 @@ public interface UserRegistrationRepository extends JpaRepository<UserRegistrati
 	UserRegistration findByUserId(Long userId);
 
 	UserRegistration findByUserId(String id);
+	
+	Page<UserRegistration> findAllByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCaseOrUserNameContainingIgnoreCase(String firstName,String lastName,String userName,Pageable pageable);
+	
+
 }

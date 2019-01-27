@@ -1,19 +1,19 @@
 package com.lxisoft.crimestopper.service.impl;
 
-import com.lxisoft.crimestopper.service.CommentService;
-import com.lxisoft.crimestopper.domain.Comment;
-import com.lxisoft.crimestopper.repository.CommentRepository;
-import com.lxisoft.crimestopper.service.dto.CommentDTO;
-import com.lxisoft.crimestopper.service.mapper.CommentMapper;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import com.lxisoft.crimestopper.domain.Comment;
+import com.lxisoft.crimestopper.repository.CommentRepository;
+import com.lxisoft.crimestopper.service.CommentService;
+import com.lxisoft.crimestopper.service.dto.CommentDTO;
+import com.lxisoft.crimestopper.service.mapper.CommentMapper;
 
 /**
  * Service Implementation for managing Comment.
@@ -87,4 +87,21 @@ public class CommentServiceImpl implements CommentService {
         log.debug("Request to delete Comment : {}", id);
         commentRepository.deleteById(id);
     }
+
+    
+    /**
+     * save an comment of an complaint
+     * @param commentDTO
+     * @Return commentDTO
+     */
+    
+	@Override
+	public Optional<CommentDTO> saveCommentInComplaint(CommentDTO comment) {
+		log.debug("comment in an commplaint "+comment);
+		
+		 Comment result=commentRepository.save(commentMapper.toEntity(comment));
+		Optional<CommentDTO>optional=Optional.of(commentMapper.toDto(result));
+		 return optional;
+		
+	}
 }
