@@ -47,5 +47,7 @@ public interface UserRegistrationRepository extends JpaRepository<UserRegistrati
 	
 	Page<UserRegistration> findAllByFirstNameStartingWith(String firstname, Pageable pageable);
 
+	UserRegistration findByUserId(Long userId);
+
 	UserRegistration findByUserId(String id);
 }

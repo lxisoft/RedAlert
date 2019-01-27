@@ -5,6 +5,7 @@ import com.lxisoft.redalert.service.UserRegistrationService;
 import com.lxisoft.redalert.web.rest.errors.BadRequestAlertException;
 import com.lxisoft.redalert.web.rest.util.HeaderUtil;
 import com.lxisoft.redalert.web.rest.util.PaginationUtil;
+import com.lxisoft.redalert.service.dto.PostDTO;
 import com.lxisoft.redalert.service.dto.UserRegistrationDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -217,5 +218,20 @@ public class UserRegistrationResource {
 		return new ResponseEntity<Set<UserRegistrationDTO>>(user.getFriends(), HttpStatus.OK);
 	}
 	
+	 @GetMapping("/sendSMS/{userId}/{phoneno}")
+	 public ResponseEntity<UserRegistrationDTO> sendSMS(@PathVariable String phoneno,@PathVariable String userId)
+	 {
+		
+			UserRegistrationDTO user = userRegistrationService.sendSMS(phoneno,userId);
+			return new ResponseEntity<UserRegistrationDTO>(user, HttpStatus.OK);
+	 }
+	 @GetMapping("/validate/{phoneno}")
+	 public ResponseEntity<UserRegistrationDTO> validate(@PathVariable String phoneno)
+	 {
+		 UserRegistrationDTO userReg=userRegistrationService.validate(phoneno);
+		return new ResponseEntity<UserRegistrationDTO>(userReg, HttpStatus.OK);
+		 
+	 }
+	 
 
 }
