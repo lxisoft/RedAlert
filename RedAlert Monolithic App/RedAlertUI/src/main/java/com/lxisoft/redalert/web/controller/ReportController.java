@@ -111,6 +111,7 @@ public class ReportController {
 
 }*/
 
+	
 	public String getReport(@RequestParam ReportTypeEnum report, @RequestParam long postId, Model model)
 
 	{

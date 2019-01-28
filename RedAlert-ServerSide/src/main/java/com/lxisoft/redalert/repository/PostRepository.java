@@ -1,0 +1,20 @@
+package com.lxisoft.redalert.repository;
+
+import com.lxisoft.redalert.domain.Post;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.*;
+import org.springframework.stereotype.Repository;
+
+
+/**
+ * Spring Data  repository for the Post entity.
+ */
+@SuppressWarnings("unused")
+@Repository
+public interface PostRepository extends JpaRepository<Post, Long> {
+	
+	Page<Post> findAllByUserRegistrationId(Pageable pageable, Long userRegistrationId);
+
+}
