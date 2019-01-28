@@ -244,8 +244,7 @@ public class UserRegistrationResource {
 		return new ResponseEntity<Set<UserRegistrationDTO>>(user.getFriends(), HttpStatus.OK);
 	}
 
-<<<<<<< HEAD
-=======
+
 	 @GetMapping("/sendSMS/{userId}/{phoneno}")
 	 public ResponseEntity<UserRegistrationDTO> sendSMS(@PathVariable String phoneno,@PathVariable String userId)
 	 {
@@ -262,7 +261,7 @@ public class UserRegistrationResource {
 	 }
 	 
 
->>>>>>> 89249d969eea945b28e861627be815635e9a5897
+
 
 	@GetMapping("/user-registration/startcharacter")
 	@Timed
@@ -275,8 +274,5 @@ public class UserRegistrationResource {
 
 	}
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 89249d969eea945b28e861627be815635e9a5897
 }
