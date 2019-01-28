@@ -115,15 +115,16 @@ public class HomeController {
 	   // OffsetDateTime o = OffsetDateTime.ofInstant(Instant.now(),ZoneId.systemDefault());
 		    
 		postDTO.setCreatedOn(Instant.now());
-		ResponseEntity<PostDTO> postDto = postResourceApi.createPostUsingPOST(postDTO);
+		PostDTO postDto = postResourceApi.createPostUsingPOST(postDTO).getBody();
 		MediaDTO mediaDTO = new MediaDTO();
 		
 	    try{
 			for(MultipartFile file:files)
 			{
 			  mediaDTO.setFile(file.getBytes());
-			  mediaDTO.setPostId(postDto.getBody().getId());
+			  mediaDTO.setPostId(postDto.getId());
 			  mediaResourceApi.createMediaUsingPOST(mediaDTO);
+			 String message =  postResourceApi.sendMailWithAttachmentUsingPOST(postDto).getBody();
             }
 		  }catch(Exception e)
 		    {
@@ -137,7 +138,7 @@ public class HomeController {
 	 * @return
 	 */
 	/*@GetMapping("/news")
-	public String getNews(Model model)
+	public String getNews(Model model)														
 	{
 		View view = new View();
 		view.setPosts((ArrayList<PostDTO>) postResourceApi.getAllPostsUsingGET(null, null, null, null, null, null, null, null, null, null).getBody());

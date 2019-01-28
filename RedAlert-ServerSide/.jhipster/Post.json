@@ -53,7 +53,7 @@
             "otherEntityRelationshipName": "post"
         }
     ],
-    "changelogDate": "20181107053415",
+    "changelogDate": "20190111041406",
     "entityTableName": "post",
     "dto": "mapstruct",
     "pagination": "pagination",
