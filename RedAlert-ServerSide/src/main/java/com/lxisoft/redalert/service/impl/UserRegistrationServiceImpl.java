@@ -156,4 +156,23 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	        
 		 return userRegistrationMapper.toDto(userRegistration);
 	}
+
+	@Override
+	public UserRegistrationDTO sendSMS(String phoneno, String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserRegistrationDTO validate(String phoneno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<UserRegistrationDTO> getAllFirstNameLastNameUserNameContainingIgnoreCase(String searchTerm,
+			String searchTerm2, String searchTerm3, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
