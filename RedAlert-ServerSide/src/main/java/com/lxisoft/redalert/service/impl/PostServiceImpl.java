@@ -20,6 +20,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Optional;
 
 /**
@@ -170,7 +174,25 @@ public class PostServiceImpl implements PostService {
             return postMapper.toDto(post);
 
     }
-}
 
+	@Override
+	public PostDTO sendSMS(Long id, Long phoneno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+}   
+
+	
+	
+	
+	
+
+
+	
+ 
+
+ 
 
 

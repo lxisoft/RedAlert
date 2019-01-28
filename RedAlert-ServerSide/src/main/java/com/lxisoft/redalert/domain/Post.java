@@ -32,7 +32,10 @@ public class Post implements Serializable {
 
     @Column(name = "description")
     private String description;
-
+    
+  /*  @Column(name="phoneno")
+    private Long phoneno;
+*/
     @Column(name = "created_on")
     private Instant createdOn;
 
@@ -263,4 +266,16 @@ public class Post implements Serializable {
             ", longitude='" + getLongitude() + "'" +
             "}";
     }
+
+
+
+	
+	/*public void setPhoneNo(Long phoneno2) {
+		// TODO Auto-generated method stub
+		this.phoneno=phoneno;
+	}
+
+*/
+
+	
 }

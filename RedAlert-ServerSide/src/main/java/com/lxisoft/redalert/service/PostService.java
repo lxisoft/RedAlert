@@ -59,6 +59,10 @@ public interface PostService {
 
 	PostDTO changeAlert(Long id, String alertLevel);
 
+	//PostDTO sendSMS(Long id, String message);
+
+	PostDTO sendSMS(Long id, Long phoneno);
+
 
 
 

@@ -20,9 +20,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 
@@ -148,6 +151,8 @@ public class PostResource {
     
     	return ResponseUtil.wrapOrNotFound(postDTO);
    }
+   
+  
     
    @GetMapping("/changeAlert/{id}/{alertLevel}") 
    public ResponseEntity<PostDTO> changeAlertLevel(@PathVariable Long id,@PathVariable String alertLevel)
@@ -158,7 +163,9 @@ public class PostResource {
 	    return ResponseUtil.wrapOrNotFound(postDTO);
 	   
    }
-    
+   
+   
+  
     
     
     
@@ -175,6 +182,7 @@ public class PostResource {
         postService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
    
     
     

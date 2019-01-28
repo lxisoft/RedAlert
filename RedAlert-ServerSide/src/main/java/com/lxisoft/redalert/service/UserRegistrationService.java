@@ -75,7 +75,21 @@ public interface UserRegistrationService {
 
 	UserRegistrationDTO findByUserId(String id);
 
+
+	UserRegistrationDTO sendSMS(String phoneno, String userId);
+
+	UserRegistrationDTO validate(String phoneNo);
+
+	
+
+
+	//Optional<UserRegistrationDTO> sendSMS(Long phoneNo);
+
+	//UserRegistrationDTO findByUserId(String id);
+
+
 	Page<UserRegistrationDTO> getAllFirstNameLastNameUserNameContainingIgnoreCase(String firstname,String lastname,String username,Pageable pageable);
+
 	
 	
 }

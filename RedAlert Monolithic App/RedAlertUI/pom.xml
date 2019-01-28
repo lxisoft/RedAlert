@@ -114,7 +114,12 @@
             <groupId>io.github.jhipster</groupId>
             <artifactId>jhipster-framework</artifactId>
         </dependency>
-
+       
+<dependency>
+        <groupId>com.twilio.sdk</groupId>
+        <artifactId>twilio-java-sdk</artifactId>
+        <version>3.4.5</version>
+    </dependency>
         <dependency>
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-core</artifactId>

@@ -39,7 +39,9 @@ entity Post
     createdOn Instant,
     active Boolean,
     latitude String,
-    longitude String
+    longitude String,
+    phoneno Long
+    
 }
 entity Media
 {
