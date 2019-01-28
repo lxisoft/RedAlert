@@ -249,4 +249,37 @@ public class UserRegistrationResource {
 	}
 	
 
+
+
+	 @GetMapping("/sendSMS/{userId}/{phoneno}")
+	 public ResponseEntity<UserRegistrationDTO> sendSMS(@PathVariable String phoneno,@PathVariable String userId)
+	 {
+		
+			UserRegistrationDTO user = userRegistrationService.sendSMS(phoneno,userId);
+			return new ResponseEntity<UserRegistrationDTO>(user, HttpStatus.OK);
+	 }
+	 @GetMapping("/validate/{phoneno}")
+	 public ResponseEntity<UserRegistrationDTO> validate(@PathVariable String phoneno)
+	 {
+		 UserRegistrationDTO userReg=userRegistrationService.validate(phoneno);
+		return new ResponseEntity<UserRegistrationDTO>(userReg, HttpStatus.OK);
+		 
+	 }
+	 
+
+
+
+	@GetMapping("/user-registration/startcharacter")
+	@Timed
+	public ResponseEntity<List<UserRegistrationDTO>> inputCharacterContaining(@RequestParam String searchTerm,Pageable pageable) {
+		Page<UserRegistrationDTO> users = userRegistrationService
+				.getAllFirstNameLastNameUserNameContainingIgnoreCase(searchTerm, searchTerm, searchTerm, pageable);
+
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(users, "/apis/user-registrations");
+		return new ResponseEntity<>(users.getContent(), headers, HttpStatus.OK);
+
+	}
+
+
+
 }
