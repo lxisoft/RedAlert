@@ -217,11 +217,7 @@ public class UserRegistrationResource {
 		user.getFriends().add(friend);
 		userRegistrationService.save(user);
 	}
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> 0b1e1a02b3a1c0c834d923537deac2c0b1803a8a
 	@PostMapping("/user-registrations/unFriend/{userId}/{friendId}")
 	@Timed
 	public void unFriend(@PathVariable Long userId, @PathVariable Long friendId) {
@@ -237,9 +233,7 @@ public class UserRegistrationResource {
 		UserRegistrationDTO user = userRegistrationService.findOne(userId).get();
 		return new ResponseEntity<Set<UserRegistrationDTO>>(user.getFriends(), HttpStatus.OK);
 	}
-<<<<<<< HEAD
-	
-=======
+
 
 	@GetMapping("/user-registration/startcharacter")
 	@Timed
@@ -253,5 +247,5 @@ public class UserRegistrationResource {
 
 	}
 
->>>>>>> 0b1e1a02b3a1c0c834d923537deac2c0b1803a8a
+
 }

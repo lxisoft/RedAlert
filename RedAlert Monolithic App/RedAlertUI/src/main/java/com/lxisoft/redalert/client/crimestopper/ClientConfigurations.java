@@ -1,13 +1,13 @@
-package com.lxisoft.crimestopper.client.red_alert;
+package com.lxisoft.redalert.client.crimestopper;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import com.lxisoft.crimestopper.client.ExcludeFromComponentScan;
+import com.lxisoft.redalert.client.ExcludeFromComponentScan;
 
 @Configuration
 @ExcludeFromComponentScan
 @EnableConfigurationProperties
-public class ClientConfiguration{
+public class ClientConfigurations{
 
 }
