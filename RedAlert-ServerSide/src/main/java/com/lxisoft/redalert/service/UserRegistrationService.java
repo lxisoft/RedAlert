@@ -76,7 +76,7 @@ public interface UserRegistrationService {
 	UserRegistrationDTO findByUserId(String id);
 
 
-	UserRegistrationDTO sendSMS(String phoneno, String userId);
+	//UserRegistrationDTO sendSMS(String phoneno, String userId);
 
 	UserRegistrationDTO validate(String phoneNo);
 
@@ -89,6 +89,8 @@ public interface UserRegistrationService {
 
 
 	Page<UserRegistrationDTO> getAllFirstNameLastNameUserNameContainingIgnoreCase(String firstname,String lastname,String username,Pageable pageable);
+
+	UserRegistrationDTO sendSMS(Long phoneno, String userId);
 
 	
 	
