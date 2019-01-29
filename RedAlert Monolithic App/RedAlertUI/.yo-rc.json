@@ -30,8 +30,8 @@
   },
   "generator-jhipster-swagger-cli": {
     "promptValues": {
-      "inputSpec": "http://localhost:8084/crimestopper/v2/api-docs",
-      "cliName": "crimestopper"
+      "inputSpec": "http://localhost:8082/RedAlert/v2/api-docs",
+      "cliName": "redalert"
     },
     "apis": {
       "RedAlert": {
@@ -45,6 +45,9 @@
       },
       "crimestopper": {
         "spec": "http://localhost:8084/crimestopper/v2/api-docs"
+      },
+      "redalert": {
+        "spec": "http://localhost:8082/RedAlert/v2/api-docs"
       }
     }
   }
