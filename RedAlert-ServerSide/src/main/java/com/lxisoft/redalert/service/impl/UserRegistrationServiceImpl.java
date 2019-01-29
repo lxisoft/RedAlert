@@ -172,7 +172,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	}
 
 
-	public UserRegistrationDTO sendSMS(String phoneNo,String userId) {
+	public UserRegistrationDTO sendSMS(Long phoneNo,String userId) {
 		// TODO Auto-generated method stub
 		final String ACCOUNT_SID = "AC5b7eefb2b599f290036b2780f4815df6";
 	    final String AUTH_TOKEN = "5bcfdda6555bd4e769a8807203be423c";
@@ -181,7 +181,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	    
 		 Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
          Message message = Message.creator(
-                 new com.twilio.type.PhoneNumber(phoneNo),
+                 new com.twilio.type.PhoneNumber(Long.toString(phoneNo)),
                 new com.twilio.type.PhoneNumber("+14232265359"),
                  "MESSAGE FROM TWILIO")
              .create();
