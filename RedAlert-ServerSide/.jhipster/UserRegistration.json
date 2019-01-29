@@ -5,10 +5,6 @@
             "fieldName": "userName",
             "fieldType": "String"
         },
-		{
-            "fieldName": "userId",
-            "fieldType": "String"
-        },
         {
             "fieldName": "password",
             "fieldType": "String"
@@ -24,6 +20,10 @@
         },
         {
             "fieldName": "lastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "userId",
             "fieldType": "String"
         },
         {
@@ -78,7 +78,7 @@
             "ownerSide": true
         }
     ],
-    "changelogDate": "20181107053414",
+    "changelogDate": "20190111041405",
     "entityTableName": "user_registration",
     "dto": "mapstruct",
     "pagination": "pagination",

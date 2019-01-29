@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity UserRegistration.
     -->
-    <changeSet id="20181107053414-2" author="jhipster">
+    <changeSet id="20190111041405-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="user_registrations_id"
                                  baseTableName="user_registration_friends"

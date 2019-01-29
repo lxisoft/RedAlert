@@ -26,7 +26,7 @@ import java.util.Optional;
  * REST controller for managing LeaderBoard.
  */
 @RestController
-@RequestMapping("/apis")
+@RequestMapping("/api")
 public class LeaderBoardResource {
 
     private final Logger log = LoggerFactory.getLogger(LeaderBoardResource.class);

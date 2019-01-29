@@ -5,11 +5,11 @@ import com.lxisoft.redalert.domain.Authority;
 import com.lxisoft.redalert.domain.User;
 import com.lxisoft.redalert.repository.UserRepository;
 import com.lxisoft.redalert.security.AuthoritiesConstants;
-
 import com.lxisoft.redalert.service.UserService;
 import com.lxisoft.redalert.service.dto.UserDTO;
 import com.lxisoft.redalert.service.mapper.UserMapper;
 import com.lxisoft.redalert.web.rest.errors.ExceptionTranslator;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;

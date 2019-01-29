@@ -3,8 +3,6 @@ package com.lxisoft.redalert.service.mapper;
 import com.lxisoft.redalert.domain.*;
 import com.lxisoft.redalert.service.dto.ActionDTO;
 
-import java.util.Optional;
-
 import org.mapstruct.*;
 
 /**

@@ -1,8 +1,7 @@
 package com.lxisoft.redalert.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.lxisoft.redalert.domain.enumeration.Alert;
-import com.lxisoft.redalert.repository.PostRepository;
+import com.lxisoft.redalert.domain.Post;
 import com.lxisoft.redalert.service.PostService;
 import com.lxisoft.redalert.web.rest.errors.BadRequestAlertException;
 import com.lxisoft.redalert.web.rest.util.HeaderUtil;
@@ -18,22 +17,23 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
+
 import java.util.List;
 import java.util.Optional;
+
+import javax.mail.MessagingException;
 
 /**
  * REST controller for managing Post.
  */
 @RestController
-@RequestMapping("/apis")
+@RequestMapping("/api")
 public class PostResource {
 
     private final Logger log = LoggerFactory.getLogger(PostResource.class);
@@ -102,8 +102,36 @@ public class PostResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/posts");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-    
+
     /**
+     * GET  /posts/:id : get the "id" post.
+     *
+     * @param id the id of the postDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the postDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/posts/{id}")
+    @Timed
+    public ResponseEntity<PostDTO> getPost(@PathVariable Long id) {
+        log.debug("REST request to get Post : {}", id);
+        Optional<PostDTO> postDTO = postService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(postDTO);
+    }
+
+    /**
+     * DELETE  /posts/:id : delete the "id" post.
+     *
+     * @param id the id of the postDTO to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @DeleteMapping("/posts/{id}")
+    @Timed
+    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
+        log.debug("REST request to delete Post : {}", id);
+        postService.delete(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+	
+	/**
      * GET  /postsByRegistrationId: : get all the posts by UserRegistration Id.
      *
      * @param pageable the pagination information
@@ -129,32 +157,31 @@ public class PostResource {
         
        
     }
-
-    /**
-     * GET  /posts/:id : get the "id" post.
-     *
-     * @param id the id of the postDTO to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the postDTO, or with status 404 (Not Found)
-     */
-    @GetMapping("/posts/{id}")
-    @Timed
-    public ResponseEntity<PostDTO> getPost(@PathVariable Long id) {
-        log.debug("REST request to get Post : {}", id);
-        Optional<PostDTO> postDTO = postService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(postDTO);
-    }
-    
-    
-   @GetMapping("/postclose/{id}")
+	
+	
+	 /**
+ * GET  /postclose:id: post is closed by id
+ * @param id the id of the PostDTO to close the post
+ * @return the ResponseEntity with status 200 (OK) and with body the postDTO, or with status 404 (Not Found)
+ */
+	 @GetMapping("/postclose/{id}")
+	 @Timed
     public ResponseEntity<PostDTO> getClosePost(@PathVariable Long id){
     	   Optional<PostDTO> postDTO=postService.closePost(id);
     
     	return ResponseUtil.wrapOrNotFound(postDTO);
    }
-   
-  
     
+	
+ 	 /**
+ *  GET /changeAlert:id:alertLevel: change the alertlevel using id	 
+ * @param id the id of the PostDTO to change
+ * @param alertLevel the enum type of postDTO to change the alertlevel of the post
+ * @return the ResponseEntity with status 200 (OK) and with body the postDTO, or with status 404 (Not Found)
+ */
+	
    @GetMapping("/changeAlert/{id}/{alertLevel}") 
+   @Timed
    public ResponseEntity<PostDTO> changeAlertLevel(@PathVariable Long id,@PathVariable String alertLevel)
    {
 	   
@@ -164,26 +191,11 @@ public class PostResource {
 	   
    }
    
-   
-  
-    
-    
-    
-    /**
-     * DELETE  /posts/:id : delete the "id" post.
-     *
-     * @param id the id of the postDTO to delete
-     * @return the ResponseEntity with status 200 (OK)
-     */
-    @DeleteMapping("/posts/{id}")
-    @Timed
-    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
-        log.debug("REST request to delete Post : {}", id);
-        postService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-    }
-    
-   
-    
-    
+   @PostMapping("/mail/")
+   @Timed
+   public String sendMailWithAttachment(@RequestBody PostDTO post) throws MessagingException, IOException,MailException
+   {
+	   String message = postService.sendMailWithAttachment(post);
+	   return message;
+   }																									
 }

@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @Configuration
-@EnableJpaRepositories("com.lxisoft.redalert.repository")
+@EnableJpaRepositories("com.lxisoft.repository")
 @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
 @EnableTransactionManagement
 public class DatabaseConfiguration {

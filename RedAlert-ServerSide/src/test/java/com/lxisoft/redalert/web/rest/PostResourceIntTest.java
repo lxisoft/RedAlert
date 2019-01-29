@@ -3,11 +3,6 @@ package com.lxisoft.redalert.web.rest;
 import com.lxisoft.redalert.RedAlertApp;
 
 import com.lxisoft.redalert.domain.Post;
-import com.lxisoft.redalert.repository.PostRepository;
-import com.lxisoft.redalert.service.PostService;
-import com.lxisoft.redalert.service.dto.PostDTO;
-import com.lxisoft.redalert.service.mapper.PostMapper;
-import com.lxisoft.redalert.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +23,6 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-
 import static com.lxisoft.redalert.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -36,6 +30,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.lxisoft.redalert.domain.enumeration.Alert;
+import com.lxisoft.redalert.repository.PostRepository;
+import com.lxisoft.redalert.service.PostService;
+import com.lxisoft.redalert.service.dto.PostDTO;
+import com.lxisoft.redalert.service.mapper.PostMapper;
+import com.lxisoft.redalert.web.rest.errors.ExceptionTranslator;
 /**
  * Test class for the PostResource REST controller.
  *

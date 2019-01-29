@@ -17,7 +17,7 @@ import javax.validation.constraints.*;
  * PostDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-17T14:30:07.868+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-28T10:13:25.923221+05:30[Asia/Calcutta]")
 
 public class PostDTO   {
   @JsonProperty("active")
@@ -134,8 +134,8 @@ public class PostDTO   {
     return createdOn;
   }
 
-  public void setCreatedOn(Instant instant) {
-    this.createdOn = instant;
+  public void setCreatedOn(Instant createdOn) {
+    this.createdOn = createdOn;
   }
 
   public PostDTO description(String description) {

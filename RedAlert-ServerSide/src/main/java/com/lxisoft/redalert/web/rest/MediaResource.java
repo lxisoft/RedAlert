@@ -6,11 +6,7 @@ import com.lxisoft.redalert.web.rest.errors.BadRequestAlertException;
 import com.lxisoft.redalert.web.rest.util.HeaderUtil;
 import com.lxisoft.redalert.web.rest.util.PaginationUtil;
 import com.lxisoft.redalert.service.dto.MediaDTO;
-import com.lxisoft.redalert.service.dto.PostDTO;
-
 import io.github.jhipster.web.util.ResponseUtil;
-import javassist.NotFoundException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -30,7 +26,7 @@ import java.util.Optional;
  * REST controller for managing Media.
  */
 @RestController
-@RequestMapping("/apis")
+@RequestMapping("/api")
 public class MediaResource {
 
     private final Logger log = LoggerFactory.getLogger(MediaResource.class);
@@ -58,7 +54,7 @@ public class MediaResource {
             throw new BadRequestAlertException("A new media cannot already have an ID", ENTITY_NAME, "idexists");
         }
         MediaDTO result = mediaService.save(mediaDTO);
-        return ResponseEntity.created(new URI("/apis/media/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/media/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -127,13 +123,27 @@ public class MediaResource {
         mediaService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
-    @GetMapping("/medias/{postId}")
+	
+	/**
+     * @param long1 
+	 * @param pageable
+     * @param postId the id of the Post to find
+	 * @param object8 
+	 * @param object7 
+	 * @param object6 
+	 * @param object5 
+	 * @param object4 
+	 * @param object3 
+	 * @param object2 
+	 * @param object 
+     * @return the ResponseEntity with status 200 (OK)
+     */
+	@GetMapping("/medias/{postId}")
     @Timed
-    public ResponseEntity<List<MediaDTO>> getAllMediaByPostId(Pageable pageable,@PathVariable Long postId) {
+    public ResponseEntity<List<MediaDTO>> getAllMediaByPostId(Long long1, Pageable pageable,@PathVariable Long postId, Object object, Object object2, Object object3, Object object4, Object object5, Object object6, Object object7, Object object8) {
         log.debug("REST request to get a page of Media");
         Page<MediaDTO> page = mediaService.findAllMediaBypostId(pageable,postId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/apis/medias");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-
 }

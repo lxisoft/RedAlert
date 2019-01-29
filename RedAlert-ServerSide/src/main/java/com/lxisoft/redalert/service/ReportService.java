@@ -1,12 +1,10 @@
 package com.lxisoft.redalert.service;
 
-import com.lxisoft.redalert.service.dto.PostDTO;
 import com.lxisoft.redalert.service.dto.ReportDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -45,8 +43,5 @@ public interface ReportService {
      * @param id the id of the entity
      */
     void delete(Long id);
-    
-   Page<ReportDTO> findAllByPost(Long id, Pageable pageable);
-
-	//Page<ReportDTO> findAllByPostId(Pageable pageable, Long id);
+	Page<ReportDTO> findAllByPost(Long id, Pageable pageable);
 }

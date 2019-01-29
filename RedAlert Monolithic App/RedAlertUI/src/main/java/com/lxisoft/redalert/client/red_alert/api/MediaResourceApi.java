@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-17T14:30:07.868+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-28T10:13:25.923221+05:30[Asia/Calcutta]")
 
 @Api(value = "MediaResource", description = "the MediaResource API")
 public interface MediaResourceApi {
@@ -37,7 +37,7 @@ public interface MediaResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/media",
+    @RequestMapping(value = "/api/media",
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.POST)
@@ -50,7 +50,7 @@ public interface MediaResourceApi {
         @ApiResponse(code = 204, message = "No Content"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden") })
-    @RequestMapping(value = "/apis/media/{id}",
+    @RequestMapping(value = "/api/media/{id}",
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteMediaUsingDELETE(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
@@ -61,10 +61,10 @@ public interface MediaResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/medias/{postId}",
+    @RequestMapping(value = "/api/medias/{postId}",
         produces = "*/*", 
         method = RequestMethod.GET)
-    ResponseEntity<List<MediaDTO>> getAllMediaByPostIdUsingGET(@ApiParam(value = "postId",required=true) @PathVariable("postId") Long postId,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
+    ResponseEntity<List<MediaDTO>> getAllMediaByPostIdUsingGET(@ApiParam(value = "postId",required=true) @PathVariable("postId") Long postId,@ApiParam(value = "long1") @Valid @RequestParam(value = "long1", required = false) Long long1,@ApiParam(value = "object") @Valid @RequestParam(value = "object", required = false) Object object,@ApiParam(value = "object2") @Valid @RequestParam(value = "object2", required = false) Object object2,@ApiParam(value = "object3") @Valid @RequestParam(value = "object3", required = false) Object object3,@ApiParam(value = "object4") @Valid @RequestParam(value = "object4", required = false) Object object4,@ApiParam(value = "object5") @Valid @RequestParam(value = "object5", required = false) Object object5,@ApiParam(value = "object6") @Valid @RequestParam(value = "object6", required = false) Object object6,@ApiParam(value = "object7") @Valid @RequestParam(value = "object7", required = false) Object object7,@ApiParam(value = "object8") @Valid @RequestParam(value = "object8", required = false) Object object8,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset);
 
 
     @ApiOperation(value = "getAllMedia", nickname = "getAllMediaUsingGET", notes = "", response = MediaDTO.class, responseContainer = "List", tags={ "media-resource", })
@@ -73,7 +73,7 @@ public interface MediaResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/media",
+    @RequestMapping(value = "/api/media",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<List<MediaDTO>> getAllMediaUsingGET(@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
@@ -85,7 +85,7 @@ public interface MediaResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/media/{id}",
+    @RequestMapping(value = "/api/media/{id}",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<MediaDTO> getMediaUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
@@ -98,7 +98,7 @@ public interface MediaResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/media",
+    @RequestMapping(value = "/api/media",
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.PUT)

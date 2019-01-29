@@ -3,11 +3,6 @@ package com.lxisoft.redalert.web.rest;
 import com.lxisoft.redalert.RedAlertApp;
 
 import com.lxisoft.redalert.domain.Action;
-import com.lxisoft.redalert.repository.ActionRepository;
-import com.lxisoft.redalert.service.ActionService;
-import com.lxisoft.redalert.service.dto.ActionDTO;
-import com.lxisoft.redalert.service.mapper.ActionMapper;
-import com.lxisoft.redalert.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +30,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.lxisoft.redalert.domain.enumeration.Reaction;
+import com.lxisoft.redalert.repository.ActionRepository;
+import com.lxisoft.redalert.service.ActionService;
+import com.lxisoft.redalert.service.dto.ActionDTO;
+import com.lxisoft.redalert.service.mapper.ActionMapper;
+import com.lxisoft.redalert.web.rest.errors.ExceptionTranslator;
 /**
  * Test class for the ActionResource REST controller.
  *
@@ -44,8 +44,8 @@ import com.lxisoft.redalert.domain.enumeration.Reaction;
 @SpringBootTest(classes = RedAlertApp.class)
 public class ActionResourceIntTest {
 
-    private static final Integer DEFAULT_USER_ID = 1;
-    private static final Integer UPDATED_USER_ID = 2;
+    private static final String DEFAULT_USER_ID = "AAAAAAAAAA";
+    private static final String UPDATED_USER_ID = "BBBBBBBBBB";
 
     private static final String DEFAULT_USER_NAME = "AAAAAAAAAA";
     private static final String UPDATED_USER_NAME = "BBBBBBBBBB";
@@ -67,7 +67,7 @@ public class ActionResourceIntTest {
 
     @Autowired
     private ActionMapper actionMapper;
-
+    
     @Autowired
     private ActionService actionService;
 
@@ -175,14 +175,14 @@ public class ActionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(action.getId().intValue())))
-            .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID)))
+            .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.toString())))
             .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].takenOn").value(hasItem(DEFAULT_TAKEN_ON.toString())))
             .andExpect(jsonPath("$.[*].reaction").value(hasItem(DEFAULT_REACTION.toString())))
             .andExpect(jsonPath("$.[*].approval").value(hasItem(DEFAULT_APPROVAL.booleanValue())));
     }
-
+    
     @Test
     @Transactional
     public void getAction() throws Exception {
@@ -194,7 +194,7 @@ public class ActionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(action.getId().intValue()))
-            .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID))
+            .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID.toString()))
             .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.takenOn").value(DEFAULT_TAKEN_ON.toString()))
@@ -215,6 +215,7 @@ public class ActionResourceIntTest {
     public void updateAction() throws Exception {
         // Initialize the database
         actionRepository.saveAndFlush(action);
+
         int databaseSizeBeforeUpdate = actionRepository.findAll().size();
 
         // Update the action
@@ -255,15 +256,15 @@ public class ActionResourceIntTest {
         // Create the Action
         ActionDTO actionDTO = actionMapper.toDto(action);
 
-        // If the entity doesn't have an ID, it will be created instead of just being updated
+        // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restActionMockMvc.perform(put("/api/actions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(actionDTO)))
-            .andExpect(status().isCreated());
+            .andExpect(status().isBadRequest());
 
         // Validate the Action in the database
         List<Action> actionList = actionRepository.findAll();
-        assertThat(actionList).hasSize(databaseSizeBeforeUpdate + 1);
+        assertThat(actionList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
@@ -271,6 +272,7 @@ public class ActionResourceIntTest {
     public void deleteAction() throws Exception {
         // Initialize the database
         actionRepository.saveAndFlush(action);
+
         int databaseSizeBeforeDelete = actionRepository.findAll().size();
 
         // Get the action

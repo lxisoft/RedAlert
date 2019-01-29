@@ -3,11 +3,6 @@ package com.lxisoft.redalert.web.rest;
 import com.lxisoft.redalert.RedAlertApp;
 
 import com.lxisoft.redalert.domain.UserRegistration;
-import com.lxisoft.redalert.repository.UserRegistrationRepository;
-import com.lxisoft.redalert.service.UserRegistrationService;
-import com.lxisoft.redalert.service.dto.UserRegistrationDTO;
-import com.lxisoft.redalert.service.mapper.UserRegistrationMapper;
-import com.lxisoft.redalert.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +28,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import static com.lxisoft.redalert.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -42,6 +36,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.lxisoft.redalert.domain.enumeration.Gender;
+import com.lxisoft.redalert.repository.UserRegistrationRepository;
+import com.lxisoft.redalert.service.UserRegistrationService;
+import com.lxisoft.redalert.service.dto.UserRegistrationDTO;
+import com.lxisoft.redalert.service.mapper.UserRegistrationMapper;
+import com.lxisoft.redalert.web.rest.errors.ExceptionTranslator;
 import com.lxisoft.redalert.domain.enumeration.BloodGroup;
 import com.lxisoft.redalert.domain.enumeration.Alert;
 /**
@@ -69,6 +68,9 @@ public class UserRegistrationResourceIntTest {
 
     private static final String DEFAULT_LAST_NAME = "AAAAAAAAAA";
     private static final String UPDATED_LAST_NAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_USER_ID = "AAAAAAAAAA";
+    private static final String UPDATED_USER_ID = "BBBBBBBBBB";
 
     private static final Gender DEFAULT_GENDER = Gender.MALE;
     private static final Gender UPDATED_GENDER = Gender.FEMALE;
@@ -151,6 +153,7 @@ public class UserRegistrationResourceIntTest {
             .profilePicContentType(DEFAULT_PROFILE_PIC_CONTENT_TYPE)
             .firstName(DEFAULT_FIRST_NAME)
             .lastName(DEFAULT_LAST_NAME)
+            .userId(DEFAULT_USER_ID)
             .gender(DEFAULT_GENDER)
             .bloodGroup(DEFAULT_BLOOD_GROUP)
             .contact(DEFAULT_CONTACT)
@@ -189,6 +192,7 @@ public class UserRegistrationResourceIntTest {
         assertThat(testUserRegistration.getProfilePicContentType()).isEqualTo(DEFAULT_PROFILE_PIC_CONTENT_TYPE);
         assertThat(testUserRegistration.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
         assertThat(testUserRegistration.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
+        assertThat(testUserRegistration.getUserId()).isEqualTo(DEFAULT_USER_ID);
         assertThat(testUserRegistration.getGender()).isEqualTo(DEFAULT_GENDER);
         assertThat(testUserRegistration.getBloodGroup()).isEqualTo(DEFAULT_BLOOD_GROUP);
         assertThat(testUserRegistration.getContact()).isEqualTo(DEFAULT_CONTACT);
@@ -236,6 +240,7 @@ public class UserRegistrationResourceIntTest {
             .andExpect(jsonPath("$.[*].profilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC))))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
+            .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.toString())))
             .andExpect(jsonPath("$.[*].gender").value(hasItem(DEFAULT_GENDER.toString())))
             .andExpect(jsonPath("$.[*].bloodGroup").value(hasItem(DEFAULT_BLOOD_GROUP.toString())))
             .andExpect(jsonPath("$.[*].contact").value(hasItem(DEFAULT_CONTACT.intValue())))
@@ -294,6 +299,7 @@ public class UserRegistrationResourceIntTest {
             .andExpect(jsonPath("$.profilePic").value(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC)))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME.toString()))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()))
+            .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID.toString()))
             .andExpect(jsonPath("$.gender").value(DEFAULT_GENDER.toString()))
             .andExpect(jsonPath("$.bloodGroup").value(DEFAULT_BLOOD_GROUP.toString()))
             .andExpect(jsonPath("$.contact").value(DEFAULT_CONTACT.intValue()))
@@ -331,6 +337,7 @@ public class UserRegistrationResourceIntTest {
             .profilePicContentType(UPDATED_PROFILE_PIC_CONTENT_TYPE)
             .firstName(UPDATED_FIRST_NAME)
             .lastName(UPDATED_LAST_NAME)
+            .userId(UPDATED_USER_ID)
             .gender(UPDATED_GENDER)
             .bloodGroup(UPDATED_BLOOD_GROUP)
             .contact(UPDATED_CONTACT)
@@ -356,6 +363,7 @@ public class UserRegistrationResourceIntTest {
         assertThat(testUserRegistration.getProfilePicContentType()).isEqualTo(UPDATED_PROFILE_PIC_CONTENT_TYPE);
         assertThat(testUserRegistration.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
         assertThat(testUserRegistration.getLastName()).isEqualTo(UPDATED_LAST_NAME);
+        assertThat(testUserRegistration.getUserId()).isEqualTo(UPDATED_USER_ID);
         assertThat(testUserRegistration.getGender()).isEqualTo(UPDATED_GENDER);
         assertThat(testUserRegistration.getBloodGroup()).isEqualTo(UPDATED_BLOOD_GROUP);
         assertThat(testUserRegistration.getContact()).isEqualTo(UPDATED_CONTACT);

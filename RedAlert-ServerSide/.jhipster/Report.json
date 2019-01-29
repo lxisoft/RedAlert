@@ -3,7 +3,7 @@
     "fields": [
         {
             "fieldName": "userId",
-            "fieldType": "Integer"
+            "fieldType": "String"
         },
         {
             "fieldName": "userName",
@@ -29,7 +29,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20181107053419",
+    "changelogDate": "20190111041410",
     "entityTableName": "report",
     "dto": "mapstruct",
     "pagination": "pagination",
