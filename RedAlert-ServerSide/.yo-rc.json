@@ -1,13 +1,13 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.lxisoft"
+      "packageName": "com.lxisoft.redalert"
     },
     "jhipsterVersion": "5.4.2",
     "applicationType": "microservice",
     "baseName": "RedAlert",
-    "packageName": "com.lxisoft",
-    "packageFolder": "com/lxisoft",
+    "packageName": "com.lxisoft.redalert",
+    "packageFolder": "com/lxisoft/redalert",
     "serverPort": "8082",
     "authenticationType": "oauth2",
     "cacheProvider": "no",

@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -202,7 +203,8 @@ private MediaResource mediaResource;
 		
 		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 		
-		List<UserRegistrationDTO> users = (List<UserRegistrationDTO>) userRegistrationResource.getAllFriends(post.getUserRegistrationId()).getBody();
+		List<UserRegistrationDTO> users = new ArrayList<UserRegistrationDTO>();
+		 userRegistrationResource.getAllFriends(post.getUserRegistrationId()).getBody().stream().map(users::add);
 		
 		List<MediaDTO> medias = mediaResource.getAllMediaByPostId(post.getId(), null, null, null, null, null, null, null, null, null, null).getBody();
         for(UserRegistrationDTO user:users)

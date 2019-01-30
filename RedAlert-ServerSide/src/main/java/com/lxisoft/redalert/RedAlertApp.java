@@ -8,6 +8,7 @@ import io.github.jhipster.config.JHipsterConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
@@ -28,6 +29,7 @@ public class RedAlertApp {
 
     private final Environment env;
 
+    
     public RedAlertApp(Environment env) {
         this.env = env;
     }

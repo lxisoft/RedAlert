@@ -17,7 +17,7 @@ logging:
     level:
         ROOT: DEBUG
         io.github.jhipster: DEBUG
-        com.lxisoft: DEBUG
+        com.lxisoft.redalert: DEBUG
 
 spring:
     profiles:
