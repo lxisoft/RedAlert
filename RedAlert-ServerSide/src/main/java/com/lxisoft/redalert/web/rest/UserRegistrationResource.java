@@ -1,20 +1,11 @@
 package com.lxisoft.redalert.web.rest;
 
 
-import com.codahale.metrics.annotation.Timed;
-import com.lxisoft.redalert.service.UserRegistrationService;
-import com.lxisoft.redalert.web.rest.errors.BadRequestAlertException;
-import com.lxisoft.redalert.web.rest.util.HeaderUtil;
-import com.lxisoft.redalert.web.rest.util.PaginationUtil;
-import com.lxisoft.redalert.service.dto.PostDTO;
-import com.lxisoft.redalert.service.dto.UserRegistrationDTO;
-import io.github.jhipster.web.util.ResponseUtil;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -244,8 +235,7 @@ public class UserRegistrationResource {
 		return new ResponseEntity<Set<UserRegistrationDTO>>(user.getFriends(), HttpStatus.OK);
 	}
 
-<<<<<<< HEAD
-=======
+
 	 @GetMapping("/sendSMS/{userId}/{phoneno}")
 	 public ResponseEntity<UserRegistrationDTO> sendSMS(@PathVariable String phoneno,@PathVariable String userId)
 	 {
@@ -260,9 +250,7 @@ public class UserRegistrationResource {
 		return new ResponseEntity<UserRegistrationDTO>(userReg, HttpStatus.OK);
 		 
 	 }
-	 
 
->>>>>>> 89249d969eea945b28e861627be815635e9a5897
 
 	@GetMapping("/user-registration/startcharacter")
 	@Timed
@@ -275,8 +263,5 @@ public class UserRegistrationResource {
 
 	}
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 89249d969eea945b28e861627be815635e9a5897
 }
