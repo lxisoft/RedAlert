@@ -79,6 +79,10 @@ public interface UserRegistrationService {
 	//UserRegistrationDTO findByUserId(String id);
 
 
+	
+
+	
+
 	UserRegistrationDTO sendSMS(Long phoneno, String userId);
 
 	

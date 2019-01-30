@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-28T10:13:25.923221+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-30T14:13:16.657136500+05:30[Asia/Calcutta]")
 
 @Api(value = "PostResource", description = "the PostResource API")
 public interface PostResourceApi {
@@ -122,7 +122,7 @@ public interface PostResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/mail/",
+    @RequestMapping(value = "/api/posts/mail",
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.POST)

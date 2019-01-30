@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -44,6 +46,8 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
     private final PostMapper postMapper;
+    
+   
     
 @Autowired
 private JavaMailSender javaMailSender;
@@ -202,22 +206,27 @@ private MediaResource mediaResource;
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		
 		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+		System.out.println("pooooooooossssssstttttttt"+post.getId());
 		
-		List<UserRegistrationDTO> users = new ArrayList<UserRegistrationDTO>();
-		 userRegistrationResource.getAllFriends(post.getUserRegistrationId()).getBody().stream().map(users::add);
-		
-		List<MediaDTO> medias = mediaResource.getAllMediaByPostId(post.getId(), null, null, null, null, null, null, null, null, null, null).getBody();
-        for(UserRegistrationDTO user:users)
+		//List<UserRegistrationDTO> users = new ArrayList<UserRegistrationDTO>();
+		ResponseEntity<Set<UserRegistrationDTO>> users = userRegistrationResource.getAllFriends(post.getUserRegistrationId());
+		 //userRegistrationResource.getAllFriends(post.getUserRegistrationId()).getBody().stream().map(users::add);
+		 System.out.println("userssssssssssss"+users.hasBody());
+		ResponseEntity<List<MediaDTO>> medias = mediaResource.getAllMediaByPostId(post.getId(), null);
+		System.out.println("meeedddddiiiaaaaaa"+medias.hasBody());
+		for(UserRegistrationDTO user:users.getBody())
         {
+			log.debug("for loop for userRegistration");
 		helper.setTo(user.getEmail());
 		helper.setSubject("Alert Message");
 		helper.setText(post.getDescription());
 
 		//FileSystemResource file = new FileSystemResource("/home/rockhard/Desktop/Registration.pdf");
-		if(!medias.isEmpty())
+		if(medias.hasBody())
 		{
-		for(MediaDTO media:medias)
+		for(MediaDTO media:medias.getBody())
 		{
+			log.debug("for loop for media");
 			File file=new File("media.png");
 			 FileUtils.writeByteArrayToFile(file, media.getFile());
 			helper.addAttachment("emergency.png",file);

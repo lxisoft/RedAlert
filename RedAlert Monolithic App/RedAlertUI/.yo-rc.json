@@ -31,11 +31,7 @@
   "generator-jhipster-swagger-cli": {
     "promptValues": {
       "inputSpec": "http://localhost:8082/RedAlert/v2/api-docs",
-<<<<<<< HEAD
-      "cliName": "redalert"
-=======
       "cliName": "RedAlert"
->>>>>>> e1d8a58fbb887edff6fc4ca6ab250acc9ca7a866
     },
     "apis": {
       "RedAlert": {
