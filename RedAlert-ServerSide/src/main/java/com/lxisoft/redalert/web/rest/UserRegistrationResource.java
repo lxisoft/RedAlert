@@ -252,7 +252,7 @@ public class UserRegistrationResource {
 
 
 	 @GetMapping("/sendSMS/{userId}/{phoneno}")
-	 public ResponseEntity<UserRegistrationDTO> sendSMS(@PathVariable String phoneno,@PathVariable String userId)
+	 public ResponseEntity<UserRegistrationDTO> sendSMS(@PathVariable Long phoneno,@PathVariable String userId)
 	 {
 		
 			UserRegistrationDTO user = userRegistrationService.sendSMS(phoneno,userId);
@@ -272,7 +272,7 @@ public class UserRegistrationResource {
 	@GetMapping("/user-registration/startcharacter")
 	@Timed
 	public ResponseEntity<List<UserRegistrationDTO>> inputCharacterContaining(@RequestParam String searchTerm,Pageable pageable) {
-		Page<UserRegistrationDTO> users = userRegistrationService
+	  	Page<UserRegistrationDTO> users = userRegistrationService
 				.getAllFirstNameLastNameUserNameContainingIgnoreCase(searchTerm, searchTerm, searchTerm, pageable);
 
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(users, "/apis/user-registrations");

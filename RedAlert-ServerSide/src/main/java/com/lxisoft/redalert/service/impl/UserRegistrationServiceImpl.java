@@ -5,6 +5,11 @@ import com.lxisoft.redalert.domain.UserRegistration;
 import com.lxisoft.redalert.repository.UserRegistrationRepository;
 import com.lxisoft.redalert.service.dto.UserRegistrationDTO;
 import com.lxisoft.redalert.service.mapper.UserRegistrationMapper;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.rest.api.v2010.account.ValidationRequest;
+import com.twilio.type.PhoneNumber;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -157,18 +162,45 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		 return userRegistrationMapper.toDto(userRegistration);
 	}
 
-	@Override
-	public UserRegistrationDTO sendSMS(String phoneno, String userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public UserRegistrationDTO validate(String phoneno) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
+	public UserRegistrationDTO sendSMS(Long phoneNo,String userId) {
+		// TODO Auto-generated method stub
+		final String ACCOUNT_SID = "AC5b7eefb2b599f290036b2780f4815df6";
+	    final String AUTH_TOKEN = "5bcfdda6555bd4e769a8807203be423c";
+	    final String TWILIO_NUMBER = "+14232265359";
+	    
+	    
+		 Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+         Message message = Message.creator(
+                 new com.twilio.type.PhoneNumber(Long.toString(phoneNo)),
+                new com.twilio.type.PhoneNumber("+14232265359"),
+                 "MESSAGE FROM TWILIO")
+             .create();
+         UserRegistration user=userRegistrationRepository.findByUserId(userId);
+		return userRegistrationMapper.toDto(user);
+
+		//return userRegistrationRepository.;
+	}
+	
+
+	public UserRegistrationDTO validate(String phoneno){
+		
+		final String ACCOUNT_SID = "AC5b7eefb2b599f290036b2780f4815df6";
+	    final String AUTH_TOKEN = "5bcfdda6555bd4e769a8807203be423c";
+	    final String TWILIO_NUMBER = "+14232265359";
+	    
+		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+	
+		 ValidationRequest validationRequest = ValidationRequest.creator(new PhoneNumber(phoneno))
+			        .setFriendlyName("Mom Number")
+			        .create();
+		 UserRegistration user=userRegistrationRepository.findByUserId(phoneno);
+			return userRegistrationMapper.toDto(user);
+
+		}
+
+	
 	@Override
 	public Page<UserRegistrationDTO> getAllFirstNameLastNameUserNameContainingIgnoreCase(String searchTerm,
 			String searchTerm2, String searchTerm3, Pageable pageable) {
@@ -176,3 +208,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		return null;
 	}
 }
+	
+
+
