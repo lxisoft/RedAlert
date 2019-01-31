@@ -12,13 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lxisoft.redalert.client.crimestopper.api.ComplaintResourceApi;
 import com.lxisoft.redalert.client.crimestopper.api.UserResponseResourceApi;
 import com.lxisoft.redalert.client.crimestopper.model.ComplaintDTO;
-import com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO;
 import com.lxisoft.redalert.client.red_alert.api.UserRegistrationResourceApi;
 import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
 import com.lxisoft.redalert.domain.User;
@@ -87,21 +86,21 @@ public class CrimeStopperHomeController {
 		return "create_complaint"; 
 	}
 	
-	@GetMapping(value="/user_response")         
+	@PostMapping(value="/likeComplaint")         
 	
-	public String likeComplaint(Model model,@RequestBody UserResponseDTO userResponse)
+	public String likeComplaint(Model model)
 	{
-		log.debug("mark an user response:"+userResponse);       
+		log.debug("mark an user response:");       
 		
 	
 		
 		//complaintResourceApi.getAllComplaintsOfFriendsUsingGET(userId, eagerload, offset, page, pageNumber, pageSize, paged, size, sort, sortSorted, sortUnsorted, unpaged);
-
+/*
 		ResponseEntity<UserResponseDTO>result=userResponseResourceApi.createUserResponseUsingPOST(userResponse);
 		HomeView homeView=new HomeView(new ArrayList<ComplaintDTO>());
 		
 		
-		model.addAttribute("userResponce",result.getBody());
+		model.addAttribute("userResponce",result.getBody());*/
 
 		return redirectHome(model); 
 	}
