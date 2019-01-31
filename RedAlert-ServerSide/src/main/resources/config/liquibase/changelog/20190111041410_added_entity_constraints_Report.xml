@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity Report.
     -->
-    <changeSet id="20181107053419-2" author="jhipster">
+    <changeSet id="20190111041410-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="post_id"
                                  baseTableName="report"

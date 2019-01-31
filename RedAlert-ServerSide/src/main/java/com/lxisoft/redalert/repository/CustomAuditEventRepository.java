@@ -1,8 +1,6 @@
 package com.lxisoft.redalert.repository;
 
-import com.lxisoft.redalert.config.Constants;
-import com.lxisoft.redalert.config.audit.AuditEventConverter;
-import com.lxisoft.redalert.domain.PersistentAuditEvent;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +9,10 @@ import org.springframework.boot.actuate.audit.AuditEventRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.lxisoft.redalert.config.Constants;
+import com.lxisoft.redalert.config.audit.AuditEventConverter;
+import com.lxisoft.redalert.domain.PersistentAuditEvent;
 
 import java.time.Instant;
 import java.util.*;

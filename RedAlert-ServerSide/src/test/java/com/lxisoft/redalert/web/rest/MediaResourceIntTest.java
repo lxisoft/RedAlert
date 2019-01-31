@@ -27,7 +27,6 @@ import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-
 import static com.lxisoft.redalert.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;

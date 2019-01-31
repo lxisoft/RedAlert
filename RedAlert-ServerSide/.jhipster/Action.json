@@ -1,23 +1,9 @@
 {
-    "fluentMethods": true,
-    "relationships": [
-        {
-            "relationshipName": "post",
-            "otherEntityName": "post",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "relationshipName": "reports",
-            "otherEntityName": "report",
-            "otherEntityRelationshipName": "action"
-        }
-    ],
+    "name": "Action",
     "fields": [
         {
             "fieldName": "userId",
-            "fieldType": "Integer"
+            "fieldType": "String"
         },
         {
             "fieldName": "userName",
@@ -41,11 +27,28 @@
             "fieldType": "Boolean"
         }
     ],
-    "changelogDate": "20181107053417",
+    "relationships": [
+        {
+            "relationshipName": "post",
+            "otherEntityName": "post",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "reports",
+            "otherEntityName": "report",
+            "otherEntityRelationshipName": "action"
+        }
+    ],
+    "changelogDate": "20190111041408",
     "entityTableName": "action",
     "dto": "mapstruct",
     "pagination": "pagination",
     "service": "serviceImpl",
     "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "RedAlert",
+    "applications": "*",
     "microserviceName": "RedAlert"
 }

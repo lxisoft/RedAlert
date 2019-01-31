@@ -17,7 +17,7 @@ import javax.validation.constraints.*;
  * ActionDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-17T14:30:07.868+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-30T14:13:16.657136500+05:30[Asia/Calcutta]")
 
 public class ActionDTO   {
   @JsonProperty("approval")
@@ -70,7 +70,7 @@ public class ActionDTO   {
   private Instant takenOn = null;
 
   @JsonProperty("userId")
-  private Integer userId = null;
+  private String userId = null;
 
   @JsonProperty("userName")
   private String userName = null;
@@ -192,11 +192,11 @@ public class ActionDTO   {
     return takenOn;
   }
 
-  public void setTakenOn(Instant instant) {
-    this.takenOn = instant;
+  public void setTakenOn(Instant takenOn) {
+    this.takenOn = takenOn;
   }
 
-  public ActionDTO userId(Integer userId) {
+  public ActionDTO userId(String userId) {
     this.userId = userId;
     return this;
   }
@@ -208,11 +208,11 @@ public class ActionDTO   {
   @ApiModelProperty(value = "")
 
 
-  public Integer getUserId() {
+  public String getUserId() {
     return userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(String userId) {
     this.userId = userId;
   }
 

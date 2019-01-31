@@ -32,7 +32,7 @@ public class SearchController {
 	@PostMapping("/submitpage")
 	public List<UserRegistrationDTO> printPage(@RequestParam String search,Model model) {
 		
-		List<UserRegistrationDTO> users=userApi.inputCharacterContainingUsingGET(search,null,null,null,null,null,null,null,null,null,null).getBody();
+		List<UserRegistrationDTO> users=(List<UserRegistrationDTO>) userApi.inputCharacterContainingUsingGET(search,null,null,null,null,null,null,null,null,null,null);
 		model.addAttribute("user",users );
 		return users ;
 		

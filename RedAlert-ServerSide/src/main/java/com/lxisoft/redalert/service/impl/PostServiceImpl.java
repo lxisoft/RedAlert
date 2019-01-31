@@ -1,30 +1,38 @@
 package com.lxisoft.redalert.service.impl;
 
 import com.lxisoft.redalert.service.PostService;
-import com.lxisoft.redalert.service.UserRegistrationService;
 import com.lxisoft.redalert.domain.Post;
-
-import com.lxisoft.redalert.domain.UserRegistration;
-
 import com.lxisoft.redalert.domain.enumeration.Alert;
-
 import com.lxisoft.redalert.repository.PostRepository;
-import com.lxisoft.redalert.repository.UserRegistrationRepository;
+import com.lxisoft.redalert.service.dto.MediaDTO;
 import com.lxisoft.redalert.service.dto.PostDTO;
+import com.lxisoft.redalert.service.dto.UserRegistrationDTO;
 import com.lxisoft.redalert.service.mapper.PostMapper;
+import com.lxisoft.redalert.web.rest.MediaResource;
+import com.lxisoft.redalert.web.rest.UserRegistrationResource;
+
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 /**
  * Service Implementation for managing Post.
@@ -32,7 +40,6 @@ import java.util.Optional;
 @Service
 @Transactional
 public class PostServiceImpl implements PostService {
-	
 
     private final Logger log = LoggerFactory.getLogger(PostServiceImpl.class);
 
@@ -40,9 +47,14 @@ public class PostServiceImpl implements PostService {
 
     private final PostMapper postMapper;
     
-    @Autowired
-    UserRegistrationRepository userRegistrationRepository;
-
+   
+    
+@Autowired
+private JavaMailSender javaMailSender;
+@Autowired
+private UserRegistrationResource userRegistrationResource;
+@Autowired
+private MediaResource mediaResource;
     public PostServiceImpl(PostRepository postRepository, PostMapper postMapper) {
         this.postRepository = postRepository;
         this.postMapper = postMapper;
@@ -102,9 +114,8 @@ public class PostServiceImpl implements PostService {
         log.debug("Request to delete Post : {}", id);
         postRepository.deleteById(id);
     }
-
-
-    /**
+	
+	/**
      * Get all the posts By UserRegistrationId.
      *
      * @param pageable the pagination information
@@ -123,6 +134,12 @@ public class PostServiceImpl implements PostService {
     }
 
     
+    /**
+     * Get all the posts By postId.
+     *
+     * 
+     * @return the list of entities
+     */
     
     @Override
     public Optional<PostDTO> closePost(Long id)
@@ -141,7 +158,14 @@ public class PostServiceImpl implements PostService {
     	
      }
     
-    
+    /**
+     * Get all the posts By UserRegistrationId.
+     *
+     * @param id the id of the postdto
+     * @param alert 
+     * @return the list of entities
+     */
+    @Override
     public PostDTO changeAlert(Long id,String alert)
     {
     	
@@ -176,23 +200,47 @@ public class PostServiceImpl implements PostService {
     }
 
 	@Override
-	public PostDTO sendSMS(Long id, Long phoneno) {
+	public String sendMailWithAttachment(PostDTO post) throws MessagingException, IOException, MailException {
 		// TODO Auto-generated method stub
-		return null;
+
+		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+		
+		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+		System.out.println("pooooooooossssssstttttttt"+post.getId());
+		
+		//List<UserRegistrationDTO> users = new ArrayList<UserRegistrationDTO>();
+		ResponseEntity<Set<UserRegistrationDTO>> users = userRegistrationResource.getAllFriends(post.getUserRegistrationId());
+		 //userRegistrationResource.getAllFriends(post.getUserRegistrationId()).getBody().stream().map(users::add);
+		 System.out.println("userssssssssssss"+users.hasBody());
+		ResponseEntity<List<MediaDTO>> medias = mediaResource.getAllMediaByPostId(post.getId(), null);
+		System.out.println("meeedddddiiiaaaaaa"+medias.hasBody());
+		for(UserRegistrationDTO user:users.getBody())
+        {
+			log.debug("for loop for userRegistration");
+		helper.setTo(user.getEmail());
+		helper.setSubject("Alert Message");
+		helper.setText(post.getDescription());
+
+		//FileSystemResource file = new FileSystemResource("/home/rockhard/Desktop/Registration.pdf");
+		if(medias.hasBody())
+		{
+		for(MediaDTO media:medias.getBody())
+		{
+			log.debug("for loop for media");
+			File file=new File("media.png");
+			 FileUtils.writeByteArrayToFile(file, media.getFile());
+			helper.addAttachment("emergency.png",file);
+		}
+		}
+		else
+		{
+			System.out.println("media null");
+		}
+
+		javaMailSender.send(mimeMessage);
+	
+        }
+        
+		return "Send successfully";
 	}
-
-	
-}   
-
-	
-	
-	
-	
-
-
-	
- 
-
- 
-
-
+}

@@ -15,23 +15,44 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity LeaderBoard.
+        Added the entity Post.
     -->
-    <changeSet id="20181107053418-1" author="jhipster">
-        <createTable tableName="leader_board">
+    <changeSet id="20190111041406-1" author="jhipster">
+        <createTable tableName="post">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="user_name" type="varchar(255)">
+            <column name="alert_level" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="score" type="integer">
+            <column name="description" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="created_on" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="active" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="latitude" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="longitude" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="user_registration_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        <dropDefaultValue tableName="post" columnName="created_on" columnDataType="datetime"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

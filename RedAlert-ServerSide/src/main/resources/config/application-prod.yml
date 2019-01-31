@@ -16,7 +16,7 @@
 logging:
     level:
         ROOT: INFO
-        com.lxisoft.redalert: INFO
+        com.lxisoft: INFO
         io.github.jhipster: INFO
 
 spring:

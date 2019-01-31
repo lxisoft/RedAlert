@@ -1,13 +1,10 @@
 package com.lxisoft.redalert.service;
 
-import com.lxisoft.redalert.domain.User;
 import com.lxisoft.redalert.domain.UserRegistration;
 import com.lxisoft.redalert.service.dto.UserRegistrationDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,8 +51,7 @@ public interface UserRegistrationService {
      * @param id the id of the entity
      */
     void delete(Long id);
-    
-    Page<UserRegistrationDTO> findByLastName(String lastName,Pageable pageable);
+	Page<UserRegistrationDTO> findByLastName(String lastName,Pageable pageable);
 
 	List<UserRegistration> findAll();
 	
@@ -75,21 +71,21 @@ public interface UserRegistrationService {
 
 	UserRegistrationDTO findByUserId(String id);
 
+	UserRegistrationDTO validate(String phoneno);
 
-	UserRegistrationDTO sendSMS(String phoneno, String userId);
+	Page<UserRegistrationDTO> getAllFirstNameLastNameUserNameContainingIgnoreCase(String searchTerm, String searchTerm2,String searchTerm3, Pageable pageable);
 
-	UserRegistrationDTO validate(String phoneNo);
-
-	
-
-
-	//Optional<UserRegistrationDTO> sendSMS(Long phoneNo);
 
 	//UserRegistrationDTO findByUserId(String id);
 
 
-	Page<UserRegistrationDTO> getAllFirstNameLastNameUserNameContainingIgnoreCase(String firstname,String lastname,String username,Pageable pageable);
+	
+
+	
+
+	UserRegistrationDTO sendSMS(Long phoneno, String userId);
 
 	
 	
+
 }

@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-17T14:30:07.868+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-30T14:13:16.657136500+05:30[Asia/Calcutta]")
 
 @Api(value = "ReportResource", description = "the ReportResource API")
 public interface ReportResourceApi {
@@ -37,7 +37,7 @@ public interface ReportResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/reports",
+    @RequestMapping(value = "/api/reports",
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.POST)
@@ -50,7 +50,7 @@ public interface ReportResourceApi {
         @ApiResponse(code = 204, message = "No Content"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden") })
-    @RequestMapping(value = "/apis/reports/{id}",
+    @RequestMapping(value = "/api/reports/{id}",
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteReportUsingDELETE(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
@@ -61,7 +61,7 @@ public interface ReportResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/postreports/{id}",
+    @RequestMapping(value = "/api/postreports/{id}",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<List<ReportDTO>> findAllByPostUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
@@ -73,7 +73,7 @@ public interface ReportResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/reports",
+    @RequestMapping(value = "/api/reports",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<List<ReportDTO>> getAllReportsUsingGET(@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
@@ -85,7 +85,7 @@ public interface ReportResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/reports/{id}",
+    @RequestMapping(value = "/api/reports/{id}",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<ReportDTO> getReportUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
@@ -98,7 +98,7 @@ public interface ReportResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/reports",
+    @RequestMapping(value = "/api/reports",
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.PUT)

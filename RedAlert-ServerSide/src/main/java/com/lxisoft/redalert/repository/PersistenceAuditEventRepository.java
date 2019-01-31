@@ -1,4 +1,4 @@
-package com.lxisoft.redalert.repository;
+ package com.lxisoft.redalert.repository;
 
 import com.lxisoft.redalert.domain.PersistentAuditEvent;
 import org.springframework.data.domain.Page;

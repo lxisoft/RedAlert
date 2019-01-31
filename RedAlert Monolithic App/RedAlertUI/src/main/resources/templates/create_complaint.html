@@ -199,6 +199,8 @@
 
 			<div class="btn-group" role="group" aria-label="Basic example">
 			<form action="/crime-stopper/likeComplaint" method="POST">
+			<input type="hiden" value="like" name="flag">
+			<input type="hidden" value="${complaint.id}" name="complaintId">
 				<button type="submit" class="btn btn-tertiary">
 						<!-- like-->	
 						<i class="far fa-thumbs-up"></i>
@@ -238,3 +240,4 @@
 </body>
 
 </html>
+ 
