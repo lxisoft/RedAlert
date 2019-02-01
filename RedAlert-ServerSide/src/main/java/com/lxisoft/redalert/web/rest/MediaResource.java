@@ -140,10 +140,10 @@ public class MediaResource {
      */
 	@GetMapping("/medias/{postId}")
     @Timed
-    public ResponseEntity<List<MediaDTO>> getAllMediaByPostId(Long long1, Pageable pageable,@PathVariable Long postId, Object object, Object object2, Object object3, Object object4, Object object5, Object object6, Object object7, Object object8) {
+    public ResponseEntity<List<MediaDTO>> getAllMediaByPostId(@PathVariable Long postId,Pageable pageable ) {
         log.debug("REST request to get a page of Media");
         Page<MediaDTO> page = mediaService.findAllMediaBypostId(pageable,postId);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/apis/medias");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/medias");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }

@@ -191,10 +191,11 @@ public class PostResource {
 	   
    }
    
-   @PostMapping("/mail/")
+   @PostMapping("/posts/mail")
    @Timed
    public String sendMailWithAttachment(@RequestBody PostDTO post) throws MessagingException, IOException,MailException
    {
+	   log.info("Mail method");
 	   String message = postService.sendMailWithAttachment(post);
 	   return message;
    }																									

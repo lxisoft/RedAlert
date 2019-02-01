@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-29T16:05:35.138308100+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-30T14:13:16.657136500+05:30[Asia/Calcutta]")
 
 @Api(value = "UserRegistrationResource", description = "the UserRegistrationResource API")
 public interface UserRegistrationResourceApi {
@@ -184,7 +184,7 @@ public interface UserRegistrationResourceApi {
     @RequestMapping(value = "/api/sendSMS/{userId}/{phoneno}",
         produces = "*/*", 
         method = RequestMethod.GET)
-    ResponseEntity<UserRegistrationDTO> sendSMSUsingGET(@ApiParam(value = "phoneno",required=true) @PathVariable("phoneno") String phoneno,@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
+    ResponseEntity<UserRegistrationDTO> sendSMSUsingGET(@ApiParam(value = "phoneno",required=true) @PathVariable("phoneno") Long phoneno,@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
 
 
     @ApiOperation(value = "unFriend", nickname = "unFriendUsingPOST", notes = "", tags={ "user-registration-resource", })
