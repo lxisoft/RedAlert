@@ -20,7 +20,7 @@
     "serviceDiscoveryType": false,
     "buildTool": "maven",
     "enableSwaggerCodegen": false,
-    "jwtSecretKey": "NDEwMDVkYWE5NDY0NzkwMTZkODNjMjdmZWYyMDM0YTgxMzgzMjY4YWIxMWYxNDNlZDUyNmViNDhlOTA0ZDljNTM4NDBkMTI3ZTY5ZmEyNjMzZjZhZGMwYTQ3Y2NjMGY2ODg3MmEyNDVlY2JkYzMxZDAyZGY2N2JkMDU0NzE2MTY=",
+    "jwtSecretKey": "YmIwNjdkMWYxMDAyNTA3YTZlNTU1OWI0ZGYyYTE0Y2JkMWYxODliMjhmNDViNGVlZGNhOTJhMTUxNzU0ZDdiOTk2N2VlMTc4YmUxOWZkMzhiOGYzYTJmOTMwNTc3YjAzNDUyNzcyNGI0ZTkzYWUyM2NiNTNlOTdjMmI0MThkNjE=",
     "enableTranslation": false,
     "testFrameworks": [],
     "jhiPrefix": "jhi",

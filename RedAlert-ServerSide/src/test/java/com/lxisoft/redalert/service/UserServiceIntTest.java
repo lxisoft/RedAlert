@@ -1,11 +1,11 @@
 package com.lxisoft.redalert.service;
 
 import com.lxisoft.redalert.RedAlertApp;
-import com.lxisoft.redalert.config.Constants;
 import com.lxisoft.redalert.domain.User;
+import com.lxisoft.redalert.config.Constants;
 import com.lxisoft.redalert.repository.UserRepository;
-import com.lxisoft.redalert.service.dto.UserDTO;
 import com.lxisoft.redalert.security.AuthoritiesConstants;
+import com.lxisoft.redalert.service.dto.UserDTO;
 
 import org.junit.Before;
 import org.junit.Test;

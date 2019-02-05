@@ -12,11 +12,13 @@ public class CommentDTO implements Serializable {
 
     private Long userId;
 
+    private String description;
+
     private Long noOfLikes;
 
     private Long noOfDislikes;
 
-    private Long noOfReplys;
+    private Long noOfReplies;
 
     private Long complaintId;
 
@@ -36,6 +38,14 @@ public class CommentDTO implements Serializable {
         this.userId = userId;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Long getNoOfLikes() {
         return noOfLikes;
     }
@@ -52,12 +62,12 @@ public class CommentDTO implements Serializable {
         this.noOfDislikes = noOfDislikes;
     }
 
-    public Long getNoOfReplys() {
-        return noOfReplys;
+    public Long getNoOfReplies() {
+        return noOfReplies;
     }
 
-    public void setNoOfReplys(Long noOfReplys) {
-        this.noOfReplys = noOfReplys;
+    public void setNoOfReplies(Long noOfReplies) {
+        this.noOfReplies = noOfReplies;
     }
 
     public Long getComplaintId() {
@@ -94,10 +104,12 @@ public class CommentDTO implements Serializable {
         return "CommentDTO{" +
             "id=" + getId() +
             ", userId=" + getUserId() +
+            ", description='" + getDescription() + "'" +
             ", noOfLikes=" + getNoOfLikes() +
             ", noOfDislikes=" + getNoOfDislikes() +
-            ", noOfReplys=" + getNoOfReplys() +
+            ", noOfReplies=" + getNoOfReplies() +
             ", complaint=" + getComplaintId() +
             "}";
     }
+    
 }

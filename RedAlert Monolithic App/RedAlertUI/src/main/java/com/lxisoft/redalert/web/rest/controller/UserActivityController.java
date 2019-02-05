@@ -26,7 +26,7 @@ import com.lxisoft.redalert.model.View;
 
 @Controller
 @RequestMapping("/postclose")
-public class UserActivity {
+public class UserActivityController {
 	@Autowired
 	PostResourceApi postResource;
 	@Autowired

@@ -15,7 +15,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20181107053416",
+    "changelogDate": "20190111041407",
     "entityTableName": "media",
     "dto": "mapstruct",
     "pagination": "pagination",

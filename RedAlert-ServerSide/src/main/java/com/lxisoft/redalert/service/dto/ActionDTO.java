@@ -1,11 +1,9 @@
 package com.lxisoft.redalert.service.dto;
 
-
 import java.time.Instant;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+
 import com.lxisoft.redalert.domain.enumeration.Reaction;
 
 /**
@@ -15,7 +13,7 @@ public class ActionDTO implements Serializable {
 
     private Long id;
 
-    private Integer userId;
+    private String userId;
 
     private String userName;
 
@@ -37,11 +35,11 @@ public class ActionDTO implements Serializable {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -103,7 +101,7 @@ public class ActionDTO implements Serializable {
         }
 
         ActionDTO actionDTO = (ActionDTO) o;
-        if(actionDTO.getId() == null || getId() == null) {
+        if (actionDTO.getId() == null || getId() == null) {
             return false;
         }
         return Objects.equals(getId(), actionDTO.getId());
@@ -118,12 +116,13 @@ public class ActionDTO implements Serializable {
     public String toString() {
         return "ActionDTO{" +
             "id=" + getId() +
-            ", userId=" + getUserId() +
+            ", userId='" + getUserId() + "'" +
             ", userName='" + getUserName() + "'" +
             ", description='" + getDescription() + "'" +
             ", takenOn='" + getTakenOn() + "'" +
             ", reaction='" + getReaction() + "'" +
             ", approval='" + isApproval() + "'" +
+            ", post=" + getPostId() +
             "}";
     }
 }

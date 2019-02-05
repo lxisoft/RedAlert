@@ -1,10 +1,11 @@
 package com.lxisoft.redalert.web.rest;
 
 import com.lxisoft.redalert.RedAlertApp;
-import com.lxisoft.redalert.config.audit.AuditEventConverter;
 import com.lxisoft.redalert.domain.PersistentAuditEvent;
+import com.lxisoft.redalert.config.audit.AuditEventConverter;
 import com.lxisoft.redalert.repository.PersistenceAuditEventRepository;
 import com.lxisoft.redalert.service.AuditEventService;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

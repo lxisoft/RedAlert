@@ -1,26 +1,33 @@
 package com.lxisoft.crimestopper.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.lxisoft.crimestopper.service.UserResponseService;
-import com.lxisoft.crimestopper.web.rest.errors.BadRequestAlertException;
-import com.lxisoft.crimestopper.web.rest.util.HeaderUtil;
-import com.lxisoft.crimestopper.web.rest.util.PaginationUtil;
-import com.lxisoft.crimestopper.service.dto.UserResponseDTO;
-import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import com.codahale.metrics.annotation.Timed;
+import com.lxisoft.crimestopper.service.UserResponseService;
+import com.lxisoft.crimestopper.service.dto.UserResponseDTO;
+import com.lxisoft.crimestopper.web.rest.errors.BadRequestAlertException;
+import com.lxisoft.crimestopper.web.rest.util.HeaderUtil;
+import com.lxisoft.crimestopper.web.rest.util.PaginationUtil;
 
-import java.util.List;
-import java.util.Optional;
+import io.github.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing UserResponse.
@@ -99,7 +106,7 @@ public class UserResponseResource {
     /**
      * GET  /user-responses/:id : get the "id" userResponse.
      *
-     * @param id the id of the userResponseDTO to retrieve
+     *  @param id the id of the userResponseDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the userResponseDTO, or with status 404 (Not Found)
      */
     @GetMapping("/user-responses/{id}")
@@ -123,4 +130,128 @@ public class UserResponseResource {
         userResponseService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+    /**
+     * POST /compliant/like : like the "id" complaint
+     * @param id the id of the userResponseDTO to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    
+    
+    @PostMapping("complaint/user-responce")
+    @Timed
+    
+    public ResponseEntity<UserResponseDTO> addUserResponseOfComplaint(@RequestBody UserResponseDTO userResponse) throws URISyntaxException 
+    {
+    	
+    	log.debug("give userResponce to an complain userID+:"+userResponse.getUserId()+"  complaintId:"+userResponse.getId());
+    	
+    	if(userResponse.getId()==null)
+    	{
+    		throw new BadRequestAlertException("invalid complaintId",ENTITY_NAME,"COMPLAINT ID NOT FOUND");
+    	}
+    	if(userResponse.getUserId()==null)
+    	{
+    		throw new BadRequestAlertException("invalid user id",ENTITY_NAME,"user ID not found");
+    	}
+    	
+    	if(userResponse.getFlag()==null)
+    	{
+    		throw new BadRequestAlertException("invalid user id",ENTITY_NAME,"flag not found");
+    	}
+    	
+    	
+    	return ResponseUtil.wrapOrNotFound(userResponseService.saveComplaintUserResponse(userResponse));
+   
+    	 
+    }
+    
+    
+   /**
+    * 
+    * 
+    */
+    @PostMapping("comment/user-responses")
+    @Timed
+    
+    public ResponseEntity<UserResponseDTO> userResponceToAnComment(@RequestBody UserResponseDTO userResponse)
+    {
+    	
+    	log.debug("post resquest to save an user responce of an comment:"+userResponse);
+    	
+    	userResponseService.saveCommentUserResponse(userResponse);
+    	
+    	
+    	//serResponseService.saveCommentUserResponce();
+    	
+    	return null;
+    	
+    }
+    
+    /**
+     * to get userResponce of An complaint
+     * @param complaintId
+     * @param pageable
+     * @return
+     */
+    
+    @GetMapping("complaint/user-responses/{complaintId}")
+    @Timed
+    public ResponseEntity<List<UserResponseDTO>> getUserResponseOfComplaint(@PathVariable Long complaintId,Pageable pageable)
+    {
+    	log.debug("request to get an userResponse of given complaint"+complaintId);
+    	
+    	Page<UserResponseDTO> result=userResponseService.getComplaintUserResponses(complaintId,pageable);
+    	
+    	 HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(result, "/api/complaint/user-responses");
+         return ResponseEntity.ok().headers(headers).body(result.getContent());
+ 
+    }
+    
+    
+    /**
+     * to get userResponce of An complaint
+     * @param complaintId
+     * @param pageable
+     * @return
+     */
+    
+    @GetMapping("comment/user-responses/{commentId}")
+    @Timed
+    public ResponseEntity<List<UserResponseDTO>> getUserResponseOfComment(@PathVariable Long commentId,Pageable pageable)
+    {
+    	log.debug("request to get an userResponse of given comment"+commentId);
+    	
+    	Page<UserResponseDTO> result=userResponseService.getCommentUserResponses(commentId,pageable);
+    	
+    	 HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(result, "/api/comment/user-responses");
+         return ResponseEntity.ok().headers(headers).body(result.getContent());
+ 
+    }
+    
+    
+    /**
+     * to get userResponce of An complaint
+     * @param complaintId
+     * @param pageable
+     * @return
+     */
+    
+    @GetMapping("reply/user-responses/{commentId}")
+    @Timed
+    public ResponseEntity<List<UserResponseDTO>> getUserResponseOfReply(@PathVariable Long replyId,Pageable pageable)
+    {
+    	log.debug("request to get an userResponse of given reply id:"+replyId);
+    	
+    	Page<UserResponseDTO> result=userResponseService.getReplyUserResponses(replyId,pageable);
+    	
+    	 HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(result, "/api/reply/user-responses");
+         return ResponseEntity.ok().headers(headers).body(result.getContent());
+ 
+    }
+    
+   
+    
+    
+    
 }

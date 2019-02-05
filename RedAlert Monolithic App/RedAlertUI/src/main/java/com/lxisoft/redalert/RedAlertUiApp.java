@@ -22,25 +22,12 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
 
-@ComponentScan( excludeFilters = {
-    @ComponentScan.Filter(com.lxisoft.redalert.client.ExcludeFromComponentScan.class)
-})
+
 @EnableFeignClients
 @ComponentScan( excludeFilters = {
     @ComponentScan.Filter(com.lxisoft.redalert.client.ExcludeFromComponentScan.class)
 })
-@ComponentScan( excludeFilters = {
-    @ComponentScan.Filter(com.lxisoft.redalert.client.ExcludeFromComponentScan.class)
-})
-@ComponentScan( excludeFilters = {
-    @ComponentScan.Filter(com.lxisoft.redalert.client.ExcludeFromComponentScan.class)
-})
-@ComponentScan( excludeFilters = {
-    @ComponentScan.Filter(com.lxisoft.redalert.client.ExcludeFromComponentScan.class)
-})
-@ComponentScan( excludeFilters = {
-    @ComponentScan.Filter(com.lxisoft.redalert.client.ExcludeFromComponentScan.class)
-})
+
 @SpringBootApplication
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
 public class RedAlertUiApp {

@@ -25,7 +25,9 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-25T17:38:11.449934700+05:30[Asia/Colombo]")
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-30T14:13:16.657136500+05:30[Asia/Calcutta]")
+
 
 @Api(value = "PostResource", description = "the PostResource API")
 public interface PostResourceApi {
@@ -36,7 +38,7 @@ public interface PostResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/changeAlert/{id}/{alertLevel}",
+    @RequestMapping(value = "/api/changeAlert/{id}/{alertLevel}",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<PostDTO> changeAlertLevelUsingGET(@ApiParam(value = "alertLevel",required=true) @PathVariable("alertLevel") String alertLevel,@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
@@ -49,7 +51,7 @@ public interface PostResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/posts",
+    @RequestMapping(value = "/api/posts",
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.POST)
@@ -62,7 +64,7 @@ public interface PostResourceApi {
         @ApiResponse(code = 204, message = "No Content"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden") })
-    @RequestMapping(value = "/apis/posts/{id}",
+    @RequestMapping(value = "/api/posts/{id}",
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deletePostUsingDELETE(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
@@ -73,7 +75,7 @@ public interface PostResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/postsByUserRegistrationId/{userRegistrationId}",
+    @RequestMapping(value = "/api/postsByUserRegistrationId/{userRegistrationId}",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<List<PostDTO>> getAllPostsByUserRegistrationIdUsingGET(@ApiParam(value = "userRegistrationId",required=true) @PathVariable("userRegistrationId") Long userRegistrationId,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
@@ -85,7 +87,7 @@ public interface PostResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/posts",
+    @RequestMapping(value = "/api/posts",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<List<PostDTO>> getAllPostsUsingGET(@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
@@ -97,7 +99,7 @@ public interface PostResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/postclose/{id}",
+    @RequestMapping(value = "/api/postclose/{id}",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<PostDTO> getClosePostUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
@@ -109,10 +111,11 @@ public interface PostResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/posts/{id}",
+    @RequestMapping(value = "/api/posts/{id}",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<PostDTO> getPostUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
+
 
 
     @ApiOperation(value = "nonClosedPostsOfFriends", nickname = "nonClosedPostsOfFriendsUsingGET", notes = "", response = PostDTO.class, responseContainer = "List", tags={ "post-resource", })
@@ -121,10 +124,24 @@ public interface PostResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/nonClosedPostsOfFriends/{userRegistrationId}",
+    @RequestMapping(value = "/api/nonClosedPostsOfFriends/{userRegistrationId}",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<List<PostDTO>> nonClosedPostsOfFriendsUsingGET(@ApiParam(value = "userRegistrationId",required=true) @PathVariable("userRegistrationId") Long userRegistrationId,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
+
+    @ApiOperation(value = "sendMailWithAttachment", nickname = "sendMailWithAttachmentUsingPOST", notes = "", response = String.class, tags={ "post-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = String.class),
+        @ApiResponse(code = 201, message = "Created"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/api/posts/mail",
+        produces = "*/*", 
+        consumes = "application/json",
+        method = RequestMethod.POST)
+    ResponseEntity<String> sendMailWithAttachmentUsingPOST(@ApiParam(value = "post" ,required=true )  @Valid @RequestBody PostDTO postDTO);
+
 
 
     @ApiOperation(value = "updatePost", nickname = "updatePostUsingPUT", notes = "", response = PostDTO.class, tags={ "post-resource", })
@@ -134,7 +151,7 @@ public interface PostResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/apis/posts",
+    @RequestMapping(value = "/api/posts",
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.PUT)

@@ -83,11 +83,16 @@ public class MediaServiceImpl implements MediaService {
      * @param id the id of the entity
      */
     @Override
-    public void delete(Long id) { 
+    public void delete(Long id) {
         log.debug("Request to delete Media : {}", id);
         mediaRepository.deleteById(id);
     }
-
+	
+	/**
+     * Find All  media by postid.
+     *
+     * @param id the id of the entity
+     */
 	@Override
 	public Page<MediaDTO> findAllMediaBypostId(Pageable pageable, Long postId) {
 		// TODO Auto-generated method stub

@@ -26,7 +26,7 @@ import java.util.Optional;
  * REST controller for managing Report.
  */
 @RestController
-@RequestMapping("/apis")
+@RequestMapping("/api")
 public class ReportResource {
 
     private final Logger log = LoggerFactory.getLogger(ReportResource.class);
@@ -54,7 +54,7 @@ public class ReportResource {
             throw new BadRequestAlertException("A new report cannot already have an ID", ENTITY_NAME, "idexists");
         }
         ReportDTO result = reportService.save(reportDTO);
-        return ResponseEntity.created(new URI("/apis/reports/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/reports/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -92,7 +92,7 @@ public class ReportResource {
     public ResponseEntity<List<ReportDTO>> getAllReports(Pageable pageable) {
         log.debug("REST request to get a page of Reports");
         Page<ReportDTO> page = reportService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/apis/reports");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/reports");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
@@ -123,8 +123,15 @@ public class ReportResource {
         reportService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
-
-   @GetMapping("/postreports/{id}")
+	
+	/**
+ * GET /postreports/ : id: find all reportDTo by post id
+ * @param id the id of the reportDTO to find
+ * @param pageable
+ * @return the ResponseEntity with status 200 (OK)
+ */
+	@GetMapping("/postreports/{id}")
+	@Timed
      public ResponseEntity<List<ReportDTO>> findAllByPost(@PathVariable Long id, Pageable pageable)
      {
     	 log.debug("REST request to get Report by post : {}", id);
@@ -133,6 +140,4 @@ public class ReportResource {
     	 HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(reportDTOpage, "/apis/postreports/{id}");
          return new ResponseEntity<>(reportDTOpage.getContent(), headers, HttpStatus.OK); 
      }
-   
-     
 }

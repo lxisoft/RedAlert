@@ -14,7 +14,9 @@ import javax.validation.constraints.*;
  * ReportDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-25T17:38:11.449934700+05:30[Asia/Colombo]")
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-30T14:13:16.657136500+05:30[Asia/Calcutta]")
+
 
 public class ReportDTO   {
   @JsonProperty("actionId")
@@ -67,7 +69,7 @@ public class ReportDTO   {
   private ReportTypeEnum reportType = null;
 
   @JsonProperty("userId")
-  private Integer userId = null;
+  private String userId = null;
 
   @JsonProperty("userName")
   private String userName = null;
@@ -152,7 +154,7 @@ public class ReportDTO   {
     this.reportType = reportType;
   }
 
-  public ReportDTO userId(Integer userId) {
+  public ReportDTO userId(String userId) {
     this.userId = userId;
     return this;
   }
@@ -164,11 +166,11 @@ public class ReportDTO   {
   @ApiModelProperty(value = "")
 
 
-  public Integer getUserId() {
+  public String getUserId() {
     return userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(String userId) {
     this.userId = userId;
   }
 

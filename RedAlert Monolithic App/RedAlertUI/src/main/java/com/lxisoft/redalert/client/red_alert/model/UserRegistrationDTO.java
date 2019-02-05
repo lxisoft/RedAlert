@@ -20,7 +20,9 @@ import javax.validation.constraints.*;
  * UserRegistrationDTO
  */
 @Validated
+
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-25T17:38:11.449934700+05:30[Asia/Colombo]")
+
 
 public class UserRegistrationDTO   {
   /**
@@ -241,8 +243,8 @@ public class UserRegistrationDTO   {
     return createdOn;
   }
 
-  public void setCreatedOn(Instant instant) {
-    this.createdOn = instant;
+  public void setCreatedOn(Instant createdOn) {
+    this.createdOn = createdOn;
   }
 
   public UserRegistrationDTO dob(OffsetDateTime dob) {

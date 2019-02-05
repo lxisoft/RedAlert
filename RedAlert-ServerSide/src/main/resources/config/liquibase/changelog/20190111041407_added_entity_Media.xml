@@ -15,30 +15,21 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity Report.
+        Added the entity Media.
     -->
-    <changeSet id="20181107053419-1" author="jhipster">
-        <createTable tableName="report">
+    <changeSet id="20190111041407-1" author="jhipster">
+        <createTable tableName="media">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="user_id" type="integer">
+            <column name="jhi_file" type="longblob">
                 <constraints nullable="true" />
             </column>
-
-            <column name="user_name" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="report_type" type="varchar(255)">
+            <column name="jhi_file_content_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
             <column name="post_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="action_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

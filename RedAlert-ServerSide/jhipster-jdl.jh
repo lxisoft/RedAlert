@@ -1,4 +1,3 @@
-
 entity UserRegistration
 {
 	userName String,
@@ -6,6 +5,7 @@ entity UserRegistration
     profilePic Blob,
     firstName String,
     lastName String,
+    userId String,
     gender Gender,
     bloodGroup BloodGroup,
     contact Long,
@@ -48,7 +48,7 @@ entity Media
 
 entity Action
 {
-    userId Integer,
+    userId String,
 	UserName String,
 	description String,
     takenOn Instant,
@@ -63,7 +63,7 @@ entity LeaderBoard
 }
 entity Report
 {
-    userId Integer,
+    userId String,
     userName String,
 	reportType ReportType
 	
@@ -86,11 +86,11 @@ relationship OneToMany
     Action{reports} to Report
 }
 relationship ManyToMany
-{
+{
+
 	UserRegistration{friends} to UserRegistration
 }
 
 dto * with mapstruct
 service all with serviceImpl
 paginate * with pagination
-

@@ -4,15 +4,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <!--
-        Added the constraints for entity Post.
+        Added the constraints for entity Action.
     -->
-    <changeSet id="20181107053415-2" author="jhipster">
+    <changeSet id="20190111041408-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="user_registration_id"
-                                 baseTableName="post"
-                                 constraintName="fk_post_user_registration_id"
+        <addForeignKeyConstraint baseColumnNames="post_id"
+                                 baseTableName="action"
+                                 constraintName="fk_action_post_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="user_registration"/>
+                                 referencedTableName="post"/>
 
     </changeSet>
 </databaseChangeLog>

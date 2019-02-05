@@ -3,11 +3,6 @@ package com.lxisoft.redalert.web.rest;
 import com.lxisoft.redalert.RedAlertApp;
 
 import com.lxisoft.redalert.domain.Report;
-import com.lxisoft.redalert.repository.ReportRepository;
-import com.lxisoft.redalert.service.ReportService;
-import com.lxisoft.redalert.service.dto.ReportDTO;
-import com.lxisoft.redalert.service.mapper.ReportMapper;
-import com.lxisoft.redalert.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-
 import static com.lxisoft.redalert.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -34,6 +28,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.lxisoft.redalert.domain.enumeration.ReportType;
+import com.lxisoft.redalert.repository.ReportRepository;
+import com.lxisoft.redalert.service.ReportService;
+import com.lxisoft.redalert.service.dto.ReportDTO;
+import com.lxisoft.redalert.service.mapper.ReportMapper;
+import com.lxisoft.redalert.web.rest.errors.ExceptionTranslator;
 /**
  * Test class for the ReportResource REST controller.
  *
@@ -43,8 +42,8 @@ import com.lxisoft.redalert.domain.enumeration.ReportType;
 @SpringBootTest(classes = RedAlertApp.class)
 public class ReportResourceIntTest {
 
-    private static final Integer DEFAULT_USER_ID = 1;
-    private static final Integer UPDATED_USER_ID = 2;
+    private static final String DEFAULT_USER_ID = "AAAAAAAAAA";
+    private static final String UPDATED_USER_ID = "BBBBBBBBBB";
 
     private static final String DEFAULT_USER_NAME = "AAAAAAAAAA";
     private static final String UPDATED_USER_NAME = "BBBBBBBBBB";
@@ -159,7 +158,7 @@ public class ReportResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(report.getId().intValue())))
-            .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID)))
+            .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.toString())))
             .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
             .andExpect(jsonPath("$.[*].reportType").value(hasItem(DEFAULT_REPORT_TYPE.toString())));
     }
@@ -175,7 +174,7 @@ public class ReportResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(report.getId().intValue()))
-            .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID))
+            .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID.toString()))
             .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()))
             .andExpect(jsonPath("$.reportType").value(DEFAULT_REPORT_TYPE.toString()));
     }

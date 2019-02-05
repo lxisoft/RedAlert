@@ -2,6 +2,7 @@ package com.lxisoft.redalert.web.rest;
 
 import com.lxisoft.redalert.RedAlertApp;
 import com.lxisoft.redalert.web.rest.vm.LoggerVM;
+
 import ch.qos.logback.classic.AsyncAppender;
 import ch.qos.logback.classic.LoggerContext;
 import org.junit.Before;

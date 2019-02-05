@@ -1,9 +1,5 @@
 package com.lxisoft.redalert.repository;
 
-import com.lxisoft.redalert.RedAlertApp;
-import com.lxisoft.redalert.config.Constants;
-import com.lxisoft.redalert.config.audit.AuditEventConverter;
-import com.lxisoft.redalert.domain.PersistentAuditEvent;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +11,11 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.lxisoft.redalert.RedAlertApp;
+import com.lxisoft.redalert.config.Constants;
+import com.lxisoft.redalert.config.audit.AuditEventConverter;
+import com.lxisoft.redalert.domain.PersistentAuditEvent;
 
 import javax.servlet.http.HttpSession;
 import java.time.Instant;
@@ -34,7 +35,7 @@ import static com.lxisoft.redalert.repository.CustomAuditEventRepository.EVENT_D
 @SpringBootTest(classes = RedAlertApp.class)
 @Transactional
 public class CustomAuditEventRepositoryIntTest {
-
+								
     @Autowired
     private PersistenceAuditEventRepository persistenceAuditEventRepository;
 
@@ -62,7 +63,7 @@ public class CustomAuditEventRepositoryIntTest {
         Map<String, String> data = new HashMap<>();
         data.put("test-key", "test-value");
         testUserEvent.setData(data);
-
+        
         testOldUserEvent = new PersistentAuditEvent();
         testOldUserEvent.setPrincipal("test-user");
         testOldUserEvent.setAuditEventType("test-type");

@@ -1,14 +1,22 @@
 package com.lxisoft.crimestopper.service;
 
-import com.lxisoft.crimestopper.service.dto.UserResponseDTO;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Optional;
+import com.lxisoft.crimestopper.service.dto.UserResponseDTO;
 
 /**
  * Service Interface for managing UserResponse.
+ */
+/**
+ * @author sooraj pn
+ *
+ */
+/**
+ * @author sooraj pn
+ *
  */
 public interface UserResponseService {
 
@@ -43,4 +51,45 @@ public interface UserResponseService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    /**
+     * @param userResponce
+     * @return UserResponce 
+     */
+
+	Optional<UserResponseDTO> saveComplaintUserResponse(UserResponseDTO userResponse);
+	
+	/**
+	 * method to save userResponse against an comment
+	 * @Param UserResponse
+	 * @return UserResponse
+	 */
+
+	Optional<UserResponseDTO> saveCommentUserResponse(UserResponseDTO userResponse);
+	
+	/**method to get all userResponse of an complaint
+	 * @param complaintId
+	 * @return userResponses
+	 */
+
+	Page<UserResponseDTO> getComplaintUserResponses(Long complaintId, Pageable pageable);
+	
+	/**
+	 * method to get all userResponse of an comment
+	 * 
+	 */
+	
+	
+	Page<UserResponseDTO> getCommentUserResponses(Long commentId, Pageable pageable);
+
+	/**
+	 * method to get all userResponse of an reply
+	 * 
+	 */
+	
+	
+	
+	Page<UserResponseDTO> getReplyUserResponses(Long replyId, Pageable pageable);
+	
+	
 }

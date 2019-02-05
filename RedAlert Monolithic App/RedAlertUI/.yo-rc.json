@@ -30,11 +30,23 @@
   },
   "generator-jhipster-swagger-cli": {
     "promptValues": {
-      "inputSpec": "http://localhost:8084/CrimeStopper/v2/api-docs",
-      "cliName": "CrimeStopper"
+      "inputSpec": "http://localhost:8082/RedAlert/v2/api-docs",
+      "cliName": "RedAlert"
     },
     "apis": {
       "RedAlert": {
+        "spec": "http://localhost:8082/RedAlert/v2/api-docs"
+      },
+      "CrimeStopper": {
+        "spec": "http://localhost:8084/CrimeStopper/v2/api-docs"
+      },
+      "crimestoopper": {
+        "spec": "localhost:8084/crimestopper/v2/api-docs"
+      },
+      "crimestopper": {
+        "spec": "http://localhost:8084/crimestopper/v2/api-docs"
+      },
+      "redalert": {
         "spec": "http://localhost:8082/RedAlert/v2/api-docs"
       }
     }

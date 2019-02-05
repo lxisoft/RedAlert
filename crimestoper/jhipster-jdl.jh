@@ -1,6 +1,7 @@
 entity Complaint 
 {
-	userId Long, subject String,
+	userId Long, 
+	subject String,
     description String,
     time Instant,
     timeOfIncident Instant,
@@ -13,32 +14,34 @@ entity Complaint
 
 entity UserResponse
 {
-	userId Long
-    flag String,
+	userId Long,
+    flag Flag
 }
 
 entity Comment
 {
-userId Long,
-noOfLikes Long,
-noOfDislikes Long,
-noOfReplys Long
+	userId Long,
+	description String,
+	noOfLikes Long,
+	noOfDislikes Long,
+	noOfReplies Long
 
 }
 
 entity Reply
 {
-userId Long,
-noOfLikes Long,
-noOfDislikes Long,
+	userId Long,
+	noOfLikes Long,
+	noOfDislikes Long
 
 }
+
 entity Location
 {
 	
  	latitude Double ,
     longitutde Double
-    // add more from Swiggy, discuss with RedAlert, Karma, Diviso
+    
 }
  
 entity Department
@@ -56,6 +59,11 @@ enum Status
 	SEEN, ACTION_TAKEN
 }
 
+enum Flag
+{
+	LIKE, DISLIKE
+}
+
 relationship ManyToOne
 {
 	Complaint{location} to Location    
@@ -68,7 +76,7 @@ relationship OneToMany
 	Comment{replies} to Reply
 	Comment{userResponses} to UserResponse
 	Reply{UserResponses} to UserResponse 
-	Complaint{attatchments} to Media{complaint}
+	Complaint{attachments} to Media{complaint}
 }
 relationship ManyToMany
 {

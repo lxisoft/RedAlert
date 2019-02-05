@@ -11,7 +11,7 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20181107053418",
+    "changelogDate": "20190111041409",
     "entityTableName": "leader_board",
     "dto": "mapstruct",
     "pagination": "pagination",

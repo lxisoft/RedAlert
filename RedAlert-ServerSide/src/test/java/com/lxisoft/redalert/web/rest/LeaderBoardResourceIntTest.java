@@ -4,10 +4,10 @@ import com.lxisoft.redalert.RedAlertApp;
 
 import com.lxisoft.redalert.domain.LeaderBoard;
 import com.lxisoft.redalert.repository.LeaderBoardRepository;
+import com.lxisoft.redalert.web.rest.errors.ExceptionTranslator;
 import com.lxisoft.redalert.service.LeaderBoardService;
 import com.lxisoft.redalert.service.dto.LeaderBoardDTO;
 import com.lxisoft.redalert.service.mapper.LeaderBoardMapper;
-import com.lxisoft.redalert.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-
 
 import static com.lxisoft.redalert.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;

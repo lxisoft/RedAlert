@@ -1,4 +1,4 @@
-/*package com.lxisoft.redalert.client;
+package com.lxisoft.redalert.client;
 
 import com.lxisoft.redalert.security.oauth2.AuthorizationHeaderUtil;
 
@@ -26,4 +26,3 @@ public class TokenRelayRequestInterceptor implements RequestInterceptor {
         }
     }
 }
-*/

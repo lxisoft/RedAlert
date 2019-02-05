@@ -13,7 +13,9 @@ import javax.validation.constraints.*;
  * LeaderBoardDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2018-12-25T17:38:11.449934700+05:30[Asia/Colombo]")
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-30T14:13:16.657136500+05:30[Asia/Calcutta]")
+
 
 public class LeaderBoardDTO   {
   @JsonProperty("id")
