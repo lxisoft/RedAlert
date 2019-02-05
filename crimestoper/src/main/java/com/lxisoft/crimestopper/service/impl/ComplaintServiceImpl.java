@@ -16,12 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lxisoft.crimestopper.client.red_alert.api.UserRegistrationResourceApi;
 import com.lxisoft.crimestopper.client.red_alert.model.UserRegistrationDTO;
 import com.lxisoft.crimestopper.domain.Complaint;
+import com.lxisoft.crimestopper.domain.UserResponse;
 import com.lxisoft.crimestopper.repository.ComplaintRepository;
 import com.lxisoft.crimestopper.repository.UserRepository;
 import com.lxisoft.crimestopper.repository.UserResponseRepository;
 import com.lxisoft.crimestopper.service.ComplaintService;
 import com.lxisoft.crimestopper.service.dto.ComplaintDTO;
+import com.lxisoft.crimestopper.service.dto.UserResponseDTO;
 import com.lxisoft.crimestopper.service.mapper.ComplaintMapper;
+import com.lxisoft.crimestopper.service.mapper.UserResponseMapper;
 
 /**
  * Service Implementation for managing Complaint.
@@ -38,6 +41,11 @@ public class ComplaintServiceImpl implements ComplaintService {
 
     private final ComplaintMapper complaintMapper;
     
+    @Autowired
+    private  UserResponseMapper userResponseMapper;
+    
+    
+   
     private final UserResponseRepository userResponseRepository;
     
     @Autowired
@@ -144,8 +152,24 @@ public class ComplaintServiceImpl implements ComplaintService {
 		complaintRepository.findByUserId(userId,pageable);
 		for(UserRegistrationDTO userDTO:users)
 		{
-			list.addAll(complaintRepository.findByUserId(userDTO.getId(),pageable).map(complaintMapper::toDto).getContent());
-		
+			List<ComplaintDTO> complaints=complaintRepository.findByUserId(userDTO.getId(),pageable).map(complaintMapper::toDto).getContent();
+			for(ComplaintDTO complaint:complaints)
+			{
+				complaint.setUserName(userDTO.getFirstName()+" "+userDTO.getLastName());
+				Optional<UserResponse>optional=userResponseRepository.findUserResponseByUserIdAndComplaintId(userDTO.getId(),complaint.getId());
+				Optional<UserResponseDTO>optionalDTO=optional.map(userResponseMapper::toDto);
+				if(optionalDTO.isPresent())
+				{
+					complaint.setUserResponse(optionalDTO.get());
+				}
+				else
+				{
+					complaint.setUserResponse(new UserResponseDTO());
+				}
+				
+			}
+			list.addAll(complaints);
+			
 		}
 		Page<ComplaintDTO> pages = new PageImpl<ComplaintDTO>(list, pageable, list.size());
 		return pages;

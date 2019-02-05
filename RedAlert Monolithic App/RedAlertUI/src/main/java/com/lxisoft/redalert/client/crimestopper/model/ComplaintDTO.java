@@ -1,19 +1,20 @@
 package com.lxisoft.redalert.client.crimestopper.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.lxisoft.redalert.client.crimestopper.model.ComplaintDTO;
-import com.lxisoft.redalert.client.crimestopper.model.DepartmentDTO;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * ComplaintDTO
@@ -51,7 +52,14 @@ public class ComplaintDTO   {
   @JsonProperty("noOfLikes")
   private Long noOfLikes = null;
 
-  /**
+  @JsonProperty("userName")
+  private String userName = null;
+  
+  @JsonProperty("userResponse")
+  private UserResponseDTO userResponse = null;
+
+
+/**
    * Gets or Sets status
    */
   public enum StatusEnum {
@@ -461,5 +469,12 @@ public class ComplaintDTO   {
     }
     return o.toString().replace("\n", "\n    ");
   }
+  public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 }
 

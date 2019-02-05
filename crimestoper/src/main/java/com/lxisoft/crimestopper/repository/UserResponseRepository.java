@@ -1,5 +1,7 @@
 package com.lxisoft.crimestopper.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +15,10 @@ import com.lxisoft.crimestopper.domain.UserResponse;
 
 /**
  * Spring Data  repository for the UserResponse entity.
+ */
+/**
+ * @author sooraj pn
+ *
  */
 @SuppressWarnings("unused")
 @Repository
@@ -54,6 +60,13 @@ public interface UserResponseRepository extends JpaRepository<UserResponse, Long
 	 */
 	
 	Page<UserResponse> findAllUserResponseByReplyId(Long replyId, Pageable pageable);
+
+	/**
+	 * find  userResponce by user id and complaitID
+	 * 
+	 */
+	
+	Optional<UserResponse> findUserResponseByUserIdAndComplaintId(Long id, Long id2);
 
 	 
 }
