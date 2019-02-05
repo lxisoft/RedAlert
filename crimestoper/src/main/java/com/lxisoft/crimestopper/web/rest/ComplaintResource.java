@@ -57,7 +57,7 @@ public class ComplaintResource {
     @PostMapping("/complaints")
     @Timed
     public ResponseEntity<ComplaintDTO> createComplaint(@RequestBody ComplaintDTO complaintDTO) throws URISyntaxException {
-        log.debug("REST request to save Complaint : {}", complaintDTO);
+        log.debug("/>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>REST request to save Complaint : {}", complaintDTO);
         if (complaintDTO.getId() != null) {
             throw new BadRequestAlertException("A new complaint cannot already have an ID", ENTITY_NAME, "idexists");
         }

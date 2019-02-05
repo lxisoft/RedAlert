@@ -142,12 +142,12 @@
 							<i class="fas fa-video"></i>
 						</button>
 					</div>
-				  </div>
+				  </div> 
 				</form>
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-primary">Add Complaint</button>
-			  </div>
+			  </div> 
 			</div>
 		  </div>
 		</div>
@@ -179,9 +179,9 @@
 			</div>
 		  </div>
 		</div>
-
+ 
 		
-	<div th:each="complaint : ${homeView.complaints}">
+	<div th:each="complaint,iter : ${homeView.complaints}">
 		<!-- Card -->
 		<div class="card center_margin80 top_margin1">
 			<!-- Card content -->
@@ -189,36 +189,107 @@
 				<div class="media ">
 					<img class="d-flex rounded-circle avatar z-depth-1-half mr-3" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="Avatar">
 					<div class="media-body">
-					<h5 class="mt-0 font-weight-bold blue-text"  th:text=${complaint.userName}>Caroline Horwitz</h5>
+					<h5 class="mt-0 font-weight-bold blue-text"  th:text="${complaint.userName}">Caroline Horwitz</h5>
 					<p th:text="${complaint.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis odit minima eaque dignissimos recusandae
 					officiis commodi nulla est, tempore atque voluptas non quod maxime, iusto, debitis aliquid? Iure ipsum,
 					itaque.</p>
+				
 					</div>
 				</div>
-			</div>
-
-			<div class="btn-group" role="group" aria-label="Basic example">
-			<form action="/crime-stopper/likeComplaint" method="POST">
-			<input type="hiden" value="like" name="flag">
-			<input type="hidden" value="${complaint.id}" name="complaintId">
-				<button type="submit" class="btn btn-tertiary">
-						<!-- like-->	
-						<i class="far fa-thumbs-up"></i>
-					</button>
-			</form>
-				<button type="button" class="btn btn-tertiary">
+			</div>  
+	
+			<div class="btn-group" style="width: 100%;" role="group" aria-label="Basic example">
+			
+					<form th:if="${complaint.userResponse.flag!=T(com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum).LIKE}"action="/crime-stopper/likeComplaint" method="POST" style="width: 100%;">
+						<input type="hidden" th:value="like" th:name="flag">
+						<input type="hidden" th:value="${complaint.userResponse.id}" th:name="responseId">
+					
+						<input type="hidden" th:value="${complaint.id}" th:name="complaintId">
+							<button type="submit" style="width: 100%;" class="btn btn-tertiary">
+								<!-- like-->	
+								<i class="far fa-thumbs-up"></i>
+							</button>
+					</form>
+					<form th:if="${complaint.userResponse.flag==T(com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum).LIKE}"action="/crime-stopper/likeComplaint" method="POST" style="width: 100%;">
+						<input type="hidden" th:value="like" th :name="flag">
+						<input type="hidden" th:value="${complaint.userResponse.id}" th:name="responseId">
+					
+						<input type="hidden" th:value="${complaint.id}" th:name="complaintId">
+							<button type="button" style="width: 100%;" class="btn btn-tertiary">
+								<!-- like-->	                                                                                           
+								<i class="fas fa-thumbs-up"></i>
+							</button>
+					</form>
+					
+					<form th:if="${complaint.userResponse.flag!=T(com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum).DISLIKE}"action="/crime-stopper/dislikeComplaint" method="POST" style="width: 100%;">
+						<input type="hidden" th:value="like" th:name="flag">
+						<input type="hidden" th:value="${complaint.userResponse.id}" th:name="responseId">
+						<input type="hidden" th:value="${complaint.id}" th:id="'complaintId'+${iter.index}" th:name="complaintId">
+							<button type="submit" style="width: 100%;" class="btn btn-tertiary">
+								<!-- like-->	
+							<i class="far fa-thumbs-down"></i>
+							</button>
+					</form>
+					<form th:if="${complaint.userResponse.flag==T(com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum).DISLIKE}"action="/crime-stopper/dislikeComplaint" method="POST" style="width: 100%;">
+						<input type="hidden" th:value="like" th:name="flag">
+						<input type="hidden" th:value="${complaint.userResponse.id}" th:name="responseId">
+						<input type="hidden" th:value="${complaint.id}" th:name="complaintId" th:id="'complaintId'+${iter.index}">
+							<button type="button" style="width: 100%;" class="btn btn-tertiary">
+								<!-- like-->	
+						<i class="fas fa-thumbs-down"></i>
+							</button>
+					</form>	
+				
+				<form style="width: 100%;">
+				<button type="button" th:onclick="|setComplaintId(${iter.index});|"  style="width: 100%;" class="btn btn-tertiary" data-toggle="modal" data-target="#basicExampleModal">
 					<!-- comment-->	
-					<<i class="far fa-comment-alt"></i>
+					<i class="far fa-comment-alt"></i>
 				</button>
-				<button type="button" class="btn btn-tertiary">
+				</form>
+				<form style="width: 100%;">
+					<button type="button" style="width: 100%;" class="btn btn-tertiary">
 					<!-- location-->
 					<i class="fas fa-map-marker-alt"></i>
-				</button>
+					</button>
+				</form>
 			</div>
 		</div>
+		
 		<!-- Card -->
 
+
+		</div>
 		
+			<!-- Modal -->
+			<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		 	 aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <form action="/crime-stopper/comment" method="POST">
+						   <div class="modal-body">
+						   
+							        <div class="form-group shadow-textarea">
+							  <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Write something here..." name="comment"></textarea>
+							  <input type="hidden"  name="complaintId" id="complaintID">
+							  
+								</div>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					        
+					        <button type="submit" class="btn btn-primary">Post comment</button>
+					      </div>
+				</form>	
+			    </div>
+			  </div>
+		
+			</div>
 	</main>
 
 

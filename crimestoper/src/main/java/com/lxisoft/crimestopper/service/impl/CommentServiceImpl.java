@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,9 +24,9 @@ import com.lxisoft.crimestopper.service.mapper.CommentMapper;
 public class CommentServiceImpl implements CommentService {
 
     private final Logger log = LoggerFactory.getLogger(CommentServiceImpl.class);
-
+    @Autowired
     private final CommentRepository commentRepository;
-
+    @Autowired
     private final CommentMapper commentMapper;
 
     public CommentServiceImpl(CommentRepository commentRepository, CommentMapper commentMapper) {
@@ -94,14 +95,14 @@ public class CommentServiceImpl implements CommentService {
      * @param commentDTO
      * @Return commentDTO
      */
-    
 	@Override
-	public Optional<CommentDTO> saveCommentInComplaint(CommentDTO comment) {
-		log.debug("comment in an commplaint "+comment);
+	public Optional<CommentDTO> saveCommentInComplaint(CommentDTO commentDTO) {
+		log.debug("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<comment in an commplaint <<<<<<<<<<<<< "+commentDTO);
+		Comment comment = commentMapper.toEntity(commentDTO);
+        comment = commentRepository.save(comment);
+        return Optional.of(commentMapper.toDto(comment));
 		
-		 Comment result=commentRepository.save(commentMapper.toEntity(comment));
-		Optional<CommentDTO>optional=Optional.of(commentMapper.toDto(result));
-		 return optional;
+		
 		
 	}
 }

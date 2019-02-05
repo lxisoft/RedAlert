@@ -90,6 +90,9 @@ public interface UserResponseService {
 	
 	
 	Page<UserResponseDTO> getReplyUserResponses(Long replyId, Pageable pageable);
+
+	
+	Page<UserResponseDTO> findByUserIdAndComplaintId(Long userId, Long complaintId);
 	
 	
 }

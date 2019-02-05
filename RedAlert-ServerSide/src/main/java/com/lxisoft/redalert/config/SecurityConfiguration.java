@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
-import com.lxisoft.redalert.security.*;
+import com.lxisoft.redalert.security.AuthoritiesConstants;
 
 @Configuration
 @EnableResourceServer
@@ -44,7 +44,8 @@ public class SecurityConfiguration extends ResourceServerConfigurerAdapter {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
             .authorizeRequests()
-            .antMatchers("/apis/**").authenticated()
+           // .antMatchers("/apis/**").authenticated()
+            .antMatchers("/apis/**").permitAll()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/info").permitAll()
             .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN);

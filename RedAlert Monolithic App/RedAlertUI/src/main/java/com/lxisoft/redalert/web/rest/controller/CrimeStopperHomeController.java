@@ -14,10 +14,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lxisoft.redalert.client.crimestopper.api.CommentResourceApi;
 import com.lxisoft.redalert.client.crimestopper.api.ComplaintResourceApi;
 import com.lxisoft.redalert.client.crimestopper.api.UserResponseResourceApi;
+import com.lxisoft.redalert.client.crimestopper.model.CommentDTO;
 import com.lxisoft.redalert.client.crimestopper.model.ComplaintDTO;
+import com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO;
+import com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum;
 import com.lxisoft.redalert.client.red_alert.api.UserRegistrationResourceApi;
 import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
 import com.lxisoft.redalert.domain.User;
@@ -36,6 +41,9 @@ public class CrimeStopperHomeController {
 	
 	@Autowired
 	UserResponseResourceApi userResponseResourceApi;
+	
+	@Autowired
+	CommentResourceApi commentResourceApi;
 	
 	@Autowired
 	UserRegistrationResourceApi userRegistrationResourceApi;
@@ -88,20 +96,39 @@ public class CrimeStopperHomeController {
 	
 	@PostMapping(value="/likeComplaint")         
 	
-	public String likeComplaint(Model model)
+	public String likeComplaint(Model model,@RequestParam(value="flag") String flag,@RequestParam(value="complaintId") String complaintId,@RequestParam(value="responseId",defaultValue="null") String responseId)
 	{
-		log.debug("mark an user response:");       
+		log.debug("oooooooooooooooooooooooooooooooooooooooooooooooooooomark an   response:"+flag+responseId+complaintId);       
 		
-	
-		
-		//complaintResourceApi.getAllComplaintsOfFriendsUsingGET(userId, eagerload, offset, page, pageNumber, pageSize, paged, size, sort, sortSorted, sortUnsorted, unpaged);
-/*
-		ResponseEntity<UserResponseDTO>result=userResponseResourceApi.createUserResponseUsingPOST(userResponse);
-		HomeView homeView=new HomeView(new ArrayList<ComplaintDTO>());
-		
-		
-		model.addAttribute("userResponce",result.getBody());*/
+		String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();	
+		User user=userRepository.findOneByLogin(currentUserLogin).get();
+	   UserRegistrationDTO userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin()).getBody();
 
+		UserResponseDTO userResponseDTO=new  UserResponseDTO();
+		log.debug("#####################################################"+responseId);
+		if(responseId.equals(""))
+		{
+			responseId=null;
+		}
+		else
+		{
+			
+			userResponseDTO.setId(Long.parseLong(responseId));
+		}
+		FlagEnum f=FlagEnum.LIKE;
+		userResponseDTO.setFlag(f);
+		userResponseDTO.setComplaintId(Long.parseLong(complaintId));
+		userResponseDTO.setUserId(userRegistrationDTO.getId());
+		log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>complaintId="+userResponseDTO.getComplaintId());
+		if(responseId!=null)
+		{
+		ResponseEntity<UserResponseDTO>result=userResponseResourceApi.updateUserResponseUsingPUT(userResponseDTO);
+		}
+		else
+		{
+			ResponseEntity<UserResponseDTO >result=userResponseResourceApi.createUserResponseUsingPOST(userResponseDTO);
+		}
+		log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>post request to like an com plaint ");
 		return redirectHome(model); 
 	}
 	
@@ -112,6 +139,66 @@ public class CrimeStopperHomeController {
 		return redirectHome(model);
 	}
 	
+	@PostMapping(value="/dislikeComplaint")         
+	
+	public String dislikeComplaint(Model model,@RequestParam(value="flag") String flag,@RequestParam(value="complaintId") String complaintId,@RequestParam(value="responseId") String responseId)
+	{
+		log.debug("oooooooooooooooooooooooooooooooooooooooooooomark an   response:"+flag+complaintId+responseId);       
+		
+		String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();	
+		User user=userRepository.findOneByLogin(currentUserLogin).get();
+	   UserRegistrationDTO userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin()).getBody();
+
+		UserResponseDTO userResponseDTO=new  UserResponseDTO();
+		log.debug("#####################################################"+responseId);
+		if(responseId.equals(""))
+		{
+			responseId=null;
+		}
+		else
+		{
+			
+			userResponseDTO.setId(Long.parseLong(responseId));
+		}
+		FlagEnum f=FlagEnum.DISLIKE;
+		userResponseDTO.setFlag(f);
+		userResponseDTO.setComplaintId(Long.parseLong(complaintId));
+		userResponseDTO.setUserId(userRegistrationDTO.getId());
+		
+		log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>complaintId="+userResponseDTO.getComplaintId());
+		if(responseId!=null)
+		{
+		ResponseEntity<UserResponseDTO>result=userResponseResourceApi.updateUserResponseUsingPUT(userResponseDTO);
+		}
+		else
+		{
+			ResponseEntity<UserResponseDTO >result=userResponseResourceApi.createUserResponseUsingPOST(userResponseDTO);
+		}
+		log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>post request to dislike an com plaint ");
+		return redirectHome(model); 
+	}
 	
 
-}
+@PostMapping(value="/comment")         
+	
+	public String comment(Model model,@RequestParam(value="comment") String comment,@RequestParam(value="complaintId") String complaintId)
+	{
+	
+	String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();	
+	User user=userRepository.findOneByLogin(currentUserLogin).get();
+   UserRegistrationDTO userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin()).getBody();
+   Long userId=userRegistrationDTO.getId();
+		log.debug("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccc comment:"+comment+"  complaintId="+complaintId+"   userId"+userId);   
+		CommentDTO commentDTO=new CommentDTO();
+		commentDTO.setDescription(comment);
+		commentDTO.setUserId(userId);
+		commentDTO.setComplaintId(Long.parseLong(complaintId));
+		
+		
+		commentResourceApi.saveCommentInComplaintUsingPOST(commentDTO);
+		
+		return redirectHome(model); 
+	}
+	
+}	
+	

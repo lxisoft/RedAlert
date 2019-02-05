@@ -58,7 +58,16 @@ public class ComplaintDTO   {
   @JsonProperty("userResponse")
   private UserResponseDTO userResponse = null;
 
-
+  public UserResponseDTO getUserResponse()
+  {
+	  return userResponse;
+  }
+  
+  public void setUserResponse(UserResponseDTO userResponse)
+  {
+	  this.userResponse=userResponse;
+  }
+  
 /**
    * Gets or Sets status
    */
@@ -67,7 +76,15 @@ public class ComplaintDTO   {
     
     ACTION_TAKEN("ACTION_TAKEN");
 
-    private String value;
+    public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	private String value;
 
     StatusEnum(String value) {
       this.value = value;

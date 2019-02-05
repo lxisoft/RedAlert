@@ -51,7 +51,7 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Autowired
     UserRegistrationResourceApi  userRegistrationResourceApi;
 
-
+ 
     public ComplaintServiceImpl(ComplaintRepository complaintRepository, ComplaintMapper complaintMapper,UserRepository userRepository,UserResponseRepository userResponseRepository) {
     	
     	this.userResponseRepository=userResponseRepository;
@@ -156,12 +156,16 @@ public class ComplaintServiceImpl implements ComplaintService {
 			for(ComplaintDTO complaint:complaints)
 			{
 				complaint.setUserName(userDTO.getFirstName()+" "+userDTO.getLastName());
-				Optional<UserResponse>optional=userResponseRepository.findUserResponseByUserIdAndComplaintId(userDTO.getId(),complaint.getId());
+				log.debug("######################################################"+userId+"###########################"+complaint.getId());
+				Optional<UserResponse>optional=userResponseRepository.findUserResponseByUserIdAndComplaintId(userId,complaint.getId());
+				log.debug("######################################################"+optional);
+				
 				Optional<UserResponseDTO>optionalDTO=optional.map(userResponseMapper::toDto);
 				if(optionalDTO.isPresent())
 				{
 					complaint.setUserResponse(optionalDTO.get());
-				}
+					log.debug("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVv="+optionalDTO.get()+"\n");
+				} 
 				else
 				{
 					complaint.setUserResponse(new UserResponseDTO());
@@ -171,6 +175,9 @@ public class ComplaintServiceImpl implements ComplaintService {
 			list.addAll(complaints);
 			
 		}
+		
+		log.debug("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{\n");
+		
 		Page<ComplaintDTO> pages = new PageImpl<ComplaintDTO>(list, pageable, list.size());
 		return pages;
 	}
