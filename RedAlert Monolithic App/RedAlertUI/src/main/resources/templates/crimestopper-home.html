@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<!-- FRAGMENT NAME -->
+	<div th:fragment ="home">
+	
+		<!-- FRAGMENT CONTENT -->
+		<div th:each="complaint : ${homeView.complaints}">
+		<!-- Card -->
+		<div class="card center_margin80 top_margin1">
+			<!-- Card content -->
+			<div class="card-body">
+				<div class="media ">
+					<img class="d-flex rounded-circle avatar z-depth-1-half mr-3" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="Avatar">
+					<div class="media-body">
+					<h5 class="mt-0 font-weight-bold blue-text"  th:text=${complaint.userName}>Caroline Horwitz</h5>
+					<p th:text="${complaint.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis odit minima eaque dignissimos recusandae
+					officiis commodi nulla est, tempore atque voluptas non quod maxime, iusto, debitis aliquid? Iure ipsum,
+					itaque.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="btn-group" role="group" aria-label="Basic example">
+			<form action="/crime-stopper/likeComplaint" method="POST">
+			<input type="hiden" value="like" name="flag">
+			<input type="hidden" value="${complaint.id}" name="complaintId">
+				<button type="submit" class="btn btn-tertiary">
+						<!-- like-->	
+						<i class="far fa-thumbs-up"></i>
+					</button>
+			</form>
+				<button type="button" class="btn btn-tertiary">
+					<!-- comment-->	
+					<<i class="far fa-comment-alt"></i>
+				</button>
+				<button type="button" class="btn btn-tertiary">
+					<!-- location-->
+					<i class="fas fa-map-marker-alt"></i>
+				</button>
+			</div>
+		</div>
+		<!-- Card -->
+		</div>
+	</div>
+		
+		
+
+</body>
+</html>

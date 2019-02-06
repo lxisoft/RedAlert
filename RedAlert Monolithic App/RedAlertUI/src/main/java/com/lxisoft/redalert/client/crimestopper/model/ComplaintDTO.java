@@ -1,5 +1,6 @@
 package com.lxisoft.redalert.client.crimestopper.model;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,10 +98,10 @@ public class ComplaintDTO   {
   private String subject = null;
 
   @JsonProperty("time")
-  private OffsetDateTime time = null;
+  private Instant time = null;
 
   @JsonProperty("timeOfIncident")
-  private OffsetDateTime timeOfIncident = null;
+  private Instant timeOfIncident = null;
 
   @JsonProperty("userId")
   private Long userId = null;
@@ -343,7 +344,7 @@ public class ComplaintDTO   {
     this.subject = subject;
   }
 
-  public ComplaintDTO time(OffsetDateTime time) {
+  public ComplaintDTO time(Instant time) {
     this.time = time;
     return this;
   }
@@ -356,15 +357,15 @@ public class ComplaintDTO   {
 
   @Valid
 
-  public OffsetDateTime getTime() {
+  public Instant getTime() {
     return time;
   }
 
-  public void setTime(OffsetDateTime time) {
+  public void setTime(Instant time) {
     this.time = time;
   }
 
-  public ComplaintDTO timeOfIncident(OffsetDateTime timeOfIncident) {
+  public ComplaintDTO timeOfIncident(Instant timeOfIncident) {
     this.timeOfIncident = timeOfIncident;
     return this;
   }
@@ -377,11 +378,11 @@ public class ComplaintDTO   {
 
   @Valid
 
-  public OffsetDateTime getTimeOfIncident() {
+  public Instant getTimeOfIncident() {
     return timeOfIncident;
   }
 
-  public void setTimeOfIncident(OffsetDateTime timeOfIncident) {
+  public void setTimeOfIncident(Instant timeOfIncident) {
     this.timeOfIncident = timeOfIncident;
   }
 
