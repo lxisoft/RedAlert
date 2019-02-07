@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>profile page</title>
+</head>
+<body>
+<center>
+<h1>Print Page</h1>
+</center>
+<!-- <form th:action="@{/crime-stopper/post}" method="post" th:object="${user}">
+Search Person Profile : <input type="text" placeholder="profileid" th:field="${user.userId}"/>
+
+<input type="submit"> -->
+
+<table>
+  
+     <th:block th:if="${result!=null}">
+         <p th:text="${result.userName}">...</p>
+         <p th:text="${result.lastName}">...</p>
+         <p th:text="${result.firstName}">...</p>
+ 	 </th:block>
+
+</table>
+
+</form>
+</body>
+</html>

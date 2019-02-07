@@ -67,7 +67,7 @@ public interface UserRegistrationResourceApi {
     ResponseEntity<Void> deleteUserRegistrationUsingDELETE(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
 
-    @ApiOperation(value = "findByUserId", nickname = "findByUserIdUsingGET", notes = "", response = UserRegistrationDTO.class, tags={ "user-registration-resource", })
+    @ApiOperation(value = "findBy	UserId", nickname = "findByUserIdUsingGET", notes = "", response = UserRegistrationDTO.class, tags={ "user-registration-resource", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = UserRegistrationDTO.class),
         @ApiResponse(code = 401, message = "Unauthorized"),
