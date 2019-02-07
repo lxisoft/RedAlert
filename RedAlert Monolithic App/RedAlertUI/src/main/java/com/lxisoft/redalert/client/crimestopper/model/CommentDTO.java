@@ -1,13 +1,12 @@
 package com.lxisoft.redalert.client.crimestopper.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * CommentDTO
@@ -28,7 +27,18 @@ public class CommentDTO   {
   @JsonProperty("noOfDislikes")
   private Long noOfDislikes = null;
 
-  @JsonProperty("noOfLikes")
+  @JsonProperty("userName")
+  private String userName = null;
+  
+  public String getUserName() {
+	return userName;
+}
+
+public void setUserName(String userName) {
+	this.userName = userName;
+}
+
+@JsonProperty("noOfLikes")
   private Long noOfLikes = null;
 
   @JsonProperty("noOfReplies")

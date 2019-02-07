@@ -186,10 +186,15 @@ public class CrimeStopperHomeController {
 	
 	String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();	
 	User user=userRepository.findOneByLogin(currentUserLogin).get();
+	CommentDTO commentDTO=new CommentDTO();
    UserRegistrationDTO userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin()).getBody();
-   Long userId=userRegistrationDTO.getId();
-		log.debug("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccc comment:"+comment+"  complaintId="+complaintId+"   userId"+userId);   
-		CommentDTO commentDTO=new CommentDTO();
+   Long userId=userRegistrationDTO.getId();		
+   log.debug("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccc comment:"+comment+"  complaintId="+complaintId+"   userId"+userId);   
+		commentDTO.setComplaintId(Long.parseLong(complaintId));
+		
+
+		
+		
 		commentDTO.setDescription(comment);
 		commentDTO.setUserId(userId);
 		commentDTO.setComplaintId(Long.parseLong(complaintId));

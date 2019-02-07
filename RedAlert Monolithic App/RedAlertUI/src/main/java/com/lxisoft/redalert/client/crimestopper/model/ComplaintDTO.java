@@ -4,6 +4,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
@@ -46,7 +47,15 @@ public class ComplaintDTO   {
   @JsonProperty("mediaContentType")
   private String mediaContentType = null;
 
-  @JsonProperty("noOfDislikes")
+  public Set<CommentDTO> getComments() {
+	return comments;
+}
+
+public void setComments(Set<CommentDTO> comments) {
+	this.comments = comments;
+}
+
+@JsonProperty("noOfDislikes")
   private Long noOfDislikes = null;
 
   @JsonProperty("noOfLikes")
@@ -57,7 +66,9 @@ public class ComplaintDTO   {
   
   @JsonProperty("userResponse")
   private UserResponseDTO userResponse = null;
-
+  @JsonProperty("comments")
+  private Set<CommentDTO> comments=null;
+  
   public UserResponseDTO getUserResponse()
   {
 	  return userResponse;

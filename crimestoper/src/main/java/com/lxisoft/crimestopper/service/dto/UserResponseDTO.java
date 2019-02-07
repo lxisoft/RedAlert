@@ -2,6 +2,7 @@ package com.lxisoft.crimestopper.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+
 import com.lxisoft.crimestopper.domain.enumeration.Flag;
 
 /**
@@ -27,7 +28,7 @@ public class UserResponseDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
+    }  
 
     public Long getUserId() {
         return userId;

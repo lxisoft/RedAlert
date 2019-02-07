@@ -45,11 +45,21 @@ public class ComplaintDTO implements Serializable {
     private UserResponseDTO userResponse;
 
     private Set<DepartmentDTO> departments = new HashSet<>();
+    
+    private Set<CommentDTO> comments=new HashSet<>();
 
     private Set<ComplaintDTO> linkedComplaints = new HashSet<>();
 
     
-    public UserResponseDTO getUserResponse() {
+    public Set<CommentDTO> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<CommentDTO> comments) {
+		this.comments = comments;
+	}
+
+	public UserResponseDTO getUserResponse() {
 		return userResponse;
 	}
 

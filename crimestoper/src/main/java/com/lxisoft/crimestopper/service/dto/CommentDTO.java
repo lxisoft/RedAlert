@@ -11,8 +11,18 @@ public class CommentDTO implements Serializable {
     private Long id;
 
     private Long userId;
+    
+    private String userName;
 
-    private String description;
+    public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	private String description;
 
     private Long noOfLikes;
 

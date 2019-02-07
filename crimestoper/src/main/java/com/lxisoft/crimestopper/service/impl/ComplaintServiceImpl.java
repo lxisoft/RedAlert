@@ -1,6 +1,8 @@
 package com.lxisoft.crimestopper.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,12 +19,15 @@ import com.lxisoft.crimestopper.client.red_alert.api.UserRegistrationResourceApi
 import com.lxisoft.crimestopper.client.red_alert.model.UserRegistrationDTO;
 import com.lxisoft.crimestopper.domain.Complaint;
 import com.lxisoft.crimestopper.domain.UserResponse;
+import com.lxisoft.crimestopper.repository.CommentRepository;
 import com.lxisoft.crimestopper.repository.ComplaintRepository;
 import com.lxisoft.crimestopper.repository.UserRepository;
 import com.lxisoft.crimestopper.repository.UserResponseRepository;
 import com.lxisoft.crimestopper.service.ComplaintService;
+import com.lxisoft.crimestopper.service.dto.CommentDTO;
 import com.lxisoft.crimestopper.service.dto.ComplaintDTO;
 import com.lxisoft.crimestopper.service.dto.UserResponseDTO;
+import com.lxisoft.crimestopper.service.mapper.CommentMapper;
 import com.lxisoft.crimestopper.service.mapper.ComplaintMapper;
 import com.lxisoft.crimestopper.service.mapper.UserResponseMapper;
 
@@ -44,8 +49,13 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Autowired
     private  UserResponseMapper userResponseMapper;
     
+    @Autowired
+    private  CommentRepository commentRepository;
     
-   
+    @Autowired
+    private  CommentMapper commentMapper;
+    
+    
     private final UserResponseRepository userResponseRepository;
     
     @Autowired
@@ -149,6 +159,8 @@ public class ComplaintServiceImpl implements ComplaintService {
 		log.debug("request to get all complaints of friends by userId:"+userId);
 		List<ComplaintDTO> list=new ArrayList<ComplaintDTO>(); 
 		List<UserRegistrationDTO> users=userRegistrationResourceApi.getAllFriendsUsingGET(userId).getBody();
+		UserRegistrationDTO currentUser=userRegistrationResourceApi.getUserRegistrationUsingGET(userId).getBody();
+		users.add(currentUser);
 		complaintRepository.findByUserId(userId,pageable);
 		for(UserRegistrationDTO userDTO:users)
 		{
@@ -158,6 +170,20 @@ public class ComplaintServiceImpl implements ComplaintService {
 				complaint.setUserName(userDTO.getFirstName()+" "+userDTO.getLastName());
 				log.debug("######################################################"+userId+"###########################"+complaint.getId());
 				Optional<UserResponse>optional=userResponseRepository.findUserResponseByUserIdAndComplaintId(userId,complaint.getId());
+				Pageable pageable2=null;
+				HashSet<CommentDTO> comments=new HashSet<CommentDTO> (commentRepository.findAllByComplaintId(pageable2,complaint.getId()).map(commentMapper::toDto).getContent());
+				Iterator<CommentDTO> itr=comments.iterator();
+				while(itr.hasNext())
+				{
+					CommentDTO temp=itr.next();
+					UserRegistrationDTO userRegistarion=userRegistrationResourceApi.getUserRegistrationUsingGET(temp.getUserId()).getBody();
+					log.debug("############################################  "+Long.toString(temp.getUserId())+"##########userRegistarion="+userRegistarion);
+					temp.setUserName(userRegistarion.getFirstName()+" "+userRegistarion.getLastName());					
+					
+				}
+				
+				complaint.setComments(comments);
+				
 				log.debug("######################################################"+optional);
 				
 				Optional<UserResponseDTO>optionalDTO=optional.map(userResponseMapper::toDto);
@@ -178,7 +204,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 		
 		log.debug("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{\n");
 		
-		Page<ComplaintDTO> pages = new PageImpl<ComplaintDTO>(list, pageable, list.size());
+		Page<ComplaintDTO>  pages = new PageImpl<ComplaintDTO>(list, pageable, list.size());
 		return pages;
 	}
 	
