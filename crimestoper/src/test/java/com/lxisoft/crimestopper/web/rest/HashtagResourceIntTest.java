@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -67,6 +68,7 @@ public class HashtagResourceIntTest {
     @Autowired
     private EntityManager em;
 
+
     @Autowired
     private Validator validator;
 
@@ -83,7 +85,8 @@ public class HashtagResourceIntTest {
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
+            .setValidator(validator)
+            .setMessageConverters(jacksonMessageConverter).build();
     }
 
     /**

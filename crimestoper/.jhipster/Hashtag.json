@@ -15,7 +15,11 @@
             "otherEntityRelationshipName": "hashtags"
         }
     ],
+<<<<<<< HEAD
     "changelogDate": "20190209065529",
+=======
+    "changelogDate": "20190209165527",
+>>>>>>> branch_of_vyshnav
     "entityTableName": "hashtag",
     "dto": "mapstruct",
     "pagination": "pagination",
