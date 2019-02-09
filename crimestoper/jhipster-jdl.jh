@@ -2,20 +2,20 @@ entity Complaint
 {
 	userId Long, 
 	subject String,
-    description String,
-    time Instant,
-    timeOfIncident Instant,
-    media Blob,
-    status Status,
-    noOfLikes Long,
-    noOfDislikes Long
+	description String,
+	time Instant,
+	timeOfIncident Instant,
+	media Blob,
+	status Status,
+	noOfLikes Long,
+	noOfDislikes Long
         
 }
 
 entity UserResponse
 {
 	userId Long,
-    flag Flag
+    	flag Flag
 }
 
 entity Comment
@@ -40,7 +40,7 @@ entity Location
 {
 	
  	latitude Double ,
-    longitutde Double
+    	longitutde Double
     
 }
  
@@ -52,6 +52,11 @@ entity Department
 entity Media
 {
 	file Blob
+}
+
+entity Hashtag
+{
+	name String
 }
 
 enum Status
@@ -81,7 +86,8 @@ relationship OneToMany
 relationship ManyToMany
 {
 	Complaint{department} to Department{complaint }
-    Complaint{linkedComplaints} to Complaint
+    	Complaint{linkedComplaints} to Complaint
+	Complaint{hashtags} to Hashtag{complaints }
 }
  
 dto * with mapstruct

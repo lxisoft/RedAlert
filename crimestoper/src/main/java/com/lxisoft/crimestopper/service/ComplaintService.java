@@ -1,11 +1,11 @@
 package com.lxisoft.crimestopper.service;
 
-import java.util.Optional;
+import com.lxisoft.crimestopper.service.dto.ComplaintDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.lxisoft.crimestopper.service.dto.ComplaintDTO;
+import java.util.Optional;
 
 /**
  * Service Interface for managing Complaint.
@@ -49,11 +49,4 @@ public interface ComplaintService {
      * @param id the id of the entity
      */
     void delete(Long id);
-    /**
-     * Get all the Complaints of friends with eager load of many-to-many relationships.
-    *
-    * @return the list of entities
-    */
-
-	Page<ComplaintDTO> findAllComplaintsOfFriends(Pageable pageable, Long userId);
 }

@@ -10,19 +10,19 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * DepartmentDTO
+ * HashtagDTO
  */
 @Validated
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-02-09T12:49:50.445+05:30[Asia/Calcutta]")
 
-public class DepartmentDTO   {
+public class HashtagDTO   {
   @JsonProperty("id")
   private Long id = null;
 
   @JsonProperty("name")
   private String name = null;
 
-  public DepartmentDTO id(Long id) {
+  public HashtagDTO id(Long id) {
     this.id = id;
     return this;
   }
@@ -42,7 +42,7 @@ public class DepartmentDTO   {
     this.id = id;
   }
 
-  public DepartmentDTO name(String name) {
+  public HashtagDTO name(String name) {
     this.name = name;
     return this;
   }
@@ -71,9 +71,9 @@ public class DepartmentDTO   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DepartmentDTO departmentDTO = (DepartmentDTO) o;
-    return Objects.equals(this.id, departmentDTO.id) &&
-        Objects.equals(this.name, departmentDTO.name);
+    HashtagDTO hashtagDTO = (HashtagDTO) o;
+    return Objects.equals(this.id, hashtagDTO.id) &&
+        Objects.equals(this.name, hashtagDTO.name);
   }
 
   @Override
@@ -84,7 +84,7 @@ public class DepartmentDTO   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DepartmentDTO {\n");
+    sb.append("class HashtagDTO {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
