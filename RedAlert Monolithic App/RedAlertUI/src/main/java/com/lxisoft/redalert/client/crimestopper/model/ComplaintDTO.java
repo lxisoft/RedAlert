@@ -1,26 +1,27 @@
 package com.lxisoft.redalert.client.crimestopper.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.lxisoft.redalert.client.crimestopper.model.ComplaintDTO;
-import com.lxisoft.redalert.client.crimestopper.model.DepartmentDTO;
-import com.lxisoft.redalert.client.crimestopper.model.HashtagDTO;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * ComplaintDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-02-09T12:49:50.445+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-24T11:16:47.830+05:30[Asia/Calcutta]")
 
 public class ComplaintDTO   {
   @JsonProperty("departments")
@@ -29,10 +30,6 @@ public class ComplaintDTO   {
 
   @JsonProperty("description")
   private String description = null;
-
-  @JsonProperty("hashtags")
-  @Valid
-  private List<HashtagDTO> hashtags = null;
 
   @JsonProperty("id")
   private Long id = null;
@@ -56,7 +53,14 @@ public class ComplaintDTO   {
   @JsonProperty("noOfLikes")
   private Long noOfLikes = null;
 
-  /**
+  @JsonProperty("userName")
+  private String userName = null;
+  
+  @JsonProperty("userResponse")
+  private UserResponseDTO userResponse = null;
+
+
+/**
    * Gets or Sets status
    */
   public enum StatusEnum {
@@ -94,10 +98,10 @@ public class ComplaintDTO   {
   private String subject = null;
 
   @JsonProperty("time")
-  private OffsetDateTime time = null;
+  private Instant time = null;
 
   @JsonProperty("timeOfIncident")
-  private OffsetDateTime timeOfIncident = null;
+  private Instant timeOfIncident = null;
 
   @JsonProperty("userId")
   private Long userId = null;
@@ -149,35 +153,6 @@ public class ComplaintDTO   {
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public ComplaintDTO hashtags(List<HashtagDTO> hashtags) {
-    this.hashtags = hashtags;
-    return this;
-  }
-
-  public ComplaintDTO addHashtagsItem(HashtagDTO hashtagsItem) {
-    if (this.hashtags == null) {
-      this.hashtags = new ArrayList<HashtagDTO>();
-    }
-    this.hashtags.add(hashtagsItem);
-    return this;
-  }
-
-  /**
-   * Get hashtags
-   * @return hashtags
-  **/
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public List<HashtagDTO> getHashtags() {
-    return hashtags;
-  }
-
-  public void setHashtags(List<HashtagDTO> hashtags) {
-    this.hashtags = hashtags;
   }
 
   public ComplaintDTO id(Long id) {
@@ -369,7 +344,7 @@ public class ComplaintDTO   {
     this.subject = subject;
   }
 
-  public ComplaintDTO time(OffsetDateTime time) {
+  public ComplaintDTO time(Instant time) {
     this.time = time;
     return this;
   }
@@ -382,15 +357,15 @@ public class ComplaintDTO   {
 
   @Valid
 
-  public OffsetDateTime getTime() {
+  public Instant getTime() {
     return time;
   }
 
-  public void setTime(OffsetDateTime time) {
+  public void setTime(Instant time) {
     this.time = time;
   }
 
-  public ComplaintDTO timeOfIncident(OffsetDateTime timeOfIncident) {
+  public ComplaintDTO timeOfIncident(Instant timeOfIncident) {
     this.timeOfIncident = timeOfIncident;
     return this;
   }
@@ -403,11 +378,11 @@ public class ComplaintDTO   {
 
   @Valid
 
-  public OffsetDateTime getTimeOfIncident() {
+  public Instant getTimeOfIncident() {
     return timeOfIncident;
   }
 
-  public void setTimeOfIncident(OffsetDateTime timeOfIncident) {
+  public void setTimeOfIncident(Instant timeOfIncident) {
     this.timeOfIncident = timeOfIncident;
   }
 
@@ -443,7 +418,6 @@ public class ComplaintDTO   {
     ComplaintDTO complaintDTO = (ComplaintDTO) o;
     return Objects.equals(this.departments, complaintDTO.departments) &&
         Objects.equals(this.description, complaintDTO.description) &&
-        Objects.equals(this.hashtags, complaintDTO.hashtags) &&
         Objects.equals(this.id, complaintDTO.id) &&
         Objects.equals(this.linkedComplaints, complaintDTO.linkedComplaints) &&
         Objects.equals(this.locationId, complaintDTO.locationId) &&
@@ -460,7 +434,7 @@ public class ComplaintDTO   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(departments, description, hashtags, id, linkedComplaints, locationId, media, mediaContentType, noOfDislikes, noOfLikes, status, subject, time, timeOfIncident, userId);
+    return Objects.hash(departments, description, id, linkedComplaints, locationId, media, mediaContentType, noOfDislikes, noOfLikes, status, subject, time, timeOfIncident, userId);
   }
 
   @Override
@@ -470,7 +444,6 @@ public class ComplaintDTO   {
     
     sb.append("    departments: ").append(toIndentedString(departments)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    hashtags: ").append(toIndentedString(hashtags)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    linkedComplaints: ").append(toIndentedString(linkedComplaints)).append("\n");
     sb.append("    locationId: ").append(toIndentedString(locationId)).append("\n");
@@ -497,5 +470,12 @@ public class ComplaintDTO   {
     }
     return o.toString().replace("\n", "\n    ");
   }
+  public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 }
 

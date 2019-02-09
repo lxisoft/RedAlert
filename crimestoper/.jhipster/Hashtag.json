@@ -16,10 +16,10 @@
         }
     ],
 <<<<<<< HEAD
-    "changelogDate": "20190209065529",
-=======
     "changelogDate": "20190209165527",
->>>>>>> branch_of_vyshnav
+=======
+    "changelogDate": "20190209065529",
+>>>>>>> parent of 5ecbfb86... cleared master branch conflicts
     "entityTableName": "hashtag",
     "dto": "mapstruct",
     "pagination": "pagination",
