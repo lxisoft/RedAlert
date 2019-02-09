@@ -101,5 +101,5 @@ public class UserResponseDTO implements Serializable {
             ", comment=" + getCommentId() +
             ", reply=" + getReplyId() +
             "}";
-    }
+    }  
 }

@@ -2,8 +2,10 @@ package com.lxisoft.redalert.service.impl;
 
 import com.lxisoft.redalert.service.PostService;
 import com.lxisoft.redalert.domain.Post;
+import com.lxisoft.redalert.domain.UserRegistration;
 import com.lxisoft.redalert.domain.enumeration.Alert;
 import com.lxisoft.redalert.repository.PostRepository;
+import com.lxisoft.redalert.repository.UserRegistrationRepository;
 import com.lxisoft.redalert.service.dto.MediaDTO;
 import com.lxisoft.redalert.service.dto.PostDTO;
 import com.lxisoft.redalert.service.dto.UserRegistrationDTO;
@@ -16,13 +18,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +38,7 @@ import java.util.Set;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+
 
 /**
  * Service Implementation for managing Post.
@@ -55,6 +61,8 @@ private JavaMailSender javaMailSender;
 private UserRegistrationResource userRegistrationResource;
 @Autowired
 private MediaResource mediaResource;
+@Autowired
+private UserRegistrationRepository userRegistrationRepository;
     public PostServiceImpl(PostRepository postRepository, PostMapper postMapper) {
         this.postRepository = postRepository;
         this.postMapper = postMapper;
@@ -198,6 +206,49 @@ private MediaResource mediaResource;
             return postMapper.toDto(post);
 
     }
+
+
+    
+    
+    
+    
+    
+	@Override
+	public Page<PostDTO> nonClosedPostsOfFriends(Pageable pageable, Long userRegistrationId) {
+	
+		Optional<UserRegistration> userRegistration=userRegistrationRepository.findById(userRegistrationId);
+		ArrayList<Post> posts=new ArrayList<Post>();
+	
+		Set<UserRegistration> friends=userRegistration.get().getFriends();
+		
+		
+		for(UserRegistration friend:friends)
+		{
+	
+			Page<Post> friendPosts=postRepository.findAllByUserRegistrationIdAndActiveIsNull(pageable, friend.getId());
+			log.debug("id : "+friend.getId()+"after geting friends post size :");
+			if(friendPosts.hasContent())
+			{
+				for(Post friendPost:friendPosts.getContent())
+				{
+					posts.add(friendPost);
+				
+				}
+			}
+			
+			
+			
+		}
+		Page<Post> page=new PageImpl<Post>(posts);
+		
+		
+		
+		return page
+        .map(postMapper::toDto);
+	}
+
+
+
 
 	@Override
 	public String sendMailWithAttachment(PostDTO post) throws MessagingException, IOException, MailException {

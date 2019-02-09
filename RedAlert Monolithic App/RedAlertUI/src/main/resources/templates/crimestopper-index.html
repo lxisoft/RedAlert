@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<!-- Head-->
+		<th:block th:include="crimestopper-head :: head"></th:block>
+	</head>
+	
+	<body>
+	
+		<header>
+		
+			<!--Navbar-->
+			<th:block th:include="crimestopper-navBar :: navBar"></th:block>
+			
+		</header>
+	
+		<main>
+
+			<!-- Home-->
+			<th:block th:include="crimestopper-home :: home"></th:block>
+			
+			<!-- Add Complaint-->
+			<th:block th:include="crimestopper-addComplaint :: addComplaint"></th:block>	
+					
+			<!-- Notifications-->
+			<th:block th:include="crimestopper-notifications :: notifications"></th:block>
+			
+		</main>
+	
+		<footer></footer>
+		
+		<!-- SCRIPTS -->
+		<th:block th:include="crimestopper-scripts :: scripts"></th:block>
+		  
+	</body>
+
+</html>
+ 

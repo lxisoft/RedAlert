@@ -103,19 +103,7 @@ public class PostResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    /**
-     * GET  /posts/:id : get the "id" post.
-     *
-     * @param id the id of the postDTO to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the postDTO, or with status 404 (Not Found)
-     */
-    @GetMapping("/posts/{id}")
-    @Timed
-    public ResponseEntity<PostDTO> getPost(@PathVariable Long id) {
-        log.debug("REST request to get Post : {}", id);
-        Optional<PostDTO> postDTO = postService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(postDTO);
-    }
+    
 
     /**
      * DELETE  /posts/:id : delete the "id" post.
@@ -138,6 +126,8 @@ public class PostResource {
      * @return the ResponseEntity with status 200 (OK) and the list of posts in body
      * @throws NotFoundException 
      */
+    
+    
     @GetMapping("/postsByUserRegistrationId/{userRegistrationId}")
     @Timed
     public ResponseEntity<List<PostDTO>> getAllPostsByUserRegistrationId(@PathVariable Long userRegistrationId,Pageable pageable) throws NotFoundException {
@@ -157,6 +147,69 @@ public class PostResource {
         
        
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /**
+     * GET  /postsByRegistrationId: : get all the posts by UserRegistration Id.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of posts in body
+     * @throws NotFoundException 
+     */
+    @GetMapping("/nonClosedPostsOfFriends/{userRegistrationId}")
+    @Timed
+    public ResponseEntity<List<PostDTO>> nonClosedPostsOfFriends(@PathVariable Long userRegistrationId,Pageable pageable) throws NotFoundException {
+        log.debug("REST request to get a page of Posts");
+        Page<PostDTO> page = postService.nonClosedPostsOfFriends(pageable,userRegistrationId);
+        
+    
+      
+       
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/posts");
+        
+        
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+     
+       
+        
+        
+       
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+
+    /**
+     * GET  /posts/:id : get the "id" post.
+     *
+     * @param id the id of the postDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the postDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/posts/{id}")
+    @Timed
+    public ResponseEntity<PostDTO> getPost(@PathVariable Long id) {
+        log.debug("REST request to get Post : {}", id);
+        Optional<PostDTO> postDTO = postService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(postDTO);
+    }
+    
+    
+ 
 	
 	
 	 /**

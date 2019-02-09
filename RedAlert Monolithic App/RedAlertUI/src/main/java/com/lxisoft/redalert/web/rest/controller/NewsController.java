@@ -1,5 +1,8 @@
 package com.lxisoft.redalert.web.rest.controller;
 
+
+import java.util.ArrayList;
+
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +21,7 @@ import com.lxisoft.redalert.client.red_alert.api.*;
 import com.lxisoft.redalert.client.red_alert.api.UserRegistrationResourceApi;
 import com.lxisoft.redalert.client.red_alert.model.*;
 import com.lxisoft.redalert.model.NewsFeedViewModel;
+import com.lxisoft.redalert.model.NewsFeedViewModels;
 
 @Controller
 @RequestMapping("/redAlertUi/newsPage")
@@ -26,6 +30,10 @@ public class NewsController {
 	@Autowired
 	UserRegistrationResourceApi userRegistrationResouceApi;
 
+	
+	@Autowired
+	MediaResourceApi mediaResouceApi;
+	
 	@Autowired
 	PostResourceApi postResourceApi;
 
@@ -34,63 +42,72 @@ public class NewsController {
 	@Autowired
 	HttpSession session;
 
-	@GetMapping("/dummyData")
-	public void getDummyData() {
-		UserRegistrationDTO user = new UserRegistrationDTO();
-		UserRegistrationDTO userdto = userRegistrationResouceApi.getUserRegistrationUsingGET((long) 1).getBody();
-		NewsFeedViewModel newsView = new NewsFeedViewModel();
-	}
-
+	
 	@GetMapping("/newsOfFriend")
-	public String getNewsOfFriend(Model model) {
-		NewsFeedViewModel newsFeedView = new NewsFeedViewModel();
+	public String getNewsOfFriend(Model model, HttpSession session) {
+		NewsFeedViewModels newsFeedViews=new NewsFeedViewModels();
+		newsFeedViews.setNewsFeedViewList(new ArrayList<NewsFeedViewModel>() );
+		UserRegistrationDTO currentUser =   (UserRegistrationDTO) session.getAttribute("cs");
+
 		
 		//UserRegistrationDTO userRegistrationDto = userRegistrationResouceApi.getUserRegistrationUsingGET((long)1 )
 			//	.getBody();
-		UserRegistrationDTO userRegistrationDto = (UserRegistrationDTO) session.getAttribute("cs");
-		System.out.println("Userregistration is ******************* " + userRegistrationDto);
-		newsFeedView.setUserRegistrationDTO(userRegistrationDto);
+		
+
 		List<PostDTO> postDtoList = postResourceApi
-				.getAllPostsByUserRegistrationIdUsingGET(newsFeedView.getUserRegistrationDTO().getId(), null, null, null,
+				.nonClosedPostsOfFriendsUsingGET(currentUser.getId(), null, null, null,
 						null, null, null, null, null, null, null)
 				.getBody();
-		System.out.println("postDtoList is set ******************* " + postDtoList);
-		PostDTO postDto = postDtoList.get(postDtoList.size() - 1);
-		newsFeedView.setPostDTO(postDto);
-		List<ActionDTO> actionDTOList = actionResourceApi.getAllActionsByPostIdUsingGET(postDto.getId(), null, null,
+		
+		
+		for(PostDTO post:postDtoList)
+		{
+		NewsFeedViewModel newsFeedView = new NewsFeedViewModel();
+		
+		UserRegistrationDTO friend=userRegistrationResouceApi.getUserRegistrationUsingGET(post.getUserRegistrationId()).getBody();
+		newsFeedView.setUserRegistrationDTO(friend);
+		newsFeedView.setPostDTO(post);
+		
+		
+		
+		
+		List<ActionDTO> actionDTOList = actionResourceApi.getAllActionsByPostIdUsingGET(post.getId(), null, null,
 				null, null, null, null, null, null, null, null).getBody();
+		
 		newsFeedView.setActionDTOList(actionDTOList);
-		System.out.println("actionDtoList is **ee***************** " + actionDTOList);
-		/* newsFeedView.setActionDTOList(actionDtoList); */
+		
+		List<MediaDTO> mediaDTOList=mediaResouceApi.getAllMediaByPostIdUsingGET(post.getId(), null, null,
+				null, null, null, null, null, null, null, null).getBody();
+		
+		
+		
+		
+		
+		
+		
+		newsFeedView.setMediaDTOList(mediaDTOList);
+	
 		newsFeedView.setNewActionDTO(new ActionDTO());
-		System.out.println("-------------------------33333333333--------------------- ");
+		
+	
 
-		model.addAttribute("postDTO", postDto);
-		model.addAttribute("newsFeedView", newsFeedView);
-
+		newsFeedViews.getNewsFeedViewList().add(newsFeedView);
+		
+		
+		}
+		
+	
+		model.addAttribute("newsFeedViews", newsFeedViews.getNewsFeedViewList());
+		model.addAttribute("newAction", new ActionDTO());
 		return "news";
 	}
 
 	@PostMapping("/newAction")
-	public String newAction(@ModelAttribute NewsFeedViewModel newsFeedView) {
+	public String newAction(@ModelAttribute ActionDTO  actionDTO) {
 
-		System.out.println("NewsFeedView Model****************************************************************"
-				+ newsFeedView.toString());
-		System.out.println("POst********************************************************************* Model"
-				+ newsFeedView.getPostDTO());
-		System.out.println(
-				"New Action View Model*******************************************" + newsFeedView.getNewActionDTO());
-
-		ActionDTO actionDTO = newsFeedView.getNewActionDTO();
-		actionDTO.setPostId(newsFeedView.getPostDTO().getId());
+	System.out.println("New Actions"+actionDTO);
 		actionDTO.setTakenOn(Instant.now());
 	actionResourceApi.createActionUsingPOST(actionDTO);
-		
-		/*
-		 * System.out.println("NewsFeedView Model"+newsFeedView);
-		 * System.out.println("NewsFeedView Model"+newsFeedView);
-		 * System.out.println("NewsFeedView Model"+newsFeedView);
-		 */
 		return "redirect:/redAlertUi/newsPage/newsOfFriend";
 
 	} 

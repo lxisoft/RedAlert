@@ -91,7 +91,7 @@ public class CrimeStopperHomeController {
 		}
 		model.addAttribute("homeView",homeView);
 
-		return "create_complaint"; 
+		return "crimestopper-index"; 
 	}
 	
 	@PostMapping(value="/likeComplaint")         
