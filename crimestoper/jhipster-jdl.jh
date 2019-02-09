@@ -54,6 +54,11 @@ entity Media
 	file Blob
 }
 
+entity Hashtag
+{
+	name String
+}
+
 enum Status
 {
 	SEEN, ACTION_TAKEN
@@ -80,8 +85,9 @@ relationship OneToMany
 }
 relationship ManyToMany
 {
-	Complaint{department} to Department{complaint }
-    Complaint{linkedComplaints} to Complaint
+	Complaint{department} to Department{complaint}
+	Complaint{linkedComplaints} to Complaint
+	Complaint{hashtags} to Hashtag{complaints}
 }
  
 dto * with mapstruct

@@ -36,5 +36,16 @@
                                  referencedColumnNames="id"
                                  referencedTableName="complaint"/>
         
+        <addForeignKeyConstraint baseColumnNames="complaints_id"
+                                 baseTableName="complaint_hashtags"
+                                 constraintName="fk_complaint_hashtags_complaints_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="complaint"/>
+        <addForeignKeyConstraint baseColumnNames="hashtags_id"
+                                 baseTableName="complaint_hashtags"
+                                 constraintName="fk_complaint_hashtags_hashtags_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hashtag"/>
+        
     </changeSet>
 </databaseChangeLog>
