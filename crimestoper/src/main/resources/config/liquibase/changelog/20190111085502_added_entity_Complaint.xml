@@ -92,17 +92,6 @@
 
         <addPrimaryKey columnNames="complaints_id, linked_complaints_id" tableName="complaint_linked_complaints"/>
         
-        <createTable tableName="complaint_hashtags">
-            <column name="hashtags_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="complaints_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="complaints_id, hashtags_id" tableName="complaint_hashtags"/>
-        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

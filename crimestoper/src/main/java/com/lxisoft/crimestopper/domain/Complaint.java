@@ -79,7 +79,7 @@ public class Complaint implements Serializable {
                joinColumns = @JoinColumn(name = "complaints_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "linked_complaints_id", referencedColumnName = "id"))
     private Set<Complaint> linkedComplaints = new HashSet<>();
-
+    
     @ManyToMany
     @JoinTable(name = "complaint_hashtags",
                joinColumns = @JoinColumn(name = "complaints_id", referencedColumnName = "id"),
@@ -360,31 +360,6 @@ public class Complaint implements Serializable {
     public void setLinkedComplaints(Set<Complaint> complaints) {
         this.linkedComplaints = complaints;
     }
-
-    public Set<Hashtag> getHashtags() {
-        return hashtags;
-    }
-
-    public Complaint hashtags(Set<Hashtag> hashtags) {
-        this.hashtags = hashtags;
-        return this;
-    }
-
-    public Complaint addHashtags(Hashtag hashtag) {
-        this.hashtags.add(hashtag);
-        hashtag.getComplaints().add(this);
-        return this;
-    }
-
-    public Complaint removeHashtags(Hashtag hashtag) {
-        this.hashtags.remove(hashtag);
-        hashtag.getComplaints().remove(this);
-        return this;
-    }
-
-    public void setHashtags(Set<Hashtag> hashtags) {
-        this.hashtags = hashtags;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -423,4 +398,9 @@ public class Complaint implements Serializable {
             ", noOfDislikes=" + getNoOfDislikes() +
             "}";
     }
+
+	public Set<Hashtag> getHashtags() {
+		// TODO Auto-generated method stub
+		return hashtags;
+	}
 }

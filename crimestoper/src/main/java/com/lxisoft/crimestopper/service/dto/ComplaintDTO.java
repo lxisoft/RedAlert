@@ -1,11 +1,13 @@
 package com.lxisoft.crimestopper.service.dto;
 
-import java.time.Instant;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.Lob;
+
 import com.lxisoft.crimestopper.domain.enumeration.Status;
 
 /**
@@ -13,8 +15,11 @@ import com.lxisoft.crimestopper.domain.enumeration.Status;
  */
 public class ComplaintDTO implements Serializable {
 
+	
     private Long id;
-
+    
+    private String userName;
+    
     private Long userId;
 
     private String subject;
@@ -36,14 +41,31 @@ public class ComplaintDTO implements Serializable {
     private Long noOfDislikes;
 
     private Long locationId;
+    
+    private UserResponseDTO userResponse;
 
     private Set<DepartmentDTO> departments = new HashSet<>();
 
     private Set<ComplaintDTO> linkedComplaints = new HashSet<>();
 
-    private Set<HashtagDTO> hashtags = new HashSet<>();
+    
+    public UserResponseDTO getUserResponse() {
+		return userResponse;
+	}
 
-    public Long getId() {
+	public void setUserResponse(UserResponseDTO userResponse) {
+		this.userResponse = userResponse;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -153,14 +175,6 @@ public class ComplaintDTO implements Serializable {
 
     public void setLinkedComplaints(Set<ComplaintDTO> complaints) {
         this.linkedComplaints = complaints;
-    }
-
-    public Set<HashtagDTO> getHashtags() {
-        return hashtags;
-    }
-
-    public void setHashtags(Set<HashtagDTO> hashtags) {
-        this.hashtags = hashtags;
     }
 
     @Override

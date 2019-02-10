@@ -86,8 +86,8 @@ relationship OneToMany
 relationship ManyToMany
 {
 	Complaint{department} to Department{complaint }
-    	Complaint{linkedComplaints} to Complaint
-	Complaint{hashtags} to Hashtag{complaints }
+    Complaint{linkedComplaints} to Complaint
+	Complaint{hashtags} to Hashtag{complaints}
 }
  
 dto * with mapstruct

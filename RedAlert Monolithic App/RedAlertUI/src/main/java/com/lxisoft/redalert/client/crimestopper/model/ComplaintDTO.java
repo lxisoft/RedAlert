@@ -1,27 +1,28 @@
 package com.lxisoft.redalert.client.crimestopper.model;
 
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.lxisoft.redalert.client.crimestopper.model.ComplaintDTO;
+import com.lxisoft.redalert.client.crimestopper.model.DepartmentDTO;
+import com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
-import javax.validation.Valid;
-import javax.validation.constraints.Pattern;
-
 import org.springframework.validation.annotation.Validated;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
-
-import io.swagger.annotations.ApiModelProperty;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 
 /**
  * ComplaintDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-24T11:16:47.830+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-02-10T01:11:22.577+05:30[Asia/Calcutta]")
 
 public class ComplaintDTO   {
   @JsonProperty("departments")
@@ -53,14 +54,7 @@ public class ComplaintDTO   {
   @JsonProperty("noOfLikes")
   private Long noOfLikes = null;
 
-  @JsonProperty("userName")
-  private String userName = null;
-  
-  @JsonProperty("userResponse")
-  private UserResponseDTO userResponse = null;
-
-
-/**
+  /**
    * Gets or Sets status
    */
   public enum StatusEnum {
@@ -105,6 +99,12 @@ public class ComplaintDTO   {
 
   @JsonProperty("userId")
   private Long userId = null;
+
+  @JsonProperty("userName")
+  private String userName = null;
+
+  @JsonProperty("userResponse")
+  private UserResponseDTO userResponse = null;
 
   public ComplaintDTO departments(List<DepartmentDTO> departments) {
     this.departments = departments;
@@ -406,6 +406,47 @@ public class ComplaintDTO   {
     this.userId = userId;
   }
 
+  public ComplaintDTO userName(String userName) {
+    this.userName = userName;
+    return this;
+  }
+
+  /**
+   * Get userName
+   * @return userName
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
+
+  public ComplaintDTO userResponse(UserResponseDTO userResponse) {
+    this.userResponse = userResponse;
+    return this;
+  }
+
+  /**
+   * Get userResponse
+   * @return userResponse
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public UserResponseDTO getUserResponse() {
+    return userResponse;
+  }
+
+  public void setUserResponse(UserResponseDTO userResponse) {
+    this.userResponse = userResponse;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -429,12 +470,14 @@ public class ComplaintDTO   {
         Objects.equals(this.subject, complaintDTO.subject) &&
         Objects.equals(this.time, complaintDTO.time) &&
         Objects.equals(this.timeOfIncident, complaintDTO.timeOfIncident) &&
-        Objects.equals(this.userId, complaintDTO.userId);
+        Objects.equals(this.userId, complaintDTO.userId) &&
+        Objects.equals(this.userName, complaintDTO.userName) &&
+        Objects.equals(this.userResponse, complaintDTO.userResponse);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(departments, description, id, linkedComplaints, locationId, media, mediaContentType, noOfDislikes, noOfLikes, status, subject, time, timeOfIncident, userId);
+    return Objects.hash(departments, description, id, linkedComplaints, locationId, media, mediaContentType, noOfDislikes, noOfLikes, status, subject, time, timeOfIncident, userId, userName, userResponse);
   }
 
   @Override
@@ -456,6 +499,8 @@ public class ComplaintDTO   {
     sb.append("    time: ").append(toIndentedString(time)).append("\n");
     sb.append("    timeOfIncident: ").append(toIndentedString(timeOfIncident)).append("\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("    userName: ").append(toIndentedString(userName)).append("\n");
+    sb.append("    userResponse: ").append(toIndentedString(userResponse)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -470,12 +515,5 @@ public class ComplaintDTO   {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 }
 

@@ -15,11 +15,9 @@
             "otherEntityRelationshipName": "hashtags"
         }
     ],
-<<<<<<< HEAD
-    "changelogDate": "20190209165527",
-=======
-    "changelogDate": "20190209065529",
->>>>>>> parent of 5ecbfb86... cleared master branch conflicts
+
+    "changelogDate": "20190209191203",
+
     "entityTableName": "hashtag",
     "dto": "mapstruct",
     "pagination": "pagination",
