@@ -79,6 +79,12 @@ public class Complaint implements Serializable {
                joinColumns = @JoinColumn(name = "complaints_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "linked_complaints_id", referencedColumnName = "id"))
     private Set<Complaint> linkedComplaints = new HashSet<>();
+    
+    @ManyToMany
+    @JoinTable(name = "complaint_hashtags",
+               joinColumns = @JoinColumn(name = "complaints_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "hashtags_id", referencedColumnName = "id"))
+    private Set<Hashtag> hashtags = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -392,4 +398,9 @@ public class Complaint implements Serializable {
             ", noOfDislikes=" + getNoOfDislikes() +
             "}";
     }
+
+	public Set<Hashtag> getHashtags() {
+		// TODO Auto-generated method stub
+		return hashtags;
+	}
 }

@@ -10,22 +10,19 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * LocationDTO
+ * HashtagDTO
  */
 @Validated
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-02-10T01:11:22.577+05:30[Asia/Calcutta]")
 
-public class LocationDTO   {
+public class HashtagDTO   {
   @JsonProperty("id")
   private Long id = null;
 
-  @JsonProperty("latitude")
-  private Double latitude = null;
+  @JsonProperty("name")
+  private String name = null;
 
-  @JsonProperty("longitutde")
-  private Double longitutde = null;
-
-  public LocationDTO id(Long id) {
+  public HashtagDTO id(Long id) {
     this.id = id;
     return this;
   }
@@ -45,44 +42,24 @@ public class LocationDTO   {
     this.id = id;
   }
 
-  public LocationDTO latitude(Double latitude) {
-    this.latitude = latitude;
+  public HashtagDTO name(String name) {
+    this.name = name;
     return this;
   }
 
   /**
-   * Get latitude
-   * @return latitude
+   * Get name
+   * @return name
   **/
   @ApiModelProperty(value = "")
 
 
-  public Double getLatitude() {
-    return latitude;
+  public String getName() {
+    return name;
   }
 
-  public void setLatitude(Double latitude) {
-    this.latitude = latitude;
-  }
-
-  public LocationDTO longitutde(Double longitutde) {
-    this.longitutde = longitutde;
-    return this;
-  }
-
-  /**
-   * Get longitutde
-   * @return longitutde
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public Double getLongitutde() {
-    return longitutde;
-  }
-
-  public void setLongitutde(Double longitutde) {
-    this.longitutde = longitutde;
+  public void setName(String name) {
+    this.name = name;
   }
 
 
@@ -94,25 +71,23 @@ public class LocationDTO   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LocationDTO locationDTO = (LocationDTO) o;
-    return Objects.equals(this.id, locationDTO.id) &&
-        Objects.equals(this.latitude, locationDTO.latitude) &&
-        Objects.equals(this.longitutde, locationDTO.longitutde);
+    HashtagDTO hashtagDTO = (HashtagDTO) o;
+    return Objects.equals(this.id, hashtagDTO.id) &&
+        Objects.equals(this.name, hashtagDTO.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, latitude, longitutde);
+    return Objects.hash(id, name);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class LocationDTO {\n");
+    sb.append("class HashtagDTO {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    latitude: ").append(toIndentedString(latitude)).append("\n");
-    sb.append("    longitutde: ").append(toIndentedString(longitutde)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }

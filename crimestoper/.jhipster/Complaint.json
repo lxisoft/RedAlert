@@ -80,6 +80,14 @@
             "otherEntityName": "complaint",
             "otherEntityField": "id",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "complaints",
+            "relationshipName": "hashtags",
+            "otherEntityName": "hashtag",
+            "otherEntityField": "id",
+            "ownerSide": true
         }
     ],
     "changelogDate": "20190111085502",
