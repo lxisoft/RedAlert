@@ -1,13 +1,19 @@
 package com.lxisoft.crimestopper.web.rest;
 
-import com.lxisoft.crimestopper.CrimestopperApp;
+import static com.lxisoft.crimestopper.web.rest.TestUtil.createFormattingConversionService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.lxisoft.crimestopper.domain.Location;
-import com.lxisoft.crimestopper.repository.LocationRepository;
-import com.lxisoft.crimestopper.service.LocationService;
-import com.lxisoft.crimestopper.service.dto.LocationDTO;
-import com.lxisoft.crimestopper.service.mapper.LocationMapper;
-import com.lxisoft.crimestopper.web.rest.errors.ExceptionTranslator;
+import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,15 +29,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import java.util.List;
-
-
-import static com.lxisoft.crimestopper.web.rest.TestUtil.createFormattingConversionService;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.lxisoft.crimestopper.CrimestopperApp;
+import com.lxisoft.crimestopper.domain.Location;
+import com.lxisoft.crimestopper.repository.LocationRepository;
+import com.lxisoft.crimestopper.service.LocationService;
+import com.lxisoft.crimestopper.service.dto.LocationDTO;
+import com.lxisoft.crimestopper.service.mapper.LocationMapper;
+import com.lxisoft.crimestopper.web.rest.errors.ExceptionTranslator;
 
 /**
  * Test class for the LocationResource REST controller.
@@ -45,8 +49,8 @@ public class LocationResourceIntTest {
     private static final Double DEFAULT_LATITUDE = 1D;
     private static final Double UPDATED_LATITUDE = 2D;
 
-    private static final Double DEFAULT_LONGITUTDE = 1D;
-    private static final Double UPDATED_LONGITUTDE = 2D;
+    private static final Double DEFAULT_LONGITUDE = 1D;
+    private static final Double UPDATED_LONGITUDE = 2D;
 
     @Autowired
     private LocationRepository locationRepository;
@@ -93,7 +97,7 @@ public class LocationResourceIntTest {
     public static Location createEntity(EntityManager em) {
         Location location = new Location()
             .latitude(DEFAULT_LATITUDE)
-            .longitutde(DEFAULT_LONGITUTDE);
+            .longitude(DEFAULT_LONGITUDE);
         return location;
     }
 
@@ -119,7 +123,7 @@ public class LocationResourceIntTest {
         assertThat(locationList).hasSize(databaseSizeBeforeCreate + 1);
         Location testLocation = locationList.get(locationList.size() - 1);
         assertThat(testLocation.getLatitude()).isEqualTo(DEFAULT_LATITUDE);
-        assertThat(testLocation.getLongitutde()).isEqualTo(DEFAULT_LONGITUTDE);
+        assertThat(testLocation.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
     }
 
     @Test
@@ -154,7 +158,7 @@ public class LocationResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(location.getId().intValue())))
             .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.doubleValue())))
-            .andExpect(jsonPath("$.[*].longitutde").value(hasItem(DEFAULT_LONGITUTDE.doubleValue())));
+            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())));
     }
     
     @Test
@@ -169,7 +173,7 @@ public class LocationResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(location.getId().intValue()))
             .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.doubleValue()))
-            .andExpect(jsonPath("$.longitutde").value(DEFAULT_LONGITUTDE.doubleValue()));
+            .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.doubleValue()));
     }
 
     @Test
@@ -194,7 +198,7 @@ public class LocationResourceIntTest {
         em.detach(updatedLocation);
         updatedLocation
             .latitude(UPDATED_LATITUDE)
-            .longitutde(UPDATED_LONGITUTDE);
+            .longitude(UPDATED_LONGITUDE);
         LocationDTO locationDTO = locationMapper.toDto(updatedLocation);
 
         restLocationMockMvc.perform(put("/api/locations")
@@ -207,7 +211,7 @@ public class LocationResourceIntTest {
         assertThat(locationList).hasSize(databaseSizeBeforeUpdate);
         Location testLocation = locationList.get(locationList.size() - 1);
         assertThat(testLocation.getLatitude()).isEqualTo(UPDATED_LATITUDE);
-        assertThat(testLocation.getLongitutde()).isEqualTo(UPDATED_LONGITUTDE);
+        assertThat(testLocation.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
     }
 
     @Test

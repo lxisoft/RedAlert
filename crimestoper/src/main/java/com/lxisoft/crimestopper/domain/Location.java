@@ -1,10 +1,15 @@
 package com.lxisoft.crimestopper.domain;
 
 
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * A Location.
@@ -18,12 +23,12 @@ public class Location implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+ 
     @Column(name = "latitude")
     private Double latitude;
-
-    @Column(name = "longitutde")
-    private Double longitutde;
+    
+    @Column(name = "longitude")
+    private Double longitude;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -47,18 +52,19 @@ public class Location implements Serializable {
         this.latitude = latitude;
     }
 
-    public Double getLongitutde() {
-        return longitutde;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public Location longitutde(Double longitutde) {
-        this.longitutde = longitutde;
+    public Location longitude(Double longitude) {
+        this.longitude = longitude;
         return this;
     }
 
-    public void setLongitutde(Double longitutde) {
-        this.longitutde = longitutde;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
+    
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -86,7 +92,7 @@ public class Location implements Serializable {
         return "Location{" +
             "id=" + getId() +
             ", latitude=" + getLatitude() +
-            ", longitutde=" + getLongitutde() +
+            ", longitude=" + getLongitude() +
             "}";
     }
 }

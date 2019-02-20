@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.lxisoft.crimestopper.domain.Complaint;
+import com.lxisoft.crimestopper.domain.Hashtag;
 
 /**
  * Spring Data  repository for the Complaint entity.
@@ -37,4 +38,15 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Long> {
      */
     @Query(value="select complaint from  Complaint complaint where complaint.userId=:id")
 	Page<Complaint> findByUserId(@Param("id") Long id,Pageable pageable);
+
+
+    /**
+     * to get complaints by hash tag
+     * @param id
+     * @param pageable
+     * @return
+     */
+   
+	Page<Complaint> findAllComplaintsByHashtags(Pageable pageable,Hashtag hashtag);
 }
+ 

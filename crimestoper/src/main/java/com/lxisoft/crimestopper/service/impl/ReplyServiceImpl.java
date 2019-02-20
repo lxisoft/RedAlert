@@ -1,19 +1,19 @@
 package com.lxisoft.crimestopper.service.impl;
 
-import com.lxisoft.crimestopper.service.ReplyService;
-import com.lxisoft.crimestopper.domain.Reply;
-import com.lxisoft.crimestopper.repository.ReplyRepository;
-import com.lxisoft.crimestopper.service.dto.ReplyDTO;
-import com.lxisoft.crimestopper.service.mapper.ReplyMapper;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import com.lxisoft.crimestopper.domain.Reply;
+import com.lxisoft.crimestopper.repository.ReplyRepository;
+import com.lxisoft.crimestopper.service.ReplyService;
+import com.lxisoft.crimestopper.service.dto.ReplyDTO;
+import com.lxisoft.crimestopper.service.mapper.ReplyMapper;
 
 /**
  * Service Implementation for managing Reply.

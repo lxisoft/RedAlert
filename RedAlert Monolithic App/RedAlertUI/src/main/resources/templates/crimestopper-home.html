@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,130 +9,136 @@
 
 
 	<!-- FRAGMENT NAME -->
-	<div th:fragment ="home">
-	
+	<div th:fragment="home">
+
 		<!-- FRAGMENT CONTENT -->
 		<div th:each="complaint,iter : ${homeView.complaints}">
-		<!-- Card -->
-		<div class="card center_margin80 top_margin1">
-			<!-- Card content -->
-			<div class="card-body">
-				<div class="media ">
-					<img class="d-flex rounded-circle avatar z-depth-1-half mr-3"
-						src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png"
-						alt="Avatar">
-					<div class="media-body">
-						<h5 class="mt-0 font-weight-bold blue-text"
-							th:text="${complaint.userName}">Caroline Horwitz</h5>
+			<!-- Card -->
+			<div class="card center_margin80 top_margin1">
+				<!-- Card content -->
+				<div class="card-body" style="cursor: pointer;" data-toggle="collapse"
+					th:attr="data-target='#complaintDetails'+${complaint.id}">
+					<div class="media ">
+						<img class="d-flex rounded-circle avatar z-depth-1-half mr-3"
+							src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png"
+							alt="Avatar">
+						<div class="media-body">
+							<h5 class="mt-0 font-weight-bold blue-text"
+								th:text="${complaint.userName}">Caroline Horwitz</h5>
+							<p th:text="${complaint.subject}">Lorem ipsum dolor sit amet,
+								consectetur adipisicing elit. Corporis odit minima eaque
+								dignissimos recusandae officiis commodi nulla est, tempore atque
+								voluptas non quod maxime, iusto, debitis aliquid? Iure ipsum,
+								itaque.</p>
+
+						</div>
+					</div>
+
+				</div>
+				<!--  Collapsible element of compaint details-->
+				<div class="collapse" th:id="|complaintDetails${complaint.Id}|">
+					<div class="mt-3" style="margin-left: 8px;">
 						<p th:text="${complaint.description}">Lorem ipsum dolor sit
 							amet, consectetur adipisicing elit. Corporis odit minima eaque
 							dignissimos recusandae officiis commodi nulla est, tempore atque
 							voluptas non quod maxime, iusto, debitis aliquid? Iure ipsum,
 							itaque.</p>
 
+						<img th:if="${complaint.image!='data:image/jpg;base64,'}"
+							class="img-fluid img-thumbnail thumbnail hoverable"
+							th:src=${complaint.image}>
+					<p th:text="${complaint.noOfDislikes}"></p>							
+
 					</div>
+
 				</div>
-			</div>
 
-			<div class="btn-group" style="width: 100%;" role="group"
-				aria-label="Basic example">
+				<!-- / Collapsible element of compaint details -->
+				<div class="btn-group" style="width: 100%;" role="group"
+					aria-label="Basic example">
 
-				<form
-					th:if="${complaint.userResponse.flag!=T(com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum).LIKE}"
-					action="/crime-stopper/likeComplaint" method="POST"
-					style="width: 100%;">
-					<input type="hidden" th:value="like" th:name="flag"> <input
-						type="hidden" th:value="${complaint.userResponse.id}"
-						th:name="responseId"> <input type="hidden"
-						th:value="${complaint.id}" th:name="complaintId">
-					<button type="submit" style="width: 100%;" class="btn btn-tertiary">
-						<!-- like-->
-						<i class="far fa-thumbs-up"></i>
-					</button>
-				</form>
-				<form
-					th:if="${complaint.userResponse.flag==T(com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum).LIKE}"
-					action="/crime-stopper/likeComplaint" method="POST"
-					style="width: 100%;">
-					<input type="hidden" th:value="like" th :name="flag"> <input
-						type="hidden" th:value="${complaint.userResponse.id}"
-						th:name="responseId"> <input type="hidden"
-						th:value="${complaint.id}" th:name="complaintId">
-					<button type="button" style="width: 100%;" class="btn btn-tertiary">
-						<!-- like-->
-						<i class="fas fa-thumbs-up"></i>
-					</button>
-				</form>
+					<form action="/crime-stopper/likeComplaint" method="POST"
+						style="width: 100%;">
+						<input type="hidden" th:value="like" th:name="flag"> <input
+							type="hidden" th:value="${complaint.userResponse.id}"
+							th:name="responseId"> <input type="hidden"
+							th:value="${complaint.id}" th:name="complaintId">
+	 					<button
+							th:if="${complaint.userResponse.flag!=T(com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum).LIKE}"
+							type="submit" style="width: 100%;" class="btn btn-tertiary">
+							<!-- like-->
+							<i class="far fa-thumbs-up"></i>
+						</button>
+						<button
+							th:if="${complaint.userResponse.flag==T(com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum).LIKE}"
+							type="button" style="width: 100%;" class="btn btn-tertiary">
+							<!-- like-->
+							<i class="fas fa-thumbs-up"></i>
+						</button>
+					</form>
 
-				<form
-					th:if="${complaint.userResponse.flag!=T(com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum).DISLIKE}"
-					action="/crime-stopper/dislikeComplaint" method="POST"
-					style="width: 100%;">
-					<input type="hidden" th:value="like" th:name="flag"> <input
-						type="hidden" th:value="${complaint.userResponse.id}"
-						th:name="responseId"> <input type="hidden"
-						th:value="${complaint.id}" th:id="'complaintId'+${iter.index}"
-						th:name="complaintId">
-					<button type="submit" style="width: 100%;" class="btn btn-tertiary">
-						<!-- like-->
-						<i class="far fa-thumbs-down"></i>
-					</button>
-				</form>
-				<form
-					th:if="${complaint.userResponse.flag==T(com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum).DISLIKE}"
-					action="/crime-stopper/dislikeComplaint" method="POST"
-					style="width: 100%;">
-					
-					<input type="hidden" th:value="like" th:name="flag"> 
-					<input
-						type="hidden" th:value="${complaint.userResponse.id}"
-						th:name="responseId"> <input type="hidden"
-						th:value="${complaint.id}" th:name="complaintId"
-						th:id="'complaintId'+${iter.index}">
-					<button type="button" style="width: 100%;" class="btn btn-tertiary">
-						<!-- like-->
-						<i class="fas fa-thumbs-down"></i>
-					</button>
-				</form>
-				<!-- comment-->
-				<!-- <form style="width: 100%;">
+
+					<form action="/crime-stopper/dislikeComplaint" method="POST"
+						style="width: 100%;">
+						<input type="hidden" th:value="like" th:name="flag"> <input
+							type="hidden" th:value="${complaint.userResponse.id}"
+							th:name="responseId"> <input type="hidden"
+							th:value="${complaint.id}" th:id="'complaintId'+${iter.index}"
+							th:name="complaintId">
+						<button
+							th:if="${complaint.userResponse.flag!=T(com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum).DISLIKE}"
+							type="submit" style="width: 100%;" class="btn btn-tertiary">
+							<!-- dislike-->
+							<i class="far fa-thumbs-down"></i>
+						</button>
+						<button
+							th:if="${complaint.userResponse.flag==T(com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum).DISLIKE}"
+							type="button" style="width: 100%;" class="btn btn-tertiary">
+							<!-- dislike-->
+							<i class="fas fa-thumbs-down"></i>
+						</button>
+					</form>
+					<!-- comment-->
+					<!-- <form style="width: 100%;">
 					<button type="button" th:onclick="|setComplaintId(${iter.index});|"  style="width: 100%;" class="btn btn-tertiary" data-toggle="modal" data-target="#basicExampleModal">
 						<i class="far fa-comment-alt"></i>
 					</button>
 					</form> -->
 
-				<form style="width: 100%;">
+					<form style="width: 100%;">
 
-					<button type="button" style="width: 100%;" class="btn btn-tertiary"
-						data-toggle="collapse"
-						th:attr="data-target='#collapseExample'+${complaint.id}">
+						<button type="button" style="width: 100%;"
+							class="btn btn-tertiary" data-toggle="collapse"
+							th:attr="data-target='#collapseExample'+${complaint.id}">
 
-						<i class="far fa-comment-alt"></i>
-					</button>
+							<i class="far fa-comment-alt"></i>
+						</button>
 
-				</form>
-				<!-- comment-->
-				<form style="width: 100%;">
-					<button type="button" style="width: 100%;" class="btn btn-tertiary">
-						<!-- location-->
-						<i class="fas fa-map-marker-alt"></i>
-					</button>
-				</form>
-			</div>
+					</form>
+					<!-- comment-->
+					<form style="width: 100%;">
+						<button type="button" style="width: 100%;"
+							class="btn btn-tertiary" data-toggle="modal" data-target="#locationModalCenter" th:lat="${complaint.location.latitude}" th:long="${complaint.location.longitude}" th:onclick="showMap(this.getAttribute('lat'),this.getAttribute('long'));">
+							<!-- location-->
+							<i class="fas fa-map-marker-alt" ></i>
+						</button>
+					</form>
+				</div>
 
-			<!--  Collapsible element -->
-			<div class="collapse" th:id="|collapseExample${complaint.Id}|">
-				<div class="mt-3" style="margin-left: 8px;">
-					<!-- / COMMENT ENTER element -->
-					<form action="/crime-stopper/comment" method="POST">
-						<div class="form-group shadow-textarea">
+				<!--  Collapsible element -->
+				<div class="collapse" th:id="|collapseExample${complaint.Id}|">
+					<div class="mt-3" style="margin-left: 8px;">
+						<!-- / COMMENT ENTER element -->
+						<form action="/crime-stopper/comment" method="POST">
+							<div class="form-group shadow-textarea">
 
-							<textarea class="form-control z-depth-1"
-								id="exampleFormControlTextarea6" rows="3"
-								placeholder="Write something here..." name="comment"></textarea>
-							<input type="hidden" name="complaintId" th:value="${complaint.id}">
-							<div class="card">
-								<!-- <div class="card-body">
+								<textarea class="form-control z-depth-1"
+									id="exampleFormControlTextarea6" rows="3"
+									placeholder="Write something here..." name="comment"></textarea>
+								<input type="hidden" name="complaintId"
+									th:value="${complaint.id}">
+								<div class="card">
+									<!-- <div class="card-body">
 
 										Title
 										<h4 class="card-title">
@@ -144,30 +151,60 @@
 
 									</div> -->
 
+								</div>
+								<!-- Card -->
 							</div>
-							<!-- Card -->
-						</div>
-						<button type="submit" class="btn btn-primary">Post
-							comment</button>
-							</form>
+							<button type="submit" class="btn btn-primary">Post
+								comment</button>
+						</form>
+					</div>
+
+
+					<!-- / COMMENT ENTER element -->
+
+					<div th:each="comment:${complaint.comments}" class="mt-3"
+						style="margin-left: 8px;">
+						<h3 th:text="${comment.userName}"></h3>
+						<p th:text="${comment.description}"></p>
+
+ 					</div>
 				</div>
-				
-			
-			<!-- / COMMENT ENTER element -->
-
-			<div th:each="comment:${complaint.comments}" class="mt-3"
-				style="margin-left: 8px;">
-				<h3 th:text="${comment.userName}"></h3>	
-				<p th:text="${comment.description}"></p>
-
-			</div>
 			</div>
 		</div>
-	</div>
-	<!-- / Collapsible element -->
-	</div>
+		<!-- / Collapsible element -->
 		
-		
+		    <!--map<!--
+    <!-- Modal -->
+    <div class="modal fade" id="locationModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
+        <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+        <div class="modal-dialog modal-dialog-centered" role="document">
+
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Location</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-12 modal_body_map">
+                      <div class="location-map" id="location-map">
+                        <div class="img-fluid" style="width: 100%; height: 200px;" id="mapholder"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-deep-orange" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--./map-->
+		
+	</div>
 </body>
 </html>
