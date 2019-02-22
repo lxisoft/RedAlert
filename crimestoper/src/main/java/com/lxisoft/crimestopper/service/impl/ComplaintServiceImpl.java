@@ -149,10 +149,10 @@ public class ComplaintServiceImpl implements ComplaintService {
 		log.debug("request to get all complaints of friends by userId:"+userId);
 		List<ComplaintDTO> list=new ArrayList<ComplaintDTO>(); 
 		List<UserRegistrationDTO> users=userRegistrationResourceApi.getAllFriendsUsingGET(userId).getBody();
-		complaintRepository.findByUserId(userId,pageable);
+		complaintRepository.findAllByUserId(userId,pageable);
 		for(UserRegistrationDTO userDTO:users)
 		{
-			List<ComplaintDTO> complaints=complaintRepository.findByUserId(userDTO.getId(),pageable).map(complaintMapper::toDto).getContent();
+			List<ComplaintDTO> complaints=complaintRepository.findAllByUserId(userDTO.getId(),pageable).map(complaintMapper::toDto).getContent();
 			for(ComplaintDTO complaint:complaints)
 			{
 				complaint.setUserName(userDTO.getFirstName()+" "+userDTO.getLastName());
@@ -174,6 +174,13 @@ public class ComplaintServiceImpl implements ComplaintService {
 		Page<ComplaintDTO> pages = new PageImpl<ComplaintDTO>(list, pageable, list.size());
 		return pages;
 	}
-	
+	public Page<ComplaintDTO> findAllComplaintsOfUserId(Pageable pageable, Long userId){
+		
+		//List<ComplaintDTO> complaints=complaintRepository.findAllByUserId(userId,pageable).map(complaintMapper::toDto).getContent();
+		Page<ComplaintDTO> complaints=complaintRepository.findAllByUserId(userId,pageable).map(complaintMapper::toDto);
+
+		return complaints;
+		
+	}
 	
 }

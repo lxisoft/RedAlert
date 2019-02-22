@@ -56,4 +56,6 @@ public interface ComplaintService {
     */
 
 	Page<ComplaintDTO> findAllComplaintsOfFriends(Pageable pageable, Long userId);
+	
+	Page<ComplaintDTO> findAllComplaintsOfUserId(Pageable pageable, Long userId);
 }

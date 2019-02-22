@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<!-- FRAGMENT NAME -->
+	<div th:fragment ="navBar">
+	
+		<!-- FRAGMENT CONTENT -->
+		<nav class="navbar navbar-expand-lg navbar-dark primary-color">
+			<div class="container">
+			
+				<!-- Navbar brand -->
+				<a class="navbar-brand" href="#">CrimeStopper</a>
+				
+				<!-- Collapse button -->
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+				  aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+				</button>
+				
+				<!-- Collapsible content -->
+				<div class="collapse navbar-collapse" id="basicExampleNav">
+				
+					<!-- Links -->
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{/crime-stopper/profilepage}">Profile</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add Complaint</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="modal" data-target="#exampleModal2" data-whatever="@mdo">Notifications</a>
+						</li>
+
+					</ul>
+					<!-- Links -->
+					
+				</div>
+				<!-- Collapsible content -->
+			</div>
+		</nav>
+	</div>
+
+
+</body>
+</html>

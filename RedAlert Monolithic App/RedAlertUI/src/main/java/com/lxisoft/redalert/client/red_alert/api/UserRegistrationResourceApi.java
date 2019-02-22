@@ -25,12 +25,16 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-30T14:13:16.657136500+05:30[Asia/Calcutta]")
+
 
 @Api(value = "UserRegistrationResource", description = "the UserRegistrationResource API")
 public interface UserRegistrationResourceApi {
 
+
     @ApiOperation(value = "addFriend", nickname = "addFriendUsingPOST", notes = "", tags={ "user-registration-resource", })
+
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 201, message = "Created"),
@@ -40,7 +44,6 @@ public interface UserRegistrationResourceApi {
     @RequestMapping(value = "/api/user-registrations/addFriend/{userId}/{friendId}",
         method = RequestMethod.POST)
     ResponseEntity<Void> addFriendUsingPOST(@ApiParam(value = "friendId",required=true) @PathVariable("friendId") Long friendId,@ApiParam(value = "userId",required=true) @PathVariable("userId") Long userId);
-
 
     @ApiOperation(value = "createUserRegistration", nickname = "createUserRegistrationUsingPOST", notes = "", response = UserRegistrationDTO.class, tags={ "user-registration-resource", })
     @ApiResponses(value = { 
@@ -54,6 +57,7 @@ public interface UserRegistrationResourceApi {
         consumes = "application/json",
         method = RequestMethod.POST)
     ResponseEntity<UserRegistrationDTO> createUserRegistrationUsingPOST(@ApiParam(value = "userRegistrationDTO" ,required=true )  @Valid @RequestBody UserRegistrationDTO userRegistrationDTO);
+
 
 
     @ApiOperation(value = "deleteUserRegistration", nickname = "deleteUserRegistrationUsingDELETE", notes = "", tags={ "user-registration-resource", })
@@ -85,7 +89,9 @@ public interface UserRegistrationResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
+
     @RequestMapping(value = "/api/user-registrations/getFriends/{userId}",
+
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<List<UserRegistrationDTO>> getAllFriendsUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") Long userId);
@@ -183,11 +189,12 @@ public interface UserRegistrationResourceApi {
         @ApiResponse(code = 404, message = "Not Found") })
     @RequestMapping(value = "/api/sendSMS/{userId}/{phoneno}",
         produces = "*/*", 
-        method = RequestMethod.GET)
+method = RequestMethod.GET)
     ResponseEntity<UserRegistrationDTO> sendSMSUsingGET(@ApiParam(value = "phoneno",required=true) @PathVariable("phoneno") Long phoneno,@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
 
 
     @ApiOperation(value = "unFriend", nickname = "unFriendUsingPOST", notes = "", tags={ "user-registration-resource", })
+
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 201, message = "Created"),
@@ -223,5 +230,6 @@ public interface UserRegistrationResourceApi {
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<UserRegistrationDTO> validateUsingGET(@ApiParam(value = "phoneno",required=true) @PathVariable("phoneno") String phoneno);
+
 
 }

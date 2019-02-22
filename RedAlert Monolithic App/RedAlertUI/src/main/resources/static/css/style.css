@@ -415,4 +415,9 @@ section .section-title {
 .btn-tertiary {
   background-color: #fff !important;
   color: #4285f4 !important; }
+.bg-color-pink {
+	
+	background-color:#4285f4;
+}
+
 

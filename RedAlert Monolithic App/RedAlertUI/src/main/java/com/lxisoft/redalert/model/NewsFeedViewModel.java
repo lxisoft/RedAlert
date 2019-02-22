@@ -13,6 +13,16 @@ public class NewsFeedViewModel {
 	private List<MediaDTO> mediaDTOList=new ArrayList<MediaDTO>();
 	private List<ReportDTO> reportDTOList=new ArrayList<ReportDTO>();
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public UserRegistrationDTO getUserRegistrationDTO() {
 		return userRegistrationDTO;
 	}
