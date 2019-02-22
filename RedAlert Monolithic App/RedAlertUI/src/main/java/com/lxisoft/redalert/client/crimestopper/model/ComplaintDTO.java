@@ -28,6 +28,17 @@ public class ComplaintDTO   {
   @Valid
   private List<DepartmentDTO> departments = null;
 
+  public LocationDTO getLocation() {
+	return location;
+}
+
+public void setLocation(LocationDTO location) {
+	this.location = location;
+}
+
+@JsonProperty("location")
+  private LocationDTO location = null;
+  
   @JsonProperty("description")
   private String description = null;
 
@@ -44,7 +55,18 @@ public class ComplaintDTO   {
   @JsonProperty("media")
   private byte[] media = null;
 
-  @JsonProperty("mediaContentType")
+  @JsonProperty("image")
+  private String image = null;
+  
+  public String getImage() {
+	return image;
+}
+
+public void setImage(String image) {
+	this.image = image;
+}
+
+@JsonProperty("mediaContentType")
   private String mediaContentType = null;
 
   public Set<CommentDTO> getComments() {

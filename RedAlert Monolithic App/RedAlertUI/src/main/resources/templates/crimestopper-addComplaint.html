@@ -7,8 +7,8 @@
 <body>
 
 	<!-- FRAGMENT NAME -->
-	<div th:fragment ="addComplaint">
-	
+	<div th:fragment="addComplaint">
+
 
 		<!-- Contains 6 parts: 
 			1. Add Complaint
@@ -17,86 +17,139 @@
 			4. Link Similar Problems 
 			5. Group of Icons 
 			6. Attach File-->
-		
-		<!-- FRAGMENT CONTENT -->	
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+		<!-- FRAGMENT CONTENT -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
-					
+
 					<!-- 1. Add Complaint-->
 					<div class="modal-header">
 						<h4 class="modal-title" id="exampleModalLabel">Add Complaint</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 					<!-- Add Complaint-->
-					
+
 					<div class="modal-body">
-						<form th:action="@{/crime-stopper/complaint/add}" th:object="${complaintDto}" th:method="post" enctype="multipart/form-data">
+						<form th:action="@{/crimestopper-complaint/add}"
+							th:object="${complaintDTO}" th:method="post"
+							enctype="multipart/form-data">
+
 
 							<!-- 2. Complaint Subject-->
 							<div class="md-form">
-								<textarea type="text" id="message-text2" class="form-control md-textarea" rows="3" name="subject" th:name="subject"></textarea>
+								<textarea type="text" id="message-text2"
+									class="form-control md-textarea" rows="3" name="subject"
+									th:name="subject"></textarea>
 								<label for="form7">Complaint Subject</label>
 							</div>
 							<!-- Complaint Subject-->
-						
+
 							<!-- 3. Describe your complaint here..-->
 							<div class="md-form ui-front">
-								<textarea type="text" id="message-text" class="form-control md-textarea" rows="3" name="description" th:name="description"></textarea>
+								<textarea type="text" id="message-text"
+									class="form-control md-textarea" rows="3" name="description"
+									th:name="description"></textarea>
 								<label for="form7">Describe your complaint here..</label>
 							</div>
 							<!-- Describe your complaint here-->
-					  
+
 							<!-- 4. Link Similar Problems-->
-							<div class="md-form">
+							 <div class="modal-body" >
+								<div class="row">
+									<div class="col-md-12 modal_body_map">
+										<div class="location-map" id="location-map">
+											<div class="img-fluid" style="b order-radius: 5px;"
+												id="mapholder"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						 	<div class="row">
+								<div class="col">
+									<div class="md-form mt-0">
+										<input type="text" placeholder=" " id="latitude"
+											class="form-control" th:field="${complaintDTO.location.latitude}" />
+
+									</div>
+								</div>
+								<div class="col">
+									<div class="md-form mt-0">
+										<input type="text" placeholder=" " id="longitude"
+											th:field="${complaintDTO.location.longitude}" class="form-control" />
+									</div>
+								</div>
+							</div> 
+
+							 <div class="md-form">
 								<p>Link Similar Problems</p>
 							</div>
 							<div class="list-group">
-								<button type="button" class="list-group-item list-group-item-action active">Problem 1</button>
-								<button type="button" class="list-group-item list-group-item-action">Problem 2</button>
-								<button type="button" class="list-group-item list-group-item-action">Problem 3</button>
-								<button type="button" class="list-group-item list-group-item-action">Problem 4</button>
-								<button type="button" class="list-group-item list-group-item-action" disabled>Problem 5</button>
+								<button type="button"
+									class="list-group-item list-group-item-action active">Problem
+									1</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">Problem
+									2</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">Problem
+									3</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">Problem
+									4</button>
+								<button type="button"
+									class="list-group-item list-group-item-action" disabled>Problem
+									5</button>
 							</div>
 							<!-- Link Similar Problems-->
-							
+
 							<!-- 5. Attach File -->
 							<div class="input-group mt-3 w-75 mx-auto">
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
 								</div>
 								<div class="custom-file">
-									<input type="file" class="custom-file-input" th:name="multipartFile" id="file-with-multi-file" aria-describedby="inputGroupFileAddon01">
-									<label class="custom-file-label" for="file-with-multi-file">Choose file</label>
+									<input type="file" class="custom-file-input"
+										th:name="multipartFile" id="file-with-multi-file"
+										aria-describedby="inputGroupFileAddon01"> <label
+										class="custom-file-label" for="file-with-multi-file">Choose
+										file</label>
 								</div>
 							</div>
 							<script>
-								$('#file-with-multi-file').on('change',function(){
-									//get the file name
-									var fileName = $(this).val();
-									//replace the "Choose a file" label
-									$(this).next('.custom-file-label').html(fileName);
-								})
+								$('#file-with-multi-file').on(
+										'change',
+										function() {
+											//get the file name
+											var fileName = $(this).val();
+											//replace the "Choose a file" label
+											$(this).next('.custom-file-label')
+													.html(fileName);
+										})
 							</script>
-							<!--Attach File-->		
-							
-							<!-- 6. Send Button-->	
+							<!--Attach File-->
+
+							<!-- 6. Send Button-->
 							<div class="modal-footer">
-								<button type="submit" class="btn btn-primary">Add Complaint</button>
+								<button type="submit" class="btn btn-primary">Add
+									Complaint</button>
 							</div>
-							<!--Send Button-->					
-							
+							<!--Send Button-->
+
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 
-	
-	
-	</div>
 
+
+	</div>
+	<script
+		src="https://maps.google.com/maps/api/js?key=AIzaSyDNvROGIUEfGUi_YHSWWbBVTJpqZuZCjvY"></script>
 </body>
 </html>

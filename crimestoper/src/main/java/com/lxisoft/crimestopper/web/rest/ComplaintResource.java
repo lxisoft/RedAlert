@@ -162,4 +162,17 @@ public class ComplaintResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
     
+    
+    @GetMapping("hashtag/complaints")
+    @Timed
+    public ResponseEntity<List<ComplaintDTO>> getAllComplaintsHashtag(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload,@RequestParam String searchContent) {
+        
+    	log.debug("REST request to get a page of Complaints");
+        Page<ComplaintDTO> page;      
+            page = complaintService.findAllComplaintsByHashtag(pageable,searchContent);
+            HttpHeaders	headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/complaints?eagerload=%b", eagerload));
+            
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+    
 }

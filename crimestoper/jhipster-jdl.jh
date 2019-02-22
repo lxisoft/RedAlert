@@ -40,7 +40,7 @@ entity Location
 {
 	
  	latitude Double ,
-    longitutde Double
+    longitude Double
     
 }
  
