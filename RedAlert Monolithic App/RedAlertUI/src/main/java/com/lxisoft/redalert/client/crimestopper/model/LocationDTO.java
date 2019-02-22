@@ -1,19 +1,18 @@
 package com.lxisoft.redalert.client.crimestopper.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * LocationDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-24T11:16:47.830+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-02-10T01:11:22.577+05:30[Asia/Calcutta]")
 
 public class LocationDTO   {
   @JsonProperty("id")
@@ -22,10 +21,26 @@ public class LocationDTO   {
   @JsonProperty("latitude")
   private Double latitude = null;
 
-  @JsonProperty("longitutde")
-  private Double longitutde = null;
+  @JsonProperty("longitude")
+  private Double longitude = null;
 
-  public LocationDTO id(Long id) {
+  public Double getLatitude() {
+	return latitude;
+}
+
+public void setLatitude(Double latitude) {
+	this.latitude = latitude;
+}
+
+public Double getLongitude() {
+	return longitude;
+}
+
+public void setLongitude(Double longitude) {
+	this.longitude = longitude;
+}
+
+public LocationDTO id(Long id) {
     this.id = id;
     return this;
   }
@@ -56,34 +71,18 @@ public class LocationDTO   {
   **/
   @ApiModelProperty(value = "")
 
-
-  public Double getLatitude() {
-    return latitude;
-  }
-
-  public void setLatitude(Double latitude) {
-    this.latitude = latitude;
-  }
-
-  public LocationDTO longitutde(Double longitutde) {
-    this.longitutde = longitutde;
+  public LocationDTO longitude(Double longitude) {
+    this.longitude = longitude;
     return this;
   }
 
   /**
-   * Get longitutde
-   * @return longitutde
+   * Get longitude
+   * @return longitude
   **/
   @ApiModelProperty(value = "")
 
 
-  public Double getLongitutde() {
-    return longitutde;
-  }
-
-  public void setLongitutde(Double longitutde) {
-    this.longitutde = longitutde;
-  }
 
 
   @Override
@@ -97,12 +96,12 @@ public class LocationDTO   {
     LocationDTO locationDTO = (LocationDTO) o;
     return Objects.equals(this.id, locationDTO.id) &&
         Objects.equals(this.latitude, locationDTO.latitude) &&
-        Objects.equals(this.longitutde, locationDTO.longitutde);
+        Objects.equals(this.longitude, locationDTO.longitude);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, latitude, longitutde);
+    return Objects.hash(id, latitude, longitude);
   }
 
   @Override
@@ -112,7 +111,7 @@ public class LocationDTO   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    latitude: ").append(toIndentedString(latitude)).append("\n");
-    sb.append("    longitutde: ").append(toIndentedString(longitutde)).append("\n");
+    sb.append("    longitude: ").append(toIndentedString(longitude)).append("\n");
     sb.append("}");
     return sb.toString();
   }

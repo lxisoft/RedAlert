@@ -1,4 +1,5 @@
 package com.lxisoft.redalert.web.rest.controller;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -14,10 +15,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lxisoft.redalert.client.crimestopper.api.CommentResourceApi;
 import com.lxisoft.redalert.client.crimestopper.api.ComplaintResourceApi;
 import com.lxisoft.redalert.client.crimestopper.api.UserResponseResourceApi;
+import com.lxisoft.redalert.client.crimestopper.model.CommentDTO;
 import com.lxisoft.redalert.client.crimestopper.model.ComplaintDTO;
+import com.lxisoft.redalert.client.crimestopper.model.LocationDTO;
+import com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO;
+import com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum;
 import com.lxisoft.redalert.client.red_alert.api.UserRegistrationResourceApi;
 import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
 import com.lxisoft.redalert.domain.User;
@@ -29,88 +36,143 @@ import com.lxisoft.redalert.security.SecurityUtils;
 @Controller
 @RequestMapping("/crime-stopper")
 public class CrimeStopperHomeController {
-	
+
 	Logger log = LoggerFactory.getLogger(CrimeStopperHomeController.class);
 	@Autowired
 	ComplaintResourceApi complaintResourceApi;
-	
+
 	@Autowired
 	UserResponseResourceApi userResponseResourceApi;
-	
+
+	@Autowired
+	CommentResourceApi commentResourceApi;
+
 	@Autowired
 	UserRegistrationResourceApi userRegistrationResourceApi;
-	
+
 	@Autowired
 	HttpSession session;
-	
+
 	@Autowired
 	UserRepository userRepository;
-	        
-	
-	public String redirectHome(Model model)
-	{
-		//log.debug(" get request for collect all friends complaints with userId:"+userId);
-		
-		//complaintResourceApi.getAllComplaintsOfFriendsUsingGET(userId, eagerload, offset, page, pageNumber, pageSize, paged, size, sort, sortSorted, sortUnsorted, unpaged);
 
+	public String redirectHome(Model model) {
 		
-		
+
 		String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
-		 log.debug("current user login>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+currentUserLogin);
-		
-		User user=userRepository.findOneByLogin(currentUserLogin).get();
-		
-		log.debug("user>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+user);
-		
-		log.debug("VVVVVVVVVVVVVVVVVVVVVVVVVVVVV"+user.getLogin());
-        UserRegistrationDTO userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin()).getBody();
-    	log.debug("DTO>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+userRegistrationDTO);
-		
-		ResponseEntity<List<ComplaintDTO>> result=complaintResourceApi.getAllComplaintsOfFriendsUsingGET(userRegistrationDTO.getId(), null, null, null, null, null, null, null, null, null, null, null);
-		//ResponseEntity<List<ComplaintDTO>> result=complaintResourceApi.getAllComplaintsUsingGET(null, null, null, null, null, null, null, null, null, null, null);
+		log.debug("current user login>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + currentUserLogin);
+
+		User user = userRepository.findOneByLogin(currentUserLogin).get();
+
+		log.debug("user>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + user);
+
 	
-		List<ComplaintDTO>set=new ArrayList<ComplaintDTO>(result.getBody());
-		HashSet<ComplaintView>complaints=new HashSet<ComplaintView>();
-		HomeView homeView=new HomeView(new ArrayList<ComplaintDTO>());
+		UserRegistrationDTO userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin())
+				.getBody();
 		
-		for(ComplaintDTO temp:set)
-		{
+
+		ResponseEntity<List<ComplaintDTO>> result = complaintResourceApi.getAllComplaintsOfFriendsUsingGET(
+				userRegistrationDTO.getId(), null, null, null, null, null, null, null, null, null, null, null);
+		
+
+		List<ComplaintDTO> set = new ArrayList<ComplaintDTO>(result.getBody());
+		HomeView homeView = new HomeView(new ArrayList<ComplaintDTO>());
+
+		for (ComplaintDTO temp : set) {
 			homeView.getComplaints().add(temp);
-			for(ComplaintDTO tem:homeView.getComplaints())
-			{
-				log.debug("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"+temp.getUserName());
-			} 
+			log.debug(" LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLocationres"+temp.getLocation());
 		}
-		model.addAttribute("homeView",homeView);
+		model.addAttribute("homeView", homeView);
+		ComplaintDTO dto=new ComplaintDTO();
+		dto.setLocation(new LocationDTO()); 
+		model.addAttribute("complaintDTO",dto);
 
-		return "crimestopper-index"; 
+		return "crimestopper-index";
 	}
-	
-	@PostMapping(value="/likeComplaint")         
-	
-	public String likeComplaint(Model model)
-	{
-		log.debug("mark an user response:");       
-		
-	
-		
-		//complaintResourceApi.getAllComplaintsOfFriendsUsingGET(userId, eagerload, offset, page, pageNumber, pageSize, paged, size, sort, sortSorted, sortUnsorted, unpaged);
-/*
-		ResponseEntity<UserResponseDTO>result=userResponseResourceApi.createUserResponseUsingPOST(userResponse);
-		HomeView homeView=new HomeView(new ArrayList<ComplaintDTO>());
-		
-		
-		model.addAttribute("userResponce",result.getBody());*/
 
-		return redirectHome(model); 
+	@PostMapping(value = "/likeComplaint")
+
+	public String likeComplaint(Model model, @RequestParam(value = "flag") String flag,
+			@RequestParam(value = "complaintId") String complaintId,
+			@RequestParam(value = "responseId", defaultValue = "null") String responseId) {
+		log.debug("oooooooooooooooooooooooooooooooooooooooooooooooooooomark an   response:" + flag + responseId
+				+ complaintId);
+
+		String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
+		User user = userRepository.findOneByLogin(currentUserLogin).get();
+		UserRegistrationDTO userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin())
+				.getBody();
+
+		UserResponseDTO userResponseDTO = new UserResponseDTO();
+		
+		if (responseId.equals("") || responseId.equals("null")) {
+			responseId = null;
+		} else {
+
+			userResponseDTO.setId(Long.parseLong(responseId));
+		}
+		FlagEnum f = FlagEnum.LIKE;
+		userResponseDTO.setFlag(f);
+		userResponseDTO.setComplaintId(Long.parseLong(complaintId));
+		userResponseDTO.setUserId(userRegistrationDTO.getId());
+
+		if (responseId != null) {
+			ResponseEntity<UserResponseDTO> result = userResponseResourceApi
+					.updateUserResponseUsingPUT(userResponseDTO);
+		} else {
+			ResponseEntity<UserResponseDTO> result = userResponseResourceApi
+					.createUserResponseUsingPOST(userResponseDTO);
+		}
+		
+		
+		ComplaintDTO dto=new ComplaintDTO();
+		dto.setLocation(new LocationDTO()); 
+		model.addAttribute("complaintDTO",dto);
+		return redirectHome(model);
 	}
-	
-	@GetMapping(value="/home")
-	public String home(Model model)
-	{
+
+	@GetMapping(value = "/home")
+	public String home(Model model) {
 		
 		return redirectHome(model);
 	}
+
+	@PostMapping(value = "/dislikeComplaint")
+
+	public String dislikeComplaint(Model model, @RequestParam(value = "flag") String flag,
+			@RequestParam(value = "complaintId") String complaintId,
+			@RequestParam(value = "responseId") String responseId) {
+		log.debug("oooooooooooooooooooooooooooooooooooooooooooomark an   response:" + flag + complaintId + responseId);
+
+		String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
+		User user = userRepository.findOneByLogin(currentUserLogin).get();
+		UserRegistrationDTO userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin())
+				.getBody();
+
+		UserResponseDTO userResponseDTO = new UserResponseDTO();
+		if (responseId.equals("") || responseId.equals("null")) {
+			responseId = null;
+		} else {
+
+			userResponseDTO.setId(Long.parseLong(responseId));
+		}
+		FlagEnum f = FlagEnum.DISLIKE;
+		userResponseDTO.setFlag(f);
+		userResponseDTO.setComplaintId(Long.parseLong(complaintId));
+		userResponseDTO.setUserId(userRegistrationDTO.getId());
+
+		if (responseId != null) {
+			ResponseEntity<UserResponseDTO> result = userResponseResourceApi
+					.updateUserResponseUsingPUT(userResponseDTO);
+		} else {
+			ResponseEntity<UserResponseDTO> result = userResponseResourceApi
+					.createUserResponseUsingPOST(userResponseDTO);
+		}
+		
+		
+		return redirectHome(model);
+	}
+
 	@GetMapping()
 	public String getAllComplaints(Model model) {
 		
@@ -119,7 +181,52 @@ public class CrimeStopperHomeController {
 		return null;
 		
 	}
-	
 
+	@PostMapping(value = "/comment")
+
+	public String comment(Model model, @RequestParam(value = "comment") String comment,
+			@RequestParam(value = "complaintId") String complaintId) {
+
+		String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
+		User user = userRepository.findOneByLogin(currentUserLogin).get();
+		CommentDTO commentDTO = new CommentDTO();
+		UserRegistrationDTO userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin())
+				.getBody();
+		Long userId = userRegistrationDTO.getId();
+		log.debug("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccc comment:" + comment + "  complaintId="
+				+ complaintId + "   userId" + userId);
+		commentDTO.setComplaintId(Long.parseLong(complaintId));
+
+		commentDTO.setDescription(comment);
+		commentDTO.setUserId(userId);
+		commentDTO.setComplaintId(Long.parseLong(complaintId));
+
+		commentResourceApi.saveCommentInComplaintUsingPOST(commentDTO);
+	
+	
+		return redirectHome(model);
+	}
+
+	@GetMapping(value = "/search")
+
+	public String likeComplaint(Model model, @RequestParam(value = "searchContent") String searchContent) {
+		log.debug("oooooooooooooooooooooooooooooooooooooooooooooooooooomark an   response:" + searchContent);
+
+		List<ComplaintDTO> result = complaintResourceApi.getAllComplaintsHashtagUsingGET(searchContent, null, null,
+				null, null, null, null, null, null, null, null, null).getBody();
+		List<ComplaintDTO> set = new ArrayList<ComplaintDTO>(result);
+		HashSet<ComplaintView> complaints = new HashSet<ComplaintView>();
+		HomeView homeView = new HomeView(new ArrayList<ComplaintDTO>());
+
+		for (ComplaintDTO temp : set) {
+			homeView.getComplaints().add(temp);
+		}
+		model.addAttribute("homeView", homeView);
+		ComplaintDTO dto=new ComplaintDTO();
+		dto.setLocation(new LocationDTO()); 
+		model.addAttribute("complaintDTO",dto);
+
+		return "crimestopper-index";
+	}
 
 }

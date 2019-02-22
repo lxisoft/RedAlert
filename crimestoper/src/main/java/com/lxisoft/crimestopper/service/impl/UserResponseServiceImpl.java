@@ -170,6 +170,12 @@ public class UserResponseServiceImpl implements UserResponseService {
 		return result;
 		
 	}
+
+	@Override
+	public Page<UserResponseDTO> findByUserIdAndComplaintId(Long userId, Long complaintId) {
+		log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>"+userResponseRepository.findUserResponseByUserIdAndComplaintId(userId,complaintId));
+		return null;
+	}
 	
 	
 } 

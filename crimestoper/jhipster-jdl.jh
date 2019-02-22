@@ -40,7 +40,7 @@ entity Location
 {
 	
  	latitude Double ,
-    longitutde Double
+    longitude Double
     
 }
  
@@ -52,6 +52,11 @@ entity Department
 entity Media
 {
 	file Blob
+}
+
+entity Hashtag
+{
+	name String
 }
 
 enum Status
@@ -82,6 +87,7 @@ relationship ManyToMany
 {
 	Complaint{department} to Department{complaint }
     Complaint{linkedComplaints} to Complaint
+	Complaint{hashtags} to Hashtag{complaints}
 }
  
 dto * with mapstruct

@@ -1,19 +1,18 @@
 package com.lxisoft.redalert.client.crimestopper.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * CommentDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-24T11:16:47.830+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-02-10T01:11:22.577+05:30[Asia/Calcutta]")
 
 public class CommentDTO   {
   @JsonProperty("complaintId")
@@ -28,7 +27,18 @@ public class CommentDTO   {
   @JsonProperty("noOfDislikes")
   private Long noOfDislikes = null;
 
-  @JsonProperty("noOfLikes")
+  @JsonProperty("userName")
+  private String userName = null;
+  
+  public String getUserName() {
+	return userName;
+}
+
+public void setUserName(String userName) {
+	this.userName = userName;
+}
+
+@JsonProperty("noOfLikes")
   private Long noOfLikes = null;
 
   @JsonProperty("noOfReplies")

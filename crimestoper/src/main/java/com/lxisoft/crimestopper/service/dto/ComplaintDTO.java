@@ -30,8 +30,19 @@ public class ComplaintDTO implements Serializable {
 
     private Instant timeOfIncident;
 
-    @Lob
+    public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	@Lob
     private byte[] media;
+    
+    private String image;
+    
     private String mediaContentType;
 
     private Status status;
@@ -40,16 +51,45 @@ public class ComplaintDTO implements Serializable {
 
     private Long noOfDislikes;
 
-    private Long locationId;
+    public LocationDTO getLocation() {
+		return location;
+	}
+
+	public void setLocation(LocationDTO location) {
+		this.location = location;
+	}
+
+	private Long locationId;
+    
+    private LocationDTO location;
     
     private UserResponseDTO userResponse;
 
     private Set<DepartmentDTO> departments = new HashSet<>();
+    
+    private Set<CommentDTO> comments=new HashSet<>();
 
     private Set<ComplaintDTO> linkedComplaints = new HashSet<>();
 
+    private Set<HashtagDTO> hashtags = new HashSet<>();
     
-    public UserResponseDTO getUserResponse() {
+    public Set<HashtagDTO> getHashtags() {
+		return hashtags;
+	}
+
+	public void setHashtags(Set<HashtagDTO> hashtags) {
+		this.hashtags = hashtags;
+	}
+
+	public Set<CommentDTO> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<CommentDTO> comments) {
+		this.comments = comments;
+	}
+
+	public UserResponseDTO getUserResponse() {
 		return userResponse;
 	}
 

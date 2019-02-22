@@ -12,7 +12,7 @@ public class LocationDTO implements Serializable {
 
     private Double latitude;
 
-    private Double longitutde;
+    private Double longitude;
 
     public Long getId() {
         return id;
@@ -30,12 +30,12 @@ public class LocationDTO implements Serializable {
         this.latitude = latitude;
     }
 
-    public Double getLongitutde() {
-        return longitutde;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setLongitutde(Double longitutde) {
-        this.longitutde = longitutde;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class LocationDTO implements Serializable {
         return "LocationDTO{" +
             "id=" + getId() +
             ", latitude=" + getLatitude() +
-            ", longitutde=" + getLongitutde() +
+            ", longitude=" + getLongitude() +
             "}";
     }
 }

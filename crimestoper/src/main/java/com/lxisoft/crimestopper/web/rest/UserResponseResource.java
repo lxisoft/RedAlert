@@ -45,7 +45,7 @@ public class UserResponseResource {
     public UserResponseResource(UserResponseService userResponseService) {
         this.userResponseService = userResponseService;
     }
-
+ 
     /**
      * POST  /user-responses : Create a new userResponse.
      *
@@ -56,7 +56,7 @@ public class UserResponseResource {
     @PostMapping("/user-responses")
     @Timed
     public ResponseEntity<UserResponseDTO> createUserResponse(@RequestBody UserResponseDTO userResponseDTO) throws URISyntaxException {
-        log.debug("REST request to save UserResponse : {}", userResponseDTO);
+        log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>REST request to save UserResponse : {}", userResponseDTO);
         if (userResponseDTO.getId() != null) {
             throw new BadRequestAlertException("A new userResponse cannot already have an ID", ENTITY_NAME, "idexists");
         }
@@ -146,12 +146,12 @@ public class UserResponseResource {
     	
     	log.debug("give userResponce to an complain userID+:"+userResponse.getUserId()+"  complaintId:"+userResponse.getId());
     	
-    	if(userResponse.getId()==null)
+    	if(userResponse.getComplaintId()==null)
     	{
     		throw new BadRequestAlertException("invalid complaintId",ENTITY_NAME,"COMPLAINT ID NOT FOUND");
     	}
     	if(userResponse.getUserId()==null)
-    	{
+    	{ 
     		throw new BadRequestAlertException("invalid user id",ENTITY_NAME,"user ID not found");
     	}
     	
@@ -181,7 +181,7 @@ public class UserResponseResource {
     	
     	userResponseService.saveCommentUserResponse(userResponse);
     	
-    	
+    	  
     	//serResponseService.saveCommentUserResponce();
     	
     	return null;
@@ -250,8 +250,15 @@ public class UserResponseResource {
  
     }
     
+   @GetMapping("complaint/user_response/{userId}/{complaintId}")
+   @Timed
+   public void test2(@PathVariable Long userId,@PathVariable Long complaintId){
+	   
+	   userResponseService.findByUserIdAndComplaintId(userId,complaintId);
+	   
+	   
+   }
    
-    
-    
-    
+       
 }
+ 

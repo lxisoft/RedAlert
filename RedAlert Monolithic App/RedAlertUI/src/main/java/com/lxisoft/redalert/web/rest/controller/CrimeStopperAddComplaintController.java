@@ -6,7 +6,6 @@ import java.time.Instant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,21 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lxisoft.redalert.client.crimestopper.api.ComplaintResourceApi;
-import com.lxisoft.redalert.model.ComplaintView;
-import com.lxisoft.redalert.model.View;
-import com.lxisoft.redalert.repository.UserRepository;
-import com.lxisoft.redalert.security.SecurityUtils;
 import com.lxisoft.redalert.client.crimestopper.model.ComplaintDTO;
 import com.lxisoft.redalert.client.red_alert.api.UserRegistrationResourceApi;
-import com.lxisoft.redalert.client.red_alert.model.MediaDTO;
-import com.lxisoft.redalert.client.red_alert.model.PostDTO;
 import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
 import com.lxisoft.redalert.domain.User;
+import com.lxisoft.redalert.repository.UserRepository;
+import com.lxisoft.redalert.security.SecurityUtils;
 
 /**
  * @author Vyshnav
  *
  */
+
 @Controller
 @RequestMapping("/crimestopper-complaint")
 public class CrimeStopperAddComplaintController {
@@ -53,6 +49,8 @@ public class CrimeStopperAddComplaintController {
 		complaintDTOnew.setSubject(complaintDTO.getSubject());				//Set Complaint Subject
 		complaintDTOnew.setDescription(complaintDTO.getDescription());		//Set Complaint Description
 		complaintDTOnew.setTime(Instant.now());								//Set Complaint Current Time
+		complaintDTOnew.setLocation(complaintDTO.getLocation());            //Set Complaint location
+				
 		
 		//BEGINNING OF SETTING COMPLAINT MEDIA
 		try {

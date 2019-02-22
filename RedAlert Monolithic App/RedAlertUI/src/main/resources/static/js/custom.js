@@ -23,6 +23,8 @@ $('.animated-icon4').toggleClass('open');
 
 });
 
+
+
 document.addEventListener("DOMContentLoaded", init, false);
 	
 	function init() {
@@ -155,3 +157,11 @@ $( document ).ready(function()
 		});
 	}
 		});
+
+function setComplaintId(val)
+{
+	id=document.getElementById("complaintId"+val).value;
+	document.getElementById("complaintID").value=id;
+	
+}
+	

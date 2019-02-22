@@ -28,8 +28,14 @@
 		<ul class="navbar-nav mr-auto" style="display: inline-block;">
 			<!-- Navbar brand -->
 			<li style="display: inline-block;"><a class="navbar-brand"
-				style="color: white;" href="#"><b>RedAlert</b></a></li>
+				style="color: white;" href="#"><b>RedAlert</b></a>
+			</li>
+			<li class="nav-item" style="display: inline-block;">
+				<a href="/crime-stopper/home"	class="navbar-brand" style="color: white;">CrimeStopper
+				</a>
+			</li>
 		</ul>
+		
 		<div id="dpContainer"
 			style="margin-left: auto; margin-right: 0; width: 40px; height: inherit;">
 			<a id="navbarDropdownMenuLink-5" data-toggle="dropdown"
@@ -48,6 +54,9 @@
 					th:href="@{/redAlertUiLogout/logout}">LogOut</a>
 			</div>
 		</div>
+		<li class="nav-item active"><a class="nav-link"
+				th:href="@{/crime-stopper/home}">Home<span class="sr-only">(current)</span></a>
+			</li>
 
 		<!-- Collapse button -->
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -107,7 +116,7 @@
 	<br />
 	<!--alerts-->
 	<div style="text-align: center;">
-		<h3 style="margin: auto; font-weight: 400;">Broadcast Your
+ 		<h3 style="margin: auto; font-weight: 400;">Broadcast Your
 			Emergency</h3>
 
 		<button id="red" type="button" class="btn btn-danger round"
@@ -156,7 +165,7 @@
 							<div class="row">
 								<div class="col-md-12 modal_body_map">
 									<div class="location-map" id="location-map">
-										<div class="img-fluid" style="border-radius: 5px;"
+										<div class="img-fluid" style="b order-radius: 5px;"
 											id="mapholder"></div>
 									</div>
 								</div>

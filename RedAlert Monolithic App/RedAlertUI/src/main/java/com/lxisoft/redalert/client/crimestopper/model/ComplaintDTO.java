@@ -1,10 +1,10 @@
 package com.lxisoft.redalert.client.crimestopper.model;
 
 import java.time.Instant;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
@@ -21,13 +21,24 @@ import io.swagger.annotations.ApiModelProperty;
  * ComplaintDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-01-24T11:16:47.830+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-02-10T01:11:22.577+05:30[Asia/Calcutta]")
 
 public class ComplaintDTO   {
   @JsonProperty("departments")
   @Valid
   private List<DepartmentDTO> departments = null;
 
+  public LocationDTO getLocation() {
+	return location;
+}
+
+public void setLocation(LocationDTO location) {
+	this.location = location;
+}
+
+@JsonProperty("location")
+  private LocationDTO location = null;
+  
   @JsonProperty("description")
   private String description = null;
 
@@ -44,23 +55,57 @@ public class ComplaintDTO   {
   @JsonProperty("media")
   private byte[] media = null;
 
-  @JsonProperty("mediaContentType")
+  @JsonProperty("image")
+  private String image = null;
+  
+  public String getImage() {
+	return image;
+}
+
+public void setImage(String image) {
+	this.image = image;
+}
+
+@JsonProperty("mediaContentType")
   private String mediaContentType = null;
 
-  @JsonProperty("noOfDislikes")
+  public Set<CommentDTO> getComments() {
+	return comments;
+}
+
+public void setComments(Set<CommentDTO> comments) {
+	this.comments = comments;
+}
+
+@JsonProperty("noOfDislikes")
   private Long noOfDislikes = null;
 
   @JsonProperty("noOfLikes")
   private Long noOfLikes = null;
+
 
   @JsonProperty("userName")
   private String userName = null;
   
   @JsonProperty("userResponse")
   private UserResponseDTO userResponse = null;
-
-
+  @JsonProperty("comments")
+  private Set<CommentDTO> comments=null;
+  
+  public UserResponseDTO getUserResponse()
+  {
+	  return userResponse;
+  }
+  
+  public void setUserResponse(UserResponseDTO userResponse)
+  {
+	  this.userResponse=userResponse;
+  }
+  
 /**
+
+  /**
+
    * Gets or Sets status
    */
   public enum StatusEnum {
@@ -68,7 +113,15 @@ public class ComplaintDTO   {
     
     ACTION_TAKEN("ACTION_TAKEN");
 
-    private String value;
+    public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	private String value;
 
     StatusEnum(String value) {
       this.value = value;
@@ -406,6 +459,39 @@ public class ComplaintDTO   {
     this.userId = userId;
   }
 
+  public ComplaintDTO userName(String userName) {
+    this.userName = userName;
+    return this;
+  }
+
+  /**
+   * Get userName
+   * @return userName
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
+
+  public ComplaintDTO userResponse(UserResponseDTO userResponse) {
+    this.userResponse = userResponse;
+    return this;
+  }
+
+  /**
+   * Get userResponse
+   * @return userResponse
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -429,12 +515,14 @@ public class ComplaintDTO   {
         Objects.equals(this.subject, complaintDTO.subject) &&
         Objects.equals(this.time, complaintDTO.time) &&
         Objects.equals(this.timeOfIncident, complaintDTO.timeOfIncident) &&
-        Objects.equals(this.userId, complaintDTO.userId);
+        Objects.equals(this.userId, complaintDTO.userId) &&
+        Objects.equals(this.userName, complaintDTO.userName) &&
+        Objects.equals(this.userResponse, complaintDTO.userResponse);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(departments, description, id, linkedComplaints, locationId, media, mediaContentType, noOfDislikes, noOfLikes, status, subject, time, timeOfIncident, userId);
+    return Objects.hash(departments, description, id, linkedComplaints, locationId, media, mediaContentType, noOfDislikes, noOfLikes, status, subject, time, timeOfIncident, userId, userName, userResponse);
   }
 
   @Override
@@ -456,6 +544,8 @@ public class ComplaintDTO   {
     sb.append("    time: ").append(toIndentedString(time)).append("\n");
     sb.append("    timeOfIncident: ").append(toIndentedString(timeOfIncident)).append("\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("    userName: ").append(toIndentedString(userName)).append("\n");
+    sb.append("    userResponse: ").append(toIndentedString(userResponse)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -470,12 +560,5 @@ public class ComplaintDTO   {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 }
 

@@ -57,7 +57,7 @@ public class ComplaintResource {
     @PostMapping("/complaints")
     @Timed
     public ResponseEntity<ComplaintDTO> createComplaint(@RequestBody ComplaintDTO complaintDTO) throws URISyntaxException {
-        log.debug("REST request to save Complaint : {}", complaintDTO);
+        log.debug("/>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>REST request to save Complaint : {}", complaintDTO);
         if (complaintDTO.getId() != null) {
             throw new BadRequestAlertException("A new complaint cannot already have an ID", ENTITY_NAME, "idexists");
         }
@@ -171,4 +171,17 @@ public class ComplaintResource {
 		return ResponseEntity.ok().headers(headers).body(page.getContent());
     	
     }
+    
+    @GetMapping("hashtag/complaints")
+    @Timed
+    public ResponseEntity<List<ComplaintDTO>> getAllComplaintsHashtag(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload,@RequestParam String searchContent) {
+        
+    	log.debug("REST request to get a page of Complaints");
+        Page<ComplaintDTO> page;      
+            page = complaintService.findAllComplaintsByHashtag(pageable,searchContent);
+            HttpHeaders	headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/complaints?eagerload=%b", eagerload));
+            
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+    
 }
