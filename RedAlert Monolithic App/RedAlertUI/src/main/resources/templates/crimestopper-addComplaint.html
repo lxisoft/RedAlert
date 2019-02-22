@@ -33,7 +33,7 @@
 					<!-- Add Complaint-->
 					
 					<div class="modal-body">
-						<form th:action="@{/crimestopper-complaint/add}" th:object="${complaintDto}" th:method="post" enctype="multipart/form-data">
+						<form th:action="@{/crime-stopper/complaint/add}" th:object="${complaintDto}" th:method="post" enctype="multipart/form-data">
 
 							<!-- 2. Complaint Subject-->
 							<div class="md-form">
@@ -43,7 +43,7 @@
 							<!-- Complaint Subject-->
 						
 							<!-- 3. Describe your complaint here..-->
-							<div class="md-form">
+							<div class="md-form ui-front">
 								<textarea type="text" id="message-text" class="form-control md-textarea" rows="3" name="description" th:name="description"></textarea>
 								<label for="form7">Describe your complaint here..</label>
 							</div>
