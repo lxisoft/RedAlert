@@ -39,6 +39,7 @@
 							th:object="${complaintDTO}" th:method="post"
 							enctype="multipart/form-data">
 
+
 							<!-- 2. Complaint Subject-->
 							<div class="md-form">
 								<textarea type="text" id="message-text2"
@@ -49,7 +50,7 @@
 							<!-- Complaint Subject-->
 
 							<!-- 3. Describe your complaint here..-->
-							<div class="md-form">
+							<div class="md-form ui-front">
 								<textarea type="text" id="message-text"
 									class="form-control md-textarea" rows="3" name="description"
 									th:name="description"></textarea>
