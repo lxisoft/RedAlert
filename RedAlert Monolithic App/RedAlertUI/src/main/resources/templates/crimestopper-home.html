@@ -118,7 +118,7 @@
 					<!-- comment-->
 					<form style="width: 100%;">
 						<button type="button" style="width: 100%;"
-							class="btn btn-tertiary" data-toggle="modal" data-target="#locationModalCenter" th:lat="${complaint.location.latitude}" th:long="${complaint.location.longitude}" th:onclick="showMap(this.getAttribute('lat'),this.getAttribute('long'));">
+							class="btn btn-tertiary" data-toggle="modal" data-target="#locationModalCenter" th:lat="${complaint.location.latitude}" th:long="${complaint.location.longitude}" th:onclick="toggleIdAttr('post');showMap(this.getAttribute('lat'),this.getAttribute('long'));">
 							<!-- location-->
 							<i class="fas fa-map-marker-alt" ></i>
 						</button>
@@ -192,7 +192,7 @@
                   <div class="row">
                     <div class="col-md-12 modal_body_map">
                       <div class="location-map" id="location-map">
-                        <div class="img-fluid" style="width: 100%; height: 200px;" id="mapholder"></div>
+                        <div class="img-fluid" style="width: 100%; height: 200px;" id="mapholder" data-secondid="post"></div>
                       </div>
                     </div>
                   </div>

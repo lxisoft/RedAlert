@@ -58,27 +58,30 @@
 							<!-- Describe your complaint here-->
 
 							<!-- 4. Link Similar Problems-->
-							 <div class="modal-body" >
-								<div class="row">
-									<div class="col-md-12 modal_body_map">
-										<div class="location-map" id="location-map">
-											<div class="img-fluid" style="b order-radius: 5px;"
-												id="mapholder"></div>
-										</div>
+							 
+							
+							<div class="modal-body">
+							<div class="row">
+								<div class="col-md-12 modal_body_map">
+									<div class="location-map" id="location-map">
+										<div class="img-fluid" style="b order-radius: 5px;"
+											id="mapholder2" data-secondid="add"></div>
 									</div>
 								</div>
 							</div>
+						</div>
+							
 						 	<div class="row">
 								<div class="col">
 									<div class="md-form mt-0">
-										<input type="text" placeholder=" " id="latitude"
+										<input type="hidden" placeholder=" " id="latitude"
 											class="form-control" th:field="${complaintDTO.location.latitude}" />
 
 									</div>
 								</div>
 								<div class="col">
 									<div class="md-form mt-0">
-										<input type="text" placeholder=" " id="longitude"
+										<input type="hidden" placeholder=" " id="longitude"
 											th:field="${complaintDTO.location.longitude}" class="form-control" />
 									</div>
 								</div>
