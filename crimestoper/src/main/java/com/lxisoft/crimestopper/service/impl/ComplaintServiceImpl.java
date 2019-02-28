@@ -1,5 +1,7 @@
 package com.lxisoft.crimestopper.service.impl;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashSet;
@@ -78,7 +80,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 	private CommentMapper commentMapper;
 
 	private final UserResponseRepository userResponseRepository;
-
+   
 	@Autowired
 	UserRegistrationResourceApi userRegistrationResourceApi;
 	
@@ -106,8 +108,13 @@ public class ComplaintServiceImpl implements ComplaintService {
 	@Override
 	public ComplaintDTO save(ComplaintDTO complaintDTO) {
 		log.debug("Request to save Complaint : {}", complaintDTO);
-
+		
+		//set complaint current time the war:time is now in uts not indian 
+		Instant instant=Instant.now();        
+		instant=instant.plus(5, ChronoUnit.HOURS).plus(30, ChronoUnit.MINUTES);
+		complaintDTO.setTime(instant);	
 		// hash tag finding start
+		
 		Pattern pattern = Pattern.compile("#{1}\\w+");
 		String subject = complaintDTO.getDescription();
 		int i = 0;
@@ -122,8 +129,12 @@ public class ComplaintServiceImpl implements ComplaintService {
 			Optional<Hashtag> optional = hashtagRepository.findByName(matcher.group(0));
 			if (optional.isPresent()) {
 				hashtagDTO.setId(optional.get().getId());
+				optional.get().setCount(optional.get().getCount()+1);
+				hashtagRepository.save(optional.get());
+				
 			} else {
 				Hashtag hashtag = new Hashtag();
+				hashtag.setCount( 1L);
 				hashtag.setName(matcher.group(0));
 				hashtagDTO = hashtagMapper.toDto(hashtagRepository.save(hashtag));
 			}

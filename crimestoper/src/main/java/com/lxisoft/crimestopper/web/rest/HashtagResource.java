@@ -1,5 +1,4 @@
 package com.lxisoft.crimestopper.web.rest;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.codahale.metrics.annotation.Timed;
 import com.lxisoft.crimestopper.service.HashtagService;
 import com.lxisoft.crimestopper.service.dto.HashtagDTO;
 import com.lxisoft.crimestopper.web.rest.errors.BadRequestAlertException;
@@ -54,15 +52,11 @@ public class HashtagResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/hashtags")
-    @Timed
     public ResponseEntity<HashtagDTO> createHashtag(@RequestBody HashtagDTO hashtagDTO) throws URISyntaxException {
         log.debug("REST request to save Hashtag : {}", hashtagDTO);
         if (hashtagDTO.getId() != null) {
             throw new BadRequestAlertException("A new hashtag cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        
-      
-        
         HashtagDTO result = hashtagService.save(hashtagDTO);
         return ResponseEntity.created(new URI("/api/hashtags/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -79,7 +73,6 @@ public class HashtagResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/hashtags")
-    @Timed
     public ResponseEntity<HashtagDTO> updateHashtag(@RequestBody HashtagDTO hashtagDTO) throws URISyntaxException {
         log.debug("REST request to update Hashtag : {}", hashtagDTO);
         if (hashtagDTO.getId() == null) {
@@ -98,7 +91,6 @@ public class HashtagResource {
      * @return the ResponseEntity with status 200 (OK) and the list of hashtags in body
      */
     @GetMapping("/hashtags")
-    @Timed
     public ResponseEntity<List<HashtagDTO>> getAllHashtags(Pageable pageable) {
         log.debug("REST request to get a page of Hashtags");
         Page<HashtagDTO> page = hashtagService.findAll(pageable);
@@ -113,7 +105,6 @@ public class HashtagResource {
      * @return the ResponseEntity with status 200 (OK) and with body the hashtagDTO, or with status 404 (Not Found)
      */
     @GetMapping("/hashtags/{id}")
-    @Timed
     public ResponseEntity<HashtagDTO> getHashtag(@PathVariable Long id) {
         log.debug("REST request to get Hashtag : {}", id);
         Optional<HashtagDTO> hashtagDTO = hashtagService.findOne(id);
@@ -127,10 +118,15 @@ public class HashtagResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/hashtags/{id}")
-    @Timed
     public ResponseEntity<Void> deleteHashtag(@PathVariable Long id) {
         log.debug("REST request to delete Hashtag : {}", id);
         hashtagService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+    @GetMapping("/trending/hashtags")
+    public List<HashtagDTO> trendingHashtags() {
+        log.debug("REST request to find all trending  Hashtags : {}");
+        List<HashtagDTO>result=hashtagService.findTrendingHashtags();
+          return result;
     }
 }

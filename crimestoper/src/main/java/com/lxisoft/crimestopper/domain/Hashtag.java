@@ -1,5 +1,6 @@
 package com.lxisoft.crimestopper.domain;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -17,13 +18,16 @@ import java.util.Objects;
 public class Hashtag implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "count")
+    private Long count;
 
     @ManyToMany(mappedBy = "hashtags")
     @JsonIgnore
@@ -49,6 +53,19 @@ public class Hashtag implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getCount() {
+        return count;
+    }
+
+    public Hashtag count(Long count) {
+        this.count = count;
+        return this;
+    }
+
+    public void setCount(Long count) {
+        this.count = count;
     }
 
     public Set<Complaint> getComplaints() {
@@ -102,6 +119,7 @@ public class Hashtag implements Serializable {
         return "Hashtag{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", count=" + getCount() +
             "}";
     }
 }

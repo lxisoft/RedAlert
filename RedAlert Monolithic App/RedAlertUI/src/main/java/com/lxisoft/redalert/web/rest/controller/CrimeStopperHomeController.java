@@ -38,9 +38,13 @@ import com.lxisoft.redalert.security.SecurityUtils;
 public class CrimeStopperHomeController {
 
 	Logger log = LoggerFactory.getLogger(CrimeStopperHomeController.class);
+	
 	@Autowired
 	ComplaintResourceApi complaintResourceApi;
-
+	
+	@Autowired
+	CSTrendingController trendingController;
+	
 	@Autowired
 	UserResponseResourceApi userResponseResourceApi;
 
@@ -56,7 +60,7 @@ public class CrimeStopperHomeController {
 	@Autowired
 	UserRepository userRepository;
 
-	public String redirectHome(Model model) {
+	public String redirectHome(Model model,String url) {
 		
 
 		String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
@@ -86,15 +90,18 @@ public class CrimeStopperHomeController {
 		ComplaintDTO dto=new ComplaintDTO();
 		dto.setLocation(new LocationDTO()); 
 		model.addAttribute("complaintDTO",dto);
-
+		if(url==null || url.equals("") || url.equals("null"))
 		return "crimestopper-index";
+		else
+		return trendingController.getTrendingHashtagsAndComplaints(model, url);
 	}
 
 	@PostMapping(value = "/likeComplaint")
 
 	public String likeComplaint(Model model, @RequestParam(value = "flag") String flag,
 			@RequestParam(value = "complaintId") String complaintId,
-			@RequestParam(value = "responseId", defaultValue = "null") String responseId) {
+			@RequestParam(value = "responseId", defaultValue = "null") String responseId
+			, @RequestParam(value = "url",required=false) String url) {
 		log.debug("oooooooooooooooooooooooooooooooooooooooooooooooooooomark an   response:" + flag + responseId
 				+ complaintId);
 
@@ -128,20 +135,21 @@ public class CrimeStopperHomeController {
 		ComplaintDTO dto=new ComplaintDTO();
 		dto.setLocation(new LocationDTO()); 
 		model.addAttribute("complaintDTO",dto);
-		return redirectHome(model);
+		return redirectHome(model,url);
 	}
 
 	@GetMapping(value = "/home")
-	public String home(Model model) {
-		
-		return redirectHome(model);
+	public String home(Model model,@RequestParam(value = "url",required=false) String url) {
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>jjjjjjjjjjjjjjjjjjjjjjjjjjjjj>>ccccc"+url);
+		url="null";
+		return redirectHome(model,url);
 	}
 
 	@PostMapping(value = "/dislikeComplaint")
 
 	public String dislikeComplaint(Model model, @RequestParam(value = "flag") String flag,
 			@RequestParam(value = "complaintId") String complaintId,
-			@RequestParam(value = "responseId") String responseId) {
+			@RequestParam(value = "responseId") String responseId,@RequestParam(value = "url",required=false) String url) {
 		log.debug("oooooooooooooooooooooooooooooooooooooooooooomark an   response:" + flag + complaintId + responseId);
 
 		String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
@@ -170,13 +178,13 @@ public class CrimeStopperHomeController {
 		}
 		
 		
-		return redirectHome(model);
+		return redirectHome(model,url);
 	}
 
 	@PostMapping(value = "/comment")
 
 	public String comment(Model model, @RequestParam(value = "comment") String comment,
-			@RequestParam(value = "complaintId") String complaintId) {
+			@RequestParam(value = "complaintId") String complaintId,@RequestParam(value = "url",required=false) String url) {
 
 		String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
 		User user = userRepository.findOneByLogin(currentUserLogin).get();
@@ -195,12 +203,12 @@ public class CrimeStopperHomeController {
 		commentResourceApi.saveCommentInComplaintUsingPOST(commentDTO);
 	
 	
-		return redirectHome(model);
+		return redirectHome(model,url);
 	}
 
 	@GetMapping(value = "/search")
 
-	public String likeComplaint(Model model, @RequestParam(value = "searchContent") String searchContent) {
+	public String likeComplaint(Model model, @RequestParam(value = "searchContent") String searchContent,@RequestParam(value = "url",required=false) String url) {
 		log.debug("oooooooooooooooooooooooooooooooooooooooooooooooooooomark an   response:" + searchContent);
 
 		List<ComplaintDTO> result = complaintResourceApi.getAllComplaintsHashtagUsingGET(searchContent, null, null,
@@ -216,8 +224,10 @@ public class CrimeStopperHomeController {
 		ComplaintDTO dto=new ComplaintDTO();
 		dto.setLocation(new LocationDTO()); 
 		model.addAttribute("complaintDTO",dto);
-
-		return "crimestopper-index";
+		if( url==null|| url.equals("") || url.equals("null") )
+			return "crimestopper-index";
+			else
+			return url;
 	}
 
 }

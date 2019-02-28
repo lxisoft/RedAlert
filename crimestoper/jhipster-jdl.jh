@@ -57,6 +57,7 @@ entity Media
 entity Hashtag
 {
 	name String
+	count Long
 }
 
 enum Status

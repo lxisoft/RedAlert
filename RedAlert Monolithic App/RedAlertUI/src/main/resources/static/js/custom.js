@@ -164,15 +164,3 @@ function setComplaintId(val)
 	document.getElementById("complaintID").value=id;
 	
 }
-	
-function toggleIdAttr(attr)
-{
-	var map1=document.getElementById("mapholder");
-	var map2=document.getElementById("mapholder2");
-	console.log(map1.dataset.secondid);
-	if(!map1.dataset.secondid==attr)
-		{
-			map1.id="mapholder2";
-			map2.id="mapholder";
-		}
-}

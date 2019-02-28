@@ -2,6 +2,8 @@ package com.lxisoft.redalert.web.rest.controller;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,9 @@ import com.lxisoft.redalert.security.SecurityUtils;
 public class CrimeStopperAddComplaintController {
 	
 	@Autowired
+	CSTrendingController trendingController ;
+	
+	@Autowired
 	UserRegistrationResourceApi userRegistrationResourceApi;
 	
 	@Autowired
@@ -43,12 +48,16 @@ public class CrimeStopperAddComplaintController {
 	ComplaintResourceApi complaintResourceApi;	
 	
 	@PostMapping("/add")
-	public String addComplaint(@ModelAttribute ComplaintDTO complaintDTO, @RequestParam MultipartFile multipartFile,Model model) {
+	public String addComplaint(@ModelAttribute ComplaintDTO complaintDTO, @RequestParam MultipartFile multipartFile,Model model,@RequestParam(value = "url",required=false) String url) {
 		
 		ComplaintDTO complaintDTOnew = new ComplaintDTO();
 		complaintDTOnew.setSubject(complaintDTO.getSubject());				//Set Complaint Subject
-		complaintDTOnew.setDescription(complaintDTO.getDescription());		//Set Complaint Description
-		complaintDTOnew.setTime(Instant.now());								//Set Complaint Current Time
+		complaintDTOnew.setDescription(complaintDTO.getDescription());		//Set Complaint Descriptiont
+		Instant.now();
+		System.out.println("#######################################>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> time  "+Instant.now());
+
+		System.out.println("#######################################>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> time  "+ZonedDateTime.now( ZoneId.of( "Asia/Kolkata" )).toInstant());
+			//Set Complaint Current Time
 		complaintDTOnew.setLocation(complaintDTO.getLocation());            //Set Complaint location
 				
 		
@@ -69,14 +78,9 @@ public class CrimeStopperAddComplaintController {
         		.findByUserIdUsingGET(user.getLogin()).getBody();
 		long userId = userRegistrationDTO.getId();
 		complaintDTOnew.setUserId(userId);									//Set Complaint UserId
-		//ENDING OF SETTING COMPLAINT USERID
-
-			
+		//ENDING OF SETTING COMPLAINT USERID		
 		complaintResourceApi.createComplaintUsingPOST(complaintDTOnew);	
-		return crimeStopperHomeController.redirectHome(model); 
+		return crimeStopperHomeController.redirectHome(model,url); 
 	}
 	
-
-	
-
 }

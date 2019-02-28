@@ -5,7 +5,6 @@ import java.time.Instant;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -103,7 +102,8 @@ import com.lxisoft.redalert.security.SecurityUtils;
 			postDTO.setLongitude(view.getPostDTO().getLongitude());
 		   // OffsetDateTime o = OffsetDateTime.ofInstant(Instant.now(),ZoneId.systemDefault());
 			    
-			postDTO.setCreatedOn(Instant.now());
+			postDTO.setCreatedOn(Instant.now( ));
+			System.out.println("#######################################>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> time  "+	postDTO.getCreatedOn());;
 			PostDTO postDto = postResourceApi.createPostUsingPOST(postDTO).getBody();
 			MediaDTO mediaDTO = new MediaDTO();
 			

@@ -2,12 +2,15 @@ package com.lxisoft.crimestopper.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.lxisoft.crimestopper.service.ComplaintService;
+import com.lxisoft.crimestopper.service.HashtagService;
 import com.lxisoft.crimestopper.service.dto.ComplaintDTO;
+import com.lxisoft.crimestopper.service.dto.HashtagDTO;
 import com.lxisoft.crimestopper.web.rest.errors.BadRequestAlertException;
 import com.lxisoft.crimestopper.web.rest.util.HeaderUtil;
 import com.lxisoft.crimestopper.web.rest.util.PaginationUtil;
@@ -42,6 +47,9 @@ public class ComplaintResource {
     private static final String ENTITY_NAME = "crimestopperComplaint";
 
     private final ComplaintService complaintService;
+    
+    @Autowired
+    private HashtagService hashtagService;
 
     public ComplaintResource(ComplaintService complaintService) {
         this.complaintService = complaintService;
@@ -153,7 +161,6 @@ public class ComplaintResource {
     @GetMapping("friends/complaints/{userId}")
     @Timed
     public ResponseEntity<List<ComplaintDTO>> getAllComplaintsOfFriends(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload,@PathVariable Long userId) {
-        
     	log.debug("REST request to get a page of Complaints");
         Page<ComplaintDTO> page;      
             page = complaintService.findAllComplaintsOfFriends(pageable,userId);
@@ -162,7 +169,6 @@ public class ComplaintResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
     
-    
     @GetMapping("hashtag/complaints")
     @Timed
     public ResponseEntity<List<ComplaintDTO>> getAllComplaintsHashtag(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload,@RequestParam String searchContent) {
@@ -170,9 +176,24 @@ public class ComplaintResource {
     	log.debug("REST request to get a page of Complaints");
         Page<ComplaintDTO> page;      
             page = complaintService.findAllComplaintsByHashtag(pageable,searchContent);
-            HttpHeaders	headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/complaints?eagerload=%b", eagerload));
-            
+            HttpHeaders	headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/complaints?eagerload=%b", eagerload));            
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
+      
+    @GetMapping("/trending/complaints")
+    @Timed
+    public ResponseEntity<List<ComplaintDTO>> getAllTrendingHashtagsAndComplaints(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+        log.debug("REST request to get a page of Complaints");
+        
+        List<HashtagDTO> hashtags=hashtagService.findTrendingHashtags();
+        List<ComplaintDTO> complaints=new ArrayList<ComplaintDTO>(); 
+        for(HashtagDTO ht:hashtags)
+        {
+        	complaints.addAll(complaintService.findAllComplaintsByHashtag(pageable,ht.getName()).getContent());	
+        }
+        Page<ComplaintDTO> page=new PageImpl<ComplaintDTO>(complaints,pageable,complaints.size());
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/complaints?eagerload=%b", eagerload));
+        return ResponseEntity.ok().headers(headers).body(complaints);
+    }
     
-}
+}   

@@ -22,9 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.validation.Validator;
-
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -47,6 +45,9 @@ public class HashtagResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
+
+    private static final Long DEFAULT_COUNT = 1L;
+    private static final Long UPDATED_COUNT = 2L;
 
     @Autowired
     private HashtagRepository hashtagRepository;
@@ -72,7 +73,6 @@ public class HashtagResourceIntTest {
     @Autowired
     private Validator validator;
 
-
     private MockMvc restHashtagMockMvc;
 
     private Hashtag hashtag;
@@ -97,7 +97,8 @@ public class HashtagResourceIntTest {
      */
     public static Hashtag createEntity(EntityManager em) {
         Hashtag hashtag = new Hashtag()
-            .name(DEFAULT_NAME);
+            .name(DEFAULT_NAME)
+            .count(DEFAULT_COUNT);
         return hashtag;
     }
 
@@ -123,6 +124,7 @@ public class HashtagResourceIntTest {
         assertThat(hashtagList).hasSize(databaseSizeBeforeCreate + 1);
         Hashtag testHashtag = hashtagList.get(hashtagList.size() - 1);
         assertThat(testHashtag.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testHashtag.getCount()).isEqualTo(DEFAULT_COUNT);
     }
 
     @Test
@@ -156,7 +158,8 @@ public class HashtagResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(hashtag.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].count").value(hasItem(DEFAULT_COUNT.intValue())));
     }
     
     @Test
@@ -170,7 +173,8 @@ public class HashtagResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(hashtag.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.count").value(DEFAULT_COUNT.intValue()));
     }
 
     @Test
@@ -194,7 +198,8 @@ public class HashtagResourceIntTest {
         // Disconnect from session so that the updates on updatedHashtag are not directly saved in db
         em.detach(updatedHashtag);
         updatedHashtag
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .count(UPDATED_COUNT);
         HashtagDTO hashtagDTO = hashtagMapper.toDto(updatedHashtag);
 
         restHashtagMockMvc.perform(put("/api/hashtags")
@@ -207,6 +212,7 @@ public class HashtagResourceIntTest {
         assertThat(hashtagList).hasSize(databaseSizeBeforeUpdate);
         Hashtag testHashtag = hashtagList.get(hashtagList.size() - 1);
         assertThat(testHashtag.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testHashtag.getCount()).isEqualTo(UPDATED_COUNT);
     }
 
     @Test
@@ -236,7 +242,7 @@ public class HashtagResourceIntTest {
 
         int databaseSizeBeforeDelete = hashtagRepository.findAll().size();
 
-        // Get the hashtag
+        // Delete the hashtag
         restHashtagMockMvc.perform(delete("/api/hashtags/{id}", hashtag.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());

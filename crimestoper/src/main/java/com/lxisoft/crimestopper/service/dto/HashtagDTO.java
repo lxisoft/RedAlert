@@ -1,16 +1,18 @@
 package com.lxisoft.crimestopper.service.dto;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * A DTO for the Hashtag entity.
  */
-public class HashtagDTO implements Serializable {
+public class HashtagDTO implements Serializable,Comparable<HashtagDTO>{
 
     private Long id;
 
     private String name;
+
+    private Long count;
+
 
     public Long getId() {
         return id;
@@ -26,6 +28,14 @@ public class HashtagDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getCount() {
+        return count;
+    }
+
+    public void setCount(Long count) {
+        this.count = count;
     }
 
     @Override
@@ -54,6 +64,13 @@ public class HashtagDTO implements Serializable {
         return "HashtagDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", count=" + getCount() +
             "}";
     }
+
+	@Override
+	public int compareTo(HashtagDTO o) {
+		Long l=o.getCount()-this.count;
+		return l.intValue();
+	}
 }
