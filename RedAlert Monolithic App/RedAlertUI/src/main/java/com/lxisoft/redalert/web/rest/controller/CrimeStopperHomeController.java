@@ -3,6 +3,7 @@ package com.lxisoft.redalert.web.rest.controller;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.servlet.http.HttpSession;
 
@@ -59,7 +60,38 @@ public class CrimeStopperHomeController {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@GetMapping(value="/test")
+	public String test(Model model)
+	{
+		
+		log.debug("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+		Scanner s=new Scanner(System.in);
+		String x=s.next();
+		
+		String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
+		log.debug("current user login>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + currentUserLogin);
 
+		User user = userRepository.findOneByLogin(currentUserLogin).get();
+
+		log.debug("user>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + user);
+
+	
+		UserRegistrationDTO userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin())
+				.getBody();
+		
+
+		ResponseEntity<List<ComplaintDTO>> result = complaintResourceApi.getAllComplaintsOfFriendsUsingGET(
+				userRegistrationDTO.getId(), null, null, null, null, null, null, null, null, null, null, null);
+		ArrayList<ComplaintDTO> complaints=new ArrayList<ComplaintDTO>();
+		complaints.add(result.getBody().get(0));
+		model.addAttribute("complaints",complaints);
+		return "crimestopper-home :: home";
+	}
+	
+	
+	
+	
 	public String redirectHome(Model model,String url) {
 		
 
@@ -84,8 +116,9 @@ public class CrimeStopperHomeController {
 
 		for (ComplaintDTO temp : set) {
 			homeView.getComplaints().add(temp);
-			log.debug(" LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLocationres"+temp.getLocation());
+			log.debug(" LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLocationres"+temp);
 		}
+		
 		model.addAttribute("homeView", homeView);
 		ComplaintDTO dto=new ComplaintDTO();
 		dto.setLocation(new LocationDTO()); 

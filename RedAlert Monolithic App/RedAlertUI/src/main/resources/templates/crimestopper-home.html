@@ -10,10 +10,7 @@
 
 	<!-- FRAGMENT NAME -->
 	<div th:fragment="home">
-
-		<!-- FRAGMENT CONTENT -->
-		<div th:each="complaint,iter : ${homeView.complaints}">
-			<!-- 	<div th:fragment="complaint"> -->
+	<div th:each="complaint,iter:${homeView.complaints}">
 			<!-- Card -->
 			<div class="card center_margin80 top_margin1">
 				<!-- Card content -->
@@ -45,7 +42,7 @@
 							dignissimos recusandae officiis commodi nulla est, tempore atque
 							voluptas non quod maxime, iusto, debitis aliquid? Iure ipsum,
 							itaque.</p>
-						<h1>heloo</h1>
+				
 
 						<img th:if="${complaint.image!='data:image/jpg;base64,'}"
 							class="img-fluid img-thumbnail thumbnail hoverable"
@@ -60,8 +57,7 @@
 				<div class="btn-group" style="width: 100%;" role="group"
 					aria-label="Basic example">
 
-					<!-- <form action="/crime-stopper/likeComplaint" method="POST"
-						style="width: 100%;"> -->
+					 <form action="/crime-stopper/likeComplaint" method="POST" style="width: 100%;"> 
 						<input type="hidden" th:value="like" th:name="flag"> <input
 							type="hidden" th:value="${complaint.userResponse.id}"
 							th:name="responseId"> <input type="hidden"
@@ -78,7 +74,7 @@
 							<!-- lik]e-->
 							<i class="fas fa-thumbs-up"></i>
 						</button>
-					<!-- </form> -->
+					 </form> 
 
 
 					<form action="/crime-stopper/dislikeComplaint" method="POST"
@@ -176,9 +172,9 @@
 				</div>
 			</div>
 			<!-- / Card -->
-		</div>
+		
 		<!-- / Collapsible element -->
-
+	</div>
 		<!--map<!--
     <!-- Modal -->
 		<div class="modal fade" id="locationModalCenter" tabindex="-1"
@@ -215,7 +211,7 @@
 			</div>
 		</div>
 		<!--./map-->
-	</div>
+		</div>
 
 </body>
 </html>
