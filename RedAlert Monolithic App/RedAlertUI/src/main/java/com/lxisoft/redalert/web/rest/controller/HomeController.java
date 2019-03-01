@@ -68,6 +68,7 @@ import com.lxisoft.redalert.security.SecurityUtils;
 			 
 			
 			User user=userRepository.findOneByLogin(currentUserLogin).get();
+			
 	        userRegistrationDTO = userRegistrationResourceApi.findByUserIdUsingGET(user.getLogin()).getBody();
 	        view.setUserRegistrationDTO(userRegistrationDTO);
 	       // view.setUserRegistrationId(1);

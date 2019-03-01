@@ -169,6 +169,17 @@ public class ComplaintResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
     
+
+    @GetMapping("/user/complaints/{userId}")
+    @Timed
+    public ResponseEntity<List<ComplaintDTO>> getAllComplaintsOfUserId(@PathVariable long userId,Pageable pageable,@RequestParam(required = false, defaultValue = "false") boolean eagerload){
+    	log.debug("REST request to get  page of Complaints for userid");
+    	Page<ComplaintDTO> page=complaintService.findAllComplaintsOfUserId(pageable, userId);
+    	 HttpHeaders	headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/complaints?eagerload=%b", eagerload));
+		return ResponseEntity.ok().headers(headers).body(page.getContent());
+    	
+    }
+    
     @GetMapping("hashtag/complaints")
     @Timed
     public ResponseEntity<List<ComplaintDTO>> getAllComplaintsHashtag(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload,@RequestParam String searchContent) {

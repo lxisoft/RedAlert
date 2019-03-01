@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div th:each="complaint,iter : ${complaints}">
+					<div class="media-body">
+						<h5 class="mt-0 font-weight-bold blue-text"
+							th:text="${complaint.subject}">Subject</h5>
+						<p th:text="${complaint.description}">Description</p>
+					</div>
+	</div>
+
+</body>
+</html>

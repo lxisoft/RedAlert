@@ -56,6 +56,8 @@ public interface ComplaintService {
     */
 
 	Page<ComplaintDTO> findAllComplaintsOfFriends(Pageable pageable, Long userId);
+	
+	Page<ComplaintDTO> findAllComplaintsOfUserId(Pageable pageable, Long userId);
 
 	 /**
      * Get all the Complaints  with given hashTag name,with eager load of many-to-many relationships.

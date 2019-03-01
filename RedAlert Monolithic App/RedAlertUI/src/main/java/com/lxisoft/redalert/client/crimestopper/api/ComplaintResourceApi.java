@@ -64,7 +64,21 @@ public interface ComplaintResourceApi {
         method = RequestMethod.GET)
     ResponseEntity<List<ComplaintDTO>> getAllComplaintsOfFriendsUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") Long userId,@ApiParam(value = "eagerload", defaultValue = "false") @Valid @RequestParam(value = "eagerload", required = false, defaultValue="false") Boolean eagerload,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
 
-  
+    
+    //PRINCE
+    @ApiOperation(value = "getAllComplaintsOfUserId", nickname = "getAllComplaintsOfUserIdUsingGET", notes = "", response = ComplaintDTO.class, responseContainer = "List", tags={ "complaint-resource", }) 
+    @ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK", response = ComplaintDTO.class, responseContainer = "List"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 403, message = "Forbidden"),
+            @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/api/user/complaints/{userId}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<List<ComplaintDTO>> getAllComplaintsOfUserIdUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") Long userId,@ApiParam(value = "eagerload", defaultValue = "false") @Valid @RequestParam(value = "eagerload", required = false, defaultValue="false") Boolean eagerload,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
+
+    
+    //SOORAJ
     @ApiOperation(value = "getAllComplaintsHashtag", nickname = "getAllComplaintsHashtagUsingGET", notes = "", response = ComplaintDTO.class, responseContainer = "List", tags={ "complaint-resource", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = ComplaintDTO.class, responseContainer = "List"),
@@ -76,7 +90,6 @@ public interface ComplaintResourceApi {
         method = RequestMethod.GET)
     ResponseEntity<List<ComplaintDTO>> getAllComplaintsHashtagUsingGET(@ApiParam(value = "userId",required=true) @RequestParam("searchContent") String searchContent,@ApiParam(value = "eagerload", defaultValue = "false") @Valid @RequestParam(value = "eagerload", required = false, defaultValue="false") Boolean eagerload,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
 
-    
 
     @ApiOperation(value = "getAllComplaints", nickname = "getAllComplaintsUsingGET", notes = "", response = ComplaintDTO.class, responseContainer = "List", tags={ "complaint-resource", })
     @ApiResponses(value = { 
@@ -89,8 +102,6 @@ public interface ComplaintResourceApi {
         method = RequestMethod.GET)
     ResponseEntity<List<ComplaintDTO>> getAllComplaintsUsingGET(@ApiParam(value = "eagerload", defaultValue = "false") @Valid @RequestParam(value = "eagerload", required = false, defaultValue="false") Boolean eagerload,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
 
-    
-    
 
     @ApiOperation(value = "getAllTrendingHashtagsAndComplaints", nickname = "getAllTrendingHashtagsAndComplaintsUsingGET", notes = "", response = ComplaintDTO.class, responseContainer = "List", tags={ "complaint-resource", })
     @ApiResponses(value = { 

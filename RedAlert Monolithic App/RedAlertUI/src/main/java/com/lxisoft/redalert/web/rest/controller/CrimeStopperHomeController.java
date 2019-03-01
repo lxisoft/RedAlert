@@ -214,6 +214,15 @@ public class CrimeStopperHomeController {
 		return redirectHome(model,url);
 	}
 
+	@GetMapping()
+	public String getAllComplaints(Model model) {
+		
+		ResponseEntity<List<ComplaintDTO>> results=complaintResourceApi.getAllComplaintsUsingGET(null, null, null, null, null, null, null, null, null, null, null);
+		model.addAttribute("res", results);
+		return null;
+		
+	}
+
 	@PostMapping(value = "/comment")
 
 	public String comment(Model model, @RequestParam(value = "comment") String comment,

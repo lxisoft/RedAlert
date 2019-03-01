@@ -146,6 +146,23 @@ public class ComplaintServiceImpl implements ComplaintService {
 		complaintDTO.setHashtags(hashtags);
 		// hash tag finding end
 		
+
+/*		log.debug("request to get all complaints of friends by userId:"+userId);
+		List<ComplaintDTO> list=new ArrayList<ComplaintDTO>(); 
+		List<UserRegistrationDTO> users=userRegistrationResourceApi.getAllFriendsUsingGET(userId).getBody();
+		complaintRepository.findByUserId(userId,pageable);
+		for(UserRegistrationDTO userDTO:users)
+		{
+			List<ComplaintDTO> complaints=complaintRepository.findAllByUserId(userDTO.getId(),pageable).map(complaintMapper::toDto).getContent();
+			for(ComplaintDTO complaint:complaints)
+			{
+				complaint.setUserName(userDTO.getFirstName()+" "+userDTO.getLastName());
+				Optional<UserResponse>optional=userResponseRepository.findUserResponseByUserIdAndComplaintId(userDTO.getId(),complaint.getId());
+				Optional<UserResponseDTO>optionalDTO=optional.map(userResponseMapper::toDto);
+				if(optionalDTO.isPresent())
+				{
+					complaint.setUserResponse(optionalDTO.get());
+=======*/
 		//CAUTION location stuffs start
 		log.debug("location:::::::::::::::::::;;;;" +complaintDTO.getLocation());
 		Location location=new Location();
@@ -348,6 +365,15 @@ public class ComplaintServiceImpl implements ComplaintService {
 		Page<ComplaintDTO> pages = new PageImpl<ComplaintDTO>(list, pageable, list.size());
 		return pages;
 
+	}
+
+	public Page<ComplaintDTO> findAllComplaintsOfUserId(Pageable pageable, Long userId){
+		
+		//List<ComplaintDTO> complaints=complaintRepository.findAllByUserId(userId,pageable).map(complaintMapper::toDto).getContent();
+		Page<ComplaintDTO> complaints=complaintRepository.findByUserId(userId,pageable).map(complaintMapper::toDto);
+
+		return complaints;
+		
 	}
 
 }
