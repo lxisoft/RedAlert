@@ -63,7 +63,8 @@
             "relationshipType": "many-to-one",
             "relationshipName": "location",
             "otherEntityName": "location",
-            "otherEntityField": "id"
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "complaint"
         },
         {
             "relationshipType": "many-to-many",
@@ -75,7 +76,7 @@
         },
         {
             "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "",
+            "otherEntityRelationshipName": "complaint",
             "relationshipName": "linkedComplaints",
             "otherEntityName": "complaint",
             "otherEntityField": "id",

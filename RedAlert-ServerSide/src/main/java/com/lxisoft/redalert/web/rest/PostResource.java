@@ -1,14 +1,12 @@
 package com.lxisoft.redalert.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.lxisoft.redalert.domain.Post;
-import com.lxisoft.redalert.service.PostService;
-import com.lxisoft.redalert.web.rest.errors.BadRequestAlertException;
-import com.lxisoft.redalert.web.rest.util.HeaderUtil;
-import com.lxisoft.redalert.web.rest.util.PaginationUtil;
-import com.lxisoft.redalert.service.dto.PostDTO;
-import io.github.jhipster.web.util.ResponseUtil;
-import javassist.NotFoundException;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
+import javax.mail.MessagingException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,16 +16,24 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import com.codahale.metrics.annotation.Timed;
+import com.lxisoft.redalert.service.PostService;
+import com.lxisoft.redalert.service.dto.PostDTO;
+import com.lxisoft.redalert.web.rest.errors.BadRequestAlertException;
+import com.lxisoft.redalert.web.rest.util.HeaderUtil;
+import com.lxisoft.redalert.web.rest.util.PaginationUtil;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.mail.MessagingException;
+import io.github.jhipster.web.util.ResponseUtil;
+import javassist.NotFoundException;
 
 /**
  * REST controller for managing Post.
@@ -60,6 +66,7 @@ public class PostResource {
         if (postDTO.getId() != null) {
             throw new BadRequestAlertException("A new post cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        System.out.println("#######################################>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> rest method time  "+	postDTO.getCreatedOn());;
         PostDTO result = postService.save(postDTO);
         return ResponseEntity.created(new URI("/api/posts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -171,29 +178,11 @@ public class PostResource {
     public ResponseEntity<List<PostDTO>> nonClosedPostsOfFriends(@PathVariable Long userRegistrationId,Pageable pageable) throws NotFoundException {
         log.debug("REST request to get a page of Posts");
         Page<PostDTO> page = postService.nonClosedPostsOfFriends(pageable,userRegistrationId);
-        
-    
-      
-       
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/posts");
-        
-        
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-     
-       
-        
-        
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);    
        
     }
     
-    
-    
-    
-    
-    
-    
-    
-
     /**
      * GET  /posts/:id : get the "id" post.
      *
@@ -208,10 +197,6 @@ public class PostResource {
         return ResponseUtil.wrapOrNotFound(postDTO);
     }
     
-    
- 
-	
-	
 	 /**
  * GET  /postclose:id: post is closed by id
  * @param id the id of the PostDTO to close the post
@@ -223,27 +208,22 @@ public class PostResource {
     	   Optional<PostDTO> postDTO=postService.closePost(id);
     
     	return ResponseUtil.wrapOrNotFound(postDTO);
-   }
-    
-	
- 	 /**
+   } 	
+  /**
  *  GET /changeAlert:id:alertLevel: change the alertlevel using id	 
  * @param id the id of the PostDTO to change
  * @param alertLevel the enum type of postDTO to change the alertlevel of the post
  * @return the ResponseEntity with status 200 (OK) and with body the postDTO, or with status 404 (Not Found)
  */
-	
+	 
    @GetMapping("/changeAlert/{id}/{alertLevel}") 
    @Timed
    public ResponseEntity<PostDTO> changeAlertLevel(@PathVariable Long id,@PathVariable String alertLevel)
-   {
-	   
+   { 
 	    Optional<PostDTO>postDTO=Optional.of(postService.changeAlert(id,alertLevel));
-	   
-	    return ResponseUtil.wrapOrNotFound(postDTO);
-	   
+	    return ResponseUtil.wrapOrNotFound(postDTO);   
    }
-   
+  
    @PostMapping("/posts/mail")
    @Timed
    public String sendMailWithAttachment(@RequestBody PostDTO post) throws MessagingException, IOException,MailException

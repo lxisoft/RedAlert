@@ -10,13 +10,12 @@
 
 	<!-- FRAGMENT NAME -->
 	<div th:fragment="home">
-
-		<!-- FRAGMENT CONTENT -->
-		<div th:each="complaint,iter : ${homeView.complaints}">
+	<div th:each="complaint,iter:${homeView.complaints}">
 			<!-- Card -->
 			<div class="card center_margin80 top_margin1">
 				<!-- Card content -->
-				<div class="card-body" style="cursor: pointer;" data-toggle="collapse"
+				<div class="card-body" style="cursor: pointer;"
+					data-toggle="collapse"
 					th:attr="data-target='#complaintDetails'+${complaint.id}">
 					<div class="media ">
 						<img class="d-flex rounded-circle avatar z-depth-1-half mr-3"
@@ -43,11 +42,12 @@
 							dignissimos recusandae officiis commodi nulla est, tempore atque
 							voluptas non quod maxime, iusto, debitis aliquid? Iure ipsum,
 							itaque.</p>
+				
 
 						<img th:if="${complaint.image!='data:image/jpg;base64,'}"
 							class="img-fluid img-thumbnail thumbnail hoverable"
 							th:src=${complaint.image}>
-					<p th:text="${complaint.noOfDislikes}"></p>							
+						<p th:text="${complaint.noOfDislikes}"></p>
 
 					</div>
 
@@ -57,13 +57,12 @@
 				<div class="btn-group" style="width: 100%;" role="group"
 					aria-label="Basic example">
 
-					<form action="/crime-stopper/likeComplaint" method="POST"
-						style="width: 100%;">
+					 <form action="/crime-stopper/likeComplaint" method="POST" style="width: 100%;"> 
 						<input type="hidden" th:value="like" th:name="flag"> <input
 							type="hidden" th:value="${complaint.userResponse.id}"
 							th:name="responseId"> <input type="hidden"
 							th:value="${complaint.id}" th:name="complaintId">
-	 					<button
+						<button
 							th:if="${complaint.userResponse.flag!=T(com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum).LIKE}"
 							type="submit" style="width: 100%;" class="btn btn-tertiary">
 							<!-- like-->
@@ -72,10 +71,10 @@
 						<button
 							th:if="${complaint.userResponse.flag==T(com.lxisoft.redalert.client.crimestopper.model.UserResponseDTO.FlagEnum).LIKE}"
 							type="button" style="width: 100%;" class="btn btn-tertiary">
-							<!-- like-->
+							<!-- lik]e-->
 							<i class="fas fa-thumbs-up"></i>
 						</button>
-					</form>
+					 </form> 
 
 
 					<form action="/crime-stopper/dislikeComplaint" method="POST"
@@ -118,9 +117,11 @@
 					<!-- comment-->
 					<form style="width: 100%;">
 						<button type="button" style="width: 100%;"
-							class="btn btn-tertiary" data-toggle="modal" data-target="#locationModalCenter" th:lat="${complaint.location.latitude}" th:long="${complaint.location.longitude}" th:onclick="showMap(this.getAttribute('lat'),this.getAttribute('long'));">
+							class="btn btn-tertiary" data-toggle="modal"
+							data-target="#locationModalCenter"
+							th:onclick="|showMapOnPost('${complaint.location.latitude}','${complaint.location.longitude}','postMap');|">
 							<!-- location-->
-							<i class="fas fa-map-marker-alt" ></i>
+							<i class="fas fa-map-marker-alt"></i>
 						</button>
 					</form>
 				</div>
@@ -167,44 +168,50 @@
 						<h3 th:text="${comment.userName}"></h3>
 						<p th:text="${comment.description}"></p>
 
- 					</div>
+					</div>
+				</div>
+			</div>
+			<!-- / Card -->
+		
+		<!-- / Collapsible element -->
+	</div>
+		<!--map<!--
+    <!-- Modal -->
+		<div class="modal fade" id="locationModalCenter" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalCenterTitle"
+			aria-hidden="true">
+
+			<!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+			<div class="modal-dialog modal-dialog-centered" role="document">
+
+
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Location</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12 modal_body_map">
+								<div class="location-map" id="location-map">
+									<div class="img-fluid" style="width: 100%; height: 200px;"
+										id="postMap"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary btn-deep-orange"
+							data-dismiss="modal">Close</button>
+					</div>
 				</div>
 			</div>
 		</div>
-		<!-- / Collapsible element -->
-		
-		    <!--map<!--
-    <!-- Modal -->
-    <div class="modal fade" id="locationModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<!--./map-->
+		</div>
 
-        <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
-        <div class="modal-dialog modal-dialog-centered" role="document">
-
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Location</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                  <div class="row">
-                    <div class="col-md-12 modal_body_map">
-                      <div class="location-map" id="location-map">
-                        <div class="img-fluid" style="width: 100%; height: 200px;" id="mapholder"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-deep-orange" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--./map-->
-		
-	</div>
 </body>
 </html>

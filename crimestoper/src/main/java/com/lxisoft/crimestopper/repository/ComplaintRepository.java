@@ -36,6 +36,7 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Long> {
      * @param pageable
      * @return
      */
+
     @Query(value="select complaint from  Complaint complaint where complaint.userId=:id")
 	Page<Complaint> findByUserId(@Param("id") Long id,Pageable pageable);
 
@@ -48,5 +49,6 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Long> {
      */
    
 	Page<Complaint> findAllComplaintsByHashtags(Pageable pageable,Hashtag hashtag);
+
 }
  

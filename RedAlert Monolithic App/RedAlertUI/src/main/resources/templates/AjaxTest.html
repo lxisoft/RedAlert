@@ -20,33 +20,38 @@
 			<!-- Home-->
 			<th:block th:include="crimestopper-search :: search"></th:block>
 			
-			<th:block th:include="crimestopper-home :: home"></th:block>
-			</
+			<div id="viewAll">
+			<!-- <th:block th:include="crimestopper-home :: home"></th:block> -->
+			</div>
 			<!-- Add Complaint-->
 			<th:block th:include="crimestopper-addComplaint :: addComplaint"></th:block>	
 					
+			<!-- Notifications-->
+			<th:block th:include="crimestopper-notifications :: notifications"></th:block>
+			
 		</main>
 	
-		  
+		<footer></footer>
+		
+		<!-- SCRIPTS -->
+		
+		<button id="ss" > Hellloooooooooooooooooooooo</button>
 		
 		<th:block th:include="crimestopper-scripts :: scripts"></th:block>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script>
-		$(document).ready(function() {
-			  $("#ss").click(function () {
-		       
-              $.ajax({
-                   type:"get",
-				  url:"/crime-stopper/test",
-					  success: function (data) {
-					        console.log(data);
-					        $("#test").show();
-					    }
-			  });
-			  });
+		$(document).ready(function(){										<!-- makes this function ready on page load -->
+		console.log("working");
+			$('#ss').on("click",function() {
+				  $.ajax({
+					  method: "GET",
+					  url: "/crime-stopper/test",
+						  
+				  })
 			});
+					
+				
 		</script>
 	</body>
 
 </html>
-  

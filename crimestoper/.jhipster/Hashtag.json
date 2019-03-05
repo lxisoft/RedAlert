@@ -4,6 +4,10 @@
         {
             "fieldName": "name",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "count",
+            "fieldType": "Long"
         }
     ],
     "relationships": [
@@ -15,9 +19,7 @@
             "otherEntityRelationshipName": "hashtags"
         }
     ],
-
     "changelogDate": "20190209191203",
-
     "entityTableName": "hashtag",
     "dto": "mapstruct",
     "pagination": "pagination",

@@ -2,6 +2,8 @@ package com.lxisoft.redalert.web.rest.controller;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.lxisoft.redalert.client.crimestopper.api.ComplaintResourceApi;
 import com.lxisoft.redalert.client.crimestopper.api.ElasticSearchResourceApi;
 import com.lxisoft.redalert.repository.UserRepository;
@@ -40,6 +43,9 @@ import com.lxisoft.redalert.domain.User;
 public class CrimeStopperAddComplaintController {
 	
 	@Autowired
+	CSTrendingController trendingController ;
+	
+	@Autowired
 	UserRegistrationResourceApi userRegistrationResourceApi;
 	@Autowired
 	ComplaintResourceApi complaintResourceApi;	
@@ -52,8 +58,7 @@ public class CrimeStopperAddComplaintController {
 	
 	//POST A COMPLAINT
 	@PostMapping("/add")
-	public String addComplaint(@ModelAttribute ComplaintDTO complaintDTO, 
-			@RequestParam MultipartFile multipartFile,Model model) {
+	public String addComplaint(@ModelAttribute ComplaintDTO complaintDTO, @RequestParam MultipartFile multipartFile,Model model,@RequestParam(value = "url",required=false) String url) {
 		
 		ComplaintDTO complaintDTOnew = new ComplaintDTO();
 		
@@ -67,8 +72,12 @@ public class CrimeStopperAddComplaintController {
 		//ENDING OF SETTING COMPLAINT USERID
 		
 		complaintDTOnew.setSubject(complaintDTO.getSubject());				//Set Complaint Subject
-		complaintDTOnew.setDescription(complaintDTO.getDescription());		//Set Complaint Description
-		complaintDTOnew.setTime(Instant.now());								//Set Complaint Current Time
+		complaintDTOnew.setDescription(complaintDTO.getDescription());		//Set Complaint Descriptiont
+		Instant.now();
+		System.out.println("#######################################>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> time  "+Instant.now());
+
+		System.out.println("#######################################>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> time  "+ZonedDateTime.now( ZoneId.of( "Asia/Kolkata" )).toInstant());
+			//Set Complaint Current Time
 		complaintDTOnew.setLocation(complaintDTO.getLocation());            //Set Complaint location
 				
 		
@@ -81,12 +90,14 @@ public class CrimeStopperAddComplaintController {
 		}	
 		//ENDING OF SETTING COMPLAINT MEDIA
 		
+
 		//BEGINNING OF SETTING COMPLAINT MEDIA
 		//complaintDTOnew.setLinkedComplaints(linkedComplaints);			//Set Complaint Linked Complaints
 		//ENDING OF SETTING COMPLAINT MEDIA
 		
+
 		complaintResourceApi.createComplaintUsingPOST(complaintDTOnew);	
-		return crimeStopperHomeController.redirectHome(model); 
+		return crimeStopperHomeController.redirectHome(model,url); 
 	}
 	
 	//GET ALL COMPLAINTS FROM ELASTICSEARCH
@@ -133,5 +144,4 @@ public class CrimeStopperAddComplaintController {
 
 	}
 	
-
 }

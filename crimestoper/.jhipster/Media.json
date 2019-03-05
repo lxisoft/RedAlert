@@ -12,7 +12,8 @@
             "relationshipType": "many-to-one",
             "relationshipName": "complaint",
             "otherEntityName": "complaint",
-            "otherEntityField": "id"
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "attachments"
         }
     ],
     "changelogDate": "20190115111413",

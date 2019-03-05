@@ -7,7 +7,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <property name="now" value="now()" dbms="h2"/>
-
+    
     <property name="now" value="now()" dbms="mysql"/>
     <property name="autoIncrement" value="true"/>
 
@@ -23,6 +23,10 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="count" type="bigint">
                 <constraints nullable="true" />
             </column>
 

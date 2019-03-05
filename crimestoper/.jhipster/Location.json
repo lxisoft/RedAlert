@@ -6,7 +6,7 @@
             "fieldType": "Double"
         },
         {
-            "fieldName": "longitutde",
+            "fieldName": "longitude",
             "fieldType": "Double"
         }
     ],

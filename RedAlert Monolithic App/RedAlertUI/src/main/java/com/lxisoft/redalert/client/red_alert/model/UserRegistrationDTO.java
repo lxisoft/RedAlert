@@ -529,7 +529,6 @@ public class UserRegistrationDTO   {
   **/
   @ApiModelProperty(value = "")
 
-
   public String getUserName() {
     return userName;
   }

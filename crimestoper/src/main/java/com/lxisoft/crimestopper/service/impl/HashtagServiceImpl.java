@@ -1,5 +1,7 @@
 package com.lxisoft.crimestopper.service.impl;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -42,7 +44,6 @@ public class HashtagServiceImpl implements HashtagService {
     @Override
     public HashtagDTO save(HashtagDTO hashtagDTO) {
         log.debug("Request to save Hashtag : {}", hashtagDTO);
-       
         Hashtag hashtag = hashtagMapper.toEntity(hashtagDTO);
         hashtag = hashtagRepository.save(hashtag);
         return hashtagMapper.toDto(hashtag);
@@ -84,7 +85,29 @@ public class HashtagServiceImpl implements HashtagService {
      */
     @Override
     public void delete(Long id) {
-        log.debug("Request to delete Hashtag : {}", id);
+        log.debug("Request to delete Hashtag : {}", id);    
         hashtagRepository.deleteById(id);
     }
+    
+    @Override
+    public List<HashtagDTO> findTrendingHashtags()
+    {
+    	  log.debug("Request to get trending  Hashtags : {}"); 
+    	  List<Hashtag>list=hashtagRepository.findAll();
+    	   Long totalCount=0L;
+    	 for(Hashtag ht:list)
+    	 {
+    		 
+    		 totalCount=totalCount+ht.getCount();
+    	 }
+    	 Long avg=totalCount/list.size();
+    	 Pageable pageable=null;
+    	 List<HashtagDTO> result=hashtagRepository.findAllHashtagByCountGreaterThan(avg,pageable).map(hashtagMapper::toDto).getContent();
+    	 System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>)())()()()"+result);
+    	
+    	 if(result.size()>2)
+    	 Collections.sort(result);
+    	  return result;
+    }
+    
 }

@@ -164,4 +164,3 @@ function setComplaintId(val)
 	document.getElementById("complaintID").value=id;
 	
 }
-	
