@@ -27,13 +27,13 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script>
 		$(document).ready(function(){										<!-- makes this function ready on page load -->
-		console.log("working");
+		  console.log("working");
 		  $( "#message-text" ).autocomplete({								<!-- adds autocomplete feature to the message-text element -->	  
 		      source: function( request, response ) {						<!-- source data for suggestions-->         
 		      console.log("working autocomplete");
 		     	 $.ajax({													<!-- Fires an ajax request-->
 		     			type: "POST",										<!-- Specifies type of request-->
-		          		url: "/crime-stopper/complaint/searchTags",			<!-- Specifies request url-->
+		          		url: "/crime-stopper/complaint/search/description",	<!-- Specifies request url-->
 		            	dataType: "json",									<!-- The data type expected from the server response. -->
 			            data: {
 			            	searchTerm: request.term						<!-- Specifies data to be sent to the server. Herer the user input value-->
@@ -63,7 +63,46 @@
 		          $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
 		      }        
 		    });	  
+		  
+		  $( "#mention-user" ).autocomplete({									<!-- adds autocomplete feature to the message-text element -->	  
+	      source: function( request, response ) {								<!-- source data for suggestions-->         
+	      console.log("working mention user");
+	     	 $.ajax({															<!-- Fires an ajax request-->
+	     			type: "POST",												<!-- Specifies type of request-->
+	          		url: "/crime-stopper/complaint/search/user-by-text-phrase",	<!-- Specifies request url-->
+	            	dataType: "json",											<!-- The data type expected from the server response. -->
+		            data: {
+		            	searchTerm: request.term								<!-- Specifies data to be sent to the server. Herer the user input value-->
+		            },
+		            success: function( result ) {								<!-- A function to be run when the request succeeds  -->
+		            	response($.map( result, function(item) {				<!-- converts json response to javascript -->
+                            return {
+				                label: item.email,								<!-- Labels (of autocomplete) are the suggestion list items -->
+				                value: item.id									<!-- Values (of autocomplete) are hidden -->
+				            };
+                        }));
+		            }
+	          });
+	      },
+		  minLength: 1,
+		  scroll: true,
+	      delay: 100,
+	      select: function( event, ui ) {
+	          log( ui.item ?
+	            "Selected: " + ui.item.label :
+	            "Nothing selected, input was " + this.value);
+	      },
+	      open: function() {
+	          $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+	      },
+	      close: function() {
+	          $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+	      }        
+	    });	  
+
+		  
 		});
+			
 	</script> 
 
 </body>

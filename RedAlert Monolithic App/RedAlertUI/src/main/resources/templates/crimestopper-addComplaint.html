@@ -11,12 +11,13 @@
 
 
 		<!-- Contains 6 parts: 
-			1. Add Complaint
+			1. Add Complaint Title
 			2. Complaint Subject
-			3. Describe your complaint here..
-			4. Link Similar Problems 
-			5. Group of Icons 
-			6. Attach File-->
+			3. Complaint Description
+			4. Location
+			5. Link Similar Problems 
+			6. Group of Icons 
+			7. Attach File-->
 
 		<!-- FRAGMENT CONTENT -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -24,7 +25,7 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 
-					<!-- 1. Add Complaint-->
+					<!-- 1. Add Complaint Title-->
 					<div class="modal-header">
 						<h4 class="modal-title" id="exampleModalLabel">Add Complaint</h4>
 						<button type="button" class="close" data-dismiss="modal"
@@ -32,10 +33,10 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<!-- Add Complaint-->
+					<!-- 1. Add Complaint Title-->
 
 					<div class="modal-body">
-						<form th:action="@{/crimestopper-complaint/add}"
+						<form th:action="@{/crime-stopper/complaint/add}"
 							th:object="${complaintDTO}" th:method="post"
 							enctype="multipart/form-data">
 
@@ -47,18 +48,26 @@
 									th:name="subject"></textarea>
 								<label for="form7">Complaint Subject</label>
 							</div>
-							<!-- Complaint Subject-->
+							<!-- 2. Complaint Subject-->
 
-							<!-- 3. Describe your complaint here..-->
+							<!-- 3. Complaint Description-->
 							<div class="md-form ui-front">
 								<textarea type="text" id="message-text"
 									class="form-control md-textarea" rows="3" name="description"
 									th:name="description"></textarea>
 								<label for="form7">Describe your complaint here..</label>
 							</div>
-							<!-- Describe your complaint here-->
+							<!-- 3. Complaint Description-->
 
-							<!-- 4. Link Similar Problems-->
+							<!-- 3.5 -->
+							<div class="md-form ui-front">
+								<textarea type="text" id="mention-user"
+									class="form-control md-textarea" rows="1" name="description"></textarea>
+								<label for="form7">Mention user here..</label>
+							</div>
+							<!-- 3.5 -->
+
+							<!-- 4. Location-->
 							 <div class="modal-body" >
 								<div class="row">
 									<div class="col-md-12 modal_body_map">
@@ -84,8 +93,10 @@
 									</div>
 								</div>
 							</div> 
+							<!-- 4. Location-->
 
-							 <div class="md-form">
+							<!-- 5. Link Similar Problems-->
+							<div class="md-form">
 								<p>Link Similar Problems</p>
 							</div>
 							<div class="list-group">
@@ -105,9 +116,9 @@
 									class="list-group-item list-group-item-action" disabled>Problem
 									5</button>
 							</div>
-							<!-- Link Similar Problems-->
+							<!-- 5. Link Similar Problems-->
 
-							<!-- 5. Attach File -->
+							<!-- 6. Attach File -->
 							<div class="input-group mt-3 w-75 mx-auto">
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
@@ -131,14 +142,14 @@
 													.html(fileName);
 										})
 							</script>
-							<!--Attach File-->
+							<!-- 6. Attach File-->
 
-							<!-- 6. Send Button-->
+							<!-- 7. Send Button-->
 							<div class="modal-footer">
 								<button type="submit" class="btn btn-primary">Add
 									Complaint</button>
 							</div>
-							<!--Send Button-->
+							<!-- 7. Send Button-->
 
 						</form>
 					</div>

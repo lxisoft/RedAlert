@@ -19,10 +19,10 @@ import com.lxisoft.elasticsearch.model.Complaint;
 public class ComplaintDAO {
 
 	
-	 	@Value("${elasticsearch.index.name}")
+	 	@Value("${elasticsearch.index.name.one}")
 	    private String indexName;
 
-	    @Value("${elasticsearch.complaint.type}")
+	    @Value("${elasticsearch.type.name.one}")
 	    private String typeName;
 
 	    @Autowired

@@ -23,6 +23,7 @@ import com.lxisoft.redalert.client.crimestopper.api.ElasticSearchResourceApi;
 import com.lxisoft.redalert.repository.UserRepository;
 import com.lxisoft.redalert.security.SecurityUtils;
 import com.lxisoft.redalert.client.crimestopper.model.ComplaintDTOElasticSearch;
+import com.lxisoft.redalert.client.crimestopper.model.UserDTOElasticSearch;
 import com.lxisoft.redalert.client.crimestopper.model.ComplaintDTO;
 import com.lxisoft.redalert.client.red_alert.api.UserRegistrationResourceApi;
 import com.lxisoft.redalert.client.red_alert.model.UserRegistrationDTO;
@@ -101,35 +102,9 @@ public class CrimeStopperAddComplaintController {
 			
 		return ; 
 	}
-
-	//SEARCH COMPLAINTS IN ELASTICSEARCH BY SUBJECT
-	@PostMapping("/searchBySubject")
-	public List<ComplaintDTOElasticSearch> searchComplaintsBySubject(Model model,@ModelAttribute String subject) {
-			
-		ResponseEntity<List<ComplaintDTOElasticSearch>> result = elasticSearchResourceApi
-				.searchComplaintsBySubjectUsingPost(subject);
-		List<ComplaintDTOElasticSearch> complaints = 
-				new ArrayList<ComplaintDTOElasticSearch>(result.getBody());
-		model.addAttribute("complaints", complaints);
-			
-		return complaints; 
-	}
-	
-	//SEARCH COMPLAINTS IN ELASTICSEARCH BY DESCRIPTION
-	@PostMapping("/searchByDescription")
-	public List<ComplaintDTOElasticSearch> searchComplaintsByDescription(Model model,@ModelAttribute String description) {
-			
-		ResponseEntity<List<ComplaintDTOElasticSearch>> result = elasticSearchResourceApi
-				.searchComplaintsByDescriptionUsingPost(description);
-		List<ComplaintDTOElasticSearch> complaints = 
-				new ArrayList<ComplaintDTOElasticSearch>(result.getBody());
-		model.addAttribute("complaints", complaints);
-			
-		return complaints; 
-	}
 	
 	//TESTING AUTOCOMPLETE FEATURE USING JQUERY AJAX ELASTICSEARCH
-	@RequestMapping(value = "/searchTags", method = RequestMethod.POST)
+	@PostMapping("/search-by-description")
 	public @ResponseBody
 	List<ComplaintDTOElasticSearch> getTags(@RequestBody String searchTerm) {
 
@@ -140,6 +115,21 @@ public class CrimeStopperAddComplaintController {
 	
 			
 		return complaints; 
+
+	}
+	
+	//AT MENTION USER
+	@RequestMapping(value = "/search/user-by-text-phrase", method = RequestMethod.POST)
+	public @ResponseBody
+	List<UserDTOElasticSearch> getUsers(@RequestBody String searchTerm) {
+
+		ResponseEntity<List<UserDTOElasticSearch>> result = elasticSearchResourceApi
+				.searchUsresByTextPhraseUsingPost(searchTerm);
+		List<UserDTOElasticSearch> users = 
+				new ArrayList<UserDTOElasticSearch>(result.getBody());
+	
+			
+		return users; 
 
 	}
 	

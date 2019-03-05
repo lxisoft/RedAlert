@@ -6,6 +6,7 @@
 package com.lxisoft.redalert.client.crimestopper.api;
 
 import com.lxisoft.redalert.client.crimestopper.model.ComplaintDTOElasticSearch;
+import com.lxisoft.redalert.client.crimestopper.model.UserDTOElasticSearch;
 import com.lxisoft.redalert.client.crimestopper.model.ComplaintDTO;
 
 import io.swagger.annotations.*;
@@ -87,6 +88,21 @@ public interface ElasticSearchResourceApi {
         method = RequestMethod.POST)
     ResponseEntity<List<ComplaintDTOElasticSearch>> searchComplaintsByDescriptionUsingPost(
     		@ApiParam(value = "complaint" ,required=true )  @Valid @RequestBody String searchTerm);
+
+
+    @ApiOperation(value = "searchUsresByTextPhrase", nickname = "searchUsresByTextPhraseUsingPost", notes = "", 
+    		response = UserDTOElasticSearch.class, responseContainer = "List", tags={ "elasticsearch-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = UserDTOElasticSearch.class, responseContainer = "List"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/api/elasticsearch/users/search",
+        produces = "*/*",
+        consumes = "application/json",
+        method = RequestMethod.POST)
+	ResponseEntity<List<UserDTOElasticSearch>> searchUsresByTextPhraseUsingPost(
+			@ApiParam(value = "complaint" ,required=true )  @Valid @RequestBody String searchTerm);
     
 
 
