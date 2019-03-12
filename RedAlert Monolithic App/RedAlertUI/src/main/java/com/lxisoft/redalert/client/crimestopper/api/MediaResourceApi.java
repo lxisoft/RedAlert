@@ -37,7 +37,7 @@ public interface MediaResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/media",
+    @RequestMapping(value = "/api/medias",
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.POST)
@@ -50,7 +50,7 @@ public interface MediaResourceApi {
         @ApiResponse(code = 204, message = "No Content"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden") })
-    @RequestMapping(value = "/api/media/{id}",
+    @RequestMapping(value = "/api/medias/{id}",
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteMediaUsingDELETE(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
@@ -73,7 +73,7 @@ public interface MediaResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/media/{id}",
+    @RequestMapping(value = "/api/medias/{id}",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<MediaDTO> getMediaUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
@@ -86,7 +86,7 @@ public interface MediaResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/media",
+    @RequestMapping(value = "/api/medias",
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.PUT)

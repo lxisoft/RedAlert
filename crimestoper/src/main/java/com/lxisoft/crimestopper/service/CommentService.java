@@ -50,5 +50,9 @@ public interface CommentService {
      */
     
 	Optional<CommentDTO> saveCommentInComplaint(CommentDTO comment);
+
+	Page<CommentDTO> findAllByComplaintId(Pageable pageable, long complaintId);
+
+	Page<CommentDTO> findAllByUserId(Pageable pageable, long userId);
 	
 }

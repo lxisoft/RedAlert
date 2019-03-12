@@ -25,135 +25,142 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-02-10T01:11:22.577+05:30[Asia/Calcutta]")
 
 @Api(value = "UserResponseResource", description = "the UserResponseResource API")
 public interface UserResponseResourceApi {
 
-    @ApiOperation(value = "addUserResponseOfComplaint", nickname = "addUserResponseOfComplaintUsingPOST", notes = "", response = UserResponseDTO.class, tags={ "user-response-resource", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class),
-        @ApiResponse(code = 201, message = "Created"),
-        @ApiResponse(code = 401, message = "Unauthorized"),
-        @ApiResponse(code = 403, message = "Forbidden"),
-        @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/complaint/user-responce",
-        produces = "*/*", 
-        consumes = "application/json",
-        method = RequestMethod.POST)
-    ResponseEntity<UserResponseDTO> addUserResponseOfComplaintUsingPOST(@ApiParam(value = "userResponse" ,required=true )  @Valid @RequestBody UserResponseDTO userResponseDTO);
+	@ApiOperation(value = "addUserResponseOfComplaint", nickname = "addUserResponseOfComplaintUsingPOST", notes = "", response = UserResponseDTO.class, tags = {
+			"user-response-resource", })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class),
+			@ApiResponse(code = 201, message = "Created"), @ApiResponse(code = 401, message = "Unauthorized"),
+			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 404, message = "Not Found") })
+	@RequestMapping(value = "/api/complaint/user-response", produces = "*/*", consumes = "application/json", method = RequestMethod.POST)
+	ResponseEntity<UserResponseDTO> addUserResponseOfComplaintUsingPOST(
+			@ApiParam(value = "userResponse", required = true) @Valid @RequestBody UserResponseDTO userResponseDTO);
 
+	@ApiOperation(value = "createUserResponse", nickname = "createUserResponseUsingPOST", notes = "", response = UserResponseDTO.class, tags = {
+			"user-response-resource", })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class),
+			@ApiResponse(code = 201, message = "Created"), @ApiResponse(code = 401, message = "Unauthorized"),
+			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 404, message = "Not Found") })
+	@RequestMapping(value = "/api/user-responses", produces = "*/*", consumes = "application/json", method = RequestMethod.POST)
+	ResponseEntity<UserResponseDTO> createUserResponseUsingPOST(
+			@ApiParam(value = "userResponseDTO", required = true) @Valid @RequestBody UserResponseDTO userResponseDTO);
 
-    @ApiOperation(value = "createUserResponse", nickname = "createUserResponseUsingPOST", notes = "", response = UserResponseDTO.class, tags={ "user-response-resource", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class),
-        @ApiResponse(code = 201, message = "Created"),
-        @ApiResponse(code = 401, message = "Unauthorized"),
-        @ApiResponse(code = 403, message = "Forbidden"),
-        @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/user-responses",
-        produces = "*/*", 
-        consumes = "application/json",
-        method = RequestMethod.POST)
-    ResponseEntity<UserResponseDTO> createUserResponseUsingPOST(@ApiParam(value = "userResponseDTO" ,required=true )  @Valid @RequestBody UserResponseDTO userResponseDTO);
+	@ApiOperation(value = "deleteUserResponse", nickname = "deleteUserResponseUsingDELETE", notes = "", tags = {
+			"user-response-resource", })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 204, message = "No Content"),
+			@ApiResponse(code = 401, message = "Unauthorized"), @ApiResponse(code = 403, message = "Forbidden") })
+	@RequestMapping(value = "/api/user-responses/{id}", method = RequestMethod.DELETE)
+	ResponseEntity<Void> deleteUserResponseUsingDELETE(
+			@ApiParam(value = "id", required = true) @PathVariable("id") Long id);
 
+	@ApiOperation(value = "getAllUserResponses", nickname = "getAllUserResponsesUsingGET", notes = "", response = UserResponseDTO.class, responseContainer = "List", tags = {
+			"user-response-resource", })
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class, responseContainer = "List"),
+			@ApiResponse(code = 401, message = "Unauthorized"), @ApiResponse(code = 403, message = "Forbidden"),
+			@ApiResponse(code = 404, message = "Not Found") })
+	@RequestMapping(value = "/api/user-responses", produces = "*/*", method = RequestMethod.GET)
+	ResponseEntity<List<UserResponseDTO>> getAllUserResponsesUsingGET(
+			@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,
+			@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,
+			@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
+			@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,
+			@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,
+			@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,
+			@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,
+			@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,
+			@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,
+			@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
 
-    @ApiOperation(value = "deleteUserResponse", nickname = "deleteUserResponseUsingDELETE", notes = "", tags={ "user-response-resource", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK"),
-        @ApiResponse(code = 204, message = "No Content"),
-        @ApiResponse(code = 401, message = "Unauthorized"),
-        @ApiResponse(code = 403, message = "Forbidden") })
-    @RequestMapping(value = "/api/user-responses/{id}",
-        method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteUserResponseUsingDELETE(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
+	@ApiOperation(value = "getUserResponseOfComment", nickname = "getUserResponseOfCommentUsingGET", notes = "", response = UserResponseDTO.class, responseContainer = "List", tags = {
+			"user-response-resource", })
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class, responseContainer = "List"),
+			@ApiResponse(code = 401, message = "Unauthorized"), @ApiResponse(code = 403, message = "Forbidden"),
+			@ApiResponse(code = 404, message = "Not Found") })
+	@RequestMapping(value = "/api/comments/{commentId}/user-responses", produces = "*/*", method = RequestMethod.GET)
+	ResponseEntity<List<UserResponseDTO>> getUserResponseOfCommentUsingGET(
+			@ApiParam(value = "commentId", required = true) @PathVariable("commentId") Long commentId,
+			@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,
+			@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,
+			@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
+			@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,
+			@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,
+			@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,
+			@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,
+			@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,
+			@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,
+			@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
 
+	@ApiOperation(value = "getUserResponseOfComplaint", nickname = "getUserResponseOfComplaintUsingGET", notes = "", response = UserResponseDTO.class, responseContainer = "List", tags = {
+			"user-response-resource", })
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class, responseContainer = "List"),
+			@ApiResponse(code = 401, message = "Unauthorized"), @ApiResponse(code = 403, message = "Forbidden"),
+			@ApiResponse(code = 404, message = "Not Found") })
+	@RequestMapping(value = "/api/complaints/{complaintId}/user-responses", produces = "*/*", method = RequestMethod.GET)
+	ResponseEntity<List<UserResponseDTO>> getUserResponseOfComplaintUsingGET(
+			@ApiParam(value = "complaintId", required = true) @PathVariable("complaintId") Long complaintId,
+			@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,
+			@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,
+			@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
+			@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,
+			@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,
+			@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,
+			@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,
+			@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,
+			@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,
+			@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
 
-    @ApiOperation(value = "getAllUserResponses", nickname = "getAllUserResponsesUsingGET", notes = "", response = UserResponseDTO.class, responseContainer = "List", tags={ "user-response-resource", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class, responseContainer = "List"),
-        @ApiResponse(code = 401, message = "Unauthorized"),
-        @ApiResponse(code = 403, message = "Forbidden"),
-        @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/user-responses",
-        produces = "*/*", 
-        method = RequestMethod.GET)
-    ResponseEntity<List<UserResponseDTO>> getAllUserResponsesUsingGET(@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
+	@ApiOperation(value = "getUserResponseOfReply", nickname = "getUserResponseOfReplyUsingGET", notes = "", response = UserResponseDTO.class, responseContainer = "List", tags = {
+			"user-response-resource", })
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class, responseContainer = "List"),
+			@ApiResponse(code = 401, message = "Unauthorized"), @ApiResponse(code = 403, message = "Forbidden"),
+			@ApiResponse(code = 404, message = "Not Found") })
+	@RequestMapping(value = "/api/replies/{replyId}/user-responses", produces = "*/*", method = RequestMethod.GET)
+	ResponseEntity<List<UserResponseDTO>> getUserResponseOfReplyUsingGET(
+			@ApiParam(value = "replyId", required = true) @PathVariable("replyId") Long replyId,
+			@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,
+			@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,
+			@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
+			@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,
+			@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,
+			@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,
+			@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,
+			@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,
+			@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,
+			@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
 
+	@ApiOperation(value = "getUserResponse", nickname = "getUserResponseUsingGET", notes = "", response = UserResponseDTO.class, tags = {
+			"user-response-resource", })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class),
+			@ApiResponse(code = 401, message = "Unauthorized"), @ApiResponse(code = 403, message = "Forbidden"),
+			@ApiResponse(code = 404, message = "Not Found") })
+	@RequestMapping(value = "/api/user-responses/{id}", produces = "*/*", method = RequestMethod.GET)
+	ResponseEntity<UserResponseDTO> getUserResponseUsingGET(
+			@ApiParam(value = "id", required = true) @PathVariable("id") Long id);
 
-    @ApiOperation(value = "getUserResponseOfComment", nickname = "getUserResponseOfCommentUsingGET", notes = "", response = UserResponseDTO.class, responseContainer = "List", tags={ "user-response-resource", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class, responseContainer = "List"),
-        @ApiResponse(code = 401, message = "Unauthorized"),
-        @ApiResponse(code = 403, message = "Forbidden"),
-        @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/comment/user-responses/{commentId}",
-        produces = "*/*", 
-        method = RequestMethod.GET)
-    ResponseEntity<List<UserResponseDTO>> getUserResponseOfCommentUsingGET(@ApiParam(value = "commentId",required=true) @PathVariable("commentId") Long commentId,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
+	@ApiOperation(value = "updateUserResponse", nickname = "updateUserResponseUsingPUT", notes = "", response = UserResponseDTO.class, tags = {
+			"user-response-resource", })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class),
+			@ApiResponse(code = 201, message = "Created"), @ApiResponse(code = 401, message = "Unauthorized"),
+			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 404, message = "Not Found") })
+	@RequestMapping(value = "/api/user-responses", produces = "*/*", consumes = "application/json", method = RequestMethod.PUT)
+	ResponseEntity<UserResponseDTO> updateUserResponseUsingPUT(
+			@ApiParam(value = "userResponseDTO", required = true) @Valid @RequestBody UserResponseDTO userResponseDTO);
 
-
-    @ApiOperation(value = "getUserResponseOfComplaint", nickname = "getUserResponseOfComplaintUsingGET", notes = "", response = UserResponseDTO.class, responseContainer = "List", tags={ "user-response-resource", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class, responseContainer = "List"),
-        @ApiResponse(code = 401, message = "Unauthorized"),
-        @ApiResponse(code = 403, message = "Forbidden"),
-        @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/complaint/user-responses/{complaintId}",
-        produces = "*/*", 
-        method = RequestMethod.GET)
-    ResponseEntity<List<UserResponseDTO>> getUserResponseOfComplaintUsingGET(@ApiParam(value = "complaintId",required=true) @PathVariable("complaintId") Long complaintId,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
-
-
-    @ApiOperation(value = "getUserResponseOfReply", nickname = "getUserResponseOfReplyUsingGET", notes = "", response = UserResponseDTO.class, responseContainer = "List", tags={ "user-response-resource", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class, responseContainer = "List"),
-        @ApiResponse(code = 401, message = "Unauthorized"),
-        @ApiResponse(code = 403, message = "Forbidden"),
-        @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/reply/user-responses/{commentId}",
-        produces = "*/*", 
-        method = RequestMethod.GET)
-    ResponseEntity<List<UserResponseDTO>> getUserResponseOfReplyUsingGET(@ApiParam(value = "replyId",required=true) @PathVariable("replyId") Long replyId,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
-
-
-    @ApiOperation(value = "getUserResponse", nickname = "getUserResponseUsingGET", notes = "", response = UserResponseDTO.class, tags={ "user-response-resource", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class),
-        @ApiResponse(code = 401, message = "Unauthorized"),
-        @ApiResponse(code = 403, message = "Forbidden"),
-        @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/user-responses/{id}",
-        produces = "*/*", 
-        method = RequestMethod.GET)
-    ResponseEntity<UserResponseDTO> getUserResponseUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
-
-
-    @ApiOperation(value = "updateUserResponse", nickname = "updateUserResponseUsingPUT", notes = "", response = UserResponseDTO.class, tags={ "user-response-resource", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class),
-        @ApiResponse(code = 201, message = "Created"),
-        @ApiResponse(code = 401, message = "Unauthorized"),
-        @ApiResponse(code = 403, message = "Forbidden"),
-        @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/user-responses",
-        produces = "*/*", 
-        consumes = "application/json",
-        method = RequestMethod.PUT)
-    ResponseEntity<UserResponseDTO> updateUserResponseUsingPUT(@ApiParam(value = "userResponseDTO" ,required=true )  @Valid @RequestBody UserResponseDTO userResponseDTO);
-
-
-    @ApiOperation(value = "userResponceToAnComment", nickname = "userResponceToAnCommentUsingPOST", notes = "", response = UserResponseDTO.class, tags={ "user-response-resource", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class),
-        @ApiResponse(code = 201, message = "Created"),
-        @ApiResponse(code = 401, message = "Unauthorized"),
-        @ApiResponse(code = 403, message = "Forbidden"),
-        @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/comment/user-responses",
-        produces = "*/*", 
-        consumes = "application/json",
-        method = RequestMethod.POST)
-    ResponseEntity<UserResponseDTO> userResponceToAnCommentUsingPOST(@ApiParam(value = "userResponse" ,required=true )  @Valid @RequestBody UserResponseDTO userResponseDTO);
+	@ApiOperation(value = "userResponceToAnComment", nickname = "userResponceToAnCommentUsingPOST", notes = "", response = UserResponseDTO.class, tags = {
+			"user-response-resource", })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = UserResponseDTO.class),
+			@ApiResponse(code = 201, message = "Created"), @ApiResponse(code = 401, message = "Unauthorized"),
+			@ApiResponse(code = 403, message = "Forbidden"), @ApiResponse(code = 404, message = "Not Found") })
+	@RequestMapping(value = "/api/comment/user-response", produces = "*/*", consumes = "application/json", method = RequestMethod.POST)
+	ResponseEntity<UserResponseDTO> userResponceToAnCommentUsingPOST(
+			@ApiParam(value = "userResponse", required = true) @Valid @RequestBody UserResponseDTO userResponseDTO);
 
 }

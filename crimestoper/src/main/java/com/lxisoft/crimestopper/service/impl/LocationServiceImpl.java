@@ -1,13 +1,15 @@
 package com.lxisoft.crimestopper.service.impl;
 
+import com.lxisoft.crimestopper.service.ComplaintService;
 import com.lxisoft.crimestopper.service.LocationService;
 import com.lxisoft.crimestopper.domain.Location;
 import com.lxisoft.crimestopper.repository.LocationRepository;
+import com.lxisoft.crimestopper.service.dto.CommentDTO;
 import com.lxisoft.crimestopper.service.dto.LocationDTO;
 import com.lxisoft.crimestopper.service.mapper.LocationMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,69 +24,80 @@ import java.util.Optional;
 @Transactional
 public class LocationServiceImpl implements LocationService {
 
-    private final Logger log = LoggerFactory.getLogger(LocationServiceImpl.class);
+	private final Logger log = LoggerFactory.getLogger(LocationServiceImpl.class);
 
-    private final LocationRepository locationRepository;
+	private final LocationRepository locationRepository;
 
-    private final LocationMapper locationMapper;
+	private final LocationMapper locationMapper;
 
-    public LocationServiceImpl(LocationRepository locationRepository, LocationMapper locationMapper) {
-        this.locationRepository = locationRepository;
-        this.locationMapper = locationMapper;
-    }
+	@Autowired
+	ComplaintService complaintService;
 
-    /**
-     * Save a location.
-     *
-     * @param locationDTO the entity to save
-     * @return the persisted entity
-     */
-    @Override
-    public LocationDTO save(LocationDTO locationDTO) {
-        log.debug("Request to save Location : {}", locationDTO);
+	public LocationServiceImpl(LocationRepository locationRepository, LocationMapper locationMapper) {
+		this.locationRepository = locationRepository;
+		this.locationMapper = locationMapper;
+	}
 
-        Location location = locationMapper.toEntity(locationDTO);
-        location = locationRepository.save(location);
-        return locationMapper.toDto(location);
-    }
+	/**
+	 * Save a location.
+	 *
+	 * @param locationDTO
+	 *            the entity to save
+	 * @return the persisted entity
+	 */
+	@Override
+	public LocationDTO save(LocationDTO locationDTO) {
+		log.debug("Request to save Location : {}", locationDTO);
 
-    /**
-     * Get all the locations.
-     *
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public Page<LocationDTO> findAll(Pageable pageable) {
-        log.debug("Request to get all Locations");
-        return locationRepository.findAll(pageable)
-            .map(locationMapper::toDto);
-    }
+		Location location = locationMapper.toEntity(locationDTO);
+		location = locationRepository.save(location);
+		return locationMapper.toDto(location);
+	}
 
+	/**
+	 * Get all the locations.
+	 *
+	 * @param pageable
+	 *            the pagination information
+	 * @return the list of entities
+	 */
+	@Override
+	@Transactional(readOnly = true)
+	public Page<LocationDTO> findAll(Pageable pageable) {
+		log.debug("Request to get all Locations");
+		return locationRepository.findAll(pageable).map(locationMapper::toDto);
+	}
 
-    /**
-     * Get one location by id.
-     *
-     * @param id the id of the entity
-     * @return the entity
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<LocationDTO> findOne(Long id) {
-        log.debug("Request to get Location : {}", id);
-        return locationRepository.findById(id)
-            .map(locationMapper::toDto);
-    }
+	/**
+	 * Get one location by id.
+	 *
+	 * @param id
+	 *            the id of the entity
+	 * @return the entity
+	 */
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<LocationDTO> findOne(Long id) {
+		log.debug("Request to get Location : {}", id);
+		return locationRepository.findById(id).map(locationMapper::toDto);
+	}
 
-    /**
-     * Delete the location by id.
-     *
-     * @param id the id of the entity
-     */
-    @Override
-    public void delete(Long id) {
-        log.debug("Request to delete Location : {}", id);
-        locationRepository.deleteById(id);
-    }
+	/**
+	 * Delete the location by id.
+	 *
+	 * @param id
+	 *            the id of the entity
+	 */
+	@Override
+	public void delete(Long id) {
+		log.debug("Request to delete Location : {}", id);
+		locationRepository.deleteById(id);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<LocationDTO> findByComplaintId(long complaintId) {
+		return locationRepository.findByComplaintId(complaintId).map(locationMapper::toDto);
+	}
+
 }

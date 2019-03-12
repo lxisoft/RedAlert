@@ -46,7 +46,7 @@ public class MediaResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new mediaDTO, or with status 400 (Bad Request) if the media has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/media")
+    @PostMapping("/medias")
     @Timed
     public ResponseEntity<MediaDTO> createMedia(@RequestBody MediaDTO mediaDTO) throws URISyntaxException {
         log.debug("REST request to save Media : {}", mediaDTO);
@@ -68,7 +68,7 @@ public class MediaResource {
      * or with status 500 (Internal Server Error) if the mediaDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/media")
+    @PutMapping("/medias")
     @Timed
     public ResponseEntity<MediaDTO> updateMedia(@RequestBody MediaDTO mediaDTO) throws URISyntaxException {
         log.debug("REST request to update Media : {}", mediaDTO);
@@ -87,7 +87,7 @@ public class MediaResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of media in body
      */
-    @GetMapping("/media")
+    @GetMapping("/medias")
     @Timed
     public ResponseEntity<List<MediaDTO>> getAllMedia(Pageable pageable) {
         log.debug("REST request to get a page of Media");
@@ -102,7 +102,7 @@ public class MediaResource {
      * @param id the id of the mediaDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the mediaDTO, or with status 404 (Not Found)
      */
-    @GetMapping("/media/{id}")
+    @GetMapping("/medias/{id}")
     @Timed
     public ResponseEntity<MediaDTO> getMedia(@PathVariable Long id) {
         log.debug("REST request to get Media : {}", id);
@@ -116,7 +116,7 @@ public class MediaResource {
      * @param id the id of the mediaDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/media/{id}")
+    @DeleteMapping("/medias/{id}")
     @Timed
     public ResponseEntity<Void> deleteMedia(@PathVariable Long id) {
         log.debug("REST request to delete Media : {}", id);

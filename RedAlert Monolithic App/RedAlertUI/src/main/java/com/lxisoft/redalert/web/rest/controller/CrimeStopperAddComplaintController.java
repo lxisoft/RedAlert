@@ -115,7 +115,7 @@ public class CrimeStopperAddComplaintController {
 	}
 	
 	//TESTING AUTOCOMPLETE FEATURE USING JQUERY AJAX ELASTICSEARCH
-	@PostMapping("/search-by-description")
+	@PostMapping("/search/description")
 	public @ResponseBody
 	List<ComplaintDTOElasticSearch> getTags(@RequestBody String searchTerm) {
 
