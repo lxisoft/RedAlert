@@ -86,8 +86,6 @@ public class ComplaintServiceImpl implements ComplaintService {
 	@Autowired
 	LocationRepository locationRepository;
 
-	@Autowired
-
 	public ComplaintServiceImpl(ComplaintRepository complaintRepository, ComplaintMapper complaintMapper,
 			UserRepository userRepository, UserResponseRepository userResponseRepository) {
 
@@ -101,8 +99,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 	/**
 	 * Save a complaint.
 	 *
-	 * @param complaintDTO
-	 *            the entity to save
+	 * @param complaintDTO the entity to save
 	 * @return the persisted entity
 	 */
 	@Override
@@ -114,10 +111,46 @@ public class ComplaintServiceImpl implements ComplaintService {
 		instant = instant.plus(5, ChronoUnit.HOURS).plus(30, ChronoUnit.MINUTES);
 		complaintDTO.setTime(instant);
 		// hash tag finding start
+		Set<HashtagDTO> hashtags = new HashSet<HashtagDTO>(identifyHashTags(complaintDTO.getDescription()));
+		complaintDTO.setHashtags(hashtags);
+		
+		// CAUTION location stuffs start
+		log.debug("location:::::::::::::::::::;;;;" + complaintDTO.getLocation());
+		Location location = new Location();
+		if(complaintDTO.getLocation()!=null)
+		{
+		location.setLatitude(complaintDTO.getLocation().getLatitude());
+		location.setLongitude(complaintDTO.getLocation().getLongitude());
+		}
+		Location savedLocation = locationRepository.save(location);
+		
+		complaintDTO.setLocationId(savedLocation.getId());
+		// Optional<Location>location=locationRepository.findBylatitudeAndLongitude(complaintDTO.getLocation().getLatitude(),complaintDTO.getLocation().getLongitude());
 
+		/*
+		 * LocationDTO locationDTO=new LocationDTO(); if(location.isPresent()) {
+		 * complaintDTO.getLocation().setId(location.get().getId());
+		 * 
+		 * } else {
+		 * 
+		 * }
+		 */
+		// CAUTION location stuffs end
+
+		Complaint complaint = complaintMapper.toEntity(complaintDTO);
+		complaint = complaintRepository.save(complaint);
+		return complaintMapper.toDto(complaint);
+	}
+
+	/**
+	 * method to find hashtags from an given subject (decription),
+	 * and saves if an new hash tag is find
+	 * @param subject
+	 * @return list of HashtagDTO 
+	 */
+	public List<HashtagDTO> identifyHashTags(String subject) {
+		log.debug("Entered into finding hashtgas method with subject = "+subject);
 		Pattern pattern = Pattern.compile("#{1}\\w+");
-		String subject = complaintDTO.getDescription();
-		int i = 0;
 		Matcher matcher = pattern.matcher(subject);
 		System.out.println("......................." + subject);
 		Set<HashtagDTO> hashtags = new HashSet<HashtagDTO>();
@@ -144,54 +177,14 @@ public class ComplaintServiceImpl implements ComplaintService {
 			 */
 
 		}
-		complaintDTO.setHashtags(hashtags);
-		// hash tag finding end
-
-		/*
-		 * log.debug("request to get all complaints of friends by userId:"+userId);
-		 * List<ComplaintDTO> list=new ArrayList<ComplaintDTO>();
-		 * List<UserRegistrationDTO>
-		 * users=userRegistrationResourceApi.getAllFriendsUsingGET(userId).getBody();
-		 * complaintRepository.findByUserId(userId,pageable); for(UserRegistrationDTO
-		 * userDTO:users) { List<ComplaintDTO>
-		 * complaints=complaintRepository.findAllByUserId(userDTO.getId(),pageable).map(
-		 * complaintMapper::toDto).getContent(); for(ComplaintDTO complaint:complaints)
-		 * { complaint.setUserName(userDTO.getFirstName()+" "+userDTO.getLastName());
-		 * Optional<UserResponse>optional=userResponseRepository.
-		 * findUserResponseByUserIdAndComplaintId(userDTO.getId(),complaint.getId());
-		 * Optional<UserResponseDTO>optionalDTO=optional.map(userResponseMapper::toDto);
-		 * if(optionalDTO.isPresent()) { complaint.setUserResponse(optionalDTO.get());
-		 * =======
-		 */
-		// CAUTION location stuffs start
-		log.debug("location:::::::::::::::::::;;;;" + complaintDTO.getLocation());
-		Location location = new Location();
-		location.setLatitude(complaintDTO.getLocation().getLatitude());
-		location.setLongitude(complaintDTO.getLocation().getLongitude());
-		Location savedLocation = locationRepository.save(location);
-		complaintDTO.setLocationId(savedLocation.getId());
-		// Optional<Location>location=locationRepository.findBylatitudeAndLongitude(complaintDTO.getLocation().getLatitude(),complaintDTO.getLocation().getLongitude());
-
-		/*
-		 * LocationDTO locationDTO=new LocationDTO(); if(location.isPresent()) {
-		 * complaintDTO.getLocation().setId(location.get().getId());
-		 * 
-		 * } else {
-		 * 
-		 * }
-		 */
-		// CAUTION location stuffs end
-
-		Complaint complaint = complaintMapper.toEntity(complaintDTO);
-		complaint = complaintRepository.save(complaint);
-		return complaintMapper.toDto(complaint);
+		log.debug("Exiting into finding hashtgas method with subject = "+subject);
+		return new ArrayList<HashtagDTO>(hashtags);
 	}
 
 	/**
 	 * Get all the complaints.
 	 *
-	 * @param pageable
-	 *            the pagination information
+	 * @param pageable the pagination information
 	 * @return the list of entities
 	 */
 	@Override
@@ -207,7 +200,6 @@ public class ComplaintServiceImpl implements ComplaintService {
 	 * @return the list of entities
 	 */
 	@Override
-	@Transactional(readOnly = true)
 	public Page<ComplaintDTO> findAllWithEagerRelationships(Pageable pageable) {
 		return complaintRepository.findAllWithEagerRelationships(pageable).map(complaintMapper::toDto);
 	}
@@ -215,8 +207,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 	/**
 	 * Get one complaint by id.
 	 *
-	 * @param id
-	 *            the id of the entity
+	 * @param id the id of the entity
 	 * @return the entity
 	 */
 	@Override
@@ -241,8 +232,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 	/**
 	 * Delete the complaint by id.
 	 *
-	 * @param id
-	 *            the id of the entity
+	 * @param id the id of the entity
 	 */
 	@Override
 	public void delete(Long id) {
@@ -253,13 +243,11 @@ public class ComplaintServiceImpl implements ComplaintService {
 	/**
 	 * Get one complaints of friends by userId.
 	 *
-	 * @param id
-	 *            the id of the entity
+	 * @param id the id of the entity
 	 * @return the entity
 	 */
 
 	@Override
-	@Transactional(readOnly = true)
 	public Page<ComplaintDTO> findAllComplaintsOfFriends(Pageable pageable, Long userId) {
 
 		log.debug("request to get all complaints of friends by userId:" + userId);
@@ -272,35 +260,8 @@ public class ComplaintServiceImpl implements ComplaintService {
 			List<ComplaintDTO> complaints = complaintRepository.findByUserId(userDTO.getId(), pageable)
 					.map(complaintMapper::toDto).getContent();
 			for (ComplaintDTO complaint : complaints) {
-				complaint.setLocation(new LocationDTO());
-				complaint.setUserName(userDTO.getFirstName() + " " + userDTO.getLastName());
-				String image = "data:image/jpg;base64," + Base64.getEncoder().encodeToString(complaint.getMedia());
-				complaint.setImage(image);
-				Optional<UserResponse> optional = userResponseRepository.findUserResponseByUserIdAndComplaintId(userId,
-						complaint.getId());
-				Pageable pageable2 = null;
-				HashSet<CommentDTO> comments = new HashSet<CommentDTO>(commentRepository
-						.findAllByComplaintId(pageable2, complaint.getId()).map(commentMapper::toDto).getContent());
-				Iterator<CommentDTO> itr = comments.iterator();
-				while (itr.hasNext()) {
-					CommentDTO temp = itr.next();
-					UserRegistrationDTO userRegistarion = userRegistrationResourceApi
-							.getUserRegistrationUsingGET(temp.getUserId()).getBody();
-					temp.setUserName(userRegistarion.getFirstName() + " " + userRegistarion.getLastName());
-
-				}
-				LocationDTO location = locationRepository.findById(complaint.getLocationId()).map(locationMapper::toDto)
-						.get();
-				complaint.setComments(comments);
-				complaint.setLocation(location);
-				Optional<UserResponseDTO> optionalDTO = optional.map(userResponseMapper::toDto);
-				if (optionalDTO.isPresent()) {
-					complaint.setUserResponse(optionalDTO.get());
-
-				} else {
-					complaint.setUserResponse(new UserResponseDTO());
-				}
-
+				
+				setMoreDetails(complaint);
 			}
 			list.addAll(complaints);
 
@@ -310,14 +271,18 @@ public class ComplaintServiceImpl implements ComplaintService {
 		return pages;
 	}
 
+	/**
+	 * the method is used to find complaints by hashtag
+	 * @param pageable
+	 * @param searchContent
+	 * @return list of complaints
+	 */
+	
 	@Override
-	@Transactional(readOnly = true)
 	public Page<ComplaintDTO> findAllComplaintsByHashtag(Pageable pageable, String searchContent) {
 
 		log.debug("request to get all complaints by search content:" + searchContent);
 		List<ComplaintDTO> list = new ArrayList<ComplaintDTO>();
-		// List<ComplaintDTO>
-		// complaints=complaintRepository.findAllComplaintsByHashtags(pageable,hashtag.get()).map(complaintMapper::toDto).getContent();
 		Optional<Hashtag> hashtag = hashtagRepository.findByName(searchContent);
 		List<ComplaintDTO> complaints = new ArrayList<ComplaintDTO>();
 		if (hashtag.isPresent()) {
@@ -326,39 +291,9 @@ public class ComplaintServiceImpl implements ComplaintService {
 				complaints = pageComplaint.map(complaintMapper::toDto).getContent();
 
 			for (ComplaintDTO complaint : complaints) {
-
-				String image = "data:image/jpg;base64," + Base64.getEncoder().encodeToString(complaint.getMedia());
-
-				complaint.setImage(image);
-				UserRegistrationDTO userDTO = userRegistrationResourceApi
-						.getUserRegistrationUsingGET(complaint.getUserId()).getBody();
-				complaint.setUserName(userDTO.getFirstName() + " " + userDTO.getLastName());
-
-				Optional<UserResponse> optional = userResponseRepository
-						.findUserResponseByUserIdAndComplaintId(complaint.getUserId(), complaint.getId());
-				Pageable pageable2 = null;
-				HashSet<CommentDTO> comments = new HashSet<CommentDTO>(commentRepository
-						.findAllByComplaintId(pageable2, complaint.getId()).map(commentMapper::toDto).getContent());
-				Iterator<CommentDTO> itr = comments.iterator();
-				while (itr.hasNext()) {
-					CommentDTO temp = itr.next();
-					UserRegistrationDTO userRegistarion = userRegistrationResourceApi
-							.getUserRegistrationUsingGET(temp.getUserId()).getBody();
-
-					temp.setUserName(userRegistarion.getFirstName() + " " + userRegistarion.getLastName());
-
-				}
-
-				complaint.setComments(comments);
-
-				Optional<UserResponseDTO> optionalDTO = optional.map(userResponseMapper::toDto);
-				if (optionalDTO.isPresent()) {
-					complaint.setUserResponse(optionalDTO.get());
-
-				} else {
-					complaint.setUserResponse(new UserResponseDTO());
-				}
-
+				
+			setMoreDetails(complaint);
+			
 			}
 			list.addAll(complaints);
 
@@ -369,28 +304,49 @@ public class ComplaintServiceImpl implements ComplaintService {
 
 	}
 
-	@Override
-	@Transactional(readOnly = true)
+	/**
+	 * to get all complaints by an given user id
+	 * @param pageable
+	 * @param userId
+	 * @return List<complaintDTO> 
+	 */
+	
 	public Page<ComplaintDTO> findAllComplaintsOfUserId(Pageable pageable, Long userId) {
 
-		// List<ComplaintDTO>
-		// complaints=complaintRepository.findAllByUserId(userId,pageable).map(complaintMapper::toDto).getContent();
 		Page<ComplaintDTO> complaints = complaintRepository.findByUserId(userId, pageable).map(complaintMapper::toDto);
 
 		return complaints;
-
+                                                                                                                                                                                                    
 	}
+	
+	
+	
+	/**
+	 * the method is used to encode an image and set to complaint
+	 * and set the user response of requested user if available
+	 * and set posted user name to complaint
+	 * @param complaint
+	 * @return complaintDTO 
+	 */
+	public ComplaintDTO setMoreDetails(ComplaintDTO complaint) {
+		if(complaint.getMedia()!=null) {
+			String image = "data:image/jpg;base64," + Base64.getEncoder().encodeToString(complaint.getMedia());
 
-	@Override
-	@Transactional(readOnly = true)
-	public Page<ComplaintDTO> findAllLikedByUserId(Pageable pageable, long userId) {
-		return complaintRepository.findAllLikedByUserId(userId, pageable).map(complaintMapper::toDto);
+			complaint.setImage(image);
+			}
+			UserRegistrationDTO userDTO = userRegistrationResourceApi
+					.getUserRegistrationUsingGET(complaint.getUserId()).getBody();
+			complaint.setUserName(userDTO.getFirstName() + " " + userDTO.getLastName());
+
+			Optional<UserResponse> optional = userResponseRepository
+					.findUserResponseByUserIdAndComplaintId(complaint.getUserId(), complaint.getId());
+			Optional<UserResponseDTO> optionalDTO = optional.map(userResponseMapper::toDto);
+			if (optionalDTO.isPresent()){
+				complaint.setUserResponse(optionalDTO.get());
+
+			} else {
+				complaint.setUserResponse(new UserResponseDTO());
+			}
+		return complaint;
 	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Optional<ComplaintDTO> findByCommentId(long commentId) {
-		return complaintRepository.findByCommentId(commentId).map(complaintMapper::toDto);
-	}
-
 }
