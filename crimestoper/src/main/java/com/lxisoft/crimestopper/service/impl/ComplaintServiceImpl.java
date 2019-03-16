@@ -310,7 +310,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 	 * @param userId
 	 * @return List<complaintDTO> 
 	 */
-	
+	@Override
 	public Page<ComplaintDTO> findAllComplaintsOfUserId(Pageable pageable, Long userId) {
 
 		Page<ComplaintDTO> complaints = complaintRepository.findByUserId(userId, pageable).map(complaintMapper::toDto);
@@ -349,4 +349,16 @@ public class ComplaintServiceImpl implements ComplaintService {
 			}
 		return complaint;
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<ComplaintDTO> findAllLikedByUserId(Pageable pageable, long userId) {
+		return complaintRepository.findAllLikedByUserId(userId, pageable).map(complaintMapper::toDto);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<ComplaintDTO> findByCommentId(long commentId) {
+		return complaintRepository.findByCommentId(commentId).map(complaintMapper::toDto);
+}
 }
