@@ -29,4 +29,6 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
 	@Query(" select l from Complaint c inner join c.location l where c.id =:id")
 	Optional<Location> findByComplaintId(@Param("id") long complaintId);
 
+	Optional<Location> findBylatitudeAndLongitude(Double latitude, Double longitude);
+
 }

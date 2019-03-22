@@ -78,7 +78,6 @@ public class Complaint implements Serializable {
 	@OneToMany(mappedBy = "complaint")
 	private Set<Media> attachments = new HashSet<>();
 	@ManyToOne
-	//@JsonIgnoreProperties("")
 	private Location location;
 
 	@ManyToMany
